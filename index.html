@@ -17,149 +17,163 @@ body {
   color: #1e293b;
 }
 
+button {
+  font-family: inherit;
+}
+
 .app {
-  max-width: 700px;
+  max-width: 900px;
   margin: auto;
   min-height: 100vh;
-  background: white;
+  padding: 20px;
 }
 
 header {
-  background: #2563eb;
-  color: white;
+  background: white;
+  border-radius: 20px;
   padding: 18px;
-  text-align: center;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,.08);
 }
 
 header h1 {
-  margin: 0;
-  font-size: 28px;
+  margin: 0 0 10px;
+  text-align: center;
 }
 
-.score {
-  margin-top: 8px;
-  font-size: 16px;
-}
-
-.progress-container {
-  height: 8px;
-  background: #dbeafe;
+.top-info {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
 }
 
 .progress {
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.progress-bar {
   height: 100%;
   width: 0%;
-  background: #22c55e;
+  background: #2563eb;
   transition: width .3s;
 }
 
-.screen {
-  padding: 25px 20px;
+.card {
+  background: white;
+  border-radius: 22px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.08);
   text-align: center;
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 h2 {
   margin-top: 0;
 }
 
-button {
-  border: none;
-  border-radius: 12px;
-  padding: 13px 18px;
-  font-size: 16px;
-  cursor: pointer;
-  margin: 6px;
-  background: #2563eb;
-  color: white;
-}
-
-button:hover {
-  opacity: .9;
-}
-
-.module-btn {
-  width: 90%;
-  max-width: 400px;
-  font-size: 18px;
-  padding: 18px;
-}
-
-.word-card {
-  background: #eff6ff;
-  border-radius: 18px;
-  padding: 25px;
-  margin: 20px 0;
-}
-
 .word {
-  font-size: 34px;
+  font-size: clamp(28px, 8vw, 48px);
   font-weight: bold;
-  color: #1d4ed8;
+  margin: 20px 0 10px;
 }
 
 .translation {
-  font-size: 18px;
-  margin-top: 8px;
+  font-size: 20px;
   color: #475569;
+  margin-bottom: 15px;
 }
 
 .definition {
-  margin-top: 15px;
-  font-size: 17px;
+  max-width: 650px;
+  margin: 15px auto;
+  padding: 15px;
+  background: #f8fafc;
+  border-radius: 12px;
+  line-height: 1.5;
 }
 
-.speaker {
-  font-size: 22px;
-  background: #0f766e;
+button.main-btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 13px 22px;
+  background: #2563eb;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+button.main-btn:hover {
+  background: #1d4ed8;
+}
+
+.audio-btn {
+  border: 0;
+  background: #dbeafe;
+  color: #1d4ed8;
+  border-radius: 50%;
+  width: 58px;
+  height: 58px;
+  font-size: 25px;
+  cursor: pointer;
 }
 
 .options {
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  margin-top: 20px;
+  max-width: 650px;
+  margin: 25px auto;
 }
 
-.option-btn {
-  width: 100%;
-  background: #e2e8f0;
-  color: #1e293b;
-}
-
-.option-btn.correct {
-  background: #22c55e;
-  color: white;
-}
-
-.option-btn.wrong {
-  background: #ef4444;
-  color: white;
-}
-
-input {
-  width: 100%;
-  max-width: 450px;
-  padding: 14px;
+.option {
   border: 2px solid #cbd5e1;
-  border-radius: 10px;
-  font-size: 20px;
-  text-align: center;
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  font-size: 19px;
+  cursor: pointer;
+  transition: .2s;
 }
 
-.sentence {
-  font-size: 25px;
-  font-weight: bold;
-  line-height: 1.5;
-  margin: 30px 0;
+.option:hover {
+  background: #eff6ff;
+  border-color: #60a5fa;
+}
+
+.option.correct {
+  background: #dcfce7;
+  border-color: #22c55e;
+}
+
+.option.wrong {
+  background: #fee2e2;
+  border-color: #ef4444;
 }
 
 .feedback {
-  font-size: 20px;
+  min-height: 30px;
   font-weight: bold;
-  margin: 15px;
+  margin-top: 10px;
+}
+
+.sentence {
+  font-size: clamp(22px, 5vw, 32px);
+  margin: 30px auto 10px;
+  line-height: 1.5;
+}
+
+.blank {
+  font-weight: bold;
+  letter-spacing: 2px;
 }
 
 .hangman-word {
@@ -174,23 +188,31 @@ input {
   line-height: 1.2;
 }
 
-.hangman-info {
-  font-size: 18px;
-  margin-bottom: 15px;
+.keyboard {
+  max-width: 700px;
+  margin: auto;
 }
 
-.letters {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
+.key-row {
+  display: flex;
+  justify-content: center;
   gap: 6px;
-  margin-top: 20px;
+  margin: 6px 0;
 }
 
 .letter-btn {
-  padding: 10px 4px;
-  margin: 0;
-  font-size: 15px;
-  background: #2563eb;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 8px;
+  background: #e2e8f0;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.letter-btn:hover {
+  background: #cbd5e1;
 }
 
 .letter-btn.used {
@@ -201,47 +223,65 @@ input {
 }
 
 .hangman-score {
-  background: #eff6ff;
-  padding: 15px;
+  margin-top: 15px;
+  padding: 12px;
+  background: #f8fafc;
   border-radius: 12px;
-  margin: 20px 0;
-  font-size: 18px;
+  font-weight: bold;
 }
 
 .result {
-  padding: 30px 15px;
-}
-
-.result h2 {
-  font-size: 30px;
-}
-
-.final-score {
-  font-size: 25px;
+  font-size: 22px;
   font-weight: bold;
-  color: #2563eb;
-  margin: 20px;
+  margin: 20px 0;
 }
 
-@media (max-width: 500px) {
-  .screen {
-    padding: 20px 14px;
+.module-btn {
+  width: 100%;
+  padding: 20px;
+  border: 0;
+  border-radius: 18px;
+  background: #2563eb;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.module-btn:hover {
+  background: #1d4ed8;
+}
+
+.step-title {
+  color: #2563eb;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 600px) {
+
+  .app {
+    padding: 12px;
   }
 
-  .word {
-    font-size: 28px;
+  .card {
+    padding: 18px 12px;
   }
 
-  .sentence {
-    font-size: 21px;
-  }
-
-  .letters {
-    grid-template-columns: repeat(7, 1fr);
+  .options {
+    grid-template-columns: 1fr;
   }
 
   .letter-btn {
-    padding: 9px 2px;
+    width: 31px;
+    height: 38px;
+    font-size: 14px;
+  }
+
+  .key-row {
+    gap: 3px;
   }
 
   .hangman-word {
@@ -258,1241 +298,1115 @@ input {
 
 <header>
   <h1>📚 Spelling Master</h1>
-  <div class="score">Score: <span id="score">0</span></div>
+
+  <div class="top-info">
+    <span id="stepLabel">Ready</span>
+    <span id="scoreLabel">⭐ 0</span>
+  </div>
+
+  <div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
 </header>
 
-<div class="progress-container">
-  <div class="progress" id="progress"></div>
-</div>
-
 <!-- HOME -->
-<div id="home" class="screen">
-  <h2>Choose a Module</h2>
+<div id="homeScreen" class="card">
+  <h2>📘 Module 1</h2>
+  <p>Practice these 8 spelling words.</p>
 
   <button class="module-btn" onclick="startModule()">
-    📘 Module 1 — 8 Words
+    Start 8 Words
   </button>
 </div>
 
+<!-- MAIN -->
+<div id="gameScreen" class="card hidden">
 
-<!-- LEARN -->
-<div id="learn" class="screen hidden">
-  <h2>📖 Learn</h2>
+  <div id="stepTitle" class="step-title"></div>
 
-  <div class="word-card">
-    <div class="word" id="learnWord"></div>
-    <div class="translation" id="learnTranslation"></div>
-    <div class="definition" id="learnDefinition"></div>
-  </div>
-
-  <button class="speaker" onclick="speakCurrentWord()">🔊 Listen</button>
-
-  <br>
-
-  <button onclick="nextLearn()">Continue →</button>
-</div>
-
-
-<!-- LISTEN & CHOOSE -->
-<div id="listen" class="screen hidden">
-  <h2>🎧 Listen & Choose</h2>
-
-  <p>Listen and choose the word you hear.</p>
-
-  <button class="speaker" onclick="speakCurrentWord()">🔊 Listen</button>
-
-  <div id="listenOptions" class="options"></div>
-
-  <div id="listenFeedback" class="feedback"></div>
-</div>
-
-
-<!-- SPELLING -->
-<div id="spelling" class="screen hidden">
-  <h2>✏️ Spelling Practice</h2>
-
-  <p>Listen and type the word.</p>
-
-  <button class="speaker" onclick="speakCurrentWord()">🔊 Listen</button>
-
-  <br><br>
-
-  <input
-    id="spellingInput"
-    type="text"
-    autocomplete="off"
-    autocapitalize="none"
-    spellcheck="false"
-  >
-
-  <br>
-
-  <button onclick="checkSpelling()">Check</button>
-
-  <div id="spellingFeedback" class="feedback"></div>
-</div>
-
-
-<!-- SENTENCE -->
-<div id="sentence" class="screen hidden">
-  <h2>📝 Sentence Practice</h2>
-
-  <p>Choose the word that completes the sentence.</p>
-
-  <div class="sentence" id="sentenceText"></div>
-
-  <div id="sentenceOptions" class="options"></div>
-
-  <div id="sentenceFeedback" class="feedback"></div>
-</div>
-
-
-<!-- HANGMAN -->
-<div id="hangman" class="screen hidden">
-  <h2>🎯 Hangman</h2>
-
-  <div class="hangman-info">
-    Attempts left: <span id="attempts">7</span>
-  </div>
-
-  <div id="hangmanWord" class="hangman-word"></div>
-
-  <div class="hangman-score">
-    Word points: <span id="hangmanPoints">0</span>
-  </div>
-
-  <div id="keyboard" class="letters"></div>
-</div>
-
-
-<!-- REVIEW SPELLING -->
-<div id="reviewSpelling" class="screen hidden">
-  <h2>🔄 Review Spelling</h2>
-
-  <p>Listen and type the word again.</p>
-
-  <button class="speaker" onclick="speakReviewWord()">🔊 Listen</button>
-
-  <br><br>
-
-  <input
-    id="reviewSpellingInput"
-    type="text"
-    autocomplete="off"
-    autocapitalize="none"
-    spellcheck="false"
-  >
-
-  <br>
-
-  <button onclick="checkReviewSpelling()">Check</button>
-
-  <div id="reviewSpellingFeedback" class="feedback"></div>
-</div>
-
-
-<!-- REVIEW SENTENCE -->
-<div id="reviewSentence" class="screen hidden">
-  <h2>🔄 Review Sentence</h2>
-
-  <p>Choose the word that completes the sentence.</p>
-
-  <div class="sentence" id="reviewSentenceText"></div>
-
-  <div id="reviewSentenceOptions" class="options"></div>
-
-  <div id="reviewSentenceFeedback" class="feedback"></div>
-</div>
-
-
-<!-- REVIEW HANGMAN -->
-<div id="reviewHangman" class="screen hidden">
-  <h2>🔄 Review Hangman</h2>
-
-  <div class="hangman-info">
-    Attempts left: <span id="reviewAttempts">7</span>
-  </div>
-
-  <div id="reviewHangmanWord" class="hangman-word"></div>
-
-  <div class="hangman-score">
-    Word points: <span id="reviewHangmanPoints">0</span>
-  </div>
-
-  <div id="reviewKeyboard" class="letters"></div>
-</div>
-
-
-<!-- RESULT -->
-<div id="result" class="screen hidden result">
-  <h2>🏆 Module Complete!</h2>
-
-  <div class="final-score">
-    Final Score: <span id="finalScore">0</span>
-  </div>
-
-  <p id="resultMessage"></p>
-
-  <button onclick="location.reload()">🏠 Back to Home</button>
-</div>
+  <div id="content"></div>
 
 </div>
 
+</div>
 
 <script>
 
+/* =========================================================
+   WORDS
+========================================================= */
+
 const words = [
+
   {
     word: "abbreviation",
-    translation: "abreviatura",
-    definition: "A shortened form of a word or phrase."
+    spanish: "abreviatura",
+    definition: "A shortened form of a word or phrase.",
+    sentence: "Dr. is an ________.",
+    spellingOptions: [
+      "abreviation",
+      "abbriviation",
+      "abbreviation",
+      "abbreviaton"
+    ]
   },
+
   {
     word: "abroad",
-    translation: "en el extranjero",
-    definition: "In or to a foreign country."
+    spanish: "en el extranjero",
+    definition: "In or to a foreign country.",
+    sentence: "We went ________.",
+    spellingOptions: [
+      "abrode",
+      "abroad",
+      "abroude",
+      "abrodd"
+    ]
   },
+
   {
     word: "access",
-    translation: "acceso",
-    definition: "The ability or opportunity to enter, use, or reach something."
+    spanish: "acceso",
+    definition: "The ability or opportunity to enter, use, or reach something.",
+    sentence: "I have ________.",
+    spellingOptions: [
+      "acces",
+      "aksess",
+      "access",
+      "acsess"
+    ]
   },
+
   {
     word: "accord",
-    translation: "acuerdo",
-    definition: "An agreement between people or groups."
+    spanish: "acuerdo",
+    definition: "An agreement between people or groups.",
+    sentence: "They reached an ________.",
+    spellingOptions: [
+      "acord",
+      "accord",
+      "akkord",
+      "acorrd"
+    ]
   },
+
   {
     word: "adequate",
-    translation: "adecuado / suficiente",
-    definition: "Good enough or sufficient for a purpose."
+    spanish: "adecuado / suficiente",
+    definition: "Good enough or sufficient for a purpose.",
+    sentence: "This is ________.",
+    spellingOptions: [
+      "adequete",
+      "adequate",
+      "adecuate",
+      "adekuate"
+    ]
   },
+
   {
     word: "advancements",
-    translation: "avances",
-    definition: "Improvements or developments that make something better."
+    spanish: "avances",
+    definition: "Improvements or developments that make something better.",
+    sentence: "________ help us.",
+    spellingOptions: [
+      "advansments",
+      "advancements",
+      "advancments",
+      "advansements"
+    ]
   },
+
   {
     word: "aeronautics",
-    translation: "aeronáutica",
-    definition: "The science and technology of aircraft and flight."
+    spanish: "aeronáutica",
+    definition: "The science and technology of aircraft and flight.",
+    sentence: "I study ________.",
+    spellingOptions: [
+      "aeronautics",
+      "aeronotics",
+      "aeronautiks",
+      "aeronaughtics"
+    ]
   },
+
   {
     word: "affectionate",
-    translation: "cariñoso",
-    definition: "Showing love, care, or fondness."
-  }
-];
-
-
-// =====================================================
-// ORACIONES
-// La palabra NO aparece en la oración.
-// Solo aparece como una de las opciones.
-// =====================================================
-
-const sentenceExercises = [
-  {
-    sentence: "Dr. is an ________.",
-    answer: "abbreviation"
-  },
-  {
-    sentence: "We went ________.",
-    answer: "abroad"
-  },
-  {
-    sentence: "I have ________.",
-    answer: "access"
-  },
-  {
-    sentence: "They reached an ________.",
-    answer: "accord"
-  },
-  {
-    sentence: "This is ________.",
-    answer: "adequate"
-  },
-  {
-    sentence: "________ help us.",
-    answer: "advancements"
-  },
-  {
-    sentence: "I study ________.",
-    answer: "aeronautics"
-  },
-  {
+    spanish: "cariñoso",
+    definition: "Showing love, care, or fondness.",
     sentence: "My dog is ________.",
-    answer: "affectionate"
+    spellingOptions: [
+      "afectionate",
+      "affectionate",
+      "affectionet",
+      "affectonate"
+    ]
   }
+
 ];
 
 
+/* =========================================================
+   GAME VARIABLES
+========================================================= */
+
+let step = "";
 let currentIndex = 0;
 let score = 0;
 
 let failedWords = [];
 
+let hangmanWord = "";
 let guessedLetters = [];
-let attempts = 7;
+let attempts = 6;
 let hangmanPoints = 0;
 
-let reviewIndex = 0;
-let reviewGuessedLetters = [];
-let reviewAttempts = 7;
-let reviewHangmanPoints = 0;
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const homeScreen = document.getElementById("homeScreen");
+const gameScreen = document.getElementById("gameScreen");
+const content = document.getElementById("content");
+const stepTitle = document.getElementById("stepTitle");
+
+const stepLabel = document.getElementById("stepLabel");
+const scoreLabel = document.getElementById("scoreLabel");
+const progressBar = document.getElementById("progressBar");
 
 
-// =====================================================
-// UTILIDADES
-// =====================================================
-
-function hideAll() {
-  document.querySelectorAll(".screen").forEach(screen => {
-    screen.classList.add("hidden");
-  });
-}
-
-
-function showScreen(id) {
-  hideAll();
-  document.getElementById(id).classList.remove("hidden");
-}
-
-
-function updateScore() {
-  document.getElementById("score").textContent = score;
-}
-
-
-function updateProgress() {
-  const total = words.length * 5;
-  const current = currentIndex * 5;
-
-  const percentage = Math.min((current / total) * 100, 100);
-
-  document.getElementById("progress").style.width =
-    percentage + "%";
-}
-
+/* =========================================================
+   SPEECH
+========================================================= */
 
 function speakWord(word) {
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
 
-    const speech = new SpeechSynthesisUtterance(word);
+  if (!("speechSynthesis" in window)) return;
 
-    speech.lang = "en-US";
-    speech.rate = 0.75;
+  speechSynthesis.cancel();
 
-    window.speechSynthesis.speak(speech);
-  }
+  const utterance = new SpeechSynthesisUtterance(word);
+
+  utterance.lang = "en-US";
+  utterance.rate = 0.75;
+
+  speechSynthesis.speak(utterance);
 }
 
 
-function speakCurrentWord() {
-  speakWord(words[currentIndex].word);
-}
-
-
-// =====================================================
-// START
-// =====================================================
+/* =========================================================
+   START
+========================================================= */
 
 function startModule() {
 
-  currentIndex = 0;
+  homeScreen.classList.add("hidden");
+  gameScreen.classList.remove("hidden");
+
   score = 0;
   failedWords = [];
+  currentIndex = 0;
 
   updateScore();
-  updateProgress();
 
   startLearn();
 }
 
 
-// =====================================================
-// LEARN
-// =====================================================
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+function updateProgress() {
+
+  /*
+    Each stage has 8 words.
+    There are 5 main stages.
+  */
+
+  const stageNumber = {
+    learn: 0,
+    listen: 1,
+    spelling: 2,
+    sentence: 3,
+    hangman: 4
+  }[step];
+
+  const total = 40;
+  const completed = stageNumber * 8 + currentIndex;
+
+  progressBar.style.width =
+    ((completed / total) * 100) + "%";
+}
+
+
+/* =========================================================
+   SCORE
+========================================================= */
+
+function updateScore() {
+  scoreLabel.textContent = "⭐ " + score;
+}
+
+
+/* =========================================================
+   LEARN
+========================================================= */
 
 function startLearn() {
 
+  step = "learn";
+  currentIndex = 0;
+
+  stepLabel.textContent = "Learn • 1 of 8";
+  stepTitle.textContent = "📘 Learn";
+
+  showLearn();
+}
+
+
+function showLearn() {
+
   const w = words[currentIndex];
 
-  showScreen("learn");
+  stepLabel.textContent =
+    `Learn • ${currentIndex + 1} of ${words.length}`;
 
-  document.getElementById("learnWord").textContent = w.word;
-  document.getElementById("learnTranslation").textContent = w.translation;
-  document.getElementById("learnDefinition").textContent = w.definition;
+  content.innerHTML = `
 
-  setTimeout(() => {
-    speakWord(w.word);
-  }, 400);
+    <div class="word">${w.word}</div>
+
+    <div class="translation">
+      ${w.spanish}
+    </div>
+
+    <div class="definition">
+      ${w.definition}
+    </div>
+
+    <button class="audio-btn"
+      onclick="speakWord('${w.word}')">
+      🔊
+    </button>
+
+    <br>
+
+    <button class="main-btn" onclick="nextLearn()">
+      Continue
+    </button>
+  `;
+
+  setTimeout(() => speakWord(w.word), 300);
+
+  updateProgress();
 }
 
 
 function nextLearn() {
 
-  startListen();
+  currentIndex++;
+
+  if (currentIndex < words.length) {
+
+    showLearn();
+
+  } else {
+
+    startListen();
+
+  }
 }
 
 
-// =====================================================
-// LISTEN
-// =====================================================
+/* =========================================================
+   LISTEN & CHOOSE
+========================================================= */
 
 function startListen() {
 
-  const w = words[currentIndex];
+  step = "listen";
+  currentIndex = 0;
 
-  showScreen("listen");
-
-  document.getElementById("listenFeedback").textContent = "";
-
-  const container = document.getElementById("listenOptions");
-
-  container.innerHTML = "";
-
-  let options = [w.word];
-
-  while (options.length < 4) {
-
-    const random =
-      words[Math.floor(Math.random() * words.length)].word;
-
-    if (!options.includes(random)) {
-      options.push(random);
-    }
-  }
-
-  options.sort(() => Math.random() - 0.5);
-
-  options.forEach(option => {
-
-    const button = document.createElement("button");
-
-    button.className = "option-btn";
-    button.textContent = option;
-
-    button.onclick = () => checkListen(option, button);
-
-    container.appendChild(button);
-  });
-
-  setTimeout(() => {
-    speakWord(w.word);
-  }, 400);
+  showListen();
 }
 
 
-function checkListen(answer, button) {
+function showListen() {
 
-  const correct = words[currentIndex].word;
+  const w = words[currentIndex];
 
-  document.querySelectorAll("#listenOptions button")
-    .forEach(btn => btn.disabled = true);
+  stepLabel.textContent =
+    `Listen & Choose • ${currentIndex + 1} of ${words.length}`;
 
-  if (answer === correct) {
+  stepTitle.textContent = "👂 Listen & Choose";
+
+  /*
+    Create 4 choices.
+    Correct word + 3 other words.
+  */
+
+  let choices = [
+    w.word,
+    ...words
+      .filter(x => x.word !== w.word)
+      .sort(() => Math.random() - .5)
+      .slice(0, 3)
+      .map(x => x.word)
+  ];
+
+  choices.sort(() => Math.random() - .5);
+
+  content.innerHTML = `
+
+    <h2>Which word did you hear?</h2>
+
+    <button class="audio-btn"
+      onclick="speakWord('${w.word}')">
+      🔊
+    </button>
+
+    <div class="options">
+
+      ${choices.map(choice => `
+        <button
+          class="option"
+          onclick="checkListen(this, '${choice}', '${w.word}')">
+          ${choice}
+        </button>
+      `).join("")}
+
+    </div>
+
+    <div id="feedback" class="feedback"></div>
+  `;
+
+  setTimeout(() => speakWord(w.word), 300);
+
+  updateProgress();
+}
+
+
+function checkListen(button, selected, correct) {
+
+  if (selected === correct) {
 
     button.classList.add("correct");
 
     score += 10;
+    updateScore();
 
-    document.getElementById("listenFeedback").textContent =
+    document.getElementById("feedback").textContent =
       "✅ Correct!";
+
+    setTimeout(() => {
+
+      currentIndex++;
+
+      if (currentIndex < words.length) {
+        showListen();
+      } else {
+        startSpelling();
+      }
+
+    }, 700);
 
   } else {
 
     button.classList.add("wrong");
 
-    document.getElementById("listenFeedback").textContent =
-      "❌ Try to remember this word.";
+    document.getElementById("feedback").textContent =
+      "❌ Try again.";
   }
-
-  updateScore();
-
-  setTimeout(() => {
-    startSpelling();
-  }, 900);
 }
 
 
-// =====================================================
-// SPELLING
-// =====================================================
+/* =========================================================
+   SPELLING
+========================================================= */
 
 function startSpelling() {
 
+  step = "spelling";
+  currentIndex = 0;
+
+  showSpelling();
+}
+
+
+function showSpelling() {
+
   const w = words[currentIndex];
 
-  showScreen("spelling");
+  stepLabel.textContent =
+    `Spelling • ${currentIndex + 1} of ${words.length}`;
 
-  document.getElementById("spellingInput").value = "";
+  stepTitle.textContent = "✏️ Spelling";
 
-  document.getElementById("spellingFeedback").textContent = "";
+  content.innerHTML = `
 
-  setTimeout(() => {
-    speakWord(w.word);
-  }, 400);
+    <h2>Choose the correct spelling</h2>
 
-  document.getElementById("spellingInput").focus();
+    <button class="audio-btn"
+      onclick="speakWord('${w.word}')">
+      🔊
+    </button>
+
+    <div class="options">
+
+      ${w.spellingOptions.map(choice => `
+        <button
+          class="option"
+          onclick="checkSpelling(this, '${choice}', '${w.word}')">
+          ${choice}
+        </button>
+      `).join("")}
+
+    </div>
+
+    <div id="feedback" class="feedback"></div>
+  `;
+
+  /*
+    Automatic pronunciation.
+  */
+
+  setTimeout(() => speakWord(w.word), 300);
+
+  updateProgress();
 }
 
 
-function checkSpelling() {
+function checkSpelling(button, selected, correct) {
 
-  const input =
-    document.getElementById("spellingInput").value
-      .trim()
-      .toLowerCase();
-
-  const correct =
-    words[currentIndex].word.toLowerCase();
-
-  const feedback =
-    document.getElementById("spellingFeedback");
-
-  if (input === correct) {
-
-    score += 10;
-
-    feedback.textContent = "✅ Correct!";
-
-    updateScore();
-
-    setTimeout(() => {
-      startSentence();
-    }, 800);
-
-  } else {
-
-    feedback.textContent =
-      "❌ Try again.";
-
-    speakCurrentWord();
-  }
-}
-
-
-// =====================================================
-// SENTENCE PRACTICE
-// =====================================================
-
-function startSentence() {
-
-  const exercise =
-    sentenceExercises[currentIndex];
-
-  showScreen("sentence");
-
-  document.getElementById("sentenceText").textContent =
-    exercise.sentence;
-
-  document.getElementById("sentenceFeedback").textContent = "";
-
-  const container =
-    document.getElementById("sentenceOptions");
-
-  container.innerHTML = "";
-
-  let options = [exercise.answer];
-
-  while (options.length < 4) {
-
-    const random =
-      words[Math.floor(Math.random() * words.length)].word;
-
-    if (!options.includes(random)) {
-      options.push(random);
-    }
-  }
-
-  options.sort(() => Math.random() - 0.5);
-
-  options.forEach(option => {
-
-    const button =
-      document.createElement("button");
-
-    button.className = "option-btn";
-    button.textContent = option;
-
-    button.onclick = () =>
-      checkSentence(option, button);
-
-    container.appendChild(button);
-  });
-}
-
-
-function checkSentence(answer, button) {
-
-  const correct =
-    sentenceExercises[currentIndex].answer;
-
-  document.querySelectorAll("#sentenceOptions button")
-    .forEach(btn => btn.disabled = true);
-
-  if (answer === correct) {
+  if (selected === correct) {
 
     button.classList.add("correct");
 
     score += 10;
+    updateScore();
 
-    document.getElementById("sentenceFeedback").textContent =
-      "✅ Correct!";
+    document.getElementById("feedback").textContent =
+      "✅ Correct spelling!";
+
+    setTimeout(() => {
+
+      currentIndex++;
+
+      if (currentIndex < words.length) {
+
+        showSpelling();
+
+      } else {
+
+        startSentence();
+
+      }
+
+    }, 700);
 
   } else {
 
     button.classList.add("wrong");
 
-    document.getElementById("sentenceFeedback").textContent =
-      "❌ Not quite.";
+    document.getElementById("feedback").textContent =
+      "❌ That's not correct. Try again.";
+
   }
-
-  updateScore();
-
-  setTimeout(() => {
-    startHangman();
-  }, 900);
 }
 
 
-// =====================================================
-// HANGMAN
-// =====================================================
+/* =========================================================
+   SENTENCE
+========================================================= */
 
-const qwertyRows = [
-  ["q","w","e","r","t","y","u","i","o","p"],
-  ["a","s","d","f","g","h","j","k","l"],
-  ["z","x","c","v","b","n","m"]
-];
+function startSentence() {
 
+  step = "sentence";
+  currentIndex = 0;
+
+  showSentence();
+}
+
+
+function showSentence() {
+
+  const w = words[currentIndex];
+
+  stepLabel.textContent =
+    `Sentence • ${currentIndex + 1} of ${words.length}`;
+
+  stepTitle.textContent = "📝 Sentence";
+
+  /*
+    Correct word + 3 random words.
+  */
+
+  let choices = [
+    w.word,
+    ...words
+      .filter(x => x.word !== w.word)
+      .sort(() => Math.random() - .5)
+      .slice(0, 3)
+      .map(x => x.word)
+  ];
+
+  choices.sort(() => Math.random() - .5);
+
+  content.innerHTML = `
+
+    <div class="sentence">
+      ${w.sentence}
+    </div>
+
+    <div class="options">
+
+      ${choices.map(choice => `
+        <button
+          class="option"
+          onclick="checkSentence(this, '${choice}', '${w.word}')">
+          ${choice}
+        </button>
+      `).join("")}
+
+    </div>
+
+    <div id="feedback" class="feedback"></div>
+  `;
+
+  updateProgress();
+}
+
+
+function checkSentence(button, selected, correct) {
+
+  if (selected === correct) {
+
+    button.classList.add("correct");
+
+    score += 10;
+    updateScore();
+
+    document.getElementById("feedback").textContent =
+      "✅ Correct!";
+
+    setTimeout(() => {
+
+      currentIndex++;
+
+      if (currentIndex < words.length) {
+
+        showSentence();
+
+      } else {
+
+        startHangman();
+
+      }
+
+    }, 700);
+
+  } else {
+
+    button.classList.add("wrong");
+
+    document.getElementById("feedback").textContent =
+      "❌ Try again.";
+  }
+}
+
+
+/* =========================================================
+   HANGMAN
+========================================================= */
 
 function startHangman() {
 
-  const word = words[currentIndex].word;
+  step = "hangman";
+  currentIndex = 0;
 
-  showScreen("hangman");
+  showHangman();
+}
+
+
+function showHangman() {
+
+  const w = words[currentIndex];
+
+  hangmanWord = w.word.toLowerCase();
 
   guessedLetters = [];
-  attempts = 7;
+  attempts = 6;
   hangmanPoints = 0;
 
-  document.getElementById("attempts").textContent =
-    attempts;
+  stepLabel.textContent =
+    `Hangman • ${currentIndex + 1} of ${words.length}`;
 
-  document.getElementById("hangmanPoints").textContent =
-    hangmanPoints;
+  stepTitle.textContent = "🎮 Hangman";
 
-  createKeyboard();
+  renderHangman();
 
-  updateHangmanWord();
+  setTimeout(() => speakWord(w.word), 300);
+
+  updateProgress();
 }
 
 
-function createKeyboard() {
+function renderHangman() {
 
-  const keyboard =
-    document.getElementById("keyboard");
+  const display = hangmanWord
+    .split("")
+    .map(letter => {
 
-  keyboard.innerHTML = "";
+      if (letter === " ") return "&nbsp;";
 
-  qwertyRows.forEach(row => {
+      return guessedLetters.includes(letter)
+        ? letter
+        : "_";
 
-    row.forEach(letter => {
+    })
+    .join(" ");
 
-      const button =
-        document.createElement("button");
+  const qwertyRows = [
+    ["q","w","e","r","t","y","u","i","o","p"],
+    ["a","s","d","f","g","h","j","k","l"],
+    ["z","x","c","v","b","n","m"]
+  ];
 
-      button.className = "letter-btn";
-      button.textContent = letter.toUpperCase();
+  content.innerHTML = `
 
-      button.id = "key-" + letter;
+    <div class="hangman-word">
+      ${display}
+    </div>
 
-      button.onclick = () =>
-        guessLetter(letter);
+    <div class="hangman-score">
+      ❤️ Attempts: ${attempts}
+      &nbsp; | &nbsp;
+      ⭐ Points: ${hangmanPoints}
+    </div>
 
-      keyboard.appendChild(button);
-    });
-  });
-}
+    <div class="keyboard">
 
+      ${qwertyRows.map(row => `
 
-function updateHangmanWord() {
+        <div class="key-row">
 
-  const word =
-    words[currentIndex].word;
+          ${row.map(letter => `
 
-  let display = "";
+            <button
+              class="letter-btn ${
+                guessedLetters.includes(letter)
+                  ? "used"
+                  : ""
+              }"
+              ${
+                guessedLetters.includes(letter)
+                  ? "disabled"
+                  : ""
+              }
+              onclick="guessLetter('${letter}')">
 
-  word.split("").forEach(letter => {
+              ${letter.toUpperCase()}
 
-    if (guessedLetters.includes(letter)) {
-      display += letter.toUpperCase();
-    } else {
-      display += "_";
-    }
-  });
+            </button>
 
-  document.getElementById("hangmanWord").textContent =
-    display;
+          `).join("")}
+
+        </div>
+
+      `).join("")}
+
+    </div>
+
+    <div id="feedback" class="feedback"></div>
+  `;
 }
 
 
 function guessLetter(letter) {
 
-  if (guessedLetters.includes(letter)) {
-    return;
-  }
+  if (guessedLetters.includes(letter)) return;
 
   guessedLetters.push(letter);
 
-  const button =
-    document.getElementById("key-" + letter);
-
-  if (button) {
-    button.disabled = true;
-    button.classList.add("used");
-  }
-
-  const word =
-    words[currentIndex].word;
-
-  if (word.includes(letter)) {
+  if (hangmanWord.includes(letter)) {
 
     hangmanPoints += 10;
-
-    document.getElementById("hangmanPoints").textContent =
-      hangmanPoints;
-
-    updateHangmanWord();
-
-    const complete =
-      word.split("").every(letter =>
-        guessedLetters.includes(letter)
-      );
-
-    if (complete) {
-
-      score += 50;
-
-      updateScore();
-
-      showHangmanResult(true);
-    }
 
   } else {
 
     attempts--;
 
-    document.getElementById("attempts").textContent =
-      attempts;
-
-    if (attempts <= 0) {
-
-      showHangmanResult(false);
-    }
-  }
-}
-
-
-function showHangmanResult(won) {
-
-  const container =
-    document.getElementById("hangman");
-
-  const word =
-    words[currentIndex].word;
-
-  if (won) {
-
-    container.innerHTML = `
-      <div class="result">
-        <h2>🎉 Correct!</h2>
-
-        <div class="hangman-score">
-          Word: <strong>${word}</strong><br><br>
-          Word Points: ${hangmanPoints}<br>
-          Total Score: ${score}
-        </div>
-      </div>
-    `;
-
-  } else {
-
-    container.innerHTML = `
-      <div class="result">
-        <h2>😮 Out of Attempts!</h2>
-
-        <div class="hangman-score">
-          The word was:<br><br>
-          <strong>${word}</strong><br><br>
-          Total Score: ${score}
-        </div>
-      </div>
-    `;
-
-    if (!failedWords.includes(currentIndex)) {
-      failedWords.push(currentIndex);
-    }
   }
 
-  setTimeout(() => {
-    nextHangman();
-  }, 1200);
+  renderHangman();
+
+  checkHangmanEnd();
 }
 
 
-function nextHangman() {
+function checkHangmanEnd() {
 
-  currentIndex++;
+  const completed = hangmanWord
+    .split("")
+    .every(letter =>
+      guessedLetters.includes(letter)
+    );
 
-  if (currentIndex < words.length) {
+  if (completed) {
 
-    updateProgress();
-
-    startLearn();
-
-  } else {
-
-    if (failedWords.length > 0) {
-
-      reviewIndex = 0;
-
-      startReviewSpelling();
-
-    } else {
-
-      finishModule();
-    }
-  }
-}
-
-
-// =====================================================
-// REVIEW SPELLING
-// =====================================================
-
-function startReviewSpelling() {
-
-  const index =
-    failedWords[reviewIndex];
-
-  const w =
-    words[index];
-
-  showScreen("reviewSpelling");
-
-  document.getElementById("reviewSpellingInput").value = "";
-
-  document.getElementById("reviewSpellingFeedback").textContent = "";
-
-  setTimeout(() => {
-    speakWord(w.word);
-  }, 400);
-
-  document.getElementById("reviewSpellingInput").focus();
-}
-
-
-function speakReviewWord() {
-
-  const index =
-    failedWords[reviewIndex];
-
-  speakWord(words[index].word);
-}
-
-
-function checkReviewSpelling() {
-
-  const index =
-    failedWords[reviewIndex];
-
-  const correct =
-    words[index].word.toLowerCase();
-
-  const input =
-    document.getElementById("reviewSpellingInput")
-      .value
-      .trim()
-      .toLowerCase();
-
-  const feedback =
-    document.getElementById("reviewSpellingFeedback");
-
-  if (input === correct) {
-
-    feedback.textContent =
-      "✅ Correct!";
-
-    score += 10;
+    score += 50;
+    score += hangmanPoints;
 
     updateScore();
 
+    content.innerHTML += `
+
+      <div class="result">
+        🎉 Word Complete!
+        <br>
+        +${50 + hangmanPoints} points
+      </div>
+
+    `;
+
     setTimeout(() => {
-      startReviewSentence();
-    }, 800);
 
-  } else {
+      currentIndex++;
 
-    feedback.textContent =
-      "❌ Try again.";
+      if (currentIndex < words.length) {
 
-    speakReviewWord();
+        showHangman();
+
+      } else {
+
+        startFinalReview();
+
+      }
+
+    }, 1200);
+
   }
-}
 
+  else if (attempts <= 0) {
 
-// =====================================================
-// REVIEW SENTENCE
-// =====================================================
+    const failedWord = words[currentIndex];
 
-function startReviewSentence() {
-
-  const index =
-    failedWords[reviewIndex];
-
-  const exercise =
-    sentenceExercises[index];
-
-  showScreen("reviewSentence");
-
-  document.getElementById("reviewSentenceText").textContent =
-    exercise.sentence;
-
-  document.getElementById("reviewSentenceFeedback").textContent =
-    "";
-
-  const container =
-    document.getElementById("reviewSentenceOptions");
-
-  container.innerHTML = "";
-
-  let options = [exercise.answer];
-
-  while (options.length < 4) {
-
-    const random =
-      words[Math.floor(Math.random() * words.length)].word;
-
-    if (!options.includes(random)) {
-      options.push(random);
+    if (!failedWords.includes(failedWord)) {
+      failedWords.push(failedWord);
     }
+
+    content.innerHTML += `
+
+      <div class="result">
+        ❌ The word was:
+        <br><strong>${failedWord.word}</strong>
+      </div>
+
+    `;
+
+    setTimeout(() => {
+
+      currentIndex++;
+
+      if (currentIndex < words.length) {
+
+        showHangman();
+
+      } else {
+
+        startFinalReview();
+
+      }
+
+    }, 1400);
+
   }
-
-  options.sort(() => Math.random() - 0.5);
-
-  options.forEach(option => {
-
-    const button =
-      document.createElement("button");
-
-    button.className = "option-btn";
-    button.textContent = option;
-
-    button.onclick = () =>
-      checkReviewSentence(option, button);
-
-    container.appendChild(button);
-  });
 }
 
 
-function checkReviewSentence(answer, button) {
+/* =========================================================
+   FINAL REVIEW
+========================================================= */
 
-  const index =
-    failedWords[reviewIndex];
+function startFinalReview() {
 
-  const correct =
-    sentenceExercises[index].answer;
+  if (failedWords.length === 0) {
 
-  document.querySelectorAll("#reviewSentenceOptions button")
-    .forEach(btn => btn.disabled = true);
+    finishModule();
 
-  if (answer === correct) {
+    return;
+  }
+
+  currentIndex = 0;
+
+  startReviewSpelling();
+}
+
+
+/* =========================================================
+   REVIEW SPELLING
+========================================================= */
+
+function startReviewSpelling() {
+
+  step = "reviewSpelling";
+
+  showReviewSpelling();
+}
+
+
+function showReviewSpelling() {
+
+  const w = failedWords[currentIndex];
+
+  stepLabel.textContent =
+    `Review Spelling • ${currentIndex + 1} of ${failedWords.length}`;
+
+  stepTitle.textContent = "🔄 Review Spelling";
+
+  content.innerHTML = `
+
+    <h2>Let's try this word again.</h2>
+
+    <button class="audio-btn"
+      onclick="speakWord('${w.word}')">
+      🔊
+    </button>
+
+    <div class="options">
+
+      ${w.spellingOptions.map(choice => `
+
+        <button
+          class="option"
+          onclick="checkReviewSpelling(
+            this,
+            '${choice}',
+            '${w.word}'
+          )">
+
+          ${choice}
+
+        </button>
+
+      `).join("")}
+
+    </div>
+
+    <div id="feedback" class="feedback"></div>
+  `;
+
+  setTimeout(() => speakWord(w.word), 300);
+}
+
+
+function checkReviewSpelling(button, selected, correct) {
+
+  if (selected === correct) {
 
     button.classList.add("correct");
 
     score += 10;
+    updateScore();
 
-    document.getElementById("reviewSentenceFeedback").textContent =
+    document.getElementById("feedback").textContent =
       "✅ Correct!";
+
+    setTimeout(() => {
+
+      currentIndex++;
+
+      if (currentIndex < failedWords.length) {
+
+        showReviewSpelling();
+
+      } else {
+
+        currentIndex = 0;
+        startReviewSentence();
+
+      }
+
+    }, 700);
 
   } else {
 
     button.classList.add("wrong");
 
-    document.getElementById("reviewSentenceFeedback").textContent =
-      "❌ Not quite.";
+    document.getElementById("feedback").textContent =
+      "❌ Try again.";
   }
-
-  updateScore();
-
-  setTimeout(() => {
-    startReviewHangman();
-  }, 900);
 }
 
 
-// =====================================================
-// REVIEW HANGMAN
-// =====================================================
+/* =========================================================
+   REVIEW SENTENCE
+========================================================= */
+
+function startReviewSentence() {
+
+  step = "reviewSentence";
+
+  showReviewSentence();
+}
+
+
+function showReviewSentence() {
+
+  const w = failedWords[currentIndex];
+
+  stepLabel.textContent =
+    `Review Sentence • ${currentIndex + 1} of ${failedWords.length}`;
+
+  stepTitle.textContent = "🔄 Review Sentence";
+
+  let choices = [
+    w.word,
+    ...words
+      .filter(x => x.word !== w.word)
+      .sort(() => Math.random() - .5)
+      .slice(0, 3)
+      .map(x => x.word)
+  ];
+
+  choices.sort(() => Math.random() - .5);
+
+  content.innerHTML = `
+
+    <div class="sentence">
+      ${w.sentence}
+    </div>
+
+    <div class="options">
+
+      ${choices.map(choice => `
+
+        <button
+          class="option"
+          onclick="checkReviewSentence(
+            this,
+            '${choice}',
+            '${w.word}'
+          )">
+
+          ${choice}
+
+        </button>
+
+      `).join("")}
+
+    </div>
+
+    <div id="feedback" class="feedback"></div>
+  `;
+}
+
+
+function checkReviewSentence(button, selected, correct) {
+
+  if (selected === correct) {
+
+    button.classList.add("correct");
+
+    score += 10;
+    updateScore();
+
+    document.getElementById("feedback").textContent =
+      "✅ Correct!";
+
+    setTimeout(() => {
+
+      currentIndex++;
+
+      if (currentIndex < failedWords.length) {
+
+        showReviewSentence();
+
+      } else {
+
+        currentIndex = 0;
+        startReviewHangman();
+
+      }
+
+    }, 700);
+
+  } else {
+
+    button.classList.add("wrong");
+
+    document.getElementById("feedback").textContent =
+      "❌ Try again.";
+  }
+}
+
+
+/* =========================================================
+   REVIEW HANGMAN
+========================================================= */
 
 function startReviewHangman() {
 
-  const index =
-    failedWords[reviewIndex];
+  step = "reviewHangman";
 
-  showScreen("reviewHangman");
-
-  reviewGuessedLetters = [];
-  reviewAttempts = 7;
-  reviewHangmanPoints = 0;
-
-  document.getElementById("reviewAttempts").textContent =
-    reviewAttempts;
-
-  document.getElementById("reviewHangmanPoints").textContent =
-    reviewHangmanPoints;
-
-  createReviewKeyboard();
-
-  updateReviewHangmanWord();
+  showReviewHangman();
 }
 
 
-function createReviewKeyboard() {
+function showReviewHangman() {
 
-  const keyboard =
-    document.getElementById("reviewKeyboard");
+  const w = failedWords[currentIndex];
 
-  keyboard.innerHTML = "";
+  hangmanWord = w.word.toLowerCase();
 
-  qwertyRows.forEach(row => {
+  guessedLetters = [];
+  attempts = 6;
+  hangmanPoints = 0;
 
-    row.forEach(letter => {
+  stepLabel.textContent =
+    `Review Hangman • ${currentIndex + 1} of ${failedWords.length}`;
 
-      const button =
-        document.createElement("button");
+  stepTitle.textContent = "🔄 Review Hangman";
 
-      button.className = "letter-btn";
-      button.textContent = letter.toUpperCase();
+  renderHangman();
 
-      button.id = "review-key-" + letter;
-
-      button.onclick = () =>
-        guessReviewLetter(letter);
-
-      keyboard.appendChild(button);
-    });
-  });
+  setTimeout(() => speakWord(w.word), 300);
 }
 
 
-function updateReviewHangmanWord() {
-
-  const index =
-    failedWords[reviewIndex];
-
-  const word =
-    words[index].word;
-
-  let display = "";
-
-  word.split("").forEach(letter => {
-
-    if (reviewGuessedLetters.includes(letter)) {
-      display += letter.toUpperCase();
-    } else {
-      display += "_";
-    }
-  });
-
-  document.getElementById("reviewHangmanWord").textContent =
-    display;
+function guessLetterReview(letter) {
+  guessLetter(letter);
 }
 
 
-function guessReviewLetter(letter) {
-
-  if (reviewGuessedLetters.includes(letter)) {
-    return;
-  }
-
-  reviewGuessedLetters.push(letter);
-
-  const button =
-    document.getElementById("review-key-" + letter);
-
-  if (button) {
-    button.disabled = true;
-    button.classList.add("used");
-  }
-
-  const index =
-    failedWords[reviewIndex];
-
-  const word =
-    words[index].word;
-
-  if (word.includes(letter)) {
-
-    reviewHangmanPoints += 10;
-
-    document.getElementById("reviewHangmanPoints").textContent =
-      reviewHangmanPoints;
-
-    updateReviewHangmanWord();
-
-    const complete =
-      word.split("").every(letter =>
-        reviewGuessedLetters.includes(letter)
-      );
-
-    if (complete) {
-
-      score += 50;
-
-      updateScore();
-
-      showReviewHangmanResult(true);
-    }
-
-  } else {
-
-    reviewAttempts--;
-
-    document.getElementById("reviewAttempts").textContent =
-      reviewAttempts;
-
-    if (reviewAttempts <= 0) {
-
-      showReviewHangmanResult(false);
-    }
-  }
-}
-
-
-function showReviewHangmanResult(won) {
-
-  const container =
-    document.getElementById("reviewHangman");
-
-  const index =
-    failedWords[reviewIndex];
-
-  const word =
-    words[index].word;
-
-  if (won) {
-
-    container.innerHTML = `
-      <div class="result">
-        <h2>🎉 Great Job!</h2>
-
-        <div class="hangman-score">
-          Word: <strong>${word}</strong><br><br>
-          Word Points: ${reviewHangmanPoints}<br>
-          Total Score: ${score}
-        </div>
-      </div>
-    `;
-
-  } else {
-
-    container.innerHTML = `
-      <div class="result">
-        <h2>💪 Keep Practicing!</h2>
-
-        <div class="hangman-score">
-          The word was:<br><br>
-          <strong>${word}</strong><br><br>
-          Total Score: ${score}
-        </div>
-      </div>
-    `;
-  }
-
-  setTimeout(() => {
-    nextReviewHangman();
-  }, 1200);
-}
-
-
-function nextReviewHangman() {
-
-  reviewIndex++;
-
-  if (reviewIndex < failedWords.length) {
-
-    startReviewSpelling();
-
-  } else {
-
-    finishModule();
-  }
-}
-
-
-// =====================================================
-// FINAL RESULT
-// =====================================================
+/* =========================================================
+   FINISH
+========================================================= */
 
 function finishModule() {
 
-  showScreen("result");
+  stepLabel.textContent = "Complete!";
+  stepTitle.textContent = "🏆 Module Complete";
 
-  document.getElementById("finalScore").textContent =
-    score;
+  progressBar.style.width = "100%";
 
-  document.getElementById("progress").style.width =
-    "100%";
+  content.innerHTML = `
 
-  let message = "";
+    <div class="result">
+      🎉 Great job!
+      <br><br>
+      Final Score: ${score}
+    </div>
 
-  if (score >= 300) {
+    <button
+      class="main-btn"
+      onclick="location.reload()">
 
-    message =
-      "🌟 Amazing! You did an excellent job!";
+      Play Again
 
-  } else if (score >= 220) {
-
-    message =
-      "👏 Great job! Keep practicing!";
-
-  } else {
-
-    message =
-      "💪 Good effort! Practice makes progress!";
-  }
-
-  document.getElementById("resultMessage").textContent =
-    message;
+    </button>
+  `;
 }
-
-
-// =====================================================
-// ENTER KEY
-// =====================================================
-
-document.getElementById("spellingInput")
-  .addEventListener("keydown", function(event) {
-
-    if (event.key === "Enter") {
-      checkSpelling();
-    }
-  });
-
-
-document.getElementById("reviewSpellingInput")
-  .addEventListener("keydown", function(event) {
-
-    if (event.key === "Enter") {
-      checkReviewSpelling();
-    }
-  });
 
 </script>
 
