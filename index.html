@@ -1,151 +1,226 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Word Hangman</title>
 
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #e0f2fe, #fef3c7);
-    margin: 0;
-    padding: 20px;
-    text-align: center;
-    color: #1f2937;
-}
+    * {
+        box-sizing: border-box;
+    }
 
-.container {
-    max-width: 500px;
-    margin: auto;
-}
+    body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #eef5ff, #ffffff);
+        color: #1f2937;
+        text-align: center;
+        min-height: 100vh;
+    }
 
-h1 {
-    font-size: 32px;
-    margin-bottom: 5px;
-}
+    .container {
+        max-width: 650px;
+        margin: auto;
+        padding: 20px 15px 40px;
+    }
 
-.subtitle {
-    color: #666;
-    margin-bottom: 20px;
-}
+    h1 {
+        font-size: 32px;
+        margin-bottom: 5px;
+    }
 
-.card {
-    background: white;
-    border-radius: 25px;
-    padding: 20px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.12);
-}
+    h2 {
+        margin-top: 10px;
+    }
 
-.stats {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
+    .subtitle {
+        color: #64748b;
+        margin-bottom: 20px;
+    }
 
-.stat {
-    background: #f3f4f6;
-    border-radius: 15px;
-    padding: 10px 15px;
-}
+    .card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px 20px;
+        margin-top: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
 
-.stat strong {
-    display: block;
-    font-size: 22px;
-}
+    .word {
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        margin: 15px 0;
+    }
 
-.hint-title {
-    color: #6366f1;
-    font-weight: bold;
-    font-size: 13px;
-}
+    .translation {
+        font-size: 19px;
+        color: #2563eb;
+        font-weight: 700;
+    }
 
-.hint {
-    font-size: 19px;
-    font-weight: bold;
-    margin: 8px 0 20px;
-}
+    .definition {
+        background: #f1f5f9;
+        border-radius: 12px;
+        padding: 15px;
+        margin: 15px 0;
+        font-size: 17px;
+        line-height: 1.5;
+        text-align: left;
+    }
 
-.word {
-    display: flex;
-    justify-content: center;
-    gap: 7px;
-    flex-wrap: wrap;
-    margin-bottom: 25px;
-}
+    button {
+        border: none;
+        border-radius: 12px;
+        padding: 12px 18px;
+        margin: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+    }
 
-.letter {
-    width: 28px;
-    height: 38px;
-    border-bottom: 3px solid #222;
-    font-size: 25px;
-    font-weight: bold;
-}
+    .primary {
+        background: #2563eb;
+        color: white;
+    }
 
-.keyboard {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-}
+    .secondary {
+        background: #e2e8f0;
+        color: #1e293b;
+    }
 
-.keyboard button {
-    border: none;
-    border-radius: 10px;
-    padding: 11px 3px;
-    font-weight: bold;
-    font-size: 15px;
-    background: #e5e7eb;
-}
+    .success {
+        background: #16a34a;
+        color: white;
+    }
 
-.keyboard button:disabled {
-    opacity: .35;
-}
+    .danger {
+        background: #dc2626;
+        color: white;
+    }
 
-.message {
-    font-weight: bold;
-    font-size: 18px;
-    min-height: 28px;
-    margin-bottom: 10px;
-}
+    .score {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 15px 0;
+    }
 
-.correct {
-    color: #15803d;
-}
+    .progress {
+        color: #64748b;
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
 
-.incorrect {
-    color: #b91c1c;
-}
+    .options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 20px;
+    }
 
-.actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-}
+    .option {
+        background: #f8fafc;
+        border: 2px solid #cbd5e1;
+        padding: 15px 8px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 700;
+    }
 
-.actions button {
-    flex: 1;
-    border: none;
-    border-radius: 12px;
-    padding: 13px;
-    font-weight: bold;
-    font-size: 14px;
-}
+    .option:hover {
+        background: #eff6ff;
+    }
 
-.listen {
-    background: #ede9fe;
-    color: #5b21b6;
-}
+    .correct {
+        background: #dcfce7 !important;
+        border-color: #16a34a !important;
+        color: #166534;
+    }
 
-.next {
-    background: #111827;
-    color: white;
-}
+    .wrong {
+        background: #fee2e2 !important;
+        border-color: #dc2626 !important;
+        color: #991b1b;
+    }
 
-.instructions {
-    margin-top: 15px;
-    font-size: 13px;
-    color: #6b7280;
-}
+    .feedback {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 15px 0;
+        min-height: 28px;
+    }
+
+    .hangman-word {
+        font-size: 30px;
+        letter-spacing: 8px;
+        font-weight: 800;
+        margin: 25px 0;
+        word-break: break-word;
+    }
+
+    .keyboard {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 7px;
+        margin-top: 20px;
+    }
+
+    .key {
+        padding: 10px 3px;
+        margin: 0;
+        background: #e2e8f0;
+        border-radius: 9px;
+        font-weight: 700;
+        font-size: 15px;
+    }
+
+    .key:disabled {
+        opacity: 0.4;
+    }
+
+    .attempts {
+        font-weight: 700;
+        color: #dc2626;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .final-score {
+        font-size: 42px;
+        font-weight: 900;
+        color: #2563eb;
+        margin: 15px;
+    }
+
+    .result-box {
+        background: #f8fafc;
+        border-radius: 15px;
+        padding: 15px;
+        margin: 10px 0;
+        font-size: 18px;
+    }
+
+    @media (max-width: 500px) {
+        h1 {
+            font-size: 28px;
+        }
+
+        .keyboard {
+            grid-template-columns: repeat(6, 1fr);
+        }
+
+        .key {
+            font-size: 14px;
+        }
+
+        .hangman-word {
+            font-size: 24px;
+            letter-spacing: 5px;
+        }
+    }
 </style>
 </head>
 
@@ -153,354 +228,549 @@ h1 {
 
 <div class="container">
 
-<h1>🎯 Word Hangman</h1>
+    <h1>🎯 Word Hangman</h1>
+    <div class="subtitle">
+        Learn the word → Practice → Spell it!
+    </div>
 
-<div class="subtitle">
-Aprende palabras en inglés jugando
-</div>
+    <!-- START -->
+    <div id="startScreen" class="card">
+        <h2>📚 Let's Practice!</h2>
 
-<div class="card">
+        <p>
+            First learn the words and practice their meanings.
+            Then play Hangman!
+        </p>
 
-<div class="stats">
+        <button class="primary" onclick="startPractice()">
+            🚀 Start Practice
+        </button>
+    </div>
 
-<div class="stat">
-<strong id="score">0</strong>
-Puntos
-</div>
+    <!-- PRACTICE -->
+    <div id="practiceScreen" class="card hidden">
 
-<div class="stat">
-<strong id="lives">6</strong>
-Intentos
-</div>
+        <div class="progress" id="practiceProgress"></div>
 
-<div class="stat">
-<strong id="round">1/7</strong>
-Palabra
-</div>
+        <div class="word" id="practiceWord"></div>
 
-</div>
+        <div class="translation" id="practiceTranslation"></div>
 
-<div class="hint-title">
-💡 PISTA EN ESPAÑOL
-</div>
+        <div class="definition">
+            <strong>📘 Definition:</strong><br>
+            <span id="practiceDefinition"></span>
+        </div>
 
-<div class="hint" id="hint"></div>
+        <button class="secondary" onclick="speakPracticeWord()">
+            🔊 Listen
+        </button>
 
-<div class="word" id="word"></div>
+        <h3>Which word matches?</h3>
 
-<div class="message" id="message"></div>
+        <div id="options" class="options"></div>
 
-<div class="keyboard" id="keyboard"></div>
+        <div id="practiceFeedback" class="feedback"></div>
 
-<div class="actions">
+        <button id="nextPracticeBtn"
+                class="primary hidden"
+                onclick="nextPractice()">
+            ➡️ Next
+        </button>
 
-<button class="listen" onclick="listenWord()">
-🔊 Escuchar
-</button>
+    </div>
 
-<button class="next" onclick="nextWord()">
-➡️ Nueva palabra
-</button>
+    <!-- HANGMAN -->
+    <div id="hangmanScreen" class="card hidden">
 
-</div>
+        <h2>🎯 Hangman</h2>
 
-</div>
+        <div class="score">
+            Score: <span id="hangmanScore">0</span>
+        </div>
 
-<div class="instructions">
+        <div class="progress" id="hangmanProgress"></div>
 
-Lee la pista en español y toca las letras para descubrir la palabra en inglés.
+        <div class="translation" id="hangmanTranslation"></div>
 
-<br><br>
+        <div class="definition">
+            <strong>📘 Definition:</strong><br>
+            <span id="hangmanDefinition"></span>
+        </div>
 
-⭐ Cada letra correcta = 10 puntos  
-🎉 Completar la palabra = 50 puntos extra
+        <button class="secondary" onclick="speakHangmanWord()">
+            🔊 Listen
+        </button>
 
-</div>
+        <div class="hangman-word" id="hangmanWord"></div>
+
+        <div class="attempts">
+            ❤️ Attempts left: <span id="attempts">6</span>
+        </div>
+
+        <div id="keyboard" class="keyboard"></div>
+
+        <div id="hangmanMessage" class="feedback"></div>
+
+        <button id="nextHangmanBtn"
+                class="primary hidden"
+                onclick="nextHangman()">
+            ➡️ Next Word
+        </button>
+
+    </div>
+
+    <!-- FINAL -->
+    <div id="finalScreen" class="card hidden">
+
+        <h2>🏆 Great Job!</h2>
+
+        <div class="final-score">
+            <span id="totalScore">0</span>
+        </div>
+
+        <p><strong>Total Points</strong></p>
+
+        <div class="result-box">
+            📚 Practice Points:
+            <strong id="practiceFinalScore">0</strong>
+        </div>
+
+        <div class="result-box">
+            🎯 Hangman Points:
+            <strong id="hangmanFinalScore">0</strong>
+        </div>
+
+        <div class="result-box">
+            ✅ Correct Practice Answers:
+            <strong id="correctAnswers">0 / 7</strong>
+        </div>
+
+        <div class="result-box">
+            📊 Accuracy:
+            <strong id="accuracy">0%</strong>
+        </div>
+
+        <button class="primary" onclick="restartGame()">
+            🔄 Play Again
+        </button>
+
+    </div>
 
 </div>
 
 <script>
 
 const words = [
-
-{
-word: "ABBREVIATION",
-hint: "Abreviación o forma corta de una palabra."
-},
-
-{
-word: "ABROAD",
-hint: "En o hacia otro país."
-},
-
-{
-word: "ACCESS",
-hint: "La posibilidad o permiso para entrar o usar algo."
-},
-
-{
-word: "ACCORD",
-hint: "Estar de acuerdo; también puede significar un acuerdo."
-},
-
-{
-word: "ADEQUATE",
-hint: "Suficiente o apropiado para una necesidad."
-},
-
-{
-word: "ADVANCEMENTS",
-hint: "Progresos o mejoras importantes."
-},
-
-{
-word: "AERONAUTICS",
-hint: "Ciencia y tecnología relacionada con los aviones y el vuelo."
-}
-
+    {
+        word: "ABBREVIATION",
+        translation: "Abreviación",
+        definition: "A shortened form of a word or phrase."
+    },
+    {
+        word: "ABROAD",
+        translation: "En el extranjero / a otro país",
+        definition: "In or to a foreign country."
+    },
+    {
+        word: "ACCESS",
+        translation: "Acceso",
+        definition: "The right or opportunity to enter, use, or reach something."
+    },
+    {
+        word: "ACCORD",
+        translation: "Acuerdo / estar de acuerdo",
+        definition: "Agreement or harmony between people or ideas."
+    },
+    {
+        word: "ADEQUATE",
+        translation: "Adecuado / suficiente",
+        definition: "Good enough or suitable for a particular purpose."
+    },
+    {
+        word: "ADVANCEMENTS",
+        translation: "Avances / progresos",
+        definition: "Improvements or developments that make something better."
+    },
+    {
+        word: "AERONAUTICS",
+        translation: "Aeronáutica",
+        definition: "The science and technology of aircraft and flight."
+    }
 ];
 
-let order = [];
-let currentIndex = 0;
-let currentWord;
-let guessed = [];
-let lives = 6;
-let score = 0;
-let finished = false;
+let practiceIndex = 0;
+let practiceScore = 0;
+let correctAnswers = 0;
 
+let hangmanIndex = 0;
+let hangmanScore = 0;
+let currentWord = "";
+let guessedLetters = [];
+let attempts = 6;
 
-function shuffle(array) {
-
-return [...array].sort(() => Math.random() - 0.5);
-
+function hideAll() {
+    document.getElementById("startScreen").classList.add("hidden");
+    document.getElementById("practiceScreen").classList.add("hidden");
+    document.getElementById("hangmanScreen").classList.add("hidden");
+    document.getElementById("finalScreen").classList.add("hidden");
 }
 
+function startPractice() {
+    practiceIndex = 0;
+    practiceScore = 0;
+    correctAnswers = 0;
 
-function startGame() {
+    hideAll();
+    document.getElementById("practiceScreen").classList.remove("hidden");
 
-order = shuffle(words);
-
-currentIndex = 0;
-
-score = 0;
-
-loadWord();
-
+    showPractice();
 }
 
+function showPractice() {
 
-function loadWord() {
+    const item = words[practiceIndex];
 
-currentWord = order[currentIndex];
+    document.getElementById("practiceProgress").textContent =
+        `Word ${practiceIndex + 1} of ${words.length}`;
 
-guessed = [];
+    document.getElementById("practiceWord").textContent =
+        item.word;
 
-lives = 6;
+    document.getElementById("practiceTranslation").textContent =
+        `🇪🇸 ${item.translation}`;
 
-finished = false;
+    document.getElementById("practiceDefinition").textContent =
+        item.definition;
 
-document.getElementById("hint").textContent =
-currentWord.hint;
+    document.getElementById("practiceFeedback").textContent = "";
 
-document.getElementById("score").textContent =
-score;
+    document.getElementById("nextPracticeBtn").classList.add("hidden");
 
-document.getElementById("lives").textContent =
-lives;
+    createOptions();
 
-document.getElementById("round").textContent =
-(currentIndex + 1) + "/7";
-
-document.getElementById("message").textContent = "";
-
-drawWord();
-
-drawKeyboard();
-
+    setTimeout(() => {
+        speakPracticeWord();
+    }, 300);
 }
 
+function createOptions() {
 
-function drawWord() {
+    const container = document.getElementById("options");
+    container.innerHTML = "";
 
-const wordContainer =
-document.getElementById("word");
+    let choices = [words[practiceIndex].word];
 
-wordContainer.innerHTML = "";
+    while (choices.length < 4) {
 
-for (let letter of currentWord.word) {
+        const randomWord =
+            words[Math.floor(Math.random() * words.length)].word;
 
-const div = document.createElement("div");
+        if (!choices.includes(randomWord)) {
+            choices.push(randomWord);
+        }
+    }
 
-div.className = "letter";
+    choices.sort(() => Math.random() - 0.5);
 
-if (guessed.includes(letter)) {
+    choices.forEach(choice => {
 
-div.textContent = letter;
+        const button = document.createElement("button");
 
+        button.className = "option";
+        button.textContent = choice;
+
+        button.onclick = () => checkPracticeAnswer(choice, button);
+
+        container.appendChild(button);
+    });
 }
 
-wordContainer.appendChild(div);
+function checkPracticeAnswer(choice, button) {
 
+    const correct = words[practiceIndex].word;
+
+    const buttons = document.querySelectorAll(".option");
+
+    buttons.forEach(btn => {
+        btn.disabled = true;
+
+        if (btn.textContent === correct) {
+            btn.classList.add("correct");
+        }
+    });
+
+    if (choice === correct) {
+
+        button.classList.add("correct");
+
+        practiceScore += 20;
+        correctAnswers++;
+
+        document.getElementById("practiceFeedback").textContent =
+            "✅ Correct! +20 points";
+
+    } else {
+
+        button.classList.add("wrong");
+
+        document.getElementById("practiceFeedback").textContent =
+            `❌ Correct answer: ${correct}`;
+    }
+
+    document.getElementById("nextPracticeBtn").classList.remove("hidden");
 }
 
+function nextPractice() {
+
+    practiceIndex++;
+
+    if (practiceIndex >= words.length) {
+        startHangman();
+    } else {
+        showPractice();
+    }
 }
 
+function startHangman() {
 
-function drawKeyboard() {
+    hangmanIndex = 0;
+    hangmanScore = 0;
 
-const keyboard =
-document.getElementById("keyboard");
+    hideAll();
 
-keyboard.innerHTML = "";
+    document.getElementById("hangmanScreen").classList.remove("hidden");
 
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-for (let letter of letters) {
-
-const button =
-document.createElement("button");
-
-button.textContent = letter;
-
-button.disabled =
-guessed.includes(letter);
-
-button.onclick = function() {
-
-guess(letter);
-
-};
-
-keyboard.appendChild(button);
-
+    showHangman();
 }
 
+function showHangman() {
+
+    const item = words[hangmanIndex];
+
+    currentWord = item.word;
+
+    guessedLetters = [];
+    attempts = 6;
+
+    document.getElementById("hangmanScore").textContent =
+        hangmanScore;
+
+    document.getElementById("hangmanProgress").textContent =
+        `Word ${hangmanIndex + 1} of ${words.length}`;
+
+    document.getElementById("hangmanTranslation").textContent =
+        `🇪🇸 ${item.translation}`;
+
+    document.getElementById("hangmanDefinition").textContent =
+        item.definition;
+
+    document.getElementById("attempts").textContent =
+        attempts;
+
+    document.getElementById("hangmanMessage").textContent = "";
+
+    document.getElementById("nextHangmanBtn").classList.add("hidden");
+
+    updateHangmanWord();
+    createKeyboard();
+
+    setTimeout(() => {
+        speakHangmanWord();
+    }, 300);
 }
 
+function updateHangmanWord() {
 
-function guess(letter) {
+    let display = "";
 
-if (finished) return;
+    for (let letter of currentWord) {
 
-if (guessed.includes(letter)) return;
+        if (letter === " ") {
+            display += "   ";
+        }
+        else if (guessedLetters.includes(letter)) {
+            display += letter + " ";
+        }
+        else {
+            display += "_ ";
+        }
+    }
 
-guessed.push(letter);
-
-if (currentWord.word.includes(letter)) {
-
-score += 10;
-
-document.getElementById("message").textContent =
-"¡Muy bien! ⭐";
-
-document.getElementById("message").className =
-"message correct";
-
-} else {
-
-lives--;
-
-document.getElementById("message").textContent =
-"Intenta otra letra";
-
-document.getElementById("message").className =
-"message incorrect";
-
+    document.getElementById("hangmanWord").textContent =
+        display.trim();
 }
 
-document.getElementById("score").textContent =
-score;
+function createKeyboard() {
 
-document.getElementById("lives").textContent =
-lives;
+    const keyboard = document.getElementById("keyboard");
 
-drawWord();
+    keyboard.innerHTML = "";
 
-drawKeyboard();
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-checkGame();
+    letters.forEach(letter => {
 
+        const button = document.createElement("button");
+
+        button.className = "key";
+        button.textContent = letter;
+
+        button.onclick = () => guessLetter(letter, button);
+
+        keyboard.appendChild(button);
+    });
 }
 
+function guessLetter(letter, button) {
 
-function checkGame() {
+    button.disabled = true;
 
-let completed =
-[...currentWord.word].every(
-letter => guessed.includes(letter)
-);
+    if (currentWord.includes(letter)) {
 
-if (completed) {
+        guessedLetters.push(letter);
 
-finished = true;
+        // 10 points per correct letter
+        hangmanScore += 10;
 
-score += 50;
+        updateHangmanWord();
 
-document.getElementById("score").textContent =
-score;
+        checkWin();
 
-document.getElementById("message").textContent =
-"🎉 ¡Correcto! +50 puntos";
+    } else {
 
-document.getElementById("message").className =
-"message correct";
+        attempts--;
 
+        document.getElementById("attempts").textContent =
+            attempts;
+
+        if (attempts <= 0) {
+            loseWord();
+        }
+    }
+
+    document.getElementById("hangmanScore").textContent =
+        hangmanScore;
 }
 
-if (lives <= 0) {
+function checkWin() {
 
-finished = true;
+    const completed = [...new Set(currentWord.replace(/ /g, ""))]
+        .every(letter => guessedLetters.includes(letter));
 
-document.getElementById("message").textContent =
-"😅 La palabra era: " + currentWord.word;
+    if (completed) {
 
-document.getElementById("message").className =
-"message incorrect";
+        hangmanScore += 50;
 
+        document.getElementById("hangmanScore").textContent =
+            hangmanScore;
+
+        document.getElementById("hangmanMessage").textContent =
+            "🎉 Word completed! +50 bonus!";
+
+        disableKeyboard();
+
+        document.getElementById("nextHangmanBtn")
+            .classList.remove("hidden");
+    }
 }
 
+function loseWord() {
+
+    document.getElementById("hangmanWord").textContent =
+        currentWord;
+
+    document.getElementById("hangmanMessage").textContent =
+        `❌ The word was ${currentWord}`;
+
+    disableKeyboard();
+
+    document.getElementById("nextHangmanBtn")
+        .classList.remove("hidden");
 }
 
+function disableKeyboard() {
 
-function nextWord() {
+    const buttons = document.querySelectorAll(".key");
 
-if (currentIndex < order.length - 1) {
-
-currentIndex++;
-
-loadWord();
-
-} else {
-
-startGame();
-
-document.getElementById("message").textContent =
-"🔄 ¡Nueva ronda!";
-
+    buttons.forEach(button => {
+        button.disabled = true;
+    });
 }
 
+function nextHangman() {
+
+    hangmanIndex++;
+
+    if (hangmanIndex >= words.length) {
+        showFinal();
+    } else {
+        showHangman();
+    }
 }
 
+function showFinal() {
 
-function listenWord() {
+    hideAll();
 
-const speech =
-new SpeechSynthesisUtterance(
-currentWord.word.toLowerCase()
-);
+    document.getElementById("finalScreen")
+        .classList.remove("hidden");
 
-speech.lang = "en-US";
+    const total = practiceScore + hangmanScore;
 
-speech.rate = 0.8;
+    const accuracy =
+        Math.round((correctAnswers / words.length) * 100);
 
-speechSynthesis.cancel();
+    document.getElementById("totalScore").textContent =
+        total;
 
-speechSynthesis.speak(speech);
+    document.getElementById("practiceFinalScore").textContent =
+        practiceScore;
 
+    document.getElementById("hangmanFinalScore").textContent =
+        hangmanScore;
+
+    document.getElementById("correctAnswers").textContent =
+        `${correctAnswers} / ${words.length}`;
+
+    document.getElementById("accuracy").textContent =
+        `${accuracy}%`;
 }
 
+function restartGame() {
 
-startGame();
+    practiceIndex = 0;
+    practiceScore = 0;
+    correctAnswers = 0;
+
+    hangmanIndex = 0;
+    hangmanScore = 0;
+
+    startPractice();
+}
+
+function speak(text) {
+
+    if ("speechSynthesis" in window) {
+
+        window.speechSynthesis.cancel();
+
+        const utterance =
+            new SpeechSynthesisUtterance(text);
+
+        utterance.lang = "en-US";
+        utterance.rate = 0.85;
+
+        window.speechSynthesis.speak(utterance);
+    }
+}
+
+function speakPracticeWord() {
+    speak(words[practiceIndex].word);
+}
+
+function speakHangmanWord() {
+    speak(words[hangmanIndex].word);
+}
 
 </script>
 
