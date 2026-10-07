@@ -13,280 +13,249 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f1f5f9;
-  color: #1e293b;
-}
-
-button {
-  font-family: inherit;
-}
-
-.app {
-  max-width: 900px;
-  margin: auto;
-  min-height: 100vh;
-  padding: 20px;
+  background: #f4f6f8;
+  color: #222;
 }
 
 header {
   background: white;
-  border-radius: 20px;
-  padding: 18px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,.08);
+  padding: 15px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-header h1 {
-  margin: 0 0 10px;
-  text-align: center;
-}
-
-.top-info {
+.header-top {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: auto;
+}
+
+.logo {
+  font-size: 22px;
   font-weight: bold;
 }
 
-.progress {
-  height: 10px;
-  background: #e2e8f0;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-top: 12px;
+.score {
+  font-weight: bold;
 }
 
-.progress-bar {
+.progress-container {
+  max-width: 900px;
+  margin: 12px auto 0;
+  height: 9px;
+  background: #e5e7eb;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress {
   height: 100%;
   width: 0%;
   background: #2563eb;
   transition: width .3s;
 }
 
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 15px;
+}
+
 .card {
   background: white;
-  border-radius: 22px;
-  padding: 25px;
+  border-radius: 20px;
+  padding: 30px;
   box-shadow: 0 5px 20px rgba(0,0,0,.08);
   text-align: center;
 }
 
-.hidden {
-  display: none !important;
-}
-
-h2 {
+h1 {
   margin-top: 0;
 }
 
 .word {
-  font-size: clamp(28px, 8vw, 48px);
+  font-size: 42px;
   font-weight: bold;
   margin: 20px 0 10px;
+  word-break: break-word;
 }
 
 .translation {
   font-size: 20px;
-  color: #475569;
-  margin-bottom: 15px;
+  color: #555;
+  margin-bottom: 20px;
 }
 
 .definition {
-  max-width: 650px;
-  margin: 15px auto;
+  background: #f1f5f9;
   padding: 15px;
-  background: #f8fafc;
   border-radius: 12px;
-  line-height: 1.5;
+  margin: 20px auto;
+  max-width: 650px;
 }
 
-button.main-btn {
-  border: 0;
+button {
+  border: none;
   border-radius: 12px;
-  padding: 13px 22px;
+  padding: 14px 22px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 7px;
   background: #2563eb;
   color: white;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 15px;
-}
-
-button.main-btn:hover {
-  background: #1d4ed8;
-}
-
-.audio-btn {
-  border: 0;
-  background: #dbeafe;
-  color: #1d4ed8;
-  border-radius: 50%;
-  width: 58px;
-  height: 58px;
-  font-size: 25px;
-  cursor: pointer;
-}
-
-.options {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  max-width: 650px;
-  margin: 25px auto;
-}
-
-.option {
-  border: 2px solid #cbd5e1;
-  background: white;
-  border-radius: 14px;
-  padding: 16px;
-  font-size: 19px;
-  cursor: pointer;
   transition: .2s;
 }
 
+button:hover {
+  transform: translateY(-1px);
+  opacity: .92;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.audio-btn {
+  background: #111827;
+}
+
+.option {
+  display: block;
+  width: min(600px, 100%);
+  margin: 12px auto;
+  background: #eef2ff;
+  color: #111827;
+  border: 2px solid transparent;
+}
+
 .option:hover {
-  background: #eff6ff;
-  border-color: #60a5fa;
-}
-
-.option.correct {
-  background: #dcfce7;
-  border-color: #22c55e;
-}
-
-.option.wrong {
-  background: #fee2e2;
-  border-color: #ef4444;
+  border-color: #2563eb;
 }
 
 .feedback {
   min-height: 30px;
+  margin: 15px;
   font-weight: bold;
-  margin-top: 10px;
+}
+
+.correct {
+  color: #15803d;
+}
+
+.incorrect {
+  color: #dc2626;
 }
 
 .sentence {
-  font-size: clamp(22px, 5vw, 32px);
-  margin: 30px auto 10px;
+  font-size: 28px;
+  margin: 30px auto;
+  max-width: 700px;
   line-height: 1.5;
 }
 
-.blank {
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.module-card {
+  background: #f8fafc;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.module-card h3 {
+  margin-top: 0;
+}
+
+.module-card button {
+  width: 100%;
+}
+
+.word-counter {
+  color: #64748b;
   font-weight: bold;
-  letter-spacing: 2px;
 }
 
 .hangman-word {
-  width: 100%;
-  text-align: center;
-  font-size: clamp(20px, 7vw, 42px);
-  letter-spacing: clamp(2px, 1.5vw, 8px);
+  font-size: clamp(22px, 6vw, 48px);
+  letter-spacing: clamp(3px, 1vw, 10px);
   font-weight: bold;
-  margin: 25px 0;
   white-space: nowrap;
   overflow: hidden;
-  line-height: 1.2;
+  margin: 25px auto;
+}
+
+.attempts {
+  font-weight: bold;
+  margin: 10px;
 }
 
 .keyboard {
   max-width: 700px;
-  margin: auto;
+  margin: 25px auto;
 }
 
-.key-row {
+.keyboard-row {
   display: flex;
   justify-content: center;
-  gap: 6px;
-  margin: 6px 0;
+  gap: 5px;
+  margin: 5px 0;
 }
 
 .letter-btn {
-  width: 42px;
-  height: 42px;
-  border: 0;
-  border-radius: 8px;
-  background: #e2e8f0;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0;
   font-weight: bold;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.letter-btn:hover {
-  background: #cbd5e1;
 }
 
 .letter-btn.used {
   background: #cbd5e1;
-  color: #94a3b8;
-  opacity: .55;
-  cursor: not-allowed;
-}
-
-.hangman-score {
-  margin-top: 15px;
-  padding: 12px;
-  background: #f8fafc;
-  border-radius: 12px;
-  font-weight: bold;
+  color: #64748b;
+  opacity: .6;
 }
 
 .result {
-  font-size: 22px;
+  font-size: 28px;
   font-weight: bold;
-  margin: 20px 0;
+  margin: 25px 0;
 }
 
-.module-btn {
-  width: 100%;
-  padding: 20px;
-  border: 0;
-  border-radius: 18px;
-  background: #2563eb;
-  color: white;
-  font-size: 20px;
+.review-title {
+  color: #7c3aed;
   font-weight: bold;
-  cursor: pointer;
 }
 
-.module-btn:hover {
-  background: #1d4ed8;
-}
-
-.step-title {
-  color: #2563eb;
-  font-size: 15px;
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-@media (max-width: 600px) {
-
-  .app {
-    padding: 12px;
-  }
-
+@media(max-width:600px) {
   .card {
-    padding: 18px 12px;
+    padding: 20px 15px;
   }
 
-  .options {
-    grid-template-columns: 1fr;
+  .word {
+    font-size: 32px;
+  }
+
+  .sentence {
+    font-size: 22px;
   }
 
   .letter-btn {
     width: 31px;
-    height: 38px;
-    font-size: 14px;
+    height: 42px;
+    font-size: 13px;
   }
 
-  .key-row {
+  .keyboard-row {
     gap: 3px;
-  }
-
-  .hangman-word {
-    font-size: clamp(18px, 6.5vw, 34px);
-    letter-spacing: 2px;
   }
 }
 </style>
@@ -294,162 +263,766 @@ button.main-btn:hover {
 
 <body>
 
-<div class="app">
-
 <header>
-  <h1>📚 Spelling Master</h1>
-
-  <div class="top-info">
-    <span id="stepLabel">Ready</span>
-    <span id="scoreLabel">⭐ 0</span>
+  <div class="header-top">
+    <div class="logo">📘 Spelling Master</div>
+    <div class="score">⭐ <span id="score">0</span></div>
   </div>
 
-  <div class="progress">
-    <div class="progress-bar" id="progressBar"></div>
+  <div class="progress-container">
+    <div class="progress" id="progress"></div>
   </div>
 </header>
 
-<!-- HOME -->
-<div id="homeScreen" class="card">
-  <h2>📘 Module 1</h2>
-  <p>Practice these 8 spelling words.</p>
-
-  <button class="module-btn" onclick="startModule()">
-    Start 8 Words
-  </button>
-</div>
-
-<!-- MAIN -->
-<div id="gameScreen" class="card hidden">
-
-  <div id="stepTitle" class="step-title"></div>
-
-  <div id="content"></div>
-
-</div>
-
+<div class="container">
+  <div class="card" id="content"></div>
 </div>
 
 <script>
 
 /* =========================================================
-   WORDS
+   MODULES
 ========================================================= */
 
-const words = [
+const modules = [
 
-  {
-    word: "abbreviation",
-    spanish: "abreviatura",
-    definition: "A shortened form of a word or phrase.",
-    sentence: "Dr. is an ________.",
-    spellingOptions: [
-      "abreviation",
-      "abbriviation",
-      "abbreviation",
-      "abbreviaton"
-    ]
-  },
+/* ================= MODULE 1 ================= */
 
-  {
-    word: "abroad",
-    spanish: "en el extranjero",
-    definition: "In or to a foreign country.",
-    sentence: "We went ________.",
-    spellingOptions: [
-      "abrode",
-      "abroad",
-      "abroude",
-      "abrodd"
-    ]
-  },
+{
+  name: "Module 1",
+  words: [
+    {
+      word: "abbreviation",
+      spanish: "abreviatura",
+      definition: "A shortened form of a word or phrase.",
+      sentence: "Dr. is an ________.",
+      spellingOptions: [
+        "abreviation",
+        "abbriviation",
+        "abbreviation",
+        "abbreviaton"
+      ]
+    },
+    {
+      word: "abroad",
+      spanish: "en el extranjero",
+      definition: "In or to a foreign country.",
+      sentence: "My family went ________ last summer.",
+      spellingOptions: [
+        "abrode",
+        "abroad",
+        "abroude",
+        "abrodd"
+      ]
+    },
+    {
+      word: "access",
+      spanish: "acceso",
+      definition: "The ability or opportunity to enter, use, or reach something.",
+      sentence: "I have ________ to the computer.",
+      spellingOptions: [
+        "acces",
+        "aksess",
+        "access",
+        "acsess"
+      ]
+    },
+    {
+      word: "accord",
+      spanish: "acuerdo",
+      definition: "An agreement between people or groups.",
+      sentence: "The two teams made an ________.",
+      spellingOptions: [
+        "acord",
+        "accord",
+        "akkord",
+        "acorrd"
+      ]
+    },
+    {
+      word: "adequate",
+      spanish: "adecuado / suficiente",
+      definition: "Good enough or sufficient for a purpose.",
+      sentence: "We have ________ food for everyone.",
+      spellingOptions: [
+        "adequete",
+        "adequate",
+        "adecuate",
+        "adekuate"
+      ]
+    },
+    {
+      word: "advancements",
+      spanish: "avances",
+      definition: "Improvements or developments that make something better.",
+      sentence: "________ help us.",
+      spellingOptions: [
+        "advansments",
+        "advancements",
+        "advancments",
+        "advansements"
+      ]
+    },
+    {
+      word: "aeronautics",
+      spanish: "aeronáutica",
+      definition: "The science and technology of aircraft and flight.",
+      sentence: "I study ________.",
+      spellingOptions: [
+        "aeronautics",
+        "aeronotics",
+        "aeronautiks",
+        "aeronaughtics"
+      ]
+    },
+    {
+      word: "affectionate",
+      spanish: "cariñoso",
+      definition: "Showing love, care, or fondness.",
+      sentence: "My puppy is very ________.",
+      spellingOptions: [
+        "afectionate",
+        "affectionate",
+        "affectionet",
+        "affectonate"
+      ]
+    }
+  ]
+},
 
-  {
-    word: "access",
-    spanish: "acceso",
-    definition: "The ability or opportunity to enter, use, or reach something.",
-    sentence: "I have ________.",
-    spellingOptions: [
-      "acces",
-      "aksess",
-      "access",
-      "acsess"
-    ]
-  },
+/* ================= MODULE 2 ================= */
 
-  {
-    word: "accord",
-    spanish: "acuerdo",
-    definition: "An agreement between people or groups.",
-    sentence: "They reached an ________.",
-    spellingOptions: [
-      "acord",
-      "accord",
-      "akkord",
-      "acorrd"
-    ]
-  },
+{
+  name: "Module 2",
+  words: [
+    {
+      word: "ancient",
+      spanish: "antiguo",
+      definition: "Very old; from a long time ago.",
+      sentence: "We saw an ________ building.",
+      spellingOptions: ["ancint","ancient","aincient","anciente"]
+    },
+    {
+      word: "approach",
+      spanish: "acercarse",
+      definition: "To move closer to something.",
+      sentence: "The boy began to ________ the door.",
+      spellingOptions: ["aproach","approch","approach","aprouch"]
+    },
+    {
+      word: "benefit",
+      spanish: "beneficio",
+      definition: "Something helpful or useful.",
+      sentence: "Exercise can ________ your body.",
+      spellingOptions: ["benifit","benefit","benefet","bennefit"]
+    },
+    {
+      word: "challenge",
+      spanish: "desafío",
+      definition: "Something that is difficult and tests your ability.",
+      sentence: "This game is a fun ________.",
+      spellingOptions: ["chalenge","challenge","challange","chaleenge"]
+    },
+    {
+      word: "community",
+      spanish: "comunidad",
+      definition: "A group of people who live or work together.",
+      sentence: "Our ________ helps each other.",
+      spellingOptions: ["comunity","community","communnity","comunityy"]
+    },
+    {
+      word: "compare",
+      spanish: "comparar",
+      definition: "To look at two things to see how they are alike or different.",
+      sentence: "We can ________ the two pictures.",
+      spellingOptions: ["compear","compare","compar","compair"]
+    },
+    {
+      word: "complete",
+      spanish: "completar",
+      definition: "To finish something.",
+      sentence: "Please ________ your homework.",
+      spellingOptions: ["compleet","complete","complet","compleate"]
+    },
+    {
+      word: "curious",
+      spanish: "curioso",
+      definition: "Wanting to know or learn something.",
+      sentence: "The child is ________ about space.",
+      spellingOptions: ["curious","currious","curius","curous"]
+    },
+    {
+      word: "discover",
+      spanish: "descubrir",
+      definition: "To find something for the first time.",
+      sentence: "We can ________ new places.",
+      spellingOptions: ["discover","discaver","discovver","discoverr"]
+    },
+    {
+      word: "different",
+      spanish: "diferente",
+      definition: "Not the same.",
+      sentence: "The two answers are ________.",
+      spellingOptions: ["diffrent","different","diferent","diffarent"]
+    }
+  ]
+},
 
-  {
-    word: "adequate",
-    spanish: "adecuado / suficiente",
-    definition: "Good enough or sufficient for a purpose.",
-    sentence: "This is ________.",
-    spellingOptions: [
-      "adequete",
-      "adequate",
-      "adecuate",
-      "adekuate"
-    ]
-  },
+/* ================= MODULE 3 ================= */
 
-  {
-    word: "advancements",
-    spanish: "avances",
-    definition: "Improvements or developments that make something better.",
-    sentence: "________ help us.",
-    spellingOptions: [
-      "advansments",
-      "advancements",
-      "advancments",
-      "advansements"
-    ]
-  },
+{
+  name: "Module 3",
+  words: [
+    {
+      word: "education",
+      spanish: "educación",
+      definition: "The process of learning.",
+      sentence: "Good ________ can open doors.",
+      spellingOptions: ["education","educashun","educacion","edducation"]
+    },
+    {
+      word: "environment",
+      spanish: "ambiente",
+      definition: "The world or place around us.",
+      sentence: "We should protect the ________.",
+      spellingOptions: ["enviroment","environment","enviornment","envirenment"]
+    },
+    {
+      word: "equipment",
+      spanish: "equipo",
+      definition: "The tools or things needed for an activity.",
+      sentence: "We need sports ________.",
+      spellingOptions: ["equipmant","equipment","equippment","equpment"]
+    },
+    {
+      word: "especially",
+      spanish: "especialmente",
+      definition: "More than usual or more than others.",
+      sentence: "I like fruit, ________ apples.",
+      spellingOptions: ["especialy","especially","especialli","espesially"]
+    },
+    {
+      word: "experience",
+      spanish: "experiencia",
+      definition: "Something that happens to you or something you learn by doing.",
+      sentence: "The trip was a great ________.",
+      spellingOptions: ["experiance","experience","expirience","experrience"]
+    },
+    {
+      word: "familiar",
+      spanish: "familiar",
+      definition: "Known because you have seen or experienced it before.",
+      sentence: "That song sounds ________.",
+      spellingOptions: ["familier","familiar","familliar","familar"]
+    },
+    {
+      word: "favorite",
+      spanish: "favorito",
+      definition: "Liked more than others.",
+      sentence: "Blue is my ________ color.",
+      spellingOptions: ["favourite","favorite","favorit","favorete"]
+    },
+    {
+      word: "important",
+      spanish: "importante",
+      definition: "Having great value or meaning.",
+      sentence: "Sleep is ________ for your body.",
+      spellingOptions: ["importent","important","importannt","importand"]
+    },
+    {
+      word: "improve",
+      spanish: "mejorar",
+      definition: "To make something better.",
+      sentence: "Practice can ________ your skills.",
+      spellingOptions: ["improove","improve","impruve","improfe"]
+    },
+    {
+      word: "knowledge",
+      spanish: "conocimiento",
+      definition: "Information and understanding gained by learning.",
+      sentence: "Books can give us ________.",
+      spellingOptions: ["knowlege","knowledge","knowladge","knowledg"]
+    }
+  ]
+},
 
-  {
-    word: "aeronautics",
-    spanish: "aeronáutica",
-    definition: "The science and technology of aircraft and flight.",
-    sentence: "I study ________.",
-    spellingOptions: [
-      "aeronautics",
-      "aeronotics",
-      "aeronautiks",
-      "aeronaughtics"
-    ]
-  },
+/* ================= MODULE 4 ================= */
 
-  {
-    word: "affectionate",
-    spanish: "cariñoso",
-    definition: "Showing love, care, or fondness.",
-    sentence: "My dog is ________.",
-    spellingOptions: [
-      "afectionate",
-      "affectionate",
-      "affectionet",
-      "affectonate"
-    ]
-  }
+{
+  name: "Module 4",
+  words: [
+    {
+      word: "language",
+      spanish: "idioma",
+      definition: "A system of words people use to communicate.",
+      sentence: "English is a ________.",
+      spellingOptions: ["langauge","language","langwage","languaje"]
+    },
+    {
+      word: "necessary",
+      spanish: "necesario",
+      definition: "Needed for something.",
+      sentence: "Water is ________ for life.",
+      spellingOptions: ["neccesary","necessary","necesary","necessery"]
+    },
+    {
+      word: "opportunity",
+      spanish: "oportunidad",
+      definition: "A good chance to do something.",
+      sentence: "This is a great ________.",
+      spellingOptions: ["oppertunity","opportunity","oportunity","opportunaty"]
+    },
+    {
+      word: "possible",
+      spanish: "posible",
+      definition: "Able to happen or be done.",
+      sentence: "Anything is ________ with practice.",
+      spellingOptions: ["posible","possible","possable","possibel"]
+    },
+    {
+      word: "practice",
+      spanish: "práctica",
+      definition: "Doing something again and again to get better.",
+      sentence: "I need more ________.",
+      spellingOptions: ["practis","practice","practise","practace"]
+    },
+    {
+      word: "prepare",
+      spanish: "preparar",
+      definition: "To get ready for something.",
+      sentence: "We need to ________ for the test.",
+      spellingOptions: ["prepair","prepare","prepere","prepear"]
+    },
+    {
+      word: "problem",
+      spanish: "problema",
+      definition: "Something that needs to be solved.",
+      sentence: "We can solve this ________.",
+      spellingOptions: ["problam","problem","proplem","probblem"]
+    },
+    {
+      word: "remember",
+      spanish: "recordar",
+      definition: "To keep something in your mind.",
+      sentence: "Please ________ my name.",
+      spellingOptions: ["remmember","remember","remeber","remembar"]
+    },
+    {
+      word: "responsible",
+      spanish: "responsable",
+      definition: "Having a duty to take care of something.",
+      sentence: "She is ________ for the dog.",
+      spellingOptions: ["responsable","responsible","responcible","responsibel"]
+    },
+    {
+      word: "successful",
+      spanish: "exitoso",
+      definition: "Having the result you wanted.",
+      sentence: "The show was ________.",
+      spellingOptions: ["succesful","successful","successfull","sucessful"]
+    }
+  ]
+},
+
+/* ================= MODULE 5 ================= */
+
+{
+  name: "Module 5",
+  words: [
+    {
+      word: "adventure",
+      spanish: "aventura",
+      definition: "An exciting or unusual experience.",
+      sentence: "The trip was a great ________.",
+      spellingOptions: ["adventure","adventchure","adventur","adventuire"]
+    },
+    {
+      word: "beautiful",
+      spanish: "hermoso",
+      definition: "Very pleasing to see.",
+      sentence: "The sunset is ________.",
+      spellingOptions: ["beautifull","beautiful","beutiful","beautifal"]
+    },
+    {
+      word: "celebrate",
+      spanish: "celebrar",
+      definition: "To do something special for an important event.",
+      sentence: "We will ________ your birthday.",
+      spellingOptions: ["celebrate","celebrate","celebrat","celebrate"]
+    },
+    {
+      word: "communication",
+      spanish: "comunicación",
+      definition: "The act of sharing information with others.",
+      sentence: "Good ________ helps a team.",
+      spellingOptions: ["comunication","communication","communicashun","communicacion"]
+    },
+    {
+      word: "creative",
+      spanish: "creativo",
+      definition: "Able to make new or original things.",
+      sentence: "She has a ________ idea.",
+      spellingOptions: ["creativ","creative","creetive","creatiive"]
+    },
+    {
+      word: "decision",
+      spanish: "decisión",
+      definition: "A choice that you make.",
+      sentence: "I made a good ________.",
+      spellingOptions: ["desicion","decision","decission","decison"]
+    },
+    {
+      word: "develop",
+      spanish: "desarrollar",
+      definition: "To grow or improve over time.",
+      sentence: "Children ________ new skills.",
+      spellingOptions: ["develope","develop","devellop","develup"]
+    },
+    {
+      word: "difference",
+      spanish: "diferencia",
+      definition: "The way two things are not the same.",
+      sentence: "I can see the ________.",
+      spellingOptions: ["diffrence","difference","differance","difarence"]
+    },
+    {
+      word: "direction",
+      spanish: "dirección",
+      definition: "The way someone or something is going.",
+      sentence: "Look in this ________.",
+      spellingOptions: ["direcshun","direction","directon","dirrection"]
+    },
+    {
+      word: "excellent",
+      spanish: "excelente",
+      definition: "Very good.",
+      sentence: "You did an ________ job.",
+      spellingOptions: ["exelent","excellent","excelent","excellant"]
+    }
+  ]
+},
+
+/* ================= MODULE 6 ================= */
+
+{
+  name: "Module 6",
+  words: [
+    {
+      word: "government",
+      spanish: "gobierno",
+      definition: "The group that leads and manages a country or community.",
+      sentence: "The ________ helps the city.",
+      spellingOptions: ["goverment","government","governement","gouvernment"]
+    },
+    {
+      word: "information",
+      spanish: "información",
+      definition: "Facts or details about something.",
+      sentence: "I found useful ________.",
+      spellingOptions: ["information","informations","informashun","informacion"]
+    },
+    {
+      word: "interesting",
+      spanish: "interesante",
+      definition: "Something that catches your attention.",
+      sentence: "That book is ________.",
+      spellingOptions: ["intresting","interesting","interestting","interessting"]
+    },
+    {
+      word: "knowledgeable",
+      spanish: "conocedor",
+      definition: "Knowing a lot about something.",
+      sentence: "Our teacher is very ________.",
+      spellingOptions: ["knowledgable","knowledgeable","knowlegeable","knowledgible"]
+    },
+    {
+      word: "material",
+      spanish: "material",
+      definition: "The substance used to make something.",
+      sentence: "Wood is a useful ________.",
+      spellingOptions: ["materiel","material","matirial","matterial"]
+    },
+    {
+      word: "natural",
+      spanish: "natural",
+      definition: "Coming from nature rather than being made by people.",
+      sentence: "Water is a ________ resource.",
+      spellingOptions: ["natral","natural","naturall","natcherall"]
+    },
+    {
+      word: "necessary",
+      spanish: "necesario",
+      definition: "Needed or required.",
+      sentence: "Food is ________ for life.",
+      spellingOptions: ["neccesary","necessary","necesery","necessery"]
+    },
+    {
+      word: "physical",
+      spanish: "físico",
+      definition: "Related to the body.",
+      sentence: "Running is a ________ activity.",
+      spellingOptions: ["phisical","physical","physicall","fisical"]
+    },
+    {
+      word: "population",
+      spanish: "población",
+      definition: "The number of people living in a place.",
+      sentence: "The city's ________ is growing.",
+      spellingOptions: ["populashun","population","popolation","popullation"]
+    },
+    {
+      word: "similar",
+      spanish: "similar",
+      definition: "Almost the same.",
+      sentence: "The two bags look ________.",
+      spellingOptions: ["similer","similar","simillar","simular"]
+    }
+  ]
+},
+
+/* ================= MODULE 7 ================= */
+
+{
+  name: "Module 7",
+  words: [
+    {
+      word: "available",
+      spanish: "disponible",
+      definition: "Ready or able to be used.",
+      sentence: "The room is ________ now.",
+      spellingOptions: ["availible","available","availlable","avaylable"]
+    },
+    {
+      word: "behavior",
+      spanish: "comportamiento",
+      definition: "The way a person or animal acts.",
+      sentence: "Good ________ is important.",
+      spellingOptions: ["behavour","behavior","behavoir","behavier"]
+    },
+    {
+      word: "conclusion",
+      spanish: "conclusión",
+      definition: "The final idea or decision after thinking about something.",
+      sentence: "We reached a ________.",
+      spellingOptions: ["conclussion","conclusion","conclution","concluson"]
+    },
+    {
+      word: "convenient",
+      spanish: "conveniente",
+      definition: "Easy or useful for a particular situation.",
+      sentence: "This time is ________ for me.",
+      spellingOptions: ["convienient","convenient","convenent","convinient"]
+    },
+    {
+      word: "effective",
+      spanish: "efectivo",
+      definition: "Working well and producing a good result.",
+      sentence: "This method is ________.",
+      spellingOptions: ["efective","effective","effectiv","effictive"]
+    },
+    {
+      word: "frequently",
+      spanish: "frecuentemente",
+      definition: "Often or many times.",
+      sentence: "We ________ play soccer.",
+      spellingOptions: ["frequintly","frequently","frequentely","frequentli"]
+    },
+    {
+      word: "individual",
+      spanish: "individual",
+      definition: "A single person or thing.",
+      sentence: "Each ________ has a choice.",
+      spellingOptions: ["individuel","individual","indivdual","individwall"]
+    },
+    {
+      word: "opinion",
+      spanish: "opinión",
+      definition: "What someone thinks or believes.",
+      sentence: "Everyone has an ________.",
+      spellingOptions: ["opinnion","opinion","opion","oppinion"]
+    },
+    {
+      word: "particular",
+      spanish: "particular",
+      definition: "Specific or special.",
+      sentence: "I need this ________ book.",
+      spellingOptions: ["particuler","particular","particullar","particulor"]
+    },
+    {
+      word: "recognize",
+      spanish: "reconocer",
+      definition: "To know someone or something because you have seen it before.",
+      sentence: "I can ________ his voice.",
+      spellingOptions: ["recognise","recognize","recognaize","recognaze"]
+    }
+  ]
+},
+
+/* ================= MODULE 8 ================= */
+
+{
+  name: "Module 8",
+  words: [
+    {
+      word: "achievement",
+      spanish: "logro",
+      definition: "Something good that you succeed in doing.",
+      sentence: "Winning the game was a great ________.",
+      spellingOptions: ["achivement","achievement","acheivement","achievment"]
+    },
+    {
+      word: "appropriate",
+      spanish: "apropiado",
+      definition: "Right or suitable for a situation.",
+      sentence: "Wear ________ clothes for school.",
+      spellingOptions: ["apropriate","appropriate","appropriete","apropriat"]
+    },
+    {
+      word: "contribute",
+      spanish: "contribuir",
+      definition: "To give or add something to help.",
+      sentence: "Everyone can ________ to the team.",
+      spellingOptions: ["contribut","contribute","contribuite","contrubute"]
+    },
+    {
+      word: "determination",
+      spanish: "determinación",
+      definition: "The decision to keep trying and not give up.",
+      sentence: "Her ________ helped her win.",
+      spellingOptions: ["determination","determinashun","determenation","determinnation"]
+    },
+    {
+      word: "environmental",
+      spanish: "ambiental",
+      definition: "Related to the natural world.",
+      sentence: "We have an ________ project.",
+      spellingOptions: ["enviromental","environmental","environmantal","enviornmental"]
+    },
+    {
+      word: "independent",
+      spanish: "independiente",
+      definition: "Able to do things without help from others.",
+      sentence: "She can work ________.",
+      spellingOptions: ["independant","independent","independet","independantt"]
+    },
+    {
+      word: "influence",
+      spanish: "influencia",
+      definition: "The power to affect what someone does or thinks.",
+      sentence: "Friends can ________ our choices.",
+      spellingOptions: ["influense","influence","influance","influince"]
+    },
+    {
+      word: "opportunity",
+      spanish: "oportunidad",
+      definition: "A chance to do something.",
+      sentence: "I have an ________ to learn.",
+      spellingOptions: ["oportunity","opportunity","oppertunity","opportunety"]
+    },
+    {
+      word: "significant",
+      spanish: "significativo",
+      definition: "Important or meaningful.",
+      sentence: "This is a ________ change.",
+      spellingOptions: ["significent","significant","signifficant","signifigant"]
+    },
+    {
+      word: "traditional",
+      spanish: "tradicional",
+      definition: "Following a custom or way that has existed for a long time.",
+      sentence: "We ate a ________ meal.",
+      spellingOptions: ["tradicional","traditional","traditionall","tradishonal"]
+    }
+  ]
+},
+
+/* ================= MODULE 9 ================= */
+
+{
+  name: "Module 9",
+  words: [
+    {
+      word: "accomplish",
+      spanish: "lograr",
+      definition: "To successfully finish or achieve something.",
+      sentence: "You can ________ your goal.",
+      spellingOptions: ["acomplish","accomplish","accomplisch","accomplash"]
+    },
+    {
+      word: "approximately",
+      spanish: "aproximadamente",
+      definition: "Almost exactly; close to a number or amount.",
+      sentence: "The trip takes ________ two hours.",
+      spellingOptions: ["aproximately","approximately","approximatly","aproximently"]
+    },
+    {
+      word: "circumstances",
+      spanish: "circunstancias",
+      definition: "The facts or conditions around a situation.",
+      sentence: "Things can change because of ________.",
+      spellingOptions: ["circumstanses","circumstances","circumstences","circumstaces"]
+    },
+    {
+      word: "consequence",
+      spanish: "consecuencia",
+      definition: "Something that happens as a result of an action.",
+      sentence: "Every choice has a ________.",
+      spellingOptions: ["consequence","consequense","consecuence","consequance"]
+    },
+    {
+      word: "demonstrate",
+      spanish: "demostrar",
+      definition: "To show how something works or how to do something.",
+      sentence: "Please ________ how it works.",
+      spellingOptions: ["demonstrate","demostrate","demonstrat","demmonstrate"]
+    },
+    {
+      word: "extraordinary",
+      spanish: "extraordinario",
+      definition: "Very unusual or special.",
+      sentence: "She has an ________ talent.",
+      spellingOptions: ["extraordinary","extraordinery","extrordinary","extraordinnary"]
+    },
+    {
+      word: "opportunity",
+      spanish: "oportunidad",
+      definition: "A chance to do something.",
+      sentence: "This gives us an ________ to help.",
+      spellingOptions: ["opportunity","oportunity","oppertunity","opportunety"]
+    },
+    {
+      word: "perspective",
+      spanish: "perspectiva",
+      definition: "The way someone sees or understands something.",
+      sentence: "Everyone has a different ________.",
+      spellingOptions: ["perspectiv","perspective","perspecteve","perspecktive"]
+    },
+    {
+      word: "responsibility",
+      spanish: "responsabilidad",
+      definition: "Something that you are expected to take care of.",
+      sentence: "Taking care of the dog is my ________.",
+      spellingOptions: ["responsability","responsibility","responsibilty","responcibility"]
+    },
+    {
+      word: "understanding",
+      spanish: "comprensión",
+      definition: "Knowledge of what something means.",
+      sentence: "Reading helps our ________.",
+      spellingOptions: ["understading","understanding","understaning","understending"]
+    }
+  ]
+}
 
 ];
 
 
 /* =========================================================
-   GAME VARIABLES
+   VARIABLES
 ========================================================= */
 
-let step = "";
+let currentModule = 0;
+let words = [];
 let currentIndex = 0;
 let score = 0;
 
@@ -459,55 +1032,53 @@ let hangmanWord = "";
 let guessedLetters = [];
 let attempts = 6;
 let hangmanPoints = 0;
+let hangmanMode = "main";
 
+const qwertyRows = [
+  ["q","w","e","r","t","y","u","i","o","p"],
+  ["a","s","d","f","g","h","j","k","l"],
+  ["z","x","c","v","b","n","m"]
+];
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
-const homeScreen = document.getElementById("homeScreen");
-const gameScreen = document.getElementById("gameScreen");
 const content = document.getElementById("content");
-const stepTitle = document.getElementById("stepTitle");
-
-const stepLabel = document.getElementById("stepLabel");
-const scoreLabel = document.getElementById("scoreLabel");
-const progressBar = document.getElementById("progressBar");
-
-
-/* =========================================================
-   SPEECH
-========================================================= */
-
-function speakWord(word) {
-
-  if (!("speechSynthesis" in window)) return;
-
-  speechSynthesis.cancel();
-
-  const utterance = new SpeechSynthesisUtterance(word);
-
-  utterance.lang = "en-US";
-  utterance.rate = 0.75;
-
-  speechSynthesis.speak(utterance);
-}
 
 
 /* =========================================================
    START
 ========================================================= */
 
-function startModule() {
+function showHome() {
 
-  homeScreen.classList.add("hidden");
-  gameScreen.classList.remove("hidden");
+  content.innerHTML = `
+    <h1>📘 Spelling Master</h1>
+    <p>Choose a module to begin.</p>
 
+    <div class="module-grid">
+      ${modules.map((module, index) => `
+        <div class="module-card">
+          <h3>${module.name}</h3>
+          <p>${module.words.length} words</p>
+          <button onclick="startModule(${index})">
+            Start ${module.words.length} Words
+          </button>
+        </div>
+      `).join("")}
+    </div>
+  `;
+
+  updateProgress(0);
+}
+
+function startModule(index) {
+
+  currentModule = index;
+  words = modules[index].words;
+
+  currentIndex = 0;
   score = 0;
   failedWords = [];
-  currentIndex = 0;
 
-  updateScore();
+  document.getElementById("score").textContent = score;
 
   startLearn();
 }
@@ -517,35 +1088,36 @@ function startModule() {
    PROGRESS
 ========================================================= */
 
-function updateProgress() {
+function updateProgress(value) {
+  document.getElementById("progress").style.width = value + "%";
+}
 
-  /*
-    Each stage has 8 words.
-    There are 5 main stages.
-  */
+function updateStageProgress(stage, index) {
 
-  const stageNumber = {
-    learn: 0,
-    listen: 1,
-    spelling: 2,
-    sentence: 3,
-    hangman: 4
-  }[step];
+  const total = words.length * 5;
+  const completed = stage * words.length + index;
 
-  const total = 40;
-  const completed = stageNumber * 8 + currentIndex;
-
-  progressBar.style.width =
-    ((completed / total) * 100) + "%";
+  updateProgress((completed / total) * 100);
 }
 
 
 /* =========================================================
-   SCORE
+   SPEECH
 ========================================================= */
 
-function updateScore() {
-  scoreLabel.textContent = "⭐ " + score;
+function speak(word) {
+
+  if ("speechSynthesis" in window) {
+
+    speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(word);
+
+    utterance.lang = "en-US";
+    utterance.rate = 0.75;
+
+    speechSynthesis.speak(utterance);
+  }
 }
 
 
@@ -555,65 +1127,54 @@ function updateScore() {
 
 function startLearn() {
 
-  step = "learn";
   currentIndex = 0;
-
-  stepLabel.textContent = "Learn • 1 of 8";
-  stepTitle.textContent = "📘 Learn";
-
   showLearn();
 }
 
-
 function showLearn() {
 
-  const w = words[currentIndex];
+  const item = words[currentIndex];
 
-  stepLabel.textContent =
-    `Learn • ${currentIndex + 1} of ${words.length}`;
+  updateStageProgress(0, currentIndex);
 
   content.innerHTML = `
 
-    <div class="word">${w.word}</div>
+    <div class="word-counter">
+      Learn • ${currentIndex + 1} / ${words.length}
+    </div>
+
+    <div class="word">${item.word}</div>
 
     <div class="translation">
-      ${w.spanish}
+      ${item.spanish}
     </div>
 
     <div class="definition">
-      ${w.definition}
+      ${item.definition}
     </div>
 
-    <button class="audio-btn"
-      onclick="speakWord('${w.word}')">
-      🔊
+    <button class="audio-btn" onclick="speak('${item.word}')">
+      🔊 Hear Word
     </button>
 
     <br>
 
-    <button class="main-btn" onclick="nextLearn()">
-      Continue
+    <button onclick="nextLearn()">
+      Continue →
     </button>
   `;
 
-  setTimeout(() => speakWord(w.word), 300);
-
-  updateProgress();
+  setTimeout(() => speak(item.word), 300);
 }
-
 
 function nextLearn() {
 
   currentIndex++;
 
-  if (currentIndex < words.length) {
-
-    showLearn();
-
-  } else {
-
+  if (currentIndex >= words.length) {
     startListen();
-
+  } else {
+    showLearn();
   }
 }
 
@@ -624,98 +1185,80 @@ function nextLearn() {
 
 function startListen() {
 
-  step = "listen";
   currentIndex = 0;
-
   showListen();
 }
 
-
 function showListen() {
 
-  const w = words[currentIndex];
+  const item = words[currentIndex];
 
-  stepLabel.textContent =
-    `Listen & Choose • ${currentIndex + 1} of ${words.length}`;
+  updateStageProgress(1, currentIndex);
 
-  stepTitle.textContent = "👂 Listen & Choose";
+  let options = [...words]
+    .filter(w => w.word !== item.word)
+    .sort(() => Math.random() - .5)
+    .slice(0, 3)
+    .map(w => w.word);
 
-  /*
-    Create 4 choices.
-    Correct word + 3 other words.
-  */
+  options.push(item.word);
 
-  let choices = [
-    w.word,
-    ...words
-      .filter(x => x.word !== w.word)
-      .sort(() => Math.random() - .5)
-      .slice(0, 3)
-      .map(x => x.word)
-  ];
-
-  choices.sort(() => Math.random() - .5);
+  options.sort(() => Math.random() - .5);
 
   content.innerHTML = `
 
-    <h2>Which word did you hear?</h2>
-
-    <button class="audio-btn"
-      onclick="speakWord('${w.word}')">
-      🔊
-    </button>
-
-    <div class="options">
-
-      ${choices.map(choice => `
-        <button
-          class="option"
-          onclick="checkListen(this, '${choice}', '${w.word}')">
-          ${choice}
-        </button>
-      `).join("")}
-
+    <div class="word-counter">
+      Listen & Choose • ${currentIndex + 1} / ${words.length}
     </div>
 
+    <h2>👂 Which word did you hear?</h2>
+
+    <button class="audio-btn" onclick="speak('${item.word}')">
+      🔊 Hear Again
+    </button>
+
     <div id="feedback" class="feedback"></div>
+
+    ${options.map(option => `
+      <button class="option"
+        onclick="checkListen('${option.replace(/'/g, "\\'")}')">
+        ${option}
+      </button>
+    `).join("")}
   `;
 
-  setTimeout(() => speakWord(w.word), 300);
-
-  updateProgress();
+  setTimeout(() => speak(item.word), 400);
 }
 
+function checkListen(answer) {
 
-function checkListen(button, selected, correct) {
+  const item = words[currentIndex];
+  const feedback = document.getElementById("feedback");
 
-  if (selected === correct) {
-
-    button.classList.add("correct");
+  if (answer === item.word) {
 
     score += 10;
-    updateScore();
 
-    document.getElementById("feedback").textContent =
-      "✅ Correct!";
+    document.getElementById("score").textContent = score;
+
+    feedback.innerHTML = `<span class="correct">✅ Correct!</span>`;
 
     setTimeout(() => {
 
       currentIndex++;
 
-      if (currentIndex < words.length) {
-        showListen();
-      } else {
+      if (currentIndex >= words.length) {
         startSpelling();
+      } else {
+        showListen();
       }
 
     }, 700);
 
   } else {
 
-    button.classList.add("wrong");
-
-    document.getElementById("feedback").textContent =
-      "❌ Try again.";
+    feedback.innerHTML =
+      `<span class="incorrect">❌ Try again.</span>`;
   }
 }
 
@@ -726,91 +1269,74 @@ function checkListen(button, selected, correct) {
 
 function startSpelling() {
 
-  step = "spelling";
   currentIndex = 0;
-
   showSpelling();
 }
 
-
 function showSpelling() {
 
-  const w = words[currentIndex];
+  const item = words[currentIndex];
 
-  stepLabel.textContent =
-    `Spelling • ${currentIndex + 1} of ${words.length}`;
+  updateStageProgress(2, currentIndex);
 
-  stepTitle.textContent = "✏️ Spelling";
+  let options = [...item.spellingOptions]
+    .sort(() => Math.random() - .5);
 
   content.innerHTML = `
 
-    <h2>Choose the correct spelling</h2>
-
-    <button class="audio-btn"
-      onclick="speakWord('${w.word}')">
-      🔊
-    </button>
-
-    <div class="options">
-
-      ${w.spellingOptions.map(choice => `
-        <button
-          class="option"
-          onclick="checkSpelling(this, '${choice}', '${w.word}')">
-          ${choice}
-        </button>
-      `).join("")}
-
+    <div class="word-counter">
+      Spelling • ${currentIndex + 1} / ${words.length}
     </div>
 
+    <h2>✏️ Choose the correct spelling</h2>
+
+    <button class="audio-btn" onclick="speak('${item.word}')">
+      🔊 Hear Word
+    </button>
+
     <div id="feedback" class="feedback"></div>
+
+    ${options.map(option => `
+      <button class="option"
+        onclick="checkSpelling('${option.replace(/'/g, "\\'")}')">
+        ${option}
+      </button>
+    `).join("")}
   `;
 
-  /*
-    Automatic pronunciation.
-  */
-
-  setTimeout(() => speakWord(w.word), 300);
-
-  updateProgress();
+  setTimeout(() => speak(item.word), 400);
 }
 
+function checkSpelling(answer) {
 
-function checkSpelling(button, selected, correct) {
+  const item = words[currentIndex];
+  const feedback = document.getElementById("feedback");
 
-  if (selected === correct) {
-
-    button.classList.add("correct");
+  if (answer === item.word) {
 
     score += 10;
-    updateScore();
 
-    document.getElementById("feedback").textContent =
-      "✅ Correct spelling!";
+    document.getElementById("score").textContent = score;
+
+    feedback.innerHTML =
+      `<span class="correct">✅ Correct spelling!</span>`;
 
     setTimeout(() => {
 
       currentIndex++;
 
-      if (currentIndex < words.length) {
-
-        showSpelling();
-
-      } else {
-
+      if (currentIndex >= words.length) {
         startSentence();
-
+      } else {
+        showSpelling();
       }
 
     }, 700);
 
   } else {
 
-    button.classList.add("wrong");
-
-    document.getElementById("feedback").textContent =
-      "❌ That's not correct. Try again.";
-
+    feedback.innerHTML =
+      `<span class="incorrect">❌ Try again.</span>`;
   }
 }
 
@@ -821,96 +1347,79 @@ function checkSpelling(button, selected, correct) {
 
 function startSentence() {
 
-  step = "sentence";
   currentIndex = 0;
-
   showSentence();
 }
 
-
 function showSentence() {
 
-  const w = words[currentIndex];
+  const item = words[currentIndex];
 
-  stepLabel.textContent =
-    `Sentence • ${currentIndex + 1} of ${words.length}`;
+  updateStageProgress(3, currentIndex);
 
-  stepTitle.textContent = "📝 Sentence";
+  let options = [...words]
+    .filter(w => w.word !== item.word)
+    .sort(() => Math.random() - .5)
+    .slice(0, 3)
+    .map(w => w.word);
 
-  /*
-    Correct word + 3 random words.
-  */
+  options.push(item.word);
 
-  let choices = [
-    w.word,
-    ...words
-      .filter(x => x.word !== w.word)
-      .sort(() => Math.random() - .5)
-      .slice(0, 3)
-      .map(x => x.word)
-  ];
-
-  choices.sort(() => Math.random() - .5);
+  options.sort(() => Math.random() - .5);
 
   content.innerHTML = `
 
-    <div class="sentence">
-      ${w.sentence}
+    <div class="word-counter">
+      Sentence • ${currentIndex + 1} / ${words.length}
     </div>
 
-    <div class="options">
+    <h2>📝 Complete the sentence</h2>
 
-      ${choices.map(choice => `
-        <button
-          class="option"
-          onclick="checkSentence(this, '${choice}', '${w.word}')">
-          ${choice}
-        </button>
-      `).join("")}
-
+    <div class="sentence">
+      ${item.sentence}
     </div>
 
     <div id="feedback" class="feedback"></div>
-  `;
 
-  updateProgress();
+    ${options.map(option => `
+      <button class="option"
+        onclick="checkSentence('${option.replace(/'/g, "\\'")}')">
+        ${option}
+      </button>
+    `).join("")}
+  `;
 }
 
+function checkSentence(answer) {
 
-function checkSentence(button, selected, correct) {
+  const item = words[currentIndex];
+  const feedback = document.getElementById("feedback");
 
-  if (selected === correct) {
-
-    button.classList.add("correct");
+  if (answer === item.word) {
 
     score += 10;
-    updateScore();
 
-    document.getElementById("feedback").textContent =
-      "✅ Correct!";
+    document.getElementById("score").textContent = score;
+
+    feedback.innerHTML =
+      `<span class="correct">✅ Correct!</span>`;
 
     setTimeout(() => {
 
       currentIndex++;
 
-      if (currentIndex < words.length) {
-
-        showSentence();
-
-      } else {
-
+      if (currentIndex >= words.length) {
         startHangman();
-
+      } else {
+        showSentence();
       }
 
     }, 700);
 
   } else {
 
-    button.classList.add("wrong");
-
-    document.getElementById("feedback").textContent =
-      "❌ Try again.";
+    feedback.innerHTML =
+      `<span class="incorrect">❌ Try again.</span>`;
   }
 }
 
@@ -921,106 +1430,79 @@ function checkSentence(button, selected, correct) {
 
 function startHangman() {
 
-  step = "hangman";
   currentIndex = 0;
+  hangmanMode = "main";
 
   showHangman();
 }
 
-
 function showHangman() {
 
-  const w = words[currentIndex];
+  const item = words[currentIndex];
 
-  hangmanWord = w.word.toLowerCase();
-
+  hangmanWord = item.word;
   guessedLetters = [];
   attempts = 6;
   hangmanPoints = 0;
 
-  stepLabel.textContent =
-    `Hangman • ${currentIndex + 1} of ${words.length}`;
-
-  stepTitle.textContent = "🎮 Hangman";
+  updateStageProgress(4, currentIndex);
 
   renderHangman();
 
-  setTimeout(() => speakWord(w.word), 300);
-
-  updateProgress();
+  setTimeout(() => speak(item.word), 400);
 }
-
 
 function renderHangman() {
 
   const display = hangmanWord
     .split("")
-    .map(letter => {
-
-      if (letter === " ") return "&nbsp;";
-
-      return guessedLetters.includes(letter)
+    .map(letter =>
+      guessedLetters.includes(letter.toLowerCase())
         ? letter
-        : "_";
-
-    })
+        : "_"
+    )
     .join(" ");
 
-  const qwertyRows = [
-    ["q","w","e","r","t","y","u","i","o","p"],
-    ["a","s","d","f","g","h","j","k","l"],
-    ["z","x","c","v","b","n","m"]
-  ];
-
   content.innerHTML = `
+
+    <div class="word-counter">
+      Hangman • ${currentIndex + 1} / ${words.length}
+    </div>
+
+    <h2>🎯 Hangman</h2>
 
     <div class="hangman-word">
       ${display}
     </div>
 
-    <div class="hangman-score">
+    <div class="attempts">
       ❤️ Attempts: ${attempts}
-      &nbsp; | &nbsp;
-      ⭐ Points: ${hangmanPoints}
     </div>
+
+    <div id="hangmanFeedback" class="feedback"></div>
 
     <div class="keyboard">
 
       ${qwertyRows.map(row => `
-
-        <div class="key-row">
+        <div class="keyboard-row">
 
           ${row.map(letter => `
 
             <button
-              class="letter-btn ${
-                guessedLetters.includes(letter)
-                  ? "used"
-                  : ""
-              }"
-              ${
-                guessedLetters.includes(letter)
-                  ? "disabled"
-                  : ""
-              }
+              class="letter-btn ${guessedLetters.includes(letter) ? "used" : ""}"
+              ${guessedLetters.includes(letter) ? "disabled" : ""}
               onclick="guessLetter('${letter}')">
-
               ${letter.toUpperCase()}
-
             </button>
 
           `).join("")}
 
         </div>
-
       `).join("")}
 
     </div>
-
-    <div id="feedback" class="feedback"></div>
   `;
 }
-
 
 function guessLetter(letter) {
 
@@ -1028,14 +1510,12 @@ function guessLetter(letter) {
 
   guessedLetters.push(letter);
 
-  if (hangmanWord.includes(letter)) {
-
-    hangmanPoints += 10;
-
-  } else {
+  if (!hangmanWord.toLowerCase().includes(letter)) {
 
     attempts--;
+  } else {
 
+    hangmanPoints += 10;
   }
 
   renderHangman();
@@ -1043,83 +1523,79 @@ function guessLetter(letter) {
   checkHangmanEnd();
 }
 
-
 function checkHangmanEnd() {
 
-  const completed = hangmanWord
+  const complete = hangmanWord
+    .toLowerCase()
     .split("")
-    .every(letter =>
-      guessedLetters.includes(letter)
-    );
+    .every(letter => guessedLetters.includes(letter));
 
-  if (completed) {
+  if (complete) {
 
-    score += 50;
-    score += hangmanPoints;
+    score += 50 + hangmanPoints;
 
-    updateScore();
+    document.getElementById("score").textContent = score;
 
     content.innerHTML += `
-
-      <div class="result">
-        🎉 Word Complete!
-        <br>
-        +${50 + hangmanPoints} points
+      <div class="feedback correct">
+        🎉 Great job!
       </div>
-
     `;
 
     setTimeout(() => {
 
       currentIndex++;
 
-      if (currentIndex < words.length) {
+      if (currentIndex >= words.length) {
 
-        showHangman();
+        if (failedWords.length > 0) {
+          startFinalReview();
+        } else {
+          finishModule();
+        }
 
       } else {
 
-        startFinalReview();
-
+        showHangman();
       }
 
-    }, 1200);
+    }, 1000);
 
+    return;
   }
 
-  else if (attempts <= 0) {
+  if (attempts <= 0) {
 
-    const failedWord = words[currentIndex];
+    const item = words[currentIndex];
 
-    if (!failedWords.includes(failedWord)) {
-      failedWords.push(failedWord);
+    if (!failedWords.some(w => w.word === item.word)) {
+      failedWords.push(item);
     }
 
     content.innerHTML += `
-
-      <div class="result">
-        ❌ The word was:
-        <br><strong>${failedWord.word}</strong>
+      <div class="feedback incorrect">
+        ❌ The word was <strong>${item.word}</strong>
       </div>
-
     `;
 
     setTimeout(() => {
 
       currentIndex++;
 
-      if (currentIndex < words.length) {
+      if (currentIndex >= words.length) {
 
-        showHangman();
+        if (failedWords.length > 0) {
+          startFinalReview();
+        } else {
+          finishModule();
+        }
 
       } else {
 
-        startFinalReview();
-
+        showHangman();
       }
 
     }, 1400);
-
   }
 }
 
@@ -1129,13 +1605,6 @@ function checkHangmanEnd() {
 ========================================================= */
 
 function startFinalReview() {
-
-  if (failedWords.length === 0) {
-
-    finishModule();
-
-    return;
-  }
 
   currentIndex = 0;
 
@@ -1149,92 +1618,72 @@ function startFinalReview() {
 
 function startReviewSpelling() {
 
-  step = "reviewSpelling";
-
+  currentIndex = 0;
   showReviewSpelling();
 }
 
-
 function showReviewSpelling() {
 
-  const w = failedWords[currentIndex];
+  const item = failedWords[currentIndex];
 
-  stepLabel.textContent =
-    `Review Spelling • ${currentIndex + 1} of ${failedWords.length}`;
-
-  stepTitle.textContent = "🔄 Review Spelling";
+  let options = [...item.spellingOptions]
+    .sort(() => Math.random() - .5);
 
   content.innerHTML = `
 
-    <h2>Let's try this word again.</h2>
-
-    <button class="audio-btn"
-      onclick="speakWord('${w.word}')">
-      🔊
-    </button>
-
-    <div class="options">
-
-      ${w.spellingOptions.map(choice => `
-
-        <button
-          class="option"
-          onclick="checkReviewSpelling(
-            this,
-            '${choice}',
-            '${w.word}'
-          )">
-
-          ${choice}
-
-        </button>
-
-      `).join("")}
-
+    <div class="review-title">
+      🔄 FINAL REVIEW
     </div>
 
+    <div class="word-counter">
+      Spelling Review • ${currentIndex + 1} / ${failedWords.length}
+    </div>
+
+    <h2>✏️ Choose the correct spelling</h2>
+
+    <button class="audio-btn" onclick="speak('${item.word}')">
+      🔊 Hear Word
+    </button>
+
     <div id="feedback" class="feedback"></div>
+
+    ${options.map(option => `
+      <button class="option"
+        onclick="checkReviewSpelling('${option.replace(/'/g, "\\'")}')">
+        ${option}
+      </button>
+    `).join("")}
   `;
 
-  setTimeout(() => speakWord(w.word), 300);
+  setTimeout(() => speak(item.word), 400);
 }
 
+function checkReviewSpelling(answer) {
 
-function checkReviewSpelling(button, selected, correct) {
+  const item = failedWords[currentIndex];
+  const feedback = document.getElementById("feedback");
 
-  if (selected === correct) {
+  if (answer === item.word) {
 
-    button.classList.add("correct");
-
-    score += 10;
-    updateScore();
-
-    document.getElementById("feedback").textContent =
-      "✅ Correct!";
+    feedback.innerHTML =
+      `<span class="correct">✅ Correct!</span>`;
 
     setTimeout(() => {
 
       currentIndex++;
 
-      if (currentIndex < failedWords.length) {
-
-        showReviewSpelling();
-
-      } else {
-
-        currentIndex = 0;
+      if (currentIndex >= failedWords.length) {
         startReviewSentence();
-
+      } else {
+        showReviewSpelling();
       }
 
     }, 700);
 
   } else {
 
-    button.classList.add("wrong");
-
-    document.getElementById("feedback").textContent =
-      "❌ Try again.";
+    feedback.innerHTML =
+      `<span class="incorrect">❌ Try again.</span>`;
   }
 }
 
@@ -1245,98 +1694,77 @@ function checkReviewSpelling(button, selected, correct) {
 
 function startReviewSentence() {
 
-  step = "reviewSentence";
-
+  currentIndex = 0;
   showReviewSentence();
 }
 
-
 function showReviewSentence() {
 
-  const w = failedWords[currentIndex];
+  const item = failedWords[currentIndex];
 
-  stepLabel.textContent =
-    `Review Sentence • ${currentIndex + 1} of ${failedWords.length}`;
+  let options = [...failedWords]
+    .filter(w => w.word !== item.word)
+    .sort(() => Math.random() - .5)
+    .slice(0, 3)
+    .map(w => w.word);
 
-  stepTitle.textContent = "🔄 Review Sentence";
+  options.push(item.word);
 
-  let choices = [
-    w.word,
-    ...words
-      .filter(x => x.word !== w.word)
-      .sort(() => Math.random() - .5)
-      .slice(0, 3)
-      .map(x => x.word)
-  ];
-
-  choices.sort(() => Math.random() - .5);
+  options.sort(() => Math.random() - .5);
 
   content.innerHTML = `
 
-    <div class="sentence">
-      ${w.sentence}
+    <div class="review-title">
+      🔄 FINAL REVIEW
     </div>
 
-    <div class="options">
+    <div class="word-counter">
+      Sentence Review • ${currentIndex + 1} / ${failedWords.length}
+    </div>
 
-      ${choices.map(choice => `
+    <h2>📝 Complete the sentence</h2>
 
-        <button
-          class="option"
-          onclick="checkReviewSentence(
-            this,
-            '${choice}',
-            '${w.word}'
-          )">
-
-          ${choice}
-
-        </button>
-
-      `).join("")}
-
+    <div class="sentence">
+      ${item.sentence}
     </div>
 
     <div id="feedback" class="feedback"></div>
+
+    ${options.map(option => `
+      <button class="option"
+        onclick="checkReviewSentence('${option.replace(/'/g, "\\'")}')">
+        ${option}
+      </button>
+    `).join("")}
   `;
 }
 
+function checkReviewSentence(answer) {
 
-function checkReviewSentence(button, selected, correct) {
+  const item = failedWords[currentIndex];
+  const feedback = document.getElementById("feedback");
 
-  if (selected === correct) {
+  if (answer === item.word) {
 
-    button.classList.add("correct");
-
-    score += 10;
-    updateScore();
-
-    document.getElementById("feedback").textContent =
-      "✅ Correct!";
+    feedback.innerHTML =
+      `<span class="correct">✅ Correct!</span>`;
 
     setTimeout(() => {
 
       currentIndex++;
 
-      if (currentIndex < failedWords.length) {
-
-        showReviewSentence();
-
-      } else {
-
-        currentIndex = 0;
+      if (currentIndex >= failedWords.length) {
         startReviewHangman();
-
+      } else {
+        showReviewSentence();
       }
 
     }, 700);
 
   } else {
 
-    button.classList.add("wrong");
-
-    document.getElementById("feedback").textContent =
-      "❌ Try again.";
+    feedback.innerHTML =
+      `<span class="incorrect">❌ Try again.</span>`;
   }
 }
 
@@ -1347,35 +1775,153 @@ function checkReviewSentence(button, selected, correct) {
 
 function startReviewHangman() {
 
-  step = "reviewHangman";
+  currentIndex = 0;
+  hangmanMode = "review";
 
   showReviewHangman();
 }
 
-
 function showReviewHangman() {
 
-  const w = failedWords[currentIndex];
+  const item = failedWords[currentIndex];
 
-  hangmanWord = w.word.toLowerCase();
-
+  hangmanWord = item.word;
   guessedLetters = [];
   attempts = 6;
   hangmanPoints = 0;
 
-  stepLabel.textContent =
-    `Review Hangman • ${currentIndex + 1} of ${failedWords.length}`;
+  renderReviewHangman();
 
-  stepTitle.textContent = "🔄 Review Hangman";
-
-  renderHangman();
-
-  setTimeout(() => speakWord(w.word), 300);
+  setTimeout(() => speak(item.word), 400);
 }
 
+function renderReviewHangman() {
 
-function guessLetterReview(letter) {
-  guessLetter(letter);
+  const display = hangmanWord
+    .split("")
+    .map(letter =>
+      guessedLetters.includes(letter.toLowerCase())
+        ? letter
+        : "_"
+    )
+    .join(" ");
+
+  content.innerHTML = `
+
+    <div class="review-title">
+      🔄 FINAL REVIEW
+    </div>
+
+    <div class="word-counter">
+      Hangman Review • ${currentIndex + 1} / ${failedWords.length}
+    </div>
+
+    <h2>🎯 Hangman</h2>
+
+    <div class="hangman-word">
+      ${display}
+    </div>
+
+    <div class="attempts">
+      ❤️ Attempts: ${attempts}
+    </div>
+
+    <div id="hangmanFeedback" class="feedback"></div>
+
+    <div class="keyboard">
+
+      ${qwertyRows.map(row => `
+        <div class="keyboard-row">
+
+          ${row.map(letter => `
+
+            <button
+              class="letter-btn ${guessedLetters.includes(letter) ? "used" : ""}"
+              ${guessedLetters.includes(letter) ? "disabled" : ""}
+              onclick="guessReviewLetter('${letter}')">
+              ${letter.toUpperCase()}
+            </button>
+
+          `).join("")}
+
+        </div>
+      `).join("")}
+
+    </div>
+  `;
+}
+
+function guessReviewLetter(letter) {
+
+  if (guessedLetters.includes(letter)) return;
+
+  guessedLetters.push(letter);
+
+  if (!hangmanWord.toLowerCase().includes(letter)) {
+    attempts--;
+  } else {
+    hangmanPoints += 10;
+  }
+
+  renderReviewHangman();
+
+  checkReviewHangmanEnd();
+}
+
+function checkReviewHangmanEnd() {
+
+  const complete = hangmanWord
+    .toLowerCase()
+    .split("")
+    .every(letter => guessedLetters.includes(letter));
+
+  if (complete) {
+
+    score += hangmanPoints;
+
+    document.getElementById("score").textContent = score;
+
+    content.innerHTML += `
+      <div class="feedback correct">
+        🎉 Great job!
+      </div>
+    `;
+
+    setTimeout(() => {
+
+      currentIndex++;
+
+      if (currentIndex >= failedWords.length) {
+        finishModule();
+      } else {
+        showReviewHangman();
+      }
+
+    }, 1000);
+
+    return;
+  }
+
+  if (attempts <= 0) {
+
+    content.innerHTML += `
+      <div class="feedback incorrect">
+        ❌ The word was <strong>${hangmanWord}</strong>
+      </div>
+    `;
+
+    setTimeout(() => {
+
+      currentIndex++;
+
+      if (currentIndex >= failedWords.length) {
+        finishModule();
+      } else {
+        showReviewHangman();
+      }
+
+    }, 1400);
+  }
 }
 
 
@@ -1385,28 +1931,46 @@ function guessLetterReview(letter) {
 
 function finishModule() {
 
-  stepLabel.textContent = "Complete!";
-  stepTitle.textContent = "🏆 Module Complete";
+  updateProgress(100);
 
-  progressBar.style.width = "100%";
+  const totalWords = words.length;
 
   content.innerHTML = `
 
+    <h1>🏆 Module Complete!</h1>
+
     <div class="result">
-      🎉 Great job!
-      <br><br>
-      Final Score: ${score}
+      ⭐ ${score} points
     </div>
 
-    <button
-      class="main-btn"
-      onclick="location.reload()">
+    <p>
+      You completed <strong>${totalWords} words</strong>.
+    </p>
 
-      Play Again
+    ${
+      failedWords.length > 0
+      ? `<p>
+          🔄 You reviewed
+          <strong>${failedWords.length}</strong>
+          word${failedWords.length === 1 ? "" : "s"}.
+         </p>`
+      : `<p class="correct">
+          🎉 Perfect! You did not miss any words!
+         </p>`
+    }
 
+    <button onclick="showHome()">
+      📚 Choose Another Module
     </button>
   `;
 }
+
+
+/* =========================================================
+   START APP
+========================================================= */
+
+showHome();
 
 </script>
 
