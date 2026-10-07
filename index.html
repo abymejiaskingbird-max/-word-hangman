@@ -51,6 +51,7 @@ h2 {
   font-weight: bold;
   text-align: center;
   margin: 15px 0;
+  white-space: nowrap;
 }
 
 .translation {
@@ -83,6 +84,10 @@ button {
 
 button:hover {
   opacity: .92;
+}
+
+button:disabled {
+  cursor: default;
 }
 
 .secondary {
@@ -161,29 +166,61 @@ button:hover {
   background: #7c3aed;
 }
 
+/* =========================
+   HANGMAN
+========================= */
+
 .hangman-word {
+  width: 100%;
   text-align: center;
-  font-size: 30px;
-  letter-spacing: 8px;
+  font-size: clamp(20px, 7vw, 42px);
+  letter-spacing: clamp(2px, 1.5vw, 8px);
   font-weight: bold;
   margin: 25px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 1.2;
 }
 
 .letters {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(10, 1fr);
   gap: 6px;
+  max-width: 600px;
+  margin: auto;
 }
 
 .letter-btn {
-  padding: 11px 4px;
+  padding: 12px 4px;
   margin: 0;
-  font-size: 15px;
+  font-size: 16px;
   background: #475569;
+  transition: .2s;
 }
 
+/* Letra ya utilizada */
 .letter-btn.used {
-  opacity: .35;
+  background: #cbd5e1 !important;
+  color: #94a3b8 !important;
+  opacity: .55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.hangman-score {
+  text-align: center;
+  background: #eff6ff;
+  border-radius: 14px;
+  padding: 14px;
+  margin: 15px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.hangman-score strong {
+  display: block;
+  font-size: 28px;
+  margin-top: 4px;
 }
 
 .final-score {
@@ -208,6 +245,7 @@ button:hover {
 }
 
 @media (max-width: 500px) {
+
   .container {
     padding: 12px;
   }
@@ -216,8 +254,20 @@ button:hover {
     font-size: 27px;
   }
 
+  .hangman-word {
+    font-size: clamp(18px, 6.5vw, 34px);
+    letter-spacing: 2px;
+  }
+
   .letters {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+    gap: 4px;
+  }
+
+  .letter-btn {
+    padding: 11px 2px;
+    font-size: 13px;
+    border-radius: 9px;
   }
 
   button {
@@ -344,85 +394,73 @@ const words = [
     word:"abbreviation",
     translation:"abreviatura",
     definition:"A shortened form of a word or phrase.",
-    sentence:"Dr. is an _______ for Doctor."
+    sentence:"Dr. is an abbreviation."
   },
 
   {
     word:"abroad",
     translation:"en el extranjero",
     definition:"In or to a foreign country.",
-    sentence:"My family traveled _______ during the summer."
+    sentence:"We went abroad."
   },
 
   {
     word:"access",
     translation:"acceso",
     definition:"The ability or opportunity to enter, use, or reach something.",
-    sentence:"Students need _______ to the computer."
+    sentence:"I have access."
   },
 
   {
     word:"accord",
     translation:"acuerdo",
-    definition:"An agreement or harmony between people or groups.",
-    sentence:"The two sides reached an _______."
+    definition:"An agreement between people or groups.",
+    sentence:"They reached an accord."
   },
 
   {
     word:"adequate",
     translation:"adecuado / suficiente",
-    definition:"Good enough or sufficient for a particular purpose.",
-    sentence:"We have _______ time to finish the project."
+    definition:"Good enough or sufficient for a purpose.",
+    sentence:"We have adequate time."
   },
 
   {
     word:"advancements",
     translation:"avances",
     definition:"Improvements or developments that make something better.",
-    sentence:"Medical _______ have helped many people."
+    sentence:"Advancements help people."
   },
 
   {
     word:"aeronautics",
     translation:"aeronáutica",
     definition:"The science and technology of aircraft and flight.",
-    sentence:"She is interested in the study of _______."
+    sentence:"He studies aeronautics."
   },
 
   {
     word:"affectionate",
     translation:"cariñoso",
     definition:"Showing love, care, or fondness.",
-    sentence:"The _______ puppy stayed close to its owner."
+    sentence:"The dog is affectionate."
   }
 
 ];
 
 
 let currentModule = words;
-
 let currentIndex = 0;
-
 let score = 0;
-
 let spellingCorrect = 0;
-
 let sentenceCorrect = 0;
-
 let spellingAnswered = 0;
-
 let sentenceAnswered = 0;
-
 let hangmanPoints = 0;
-
 let failedWords = [];
-
 let hangmanWord = "";
-
 let guessedLetters = [];
-
 let attemptsLeft = 6;
-
 let currentHangman = null;
 
 
@@ -433,19 +471,12 @@ let currentHangman = null;
 function startModule(){
 
   currentIndex = 0;
-
   score = 0;
-
   spellingCorrect = 0;
-
   sentenceCorrect = 0;
-
   spellingAnswered = 0;
-
   sentenceAnswered = 0;
-
   hangmanPoints = 0;
-
   failedWords = [];
 
   document.getElementById("home")
@@ -460,7 +491,6 @@ function startModule(){
   updateScore();
 
   showLearn();
-
 }
 
 
@@ -474,7 +504,6 @@ function goHome(){
 
   document.getElementById("home")
     .classList.remove("hidden");
-
 }
 
 
@@ -492,13 +521,10 @@ function speakWord(word){
       new SpeechSynthesisUtterance(word);
 
     utterance.lang = "en-US";
-
     utterance.rate = 0.75;
 
     window.speechSynthesis.speak(utterance);
-
   }
-
 }
 
 
@@ -508,8 +534,7 @@ function speakWord(word){
 
 function showLearn(){
 
-  const w =
-    currentModule[currentIndex];
+  const w = currentModule[currentIndex];
 
   document.getElementById("stageTitle").innerHTML =
 
@@ -550,7 +575,6 @@ function showLearn(){
   );
 
   speakWord(w.word);
-
 }
 
 
@@ -567,7 +591,6 @@ function nextLearn(){
     startListen();
 
   }
-
 }
 
 
@@ -580,7 +603,6 @@ function startListen(){
   currentIndex = 0;
 
   showListen();
-
 }
 
 
@@ -633,9 +655,7 @@ function showListen(){
       document.createElement("button");
 
     btn.className = "option";
-
-    btn.textContent =
-      choice.word;
+    btn.textContent = choice.word;
 
     btn.onclick = () => {
 
@@ -649,7 +669,6 @@ function showListen(){
       if(choice.word === correct.word){
 
         btn.classList.add("correct");
-
         score += 10;
 
       }else{
@@ -658,9 +677,7 @@ function showListen(){
 
         all.forEach(b => {
 
-          if(
-            b.textContent === correct.word
-          ){
+          if(b.textContent === correct.word){
 
             b.classList.add("correct");
 
@@ -669,7 +686,6 @@ function showListen(){
         });
 
         addFailed(correct);
-
       }
 
       updateScore();
@@ -678,10 +694,7 @@ function showListen(){
 
         currentIndex++;
 
-        if(
-          currentIndex <
-          currentModule.length
-        ){
+        if(currentIndex < currentModule.length){
 
           showListen();
 
@@ -705,7 +718,6 @@ function showListen(){
   );
 
   speakWord(correct.word);
-
 }
 
 
@@ -718,7 +730,6 @@ function startSpelling(){
   currentIndex = 0;
 
   showSpelling();
-
 }
 
 
@@ -754,6 +765,11 @@ function showSpelling(){
       ${correct.definition}
     </div>
 
+    <button class="listen-btn"
+      onclick="speakWord('${correct.word}')">
+      🔊 Listen to Word
+    </button>
+
     <h3 style="text-align:center">
       Which spelling is correct?
     </h3>
@@ -763,9 +779,7 @@ function showSpelling(){
   `;
 
   const box =
-    document.getElementById(
-      "spellingOptions"
-    );
+    document.getElementById("spellingOptions");
 
   choices.forEach(choice => {
 
@@ -773,7 +787,6 @@ function showSpelling(){
       document.createElement("button");
 
     btn.className = "option";
-
     btn.textContent = choice;
 
     btn.onclick = () => {
@@ -790,9 +803,7 @@ function showSpelling(){
       if(choice === correct.word){
 
         btn.classList.add("correct");
-
         score += 20;
-
         spellingCorrect++;
 
       }else{
@@ -801,9 +812,7 @@ function showSpelling(){
 
         all.forEach(b => {
 
-          if(
-            b.textContent === correct.word
-          ){
+          if(b.textContent === correct.word){
 
             b.classList.add("correct");
 
@@ -812,7 +821,6 @@ function showSpelling(){
         });
 
         addFailed(correct);
-
       }
 
       updateScore();
@@ -821,10 +829,7 @@ function showSpelling(){
 
         currentIndex++;
 
-        if(
-          currentIndex <
-          currentModule.length
-        ){
+        if(currentIndex < currentModule.length){
 
           showSpelling();
 
@@ -847,6 +852,8 @@ function showSpelling(){
     currentModule.length
   );
 
+  /* Automatic pronunciation */
+  speakWord(correct.word);
 }
 
 
@@ -859,7 +866,6 @@ function startSentence(){
   currentIndex = 0;
 
   showSentence();
-
 }
 
 
@@ -903,9 +909,7 @@ function showSentence(){
   `;
 
   const box =
-    document.getElementById(
-      "sentenceOptions"
-    );
+    document.getElementById("sentenceOptions");
 
   choices.forEach(choice => {
 
@@ -913,9 +917,7 @@ function showSentence(){
       document.createElement("button");
 
     btn.className = "option";
-
-    btn.textContent =
-      choice.word;
+    btn.textContent = choice.word;
 
     btn.onclick = () => {
 
@@ -931,9 +933,7 @@ function showSentence(){
       if(choice.word === correct.word){
 
         btn.classList.add("correct");
-
         score += 20;
-
         sentenceCorrect++;
 
       }else{
@@ -942,9 +942,7 @@ function showSentence(){
 
         all.forEach(b => {
 
-          if(
-            b.textContent === correct.word
-          ){
+          if(b.textContent === correct.word){
 
             b.classList.add("correct");
 
@@ -953,7 +951,6 @@ function showSentence(){
         });
 
         addFailed(correct);
-
       }
 
       updateScore();
@@ -962,10 +959,7 @@ function showSentence(){
 
         currentIndex++;
 
-        if(
-          currentIndex <
-          currentModule.length
-        ){
+        if(currentIndex < currentModule.length){
 
           showSentence();
 
@@ -988,6 +982,7 @@ function showSentence(){
     currentModule.length
   );
 
+  speakWord(correct.word);
 }
 
 
@@ -1000,7 +995,6 @@ function startHangman(){
   currentIndex = 0;
 
   showHangman();
-
 }
 
 
@@ -1017,34 +1011,34 @@ function showHangman(){
   attemptsLeft = 6;
 
   renderHangman();
-
 }
+
+
+/*
+  QWERTY keyboard
+*/
+const qwertyRows = [
+  ["q","w","e","r","t","y","u","i","o","p"],
+  ["a","s","d","f","g","h","j","k","l"],
+  ["z","x","c","v","b","n","m"]
+];
 
 
 function renderHangman(){
 
-  const w =
-    currentHangman;
-
   let display = "";
 
-  for(
-    const letter of hangmanWord
-  ){
+  for(const letter of hangmanWord){
 
-    if(
-      guessedLetters.includes(letter)
-    ){
+    if(guessedLetters.includes(letter)){
 
-      display +=
-        letter.toUpperCase() + " ";
+      display += letter.toUpperCase() + " ";
 
     }else{
 
       display += "_ ";
 
     }
-
   }
 
   document.getElementById("stageTitle").innerHTML =
@@ -1057,12 +1051,12 @@ function renderHangman(){
   document.getElementById("content").innerHTML = `
 
     <div class="translation">
-      🇪🇸 ${w.translation}
+      🇪🇸 ${currentHangman.translation}
     </div>
 
     <div class="definition">
       <strong>Definition:</strong><br>
-      ${w.definition}
+      ${currentHangman.definition}
     </div>
 
     <div style="text-align:center">
@@ -1073,64 +1067,64 @@ function renderHangman(){
       ${display}
     </div>
 
-    <div class="letters"
-      id="letters">
-    </div>
-
+    <div class="letters" id="letters"></div>
   `;
 
   const box =
     document.getElementById("letters");
 
-  const alphabet =
-    "abcdefghijklmnopqrstuvwxyz";
+  qwertyRows.forEach(row => {
 
-  for(
-    const letter of alphabet
-  ){
+    const rowDiv =
+      document.createElement("div");
 
-    const btn =
-      document.createElement("button");
+    rowDiv.style.display = "contents";
 
-    btn.className =
-      "letter-btn";
+    row.forEach(letter => {
 
-    btn.textContent =
-      letter.toUpperCase();
+      const btn =
+        document.createElement("button");
 
-    btn.onclick = () =>
-      guessLetter(letter);
+      btn.className = "letter-btn";
+      btn.textContent = letter.toUpperCase();
 
-    box.appendChild(btn);
+      if(guessedLetters.includes(letter)){
 
-  }
+        btn.classList.add("used");
+        btn.disabled = true;
+
+      }else{
+
+        btn.onclick = () =>
+          guessLetter(letter);
+
+      }
+
+      box.appendChild(btn);
+
+    });
+
+  });
 
   updateProgress(
     currentIndex,
     currentModule.length
   );
-
 }
 
 
 function guessLetter(letter){
 
-  if(
-    guessedLetters.includes(letter)
-  ){
+  if(guessedLetters.includes(letter)){
 
     return;
-
   }
 
   guessedLetters.push(letter);
 
-  if(
-    hangmanWord.includes(letter)
-  ){
+  if(hangmanWord.includes(letter)){
 
     score += 10;
-
     hangmanPoints += 10;
 
   }else{
@@ -1151,68 +1145,72 @@ function guessLetter(letter){
   if(complete){
 
     score += 50;
-
     hangmanPoints += 50;
 
     updateScore();
 
-    document.getElementById("content").innerHTML = `
-
-      <div class="feedback success">
-        🎉 Correct!
-      </div>
-
-      <div class="word">
-        ${currentHangman.word}
-      </div>
-
-      <div class="feedback">
-        +50 completion bonus!
-      </div>
-
-      <button onclick="nextHangman()">
-        Continue →
-      </button>
-
-    `;
+    showHangmanResult(true);
 
     return;
-
   }
 
   if(attemptsLeft <= 0){
 
     addFailed(currentHangman);
 
-    document.getElementById("content").innerHTML = `
-
-      <div class="feedback danger">
-        Not quite!
-      </div>
-
-      <div class="word">
-        ${currentHangman.word}
-      </div>
-
-      <div class="definition">
-        The correct spelling is:
-        <strong>
-          ${currentHangman.word}
-        </strong>
-      </div>
-
-      <button onclick="nextHangman()">
-        Continue →
-      </button>
-
-    `;
+    showHangmanResult(false);
 
     return;
-
   }
 
   renderHangman();
+}
 
+
+/*
+  Resultado dentro de la misma ventana.
+  No hay botón Continue.
+*/
+function showHangmanResult(won){
+
+  const points =
+    won ? 50 : 0;
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="feedback ${won ? "success" : "danger"}">
+
+      ${won ? "🎉 Correct!" : "😔 Keep practicing!"}
+
+    </div>
+
+    <div class="hangman-word">
+      ${currentHangman.word}
+    </div>
+
+    <div class="hangman-score">
+
+      ${won ? "⭐ Hangman Points" : "📚 Correct Spelling"}
+
+      <strong>
+        ${won ? "+" + points + " + letter points" : currentHangman.word}
+      </strong>
+
+    </div>
+
+    <div class="feedback">
+      Total Score: ${score}
+    </div>
+  `;
+
+  /*
+    Pasa automáticamente a la próxima palabra.
+  */
+  setTimeout(() => {
+
+    nextHangman();
+
+  },1200);
 }
 
 
@@ -1220,10 +1218,7 @@ function nextHangman(){
 
   currentIndex++;
 
-  if(
-    currentIndex <
-    currentModule.length
-  ){
+  if(currentIndex < currentModule.length){
 
     showHangman();
 
@@ -1232,7 +1227,6 @@ function nextHangman(){
     startReview();
 
   }
-
 }
 
 
@@ -1254,7 +1248,6 @@ function startReview(){
     showFinal();
 
     return;
-
   }
 
   window.reviewWords =
@@ -1280,9 +1273,7 @@ function startReview(){
     <button onclick="startReviewSpelling()">
       Start Review →
     </button>
-
   `;
-
 }
 
 
@@ -1291,22 +1282,18 @@ function startReviewSpelling(){
   reviewIndex = 0;
 
   reviewSpelling();
-
 }
 
 
 function reviewSpelling(){
 
-  if(
-    reviewIndex >= reviewWords.length
-  ){
+  if(reviewIndex >= reviewWords.length){
 
     reviewIndex = 0;
 
     reviewSentence();
 
     return;
-
   }
 
   const correct =
@@ -1338,18 +1325,20 @@ function reviewSpelling(){
       ${correct.definition}
     </div>
 
+    <button class="listen-btn"
+      onclick="speakWord('${correct.word}')">
+      🔊 Listen
+    </button>
+
     <h3 style="text-align:center">
       Which spelling is correct?
     </h3>
 
     <div id="reviewOptions"></div>
-
   `;
 
   const box =
-    document.getElementById(
-      "reviewOptions"
-    );
+    document.getElementById("reviewOptions");
 
   choices.forEach(choice => {
 
@@ -1357,7 +1346,6 @@ function reviewSpelling(){
       document.createElement("button");
 
     btn.className = "option";
-
     btn.textContent = choice;
 
     btn.onclick = () => {
@@ -1369,12 +1357,9 @@ function reviewSpelling(){
         b => b.disabled = true
       );
 
-      if(
-        choice === correct.word
-      ){
+      if(choice === correct.word){
 
         btn.classList.add("correct");
-
         score += 20;
 
       }else{
@@ -1383,16 +1368,13 @@ function reviewSpelling(){
 
         all.forEach(b => {
 
-          if(
-            b.textContent === correct.word
-          ){
+          if(b.textContent === correct.word){
 
             b.classList.add("correct");
 
           }
 
         });
-
       }
 
       updateScore();
@@ -1404,28 +1386,25 @@ function reviewSpelling(){
         reviewSpelling();
 
       },700);
-
     };
 
     box.appendChild(btn);
 
   });
 
+  speakWord(correct.word);
 }
 
 
 function reviewSentence(){
 
-  if(
-    reviewIndex >= reviewWords.length
-  ){
+  if(reviewIndex >= reviewWords.length){
 
     reviewIndex = 0;
 
     reviewHangman();
 
     return;
-
   }
 
   const correct =
@@ -1463,7 +1442,6 @@ function reviewSentence(){
     </h3>
 
     <div id="reviewSentenceOptions"></div>
-
   `;
 
   const box =
@@ -1477,9 +1455,7 @@ function reviewSentence(){
       document.createElement("button");
 
     btn.className = "option";
-
-    btn.textContent =
-      choice.word;
+    btn.textContent = choice.word;
 
     btn.onclick = () => {
 
@@ -1490,12 +1466,9 @@ function reviewSentence(){
         b => b.disabled = true
       );
 
-      if(
-        choice.word === correct.word
-      ){
+      if(choice.word === correct.word){
 
         btn.classList.add("correct");
-
         score += 20;
 
       }else{
@@ -1504,16 +1477,13 @@ function reviewSentence(){
 
         all.forEach(b => {
 
-          if(
-            b.textContent === correct.word
-          ){
+          if(b.textContent === correct.word){
 
             b.classList.add("correct");
 
           }
 
         });
-
       }
 
       updateScore();
@@ -1532,19 +1502,21 @@ function reviewSentence(){
 
   });
 
+  speakWord(correct.word);
 }
 
 
+/* =========================
+   REVIEW HANGMAN
+========================= */
+
 function reviewHangman(){
 
-  if(
-    reviewIndex >= reviewWords.length
-  ){
+  if(reviewIndex >= reviewWords.length){
 
     showFinal();
 
     return;
-
   }
 
   currentHangman =
@@ -1558,7 +1530,6 @@ function reviewHangman(){
   attemptsLeft = 6;
 
   renderReviewHangman();
-
 }
 
 
@@ -1566,23 +1537,17 @@ function renderReviewHangman(){
 
   let display = "";
 
-  for(
-    const letter of hangmanWord
-  ){
+  for(const letter of hangmanWord){
 
-    if(
-      guessedLetters.includes(letter)
-    ){
+    if(guessedLetters.includes(letter)){
 
-      display +=
-        letter.toUpperCase() + " ";
+      display += letter.toUpperCase() + " ";
 
     }else{
 
       display += "_ ";
 
     }
-
   }
 
   document.getElementById("stageTitle").innerHTML =
@@ -1613,55 +1578,51 @@ function renderReviewHangman(){
     <div class="letters"
       id="reviewLetters">
     </div>
-
   `;
 
   const box =
-    document.getElementById(
-      "reviewLetters"
-    );
+    document.getElementById("reviewLetters");
 
-  const alphabet =
-    "abcdefghijklmnopqrstuvwxyz";
+  qwertyRows.forEach(row => {
 
-  for(
-    const letter of alphabet
-  ){
+    row.forEach(letter => {
 
-    const btn =
-      document.createElement("button");
+      const btn =
+        document.createElement("button");
 
-    btn.className =
-      "letter-btn";
+      btn.className = "letter-btn";
+      btn.textContent = letter.toUpperCase();
 
-    btn.textContent =
-      letter.toUpperCase();
+      if(guessedLetters.includes(letter)){
 
-    btn.onclick = () =>
-      reviewGuess(letter);
+        btn.classList.add("used");
+        btn.disabled = true;
 
-    box.appendChild(btn);
+      }else{
 
-  }
+        btn.onclick = () =>
+          reviewGuess(letter);
 
+      }
+
+      box.appendChild(btn);
+
+    });
+
+  });
 }
 
 
 function reviewGuess(letter){
 
-  if(
-    guessedLetters.includes(letter)
-  ){
+  if(guessedLetters.includes(letter)){
 
     return;
-
   }
 
   guessedLetters.push(letter);
 
-  if(
-    hangmanWord.includes(letter)
-  ){
+  if(hangmanWord.includes(letter)){
 
     score += 10;
 
@@ -1686,50 +1647,56 @@ function reviewGuess(letter){
 
     updateScore();
 
-    document.getElementById("content").innerHTML = `
-
-      <div class="feedback success">
-        🎉 You got it!
-      </div>
-
-      <div class="word">
-        ${currentHangman.word}
-      </div>
-
-      <button onclick="nextReviewHangman()">
-        Continue →
-      </button>
-
-    `;
+    showReviewHangmanResult(true);
 
     return;
-
   }
 
   if(attemptsLeft <= 0){
 
-    document.getElementById("content").innerHTML = `
-
-      <div class="feedback danger">
-        Keep practicing!
-      </div>
-
-      <div class="word">
-        ${currentHangman.word}
-      </div>
-
-      <button onclick="nextReviewHangman()">
-        Continue →
-      </button>
-
-    `;
+    showReviewHangmanResult(false);
 
     return;
-
   }
 
   renderReviewHangman();
+}
 
+
+function showReviewHangmanResult(won){
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="feedback ${won ? "success" : "danger"}">
+
+      ${won ? "🎉 You got it!" : "📚 Keep practicing!"}
+
+    </div>
+
+    <div class="hangman-word">
+      ${currentHangman.word}
+    </div>
+
+    <div class="hangman-score">
+
+      ${won ? "⭐ Great job!" : "Correct spelling"}
+
+      <strong>
+        ${won ? "+50 points" : currentHangman.word}
+      </strong>
+
+    </div>
+
+    <div class="feedback">
+      Total Score: ${score}
+    </div>
+  `;
+
+  setTimeout(() => {
+
+    nextReviewHangman();
+
+  },1200);
 }
 
 
@@ -1738,7 +1705,6 @@ function nextReviewHangman(){
   reviewIndex++;
 
   reviewHangman();
-
 }
 
 
@@ -1790,7 +1756,6 @@ function showFinal(){
           totalQuestions
         ) * 100
       );
-
   }
 
   document.getElementById("accuracy")
@@ -1820,9 +1785,7 @@ function showFinal(){
     document.getElementById("finalMessage")
       .textContent =
       "📚 Keep practicing. You can master these words!";
-
   }
-
 }
 
 
@@ -1832,14 +1795,10 @@ function showFinal(){
 
 function addFailed(word){
 
-  if(
-    !failedWords.includes(word)
-  ){
+  if(!failedWords.includes(word)){
 
     failedWords.push(word);
-
   }
-
 }
 
 
@@ -1856,7 +1815,6 @@ function makeMisspellings(word){
       word.slice(0,pos) +
       word.slice(pos + 1)
     );
-
   }
 
   let duplicatePos =
@@ -1890,7 +1848,6 @@ function makeMisspellings(word){
     results.push(
       arr.join("")
     );
-
   }
 
   while(results.length < 3){
@@ -1927,15 +1884,12 @@ function makeMisspellings(word){
     ){
 
       results.push(candidate);
-
     }
-
   }
 
   return [
     ...new Set(results)
   ].slice(0,3);
-
 }
 
 
@@ -1952,7 +1906,6 @@ function shuffle(array){
     .map(
       ({value}) => value
     );
-
 }
 
 
@@ -1960,7 +1913,6 @@ function updateScore(){
 
   document.getElementById("score")
     .textContent = score;
-
 }
 
 
@@ -1973,7 +1925,6 @@ function updateProgress(index,total){
     "progressBar"
   ).style.width =
     percent + "%";
-
 }
 
 </script>
