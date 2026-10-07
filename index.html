@@ -1,150 +1,228 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Word Hangman</title>
+<title>Spelling Master</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #e0f2fe, #fef3c7);
-    margin: 0;
-    padding: 20px;
-    text-align: center;
-    color: #1f2937;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  color: #172033;
 }
 
 .container {
-    max-width: 500px;
-    margin: auto;
+  max-width: 720px;
+  margin: auto;
+  padding: 20px;
 }
 
 h1 {
-    font-size: 32px;
-    margin-bottom: 5px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+h2 {
+  margin-top: 0;
 }
 
 .subtitle {
-    color: #666;
-    margin-bottom: 20px;
+  text-align: center;
+  color: #667085;
+  margin-bottom: 25px;
 }
 
 .card {
-    background: white;
-    border-radius: 25px;
-    padding: 20px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.12);
-}
-
-.stats {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
-
-.stat {
-    background: #f3f4f6;
-    border-radius: 15px;
-    padding: 10px 15px;
-}
-
-.stat strong {
-    display: block;
-    font-size: 22px;
-}
-
-.hint-title {
-    color: #6366f1;
-    font-weight: bold;
-    font-size: 13px;
-}
-
-.hint {
-    font-size: 19px;
-    font-weight: bold;
-    margin: 8px 0 20px;
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 18px rgba(0,0,0,.08);
 }
 
 .word {
-    display: flex;
-    justify-content: center;
-    gap: 7px;
-    flex-wrap: wrap;
-    margin-bottom: 25px;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  margin: 15px 0;
 }
 
-.letter {
-    width: 28px;
-    height: 38px;
-    border-bottom: 3px solid #222;
-    font-size: 25px;
-    font-weight: bold;
+.translation {
+  text-align: center;
+  font-size: 19px;
+  color: #526071;
+  margin-bottom: 15px;
 }
 
-.keyboard {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
+.definition {
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 15px;
+  line-height: 1.5;
+  margin-bottom: 20px;
 }
 
-.keyboard button {
-    border: none;
-    border-radius: 10px;
-    padding: 11px 3px;
-    font-weight: bold;
-    font-size: 15px;
-    background: #e5e7eb;
+button {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 15px;
+  margin: 7px 0;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
 }
 
-.keyboard button:disabled {
-    opacity: .35;
+button:hover {
+  opacity: .92;
 }
 
-.message {
-    font-weight: bold;
-    font-size: 18px;
-    min-height: 28px;
-    margin-bottom: 10px;
+.secondary {
+  background: #64748b;
 }
 
-.correct {
-    color: #15803d;
+.success {
+  background: #16a34a !important;
 }
 
-.incorrect {
-    color: #b91c1c;
+.danger {
+  background: #dc2626 !important;
 }
 
-.actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
+.option {
+  background: #eef2ff;
+  color: #172033;
+  border: 2px solid transparent;
 }
 
-.actions button {
-    flex: 1;
-    border: none;
-    border-radius: 12px;
-    padding: 13px;
-    font-weight: bold;
-    font-size: 14px;
+.option.correct {
+  background: #dcfce7;
+  border-color: #16a34a;
 }
 
-.listen {
-    background: #ede9fe;
-    color: #5b21b6;
+.option.wrong {
+  background: #fee2e2;
+  border-color: #dc2626;
 }
 
-.next {
-    background: #111827;
-    color: white;
+.progress {
+  height: 12px;
+  background: #e5e7eb;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 15px;
 }
 
-.instructions {
-    margin-top: 15px;
-    font-size: 13px;
-    color: #6b7280;
+.progress-bar {
+  height: 100%;
+  background: #2563eb;
+  width: 0%;
+  transition: width .3s;
+}
+
+.score {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.module-btn {
+  background: #1d4ed8;
+  min-height: 75px;
+}
+
+.hidden {
+  display: none;
+}
+
+.feedback {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+.listen-btn {
+  background: #7c3aed;
+}
+
+.hangman-word {
+  text-align: center;
+  font-size: 30px;
+  letter-spacing: 8px;
+  font-weight: bold;
+  margin: 25px 0;
+}
+
+.letters {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.letter-btn {
+  padding: 11px 4px;
+  margin: 0;
+  font-size: 15px;
+  background: #475569;
+}
+
+.letter-btn.used {
+  opacity: .35;
+}
+
+.final-score {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 10px;
+  margin: 7px 0;
+}
+
+.small {
+  color: #64748b;
+  font-size: 14px;
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 12px;
+  }
+
+  .word {
+    font-size: 27px;
+  }
+
+  .letters {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  button {
+    font-size: 16px;
+  }
 }
 </style>
 </head>
@@ -153,354 +231,1750 @@ h1 {
 
 <div class="container">
 
-<h1>🎯 Word Hangman</h1>
+  <!-- HOME -->
+  <div id="home">
 
-<div class="subtitle">
-Aprende palabras en inglés jugando
+    <h1>📚 Spelling Master</h1>
+
+    <div class="subtitle">
+      Choose a module to begin
+    </div>
+
+    <div class="card">
+
+      <h2>Choose Your Module</h2>
+
+      <div class="module-grid">
+
+        <button class="module-btn" onclick="startModule()">
+          📘 Module 1
+          <br>
+          <span class="small" style="color:white;">
+            8 Words
+          </span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- GAME -->
+  <div id="game" class="hidden">
+
+    <div class="score">
+      ⭐ Score: <span id="score">0</span>
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="card">
+
+      <div id="stageTitle"></div>
+
+      <div id="content"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FINAL -->
+  <div id="final" class="hidden">
+
+    <div class="card">
+
+      <h1>🏆 Module Complete!</h1>
+
+      <div class="final-score">
+        <span id="finalScore">0</span> points
+      </div>
+
+      <div class="stat">
+        <span>Spelling Correct</span>
+        <strong id="spellingCorrect">0</strong>
+      </div>
+
+      <div class="stat">
+        <span>Sentence Correct</span>
+        <strong id="sentenceCorrect">0</strong>
+      </div>
+
+      <div class="stat">
+        <span>Hangman Points</span>
+        <strong id="hangmanPoints">0</strong>
+      </div>
+
+      <div class="stat">
+        <span>Total Questions</span>
+        <strong id="totalQuestions">0</strong>
+      </div>
+
+      <div class="stat">
+        <span>Accuracy</span>
+        <strong id="accuracy">0%</strong>
+      </div>
+
+      <div id="finalMessage" class="feedback"></div>
+
+      <button onclick="goHome()">
+        🏠 Back to Modules
+      </button>
+
+    </div>
+
+  </div>
+
 </div>
 
-<div class="card">
-
-<div class="stats">
-
-<div class="stat">
-<strong id="score">0</strong>
-Puntos
-</div>
-
-<div class="stat">
-<strong id="lives">6</strong>
-Intentos
-</div>
-
-<div class="stat">
-<strong id="round">1/7</strong>
-Palabra
-</div>
-
-</div>
-
-<div class="hint-title">
-💡 PISTA EN ESPAÑOL
-</div>
-
-<div class="hint" id="hint"></div>
-
-<div class="word" id="word"></div>
-
-<div class="message" id="message"></div>
-
-<div class="keyboard" id="keyboard"></div>
-
-<div class="actions">
-
-<button class="listen" onclick="listenWord()">
-🔊 Escuchar
-</button>
-
-<button class="next" onclick="nextWord()">
-➡️ Nueva palabra
-</button>
-
-</div>
-
-</div>
-
-<div class="instructions">
-
-Lee la pista en español y toca las letras para descubrir la palabra en inglés.
-
-<br><br>
-
-⭐ Cada letra correcta = 10 puntos  
-🎉 Completar la palabra = 50 puntos extra
-
-</div>
-
-</div>
 
 <script>
 
+/* =========================
+   MODULE 1 — FIRST 8 WORDS
+========================= */
+
 const words = [
 
-{
-word: "ABBREVIATION",
-hint: "Abreviación o forma corta de una palabra."
-},
+  {
+    word:"abbreviation",
+    translation:"abreviatura",
+    definition:"A shortened form of a word or phrase.",
+    sentence:"Dr. is an _______ for Doctor."
+  },
 
-{
-word: "ABROAD",
-hint: "En o hacia otro país."
-},
+  {
+    word:"abroad",
+    translation:"en el extranjero",
+    definition:"In or to a foreign country.",
+    sentence:"My family traveled _______ during the summer."
+  },
 
-{
-word: "ACCESS",
-hint: "La posibilidad o permiso para entrar o usar algo."
-},
+  {
+    word:"access",
+    translation:"acceso",
+    definition:"The ability or opportunity to enter, use, or reach something.",
+    sentence:"Students need _______ to the computer."
+  },
 
-{
-word: "ACCORD",
-hint: "Estar de acuerdo; también puede significar un acuerdo."
-},
+  {
+    word:"accord",
+    translation:"acuerdo",
+    definition:"An agreement or harmony between people or groups.",
+    sentence:"The two sides reached an _______."
+  },
 
-{
-word: "ADEQUATE",
-hint: "Suficiente o apropiado para una necesidad."
-},
+  {
+    word:"adequate",
+    translation:"adecuado / suficiente",
+    definition:"Good enough or sufficient for a particular purpose.",
+    sentence:"We have _______ time to finish the project."
+  },
 
-{
-word: "ADVANCEMENTS",
-hint: "Progresos o mejoras importantes."
-},
+  {
+    word:"advancements",
+    translation:"avances",
+    definition:"Improvements or developments that make something better.",
+    sentence:"Medical _______ have helped many people."
+  },
 
-{
-word: "AERONAUTICS",
-hint: "Ciencia y tecnología relacionada con los aviones y el vuelo."
-}
+  {
+    word:"aeronautics",
+    translation:"aeronáutica",
+    definition:"The science and technology of aircraft and flight.",
+    sentence:"She is interested in the study of _______."
+  },
+
+  {
+    word:"affectionate",
+    translation:"cariñoso",
+    definition:"Showing love, care, or fondness.",
+    sentence:"The _______ puppy stayed close to its owner."
+  }
 
 ];
 
-let order = [];
+
+let currentModule = words;
+
 let currentIndex = 0;
-let currentWord;
-let guessed = [];
-let lives = 6;
+
 let score = 0;
-let finished = false;
+
+let spellingCorrect = 0;
+
+let sentenceCorrect = 0;
+
+let spellingAnswered = 0;
+
+let sentenceAnswered = 0;
+
+let hangmanPoints = 0;
+
+let failedWords = [];
+
+let hangmanWord = "";
+
+let guessedLetters = [];
+
+let attemptsLeft = 6;
+
+let currentHangman = null;
 
 
-function shuffle(array) {
+/* =========================
+   HOME
+========================= */
 
-return [...array].sort(() => Math.random() - 0.5);
+function startModule(){
 
-}
+  currentIndex = 0;
 
+  score = 0;
 
-function startGame() {
+  spellingCorrect = 0;
 
-order = shuffle(words);
+  sentenceCorrect = 0;
 
-currentIndex = 0;
+  spellingAnswered = 0;
 
-score = 0;
+  sentenceAnswered = 0;
 
-loadWord();
+  hangmanPoints = 0;
 
-}
+  failedWords = [];
 
+  document.getElementById("home")
+    .classList.add("hidden");
 
-function loadWord() {
+  document.getElementById("final")
+    .classList.add("hidden");
 
-currentWord = order[currentIndex];
+  document.getElementById("game")
+    .classList.remove("hidden");
 
-guessed = [];
+  updateScore();
 
-lives = 6;
-
-finished = false;
-
-document.getElementById("hint").textContent =
-currentWord.hint;
-
-document.getElementById("score").textContent =
-score;
-
-document.getElementById("lives").textContent =
-lives;
-
-document.getElementById("round").textContent =
-(currentIndex + 1) + "/7";
-
-document.getElementById("message").textContent = "";
-
-drawWord();
-
-drawKeyboard();
-
-}
-
-
-function drawWord() {
-
-const wordContainer =
-document.getElementById("word");
-
-wordContainer.innerHTML = "";
-
-for (let letter of currentWord.word) {
-
-const div = document.createElement("div");
-
-div.className = "letter";
-
-if (guessed.includes(letter)) {
-
-div.textContent = letter;
-
-}
-
-wordContainer.appendChild(div);
-
-}
+  showLearn();
 
 }
 
 
-function drawKeyboard() {
+function goHome(){
 
-const keyboard =
-document.getElementById("keyboard");
+  document.getElementById("game")
+    .classList.add("hidden");
 
-keyboard.innerHTML = "";
+  document.getElementById("final")
+    .classList.add("hidden");
 
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-for (let letter of letters) {
-
-const button =
-document.createElement("button");
-
-button.textContent = letter;
-
-button.disabled =
-guessed.includes(letter);
-
-button.onclick = function() {
-
-guess(letter);
-
-};
-
-keyboard.appendChild(button);
-
-}
+  document.getElementById("home")
+    .classList.remove("hidden");
 
 }
 
 
-function guess(letter) {
+/* =========================
+   SPEECH
+========================= */
 
-if (finished) return;
+function speakWord(word){
 
-if (guessed.includes(letter)) return;
+  if("speechSynthesis" in window){
 
-guessed.push(letter);
+    window.speechSynthesis.cancel();
 
-if (currentWord.word.includes(letter)) {
+    const utterance =
+      new SpeechSynthesisUtterance(word);
 
-score += 10;
+    utterance.lang = "en-US";
 
-document.getElementById("message").textContent =
-"¡Muy bien! ⭐";
+    utterance.rate = 0.75;
 
-document.getElementById("message").className =
-"message correct";
+    window.speechSynthesis.speak(utterance);
 
-} else {
-
-lives--;
-
-document.getElementById("message").textContent =
-"Intenta otra letra";
-
-document.getElementById("message").className =
-"message incorrect";
-
-}
-
-document.getElementById("score").textContent =
-score;
-
-document.getElementById("lives").textContent =
-lives;
-
-drawWord();
-
-drawKeyboard();
-
-checkGame();
+  }
 
 }
 
 
-function checkGame() {
+/* =========================
+   LEARN
+========================= */
 
-let completed =
-[...currentWord.word].every(
-letter => guessed.includes(letter)
-);
+function showLearn(){
 
-if (completed) {
+  const w =
+    currentModule[currentIndex];
 
-finished = true;
+  document.getElementById("stageTitle").innerHTML =
 
-score += 50;
+    `<h2>📖 Learn</h2>
+     <div class="small">
+     Word ${currentIndex + 1} of ${currentModule.length}
+     </div>`;
 
-document.getElementById("score").textContent =
-score;
+  document.getElementById("content").innerHTML = `
 
-document.getElementById("message").textContent =
-"🎉 ¡Correcto! +50 puntos";
+    <div class="word">
+      ${w.word}
+    </div>
 
-document.getElementById("message").className =
-"message correct";
+    <div class="translation">
+      🇪🇸 ${w.translation}
+    </div>
 
-}
+    <div class="definition">
+      <strong>Definition:</strong><br>
+      ${w.definition}
+    </div>
 
-if (lives <= 0) {
+    <button class="listen-btn"
+      onclick="speakWord('${w.word}')">
+      🔊 Listen
+    </button>
 
-finished = true;
+    <button onclick="nextLearn()">
+      Continue →
+    </button>
 
-document.getElementById("message").textContent =
-"😅 La palabra era: " + currentWord.word;
+  `;
 
-document.getElementById("message").className =
-"message incorrect";
+  updateProgress(
+    currentIndex,
+    currentModule.length
+  );
 
-}
-
-}
-
-
-function nextWord() {
-
-if (currentIndex < order.length - 1) {
-
-currentIndex++;
-
-loadWord();
-
-} else {
-
-startGame();
-
-document.getElementById("message").textContent =
-"🔄 ¡Nueva ronda!";
-
-}
+  speakWord(w.word);
 
 }
 
 
-function listenWord() {
+function nextLearn(){
 
-const speech =
-new SpeechSynthesisUtterance(
-currentWord.word.toLowerCase()
-);
+  currentIndex++;
 
-speech.lang = "en-US";
+  if(currentIndex < currentModule.length){
 
-speech.rate = 0.8;
+    showLearn();
 
-speechSynthesis.cancel();
+  }else{
 
-speechSynthesis.speak(speech);
+    startListen();
+
+  }
 
 }
 
 
-startGame();
+/* =========================
+   LISTEN
+========================= */
+
+function startListen(){
+
+  currentIndex = 0;
+
+  showListen();
+
+}
+
+
+function showListen(){
+
+  const correct =
+    currentModule[currentIndex];
+
+  let choices = [correct];
+
+  let pool =
+    currentModule.filter(
+      w => w.word !== correct.word
+    );
+
+  pool = shuffle(pool);
+
+  choices.push(...pool.slice(0,3));
+
+  choices = shuffle(choices);
+
+  document.getElementById("stageTitle").innerHTML =
+
+    `<h2>🔊 Listen & Choose</h2>
+     <div class="small">
+     Word ${currentIndex + 1} of ${currentModule.length}
+     </div>`;
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="translation">
+      👂 Listen to the word.
+    </div>
+
+    <button class="listen-btn"
+      onclick="speakWord('${correct.word}')">
+      🔊 Repeat Word
+    </button>
+
+    <div id="listenOptions"></div>
+
+  `;
+
+  const box =
+    document.getElementById("listenOptions");
+
+  choices.forEach(choice => {
+
+    const btn =
+      document.createElement("button");
+
+    btn.className = "option";
+
+    btn.textContent =
+      choice.word;
+
+    btn.onclick = () => {
+
+      const all =
+        box.querySelectorAll("button");
+
+      all.forEach(
+        b => b.disabled = true
+      );
+
+      if(choice.word === correct.word){
+
+        btn.classList.add("correct");
+
+        score += 10;
+
+      }else{
+
+        btn.classList.add("wrong");
+
+        all.forEach(b => {
+
+          if(
+            b.textContent === correct.word
+          ){
+
+            b.classList.add("correct");
+
+          }
+
+        });
+
+        addFailed(correct);
+
+      }
+
+      updateScore();
+
+      setTimeout(() => {
+
+        currentIndex++;
+
+        if(
+          currentIndex <
+          currentModule.length
+        ){
+
+          showListen();
+
+        }else{
+
+          startSpelling();
+
+        }
+
+      },700);
+
+    };
+
+    box.appendChild(btn);
+
+  });
+
+  updateProgress(
+    currentIndex,
+    currentModule.length
+  );
+
+  speakWord(correct.word);
+
+}
+
+
+/* =========================
+   SPELLING
+========================= */
+
+function startSpelling(){
+
+  currentIndex = 0;
+
+  showSpelling();
+
+}
+
+
+function showSpelling(){
+
+  const correct =
+    currentModule[currentIndex];
+
+  let choices =
+    makeMisspellings(correct.word);
+
+  choices =
+    shuffle([
+      correct.word,
+      ...choices
+    ]);
+
+  document.getElementById("stageTitle").innerHTML =
+
+    `<h2>✏️ Spelling Practice</h2>
+     <div class="small">
+     Word ${currentIndex + 1} of ${currentModule.length}
+     </div>`;
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="translation">
+      🇪🇸 ${correct.translation}
+    </div>
+
+    <div class="definition">
+      <strong>Definition:</strong><br>
+      ${correct.definition}
+    </div>
+
+    <h3 style="text-align:center">
+      Which spelling is correct?
+    </h3>
+
+    <div id="spellingOptions"></div>
+
+  `;
+
+  const box =
+    document.getElementById(
+      "spellingOptions"
+    );
+
+  choices.forEach(choice => {
+
+    const btn =
+      document.createElement("button");
+
+    btn.className = "option";
+
+    btn.textContent = choice;
+
+    btn.onclick = () => {
+
+      const all =
+        box.querySelectorAll("button");
+
+      all.forEach(
+        b => b.disabled = true
+      );
+
+      spellingAnswered++;
+
+      if(choice === correct.word){
+
+        btn.classList.add("correct");
+
+        score += 20;
+
+        spellingCorrect++;
+
+      }else{
+
+        btn.classList.add("wrong");
+
+        all.forEach(b => {
+
+          if(
+            b.textContent === correct.word
+          ){
+
+            b.classList.add("correct");
+
+          }
+
+        });
+
+        addFailed(correct);
+
+      }
+
+      updateScore();
+
+      setTimeout(() => {
+
+        currentIndex++;
+
+        if(
+          currentIndex <
+          currentModule.length
+        ){
+
+          showSpelling();
+
+        }else{
+
+          startSentence();
+
+        }
+
+      },700);
+
+    };
+
+    box.appendChild(btn);
+
+  });
+
+  updateProgress(
+    currentIndex,
+    currentModule.length
+  );
+
+}
+
+
+/* =========================
+   SENTENCE
+========================= */
+
+function startSentence(){
+
+  currentIndex = 0;
+
+  showSentence();
+
+}
+
+
+function showSentence(){
+
+  const correct =
+    currentModule[currentIndex];
+
+  let choices = [correct];
+
+  let pool =
+    currentModule.filter(
+      w => w.word !== correct.word
+    );
+
+  pool = shuffle(pool);
+
+  choices.push(...pool.slice(0,3));
+
+  choices = shuffle(choices);
+
+  document.getElementById("stageTitle").innerHTML =
+
+    `<h2>📝 Sentence Practice</h2>
+     <div class="small">
+     Word ${currentIndex + 1} of ${currentModule.length}
+     </div>`;
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="definition">
+      ${correct.sentence}
+    </div>
+
+    <h3 style="text-align:center">
+      Which word completes the sentence?
+    </h3>
+
+    <div id="sentenceOptions"></div>
+
+  `;
+
+  const box =
+    document.getElementById(
+      "sentenceOptions"
+    );
+
+  choices.forEach(choice => {
+
+    const btn =
+      document.createElement("button");
+
+    btn.className = "option";
+
+    btn.textContent =
+      choice.word;
+
+    btn.onclick = () => {
+
+      const all =
+        box.querySelectorAll("button");
+
+      all.forEach(
+        b => b.disabled = true
+      );
+
+      sentenceAnswered++;
+
+      if(choice.word === correct.word){
+
+        btn.classList.add("correct");
+
+        score += 20;
+
+        sentenceCorrect++;
+
+      }else{
+
+        btn.classList.add("wrong");
+
+        all.forEach(b => {
+
+          if(
+            b.textContent === correct.word
+          ){
+
+            b.classList.add("correct");
+
+          }
+
+        });
+
+        addFailed(correct);
+
+      }
+
+      updateScore();
+
+      setTimeout(() => {
+
+        currentIndex++;
+
+        if(
+          currentIndex <
+          currentModule.length
+        ){
+
+          showSentence();
+
+        }else{
+
+          startHangman();
+
+        }
+
+      },700);
+
+    };
+
+    box.appendChild(btn);
+
+  });
+
+  updateProgress(
+    currentIndex,
+    currentModule.length
+  );
+
+}
+
+
+/* =========================
+   HANGMAN
+========================= */
+
+function startHangman(){
+
+  currentIndex = 0;
+
+  showHangman();
+
+}
+
+
+function showHangman(){
+
+  currentHangman =
+    currentModule[currentIndex];
+
+  hangmanWord =
+    currentHangman.word.toLowerCase();
+
+  guessedLetters = [];
+
+  attemptsLeft = 6;
+
+  renderHangman();
+
+}
+
+
+function renderHangman(){
+
+  const w =
+    currentHangman;
+
+  let display = "";
+
+  for(
+    const letter of hangmanWord
+  ){
+
+    if(
+      guessedLetters.includes(letter)
+    ){
+
+      display +=
+        letter.toUpperCase() + " ";
+
+    }else{
+
+      display += "_ ";
+
+    }
+
+  }
+
+  document.getElementById("stageTitle").innerHTML =
+
+    `<h2>🎮 Hangman</h2>
+     <div class="small">
+     Word ${currentIndex + 1} of ${currentModule.length}
+     </div>`;
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="translation">
+      🇪🇸 ${w.translation}
+    </div>
+
+    <div class="definition">
+      <strong>Definition:</strong><br>
+      ${w.definition}
+    </div>
+
+    <div style="text-align:center">
+      ❤️ Attempts left: ${attemptsLeft}
+    </div>
+
+    <div class="hangman-word">
+      ${display}
+    </div>
+
+    <div class="letters"
+      id="letters">
+    </div>
+
+  `;
+
+  const box =
+    document.getElementById("letters");
+
+  const alphabet =
+    "abcdefghijklmnopqrstuvwxyz";
+
+  for(
+    const letter of alphabet
+  ){
+
+    const btn =
+      document.createElement("button");
+
+    btn.className =
+      "letter-btn";
+
+    btn.textContent =
+      letter.toUpperCase();
+
+    btn.onclick = () =>
+      guessLetter(letter);
+
+    box.appendChild(btn);
+
+  }
+
+  updateProgress(
+    currentIndex,
+    currentModule.length
+  );
+
+}
+
+
+function guessLetter(letter){
+
+  if(
+    guessedLetters.includes(letter)
+  ){
+
+    return;
+
+  }
+
+  guessedLetters.push(letter);
+
+  if(
+    hangmanWord.includes(letter)
+  ){
+
+    score += 10;
+
+    hangmanPoints += 10;
+
+  }else{
+
+    attemptsLeft--;
+
+  }
+
+  updateScore();
+
+  const complete =
+    [...new Set(hangmanWord)]
+      .every(
+        letter =>
+          guessedLetters.includes(letter)
+      );
+
+  if(complete){
+
+    score += 50;
+
+    hangmanPoints += 50;
+
+    updateScore();
+
+    document.getElementById("content").innerHTML = `
+
+      <div class="feedback success">
+        🎉 Correct!
+      </div>
+
+      <div class="word">
+        ${currentHangman.word}
+      </div>
+
+      <div class="feedback">
+        +50 completion bonus!
+      </div>
+
+      <button onclick="nextHangman()">
+        Continue →
+      </button>
+
+    `;
+
+    return;
+
+  }
+
+  if(attemptsLeft <= 0){
+
+    addFailed(currentHangman);
+
+    document.getElementById("content").innerHTML = `
+
+      <div class="feedback danger">
+        Not quite!
+      </div>
+
+      <div class="word">
+        ${currentHangman.word}
+      </div>
+
+      <div class="definition">
+        The correct spelling is:
+        <strong>
+          ${currentHangman.word}
+        </strong>
+      </div>
+
+      <button onclick="nextHangman()">
+        Continue →
+      </button>
+
+    `;
+
+    return;
+
+  }
+
+  renderHangman();
+
+}
+
+
+function nextHangman(){
+
+  currentIndex++;
+
+  if(
+    currentIndex <
+    currentModule.length
+  ){
+
+    showHangman();
+
+  }else{
+
+    startReview();
+
+  }
+
+}
+
+
+/* =========================
+   REVIEW
+========================= */
+
+function startReview(){
+
+  const reviewWords =
+    [...new Map(
+      failedWords.map(
+        w => [w.word,w]
+      )
+    ).values()];
+
+  if(reviewWords.length === 0){
+
+    showFinal();
+
+    return;
+
+  }
+
+  window.reviewWords =
+    reviewWords;
+
+  window.reviewIndex = 0;
+
+  document.getElementById("stageTitle").innerHTML =
+    `<h2>🔥 Final Review</h2>`;
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="feedback">
+      You missed
+      ${reviewWords.length}
+      ${reviewWords.length === 1 ? "word" : "words"}.
+    </div>
+
+    <div class="definition">
+      Let's practice the words that need more work.
+    </div>
+
+    <button onclick="startReviewSpelling()">
+      Start Review →
+    </button>
+
+  `;
+
+}
+
+
+function startReviewSpelling(){
+
+  reviewIndex = 0;
+
+  reviewSpelling();
+
+}
+
+
+function reviewSpelling(){
+
+  if(
+    reviewIndex >= reviewWords.length
+  ){
+
+    reviewIndex = 0;
+
+    reviewSentence();
+
+    return;
+
+  }
+
+  const correct =
+    reviewWords[reviewIndex];
+
+  let choices =
+    makeMisspellings(correct.word);
+
+  choices =
+    shuffle([
+      correct.word,
+      ...choices
+    ]);
+
+  document.getElementById("stageTitle").innerHTML =
+
+    `<h2>🔥 Review Spelling</h2>
+     <div class="small">
+     ${reviewIndex + 1} of ${reviewWords.length}
+     </div>`;
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="translation">
+      🇪🇸 ${correct.translation}
+    </div>
+
+    <div class="definition">
+      ${correct.definition}
+    </div>
+
+    <h3 style="text-align:center">
+      Which spelling is correct?
+    </h3>
+
+    <div id="reviewOptions"></div>
+
+  `;
+
+  const box =
+    document.getElementById(
+      "reviewOptions"
+    );
+
+  choices.forEach(choice => {
+
+    const btn =
+      document.createElement("button");
+
+    btn.className = "option";
+
+    btn.textContent = choice;
+
+    btn.onclick = () => {
+
+      const all =
+        box.querySelectorAll("button");
+
+      all.forEach(
+        b => b.disabled = true
+      );
+
+      if(
+        choice === correct.word
+      ){
+
+        btn.classList.add("correct");
+
+        score += 20;
+
+      }else{
+
+        btn.classList.add("wrong");
+
+        all.forEach(b => {
+
+          if(
+            b.textContent === correct.word
+          ){
+
+            b.classList.add("correct");
+
+          }
+
+        });
+
+      }
+
+      updateScore();
+
+      setTimeout(() => {
+
+        reviewIndex++;
+
+        reviewSpelling();
+
+      },700);
+
+    };
+
+    box.appendChild(btn);
+
+  });
+
+}
+
+
+function reviewSentence(){
+
+  if(
+    reviewIndex >= reviewWords.length
+  ){
+
+    reviewIndex = 0;
+
+    reviewHangman();
+
+    return;
+
+  }
+
+  const correct =
+    reviewWords[reviewIndex];
+
+  let choices = [correct];
+
+  let pool =
+    currentModule.filter(
+      w => w.word !== correct.word
+    );
+
+  choices.push(
+    ...shuffle(pool).slice(0,3)
+  );
+
+  choices =
+    shuffle(choices);
+
+  document.getElementById("stageTitle").innerHTML =
+
+    `<h2>🔥 Review Sentence</h2>
+     <div class="small">
+     ${reviewIndex + 1} of ${reviewWords.length}
+     </div>`;
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="definition">
+      ${correct.sentence}
+    </div>
+
+    <h3 style="text-align:center">
+      Choose the correct word.
+    </h3>
+
+    <div id="reviewSentenceOptions"></div>
+
+  `;
+
+  const box =
+    document.getElementById(
+      "reviewSentenceOptions"
+    );
+
+  choices.forEach(choice => {
+
+    const btn =
+      document.createElement("button");
+
+    btn.className = "option";
+
+    btn.textContent =
+      choice.word;
+
+    btn.onclick = () => {
+
+      const all =
+        box.querySelectorAll("button");
+
+      all.forEach(
+        b => b.disabled = true
+      );
+
+      if(
+        choice.word === correct.word
+      ){
+
+        btn.classList.add("correct");
+
+        score += 20;
+
+      }else{
+
+        btn.classList.add("wrong");
+
+        all.forEach(b => {
+
+          if(
+            b.textContent === correct.word
+          ){
+
+            b.classList.add("correct");
+
+          }
+
+        });
+
+      }
+
+      updateScore();
+
+      setTimeout(() => {
+
+        reviewIndex++;
+
+        reviewSentence();
+
+      },700);
+
+    };
+
+    box.appendChild(btn);
+
+  });
+
+}
+
+
+function reviewHangman(){
+
+  if(
+    reviewIndex >= reviewWords.length
+  ){
+
+    showFinal();
+
+    return;
+
+  }
+
+  currentHangman =
+    reviewWords[reviewIndex];
+
+  hangmanWord =
+    currentHangman.word.toLowerCase();
+
+  guessedLetters = [];
+
+  attemptsLeft = 6;
+
+  renderReviewHangman();
+
+}
+
+
+function renderReviewHangman(){
+
+  let display = "";
+
+  for(
+    const letter of hangmanWord
+  ){
+
+    if(
+      guessedLetters.includes(letter)
+    ){
+
+      display +=
+        letter.toUpperCase() + " ";
+
+    }else{
+
+      display += "_ ";
+
+    }
+
+  }
+
+  document.getElementById("stageTitle").innerHTML =
+
+    `<h2>🔥 Review Hangman</h2>
+     <div class="small">
+     ${reviewIndex + 1} of ${reviewWords.length}
+     </div>`;
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="translation">
+      🇪🇸 ${currentHangman.translation}
+    </div>
+
+    <div class="definition">
+      ${currentHangman.definition}
+    </div>
+
+    <div style="text-align:center">
+      ❤️ Attempts left: ${attemptsLeft}
+    </div>
+
+    <div class="hangman-word">
+      ${display}
+    </div>
+
+    <div class="letters"
+      id="reviewLetters">
+    </div>
+
+  `;
+
+  const box =
+    document.getElementById(
+      "reviewLetters"
+    );
+
+  const alphabet =
+    "abcdefghijklmnopqrstuvwxyz";
+
+  for(
+    const letter of alphabet
+  ){
+
+    const btn =
+      document.createElement("button");
+
+    btn.className =
+      "letter-btn";
+
+    btn.textContent =
+      letter.toUpperCase();
+
+    btn.onclick = () =>
+      reviewGuess(letter);
+
+    box.appendChild(btn);
+
+  }
+
+}
+
+
+function reviewGuess(letter){
+
+  if(
+    guessedLetters.includes(letter)
+  ){
+
+    return;
+
+  }
+
+  guessedLetters.push(letter);
+
+  if(
+    hangmanWord.includes(letter)
+  ){
+
+    score += 10;
+
+  }else{
+
+    attemptsLeft--;
+
+  }
+
+  updateScore();
+
+  const complete =
+    [...new Set(hangmanWord)]
+      .every(
+        letter =>
+          guessedLetters.includes(letter)
+      );
+
+  if(complete){
+
+    score += 50;
+
+    updateScore();
+
+    document.getElementById("content").innerHTML = `
+
+      <div class="feedback success">
+        🎉 You got it!
+      </div>
+
+      <div class="word">
+        ${currentHangman.word}
+      </div>
+
+      <button onclick="nextReviewHangman()">
+        Continue →
+      </button>
+
+    `;
+
+    return;
+
+  }
+
+  if(attemptsLeft <= 0){
+
+    document.getElementById("content").innerHTML = `
+
+      <div class="feedback danger">
+        Keep practicing!
+      </div>
+
+      <div class="word">
+        ${currentHangman.word}
+      </div>
+
+      <button onclick="nextReviewHangman()">
+        Continue →
+      </button>
+
+    `;
+
+    return;
+
+  }
+
+  renderReviewHangman();
+
+}
+
+
+function nextReviewHangman(){
+
+  reviewIndex++;
+
+  reviewHangman();
+
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+function showFinal(){
+
+  document.getElementById("game")
+    .classList.add("hidden");
+
+  document.getElementById("final")
+    .classList.remove("hidden");
+
+  document.getElementById("finalScore")
+    .textContent = score;
+
+  document.getElementById("spellingCorrect")
+    .textContent =
+    `${spellingCorrect} / ${currentModule.length}`;
+
+  document.getElementById("sentenceCorrect")
+    .textContent =
+    `${sentenceCorrect} / ${currentModule.length}`;
+
+  document.getElementById("hangmanPoints")
+    .textContent =
+    hangmanPoints;
+
+  const totalQuestions =
+    spellingAnswered +
+    sentenceAnswered;
+
+  document.getElementById("totalQuestions")
+    .textContent =
+    totalQuestions;
+
+  let accuracy = 0;
+
+  if(totalQuestions > 0){
+
+    accuracy =
+      Math.round(
+        (
+          (spellingCorrect +
+           sentenceCorrect)
+          /
+          totalQuestions
+        ) * 100
+      );
+
+  }
+
+  document.getElementById("accuracy")
+    .textContent =
+    accuracy + "%";
+
+  if(accuracy >= 90){
+
+    document.getElementById("finalMessage")
+      .textContent =
+      "🌟 Excellent! You really know these words!";
+
+  }else if(accuracy >= 80){
+
+    document.getElementById("finalMessage")
+      .textContent =
+      "👏 Great job! Keep practicing the tricky words.";
+
+  }else if(accuracy >= 70){
+
+    document.getElementById("finalMessage")
+      .textContent =
+      "💪 Good effort! A little more practice will help.";
+
+  }else{
+
+    document.getElementById("finalMessage")
+      .textContent =
+      "📚 Keep practicing. You can master these words!";
+
+  }
+
+}
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function addFailed(word){
+
+  if(
+    !failedWords.includes(word)
+  ){
+
+    failedWords.push(word);
+
+  }
+
+}
+
+
+function makeMisspellings(word){
+
+  let results = [];
+
+  if(word.length > 5){
+
+    let pos =
+      Math.floor(word.length / 2);
+
+    results.push(
+      word.slice(0,pos) +
+      word.slice(pos + 1)
+    );
+
+  }
+
+  let duplicatePos =
+    Math.min(2,word.length - 1);
+
+  results.push(
+
+    word.slice(0,duplicatePos) +
+    word[duplicatePos] +
+    word.slice(duplicatePos)
+
+  );
+
+  if(word.length > 4){
+
+    let pos =
+      Math.min(2,word.length - 2);
+
+    let arr =
+      word.split("");
+
+    let temp =
+      arr[pos];
+
+    arr[pos] =
+      arr[pos + 1];
+
+    arr[pos + 1] =
+      temp;
+
+    results.push(
+      arr.join("")
+    );
+
+  }
+
+  while(results.length < 3){
+
+    let arr =
+      word.split("");
+
+    let pos =
+      Math.floor(
+        Math.random() *
+        arr.length
+      );
+
+    let letters =
+      "abcdefghijklmnopqrstuvwxyz";
+
+    let newLetter =
+      letters[
+        Math.floor(
+          Math.random() *
+          letters.length
+        )
+      ];
+
+    arr[pos] =
+      newLetter;
+
+    let candidate =
+      arr.join("");
+
+    if(
+      candidate !== word &&
+      !results.includes(candidate)
+    ){
+
+      results.push(candidate);
+
+    }
+
+  }
+
+  return [
+    ...new Set(results)
+  ].slice(0,3);
+
+}
+
+
+function shuffle(array){
+
+  return array
+    .map(value => ({
+      value:value,
+      sort:Math.random()
+    }))
+    .sort(
+      (a,b) => a.sort - b.sort
+    )
+    .map(
+      ({value}) => value
+    );
+
+}
+
+
+function updateScore(){
+
+  document.getElementById("score")
+    .textContent = score;
+
+}
+
+
+function updateProgress(index,total){
+
+  const percent =
+    ((index + 1) / total) * 100;
+
+  document.getElementById(
+    "progressBar"
+  ).style.width =
+    percent + "%";
+
+}
 
 </script>
 
