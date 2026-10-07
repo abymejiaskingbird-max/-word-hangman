@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Hangman</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e0f2fe, #fef3c7);
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    color: #1f2937;
+}
+
+.container {
+    max-width: 500px;
+    margin: auto;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.12);
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.stat {
+    background: #f3f4f6;
+    border-radius: 15px;
+    padding: 10px 15px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 22px;
+}
+
+.hint-title {
+    color: #6366f1;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.hint {
+    font-size: 19px;
+    font-weight: bold;
+    margin: 8px 0 20px;
+}
+
+.word {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.letter {
+    width: 28px;
+    height: 38px;
+    border-bottom: 3px solid #222;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.keyboard button {
+    border: none;
+    border-radius: 10px;
+    padding: 11px 3px;
+    font-weight: bold;
+    font-size: 15px;
+    background: #e5e7eb;
+}
+
+.keyboard button:disabled {
+    opacity: .35;
+}
+
+.message {
+    font-weight: bold;
+    font-size: 18px;
+    min-height: 28px;
+    margin-bottom: 10px;
+}
+
+.correct {
+    color: #15803d;
+}
+
+.incorrect {
+    color: #b91c1c;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.actions button {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 13px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.listen {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+.next {
+    background: #111827;
+    color: white;
+}
+
+.instructions {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #6b7280;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🎯 Word Hangman</h1>
+
+<div class="subtitle">
+Aprende palabras en inglés jugando
+</div>
+
+<div class="card">
+
+<div class="stats">
+
+<div class="stat">
+<strong id="score">0</strong>
+Puntos
+</div>
+
+<div class="stat">
+<strong id="lives">6</strong>
+Intentos
+</div>
+
+<div class="stat">
+<strong id="round">1/7</strong>
+Palabra
+</div>
+
+</div>
+
+<div class="hint-title">
+💡 PISTA EN ESPAÑOL
+</div>
+
+<div class="hint" id="hint"></div>
+
+<div class="word" id="word"></div>
+
+<div class="message" id="message"></div>
+
+<div class="keyboard" id="keyboard"></div>
+
+<div class="actions">
+
+<button class="listen" onclick="listenWord()">
+🔊 Escuchar
+</button>
+
+<button class="next" onclick="nextWord()">
+➡️ Nueva palabra
+</button>
+
+</div>
+
+</div>
+
+<div class="instructions">
+
+Lee la pista en español y toca las letras para descubrir la palabra en inglés.
+
+<br><br>
+
+⭐ Cada letra correcta = 10 puntos  
+🎉 Completar la palabra = 50 puntos extra
+
+</div>
+
+</div>
+
+<script>
+
+const words = [
+
+{
+word: "ABBREVIATION",
+hint: "Abreviación o forma corta de una palabra."
+},
+
+{
+word: "ABROAD",
+hint: "En o hacia otro país."
+},
+
+{
+word: "ACCESS",
+hint: "La posibilidad o permiso para entrar o usar algo."
+},
+
+{
+word: "ACCORD",
+hint: "Estar de acuerdo; también puede significar un acuerdo."
+},
+
+{
+word: "ADEQUATE",
+hint: "Suficiente o apropiado para una necesidad."
+},
+
+{
+word: "ADVANCEMENTS",
+hint: "Progresos o mejoras importantes."
+},
+
+{
+word: "AERONAUTICS",
+hint: "Ciencia y tecnología relacionada con los aviones y el vuelo."
+}
+
+];
+
+let order = [];
+let currentIndex = 0;
+let currentWord;
+let guessed = [];
+let lives = 6;
+let score = 0;
+let finished = false;
+
+
+function shuffle(array) {
+
+return [...array].sort(() => Math.random() - 0.5);
+
+}
+
+
+function startGame() {
+
+order = shuffle(words);
+
+currentIndex = 0;
+
+score = 0;
+
+loadWord();
+
+}
+
+
+function loadWord() {
+
+currentWord = order[currentIndex];
+
+guessed = [];
+
+lives = 6;
+
+finished = false;
+
+document.getElementById("hint").textContent =
+currentWord.hint;
+
+document.getElementById("score").textContent =
+score;
+
+document.getElementById("lives").textContent =
+lives;
+
+document.getElementById("round").textContent =
+(currentIndex + 1) + "/7";
+
+document.getElementById("message").textContent = "";
+
+drawWord();
+
+drawKeyboard();
+
+}
+
+
+function drawWord() {
+
+const wordContainer =
+document.getElementById("word");
+
+wordContainer.innerHTML = "";
+
+for (let letter of currentWord.word) {
+
+const div = document.createElement("div");
+
+div.className = "letter";
+
+if (guessed.includes(letter)) {
+
+div.textContent = letter;
+
+}
+
+wordContainer.appendChild(div);
+
+}
+
+}
+
+
+function drawKeyboard() {
+
+const keyboard =
+document.getElementById("keyboard");
+
+keyboard.innerHTML = "";
+
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+for (let letter of letters) {
+
+const button =
+document.createElement("button");
+
+button.textContent = letter;
+
+button.disabled =
+guessed.includes(letter);
+
+button.onclick = function() {
+
+guess(letter);
+
+};
+
+keyboard.appendChild(button);
+
+}
+
+}
+
+
+function guess(letter) {
+
+if (finished) return;
+
+if (guessed.includes(letter)) return;
+
+guessed.push(letter);
+
+if (currentWord.word.includes(letter)) {
+
+score += 10;
+
+document.getElementById("message").textContent =
+"¡Muy bien! ⭐";
+
+document.getElementById("message").className =
+"message correct";
+
+} else {
+
+lives--;
+
+document.getElementById("message").textContent =
+"Intenta otra letra";
+
+document.getElementById("message").className =
+"message incorrect";
+
+}
+
+document.getElementById("score").textContent =
+score;
+
+document.getElementById("lives").textContent =
+lives;
+
+drawWord();
+
+drawKeyboard();
+
+checkGame();
+
+}
+
+
+function checkGame() {
+
+let completed =
+[...currentWord.word].every(
+letter => guessed.includes(letter)
+);
+
+if (completed) {
+
+finished = true;
+
+score += 50;
+
+document.getElementById("score").textContent =
+score;
+
+document.getElementById("message").textContent =
+"🎉 ¡Correcto! +50 puntos";
+
+document.getElementById("message").className =
+"message correct";
+
+}
+
+if (lives <= 0) {
+
+finished = true;
+
+document.getElementById("message").textContent =
+"😅 La palabra era: " + currentWord.word;
+
+document.getElementById("message").className =
+"message incorrect";
+
+}
+
+}
+
+
+function nextWord() {
+
+if (currentIndex < order.length - 1) {
+
+currentIndex++;
+
+loadWord();
+
+} else {
+
+startGame();
+
+document.getElementById("message").textContent =
+"🔄 ¡Nueva ronda!";
+
+}
+
+}
+
+
+function listenWord() {
+
+const speech =
+new SpeechSynthesisUtterance(
+currentWord.word.toLowerCase()
+);
+
+speech.lang = "en-US";
+
+speech.rate = 0.8;
+
+speechSynthesis.cancel();
+
+speechSynthesis.speak(speech);
+
+}
+
+
+startGame();
+
+</script>
+
+</body>
+</html>
