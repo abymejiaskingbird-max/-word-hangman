@@ -1,919 +1,2689 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Spelling Master</title>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
-.container{max-width:720px;margin:auto;padding:20px}
-h1{text-align:center;margin-bottom:8px}
-h2{margin-top:0}
-.subtitle{text-align:center;color:#667085;margin-bottom:25px}
-.card{background:white;border-radius:20px;padding:25px;margin-bottom:20px;box-shadow:0 5px 18px rgba(0,0,0,.08)}
-.word{font-size:32px;font-weight:bold;text-align:center;margin:15px 0}
-.translation{text-align:center;font-size:19px;color:#526071;margin-bottom:15px}
-.definition{background:#f1f5f9;border-radius:12px;padding:15px;line-height:1.5;margin-bottom:20px}
-button{width:100%;border:none;border-radius:14px;padding:15px;margin:7px 0;font-size:17px;font-weight:bold;cursor:pointer;background:#2563eb;color:white}
-button:hover{opacity:.92}
-.secondary{background:#64748b}
-.success{background:#16a34a!important}
-.danger{background:#dc2626!important}
-.option{background:#eef2ff;color:#172033;border:2px solid transparent}
-.option.correct{background:#dcfce7;border-color:#16a34a}
-.option.wrong{background:#fee2e2;border-color:#dc2626}
-.progress{height:12px;background:#e5e7eb;border-radius:20px;overflow:hidden;margin-bottom:15px}
-.progress-bar{height:100%;background:#2563eb;width:0%;transition:width .3s}
-.score{text-align:center;font-weight:bold;font-size:18px;margin-bottom:15px}
-.module-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.module-btn{background:#1d4ed8;min-height:75px}
-.hidden{display:none}
-.feedback{text-align:center;font-size:18px;font-weight:bold;margin:15px 0}
-.listen-btn{background:#7c3aed}
-.hangman-word{text-align:center;font-size:30px;letter-spacing:8px;font-weight:bold;margin:25px 0}
-.letters{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.letter-btn{padding:11px 4px;margin:0;font-size:15px;background:#475569}
-.letter-btn.used{opacity:.35}
-.final-score{text-align:center;font-size:25px;font-weight:bold;margin:20px 0}
-.stat{display:flex;justify-content:space-between;padding:12px;background:#f8fafc;border-radius:10px;margin:7px 0}
-.small{color:#64748b;font-size:14px}
-@media(max-width:500px){
-.container{padding:12px}
-.word{font-size:27px}
-.letters{grid-template-columns:repeat(6,1fr)}
-button{font-size:16px}
+
+* {
+
+  box-sizing: border-box;
+
 }
+
+body {
+
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+
+  background: #f4f7fb;
+
+  color: #172033;
+
+}
+
+.container {
+
+  max-width: 720px;
+
+  margin: auto;
+
+  padding: 20px;
+
+}
+
+h1 {
+
+  text-align: center;
+
+  margin-bottom: 8px;
+
+}
+
+h2 {
+
+  margin-top: 0;
+
+}
+
+.subtitle {
+
+  text-align: center;
+
+  color: #667085;
+
+  margin-bottom: 25px;
+
+}
+
+.card {
+
+  background: white;
+
+  border-radius: 20px;
+
+  padding: 25px;
+
+  margin-bottom: 20px;
+
+  box-shadow: 0 5px 18px rgba(0,0,0,.08);
+
+}
+
+.word {
+
+  font-size: 32px;
+
+  font-weight: bold;
+
+  text-align: center;
+
+  margin: 15px 0;
+
+}
+
+.translation {
+
+  text-align: center;
+
+  font-size: 19px;
+
+  color: #526071;
+
+  margin-bottom: 15px;
+
+}
+
+.definition {
+
+  background: #f1f5f9;
+
+  border-radius: 12px;
+
+  padding: 15px;
+
+  line-height: 1.5;
+
+  margin-bottom: 20px;
+
+}
+
+button {
+
+  width: 100%;
+
+  border: none;
+
+  border-radius: 14px;
+
+  padding: 15px;
+
+  margin: 7px 0;
+
+  font-size: 17px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  background: #2563eb;
+
+  color: white;
+
+}
+
+button:hover {
+
+  opacity: .92;
+
+}
+
+.secondary {
+
+  background: #64748b;
+
+}
+
+.success {
+
+  background: #16a34a !important;
+
+}
+
+.danger {
+
+  background: #dc2626 !important;
+
+}
+
+.option {
+
+  background: #eef2ff;
+
+  color: #172033;
+
+  border: 2px solid transparent;
+
+}
+
+.option.correct {
+
+  background: #dcfce7;
+
+  border-color: #16a34a;
+
+}
+
+.option.wrong {
+
+  background: #fee2e2;
+
+  border-color: #dc2626;
+
+}
+
+.progress {
+
+  height: 12px;
+
+  background: #e5e7eb;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  margin-bottom: 15px;
+
+}
+
+.progress-bar {
+
+  height: 100%;
+
+  background: #2563eb;
+
+  width: 0%;
+
+  transition: width .3s;
+
+}
+
+.score {
+
+  text-align: center;
+
+  font-weight: bold;
+
+  font-size: 18px;
+
+  margin-bottom: 15px;
+
+}
+
+.module-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 12px;
+
+}
+
+.module-btn {
+
+  background: #1d4ed8;
+
+  min-height: 75px;
+
+}
+
+.hidden {
+
+  display: none;
+
+}
+
+.feedback {
+
+  text-align: center;
+
+  font-size: 18px;
+
+  font-weight: bold;
+
+  margin: 15px 0;
+
+}
+
+.listen-btn {
+
+  background: #7c3aed;
+
+}
+
+.hangman-word {
+
+  text-align: center;
+
+  font-size: 30px;
+
+  letter-spacing: 8px;
+
+  font-weight: bold;
+
+  margin: 25px 0;
+
+}
+
+.letters {
+
+  display: grid;
+
+  grid-template-columns: repeat(7, 1fr);
+
+  gap: 6px;
+
+}
+
+.letter-btn {
+
+  padding: 11px 4px;
+
+  margin: 0;
+
+  font-size: 15px;
+
+  background: #475569;
+
+}
+
+.letter-btn.used {
+
+  opacity: .35;
+
+}
+
+.final-score {
+
+  text-align: center;
+
+  font-size: 25px;
+
+  font-weight: bold;
+
+  margin: 20px 0;
+
+}
+
+.stat {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 12px;
+
+  background: #f8fafc;
+
+  border-radius: 10px;
+
+  margin: 7px 0;
+
+}
+
+.small {
+
+  color: #64748b;
+
+  font-size: 14px;
+
+}
+
+@media (max-width: 500px) {
+
+  .container {
+
+    padding: 12px;
+
+  }
+
+  .word {
+
+    font-size: 27px;
+
+  }
+
+  .letters {
+
+    grid-template-columns: repeat(6, 1fr);
+
+  }
+
+  button {
+
+    font-size: 16px;
+
+  }
+
+}
+
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<div id="home">
-<h1>📚 Spelling Master</h1>
-<div class="subtitle">Choose a module to begin</div>
-<div class="card">
-<h2>Choose Your Module</h2>
-<div class="module-grid" id="moduleButtons"></div>
-</div>
+  <!-- HOME -->
+
+  <div id="home">
+
+    <h1>📚 Spelling Master</h1>
+
+    <div class="subtitle">
+
+      Choose a module to begin
+
+    </div>
+
+    <div class="card">
+
+      <h2>Choose Your Module</h2>
+
+      <div class="module-grid" id="moduleButtons"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- GAME -->
+
+  <div id="game" class="hidden">
+
+    <div class="score">
+
+      ⭐ Score: <span id="score">0</span>
+
+    </div>
+
+    <div class="progress">
+
+      <div class="progress-bar" id="progressBar"></div>
+
+    </div>
+
+    <div class="card">
+
+      <div id="stageTitle"></div>
+
+      <div id="content"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FINAL -->
+
+  <div id="final" class="hidden">
+
+    <div class="card">
+
+      <h1>🏆 Module Complete!</h1>
+
+      <div class="final-score">
+
+        <span id="finalScore">0</span> points
+
+      </div>
+
+      <div class="stat">
+
+        <span>Spelling Correct</span>
+
+        <strong id="spellingCorrect">0</strong>
+
+      </div>
+
+      <div class="stat">
+
+        <span>Sentence Correct</span>
+
+        <strong id="sentenceCorrect">0</strong>
+
+      </div>
+
+      <div class="stat">
+
+        <span>Hangman Points</span>
+
+        <strong id="hangmanPoints">0</strong>
+
+      </div>
+
+      <div class="stat">
+
+        <span>Total Questions</span>
+
+        <strong id="totalQuestions">0</strong>
+
+      </div>
+
+      <div class="stat">
+
+        <span>Accuracy</span>
+
+        <strong id="accuracy">0%</strong>
+
+      </div>
+
+      <div id="finalMessage" class="feedback"></div>
+
+      <button onclick="goHome()">🏠 Back to Modules</button>
+
+    </div>
+
+  </div>
+
 </div>
 
-<div id="game" class="hidden">
-<div class="score">⭐ Score: <span id="score">0</span></div>
-<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
-<div class="card">
-<div id="stageTitle"></div>
-<div id="content"></div>
-</div>
-</div>
-
-<div id="final" class="hidden">
-<div class="card">
-<h1>🏆 Module Complete!</h1>
-<div class="final-score"><span id="finalScore">0</span> points</div>
-
-<div class="stat"><span>Spelling Correct</span><strong id="spellingCorrect">0</strong></div>
-<div class="stat"><span>Sentence Correct</span><strong id="sentenceCorrect">0</strong></div>
-<div class="stat"><span>Hangman Points</span><strong id="hangmanPoints">0</strong></div>
-<div class="stat"><span>Total Questions</span><strong id="totalQuestions">0</strong></div>
-<div class="stat"><span>Accuracy</span><strong id="accuracy">0%</strong></div>
-
-<div id="finalMessage" class="feedback"></div>
-
-<button onclick="goHome()">🏠 Back to Modules</button>
-</div>
-</div>
-
-</div>
 
 <script>
 
-const words=[
+/* =========================================================
 
-{word:"abbreviation",translation:"abreviatura",definition:"A shortened form of a word or phrase.",sentence:"Dr. is an _______ for Doctor."},
-{word:"abroad",translation:"en el extranjero",definition:"In or to a foreign country.",sentence:"My aunt lives _______."},
-{word:"access",translation:"acceso",definition:"The ability or opportunity to enter, use, or reach something.",sentence:"I need _______ to the computer."},
-{word:"accord",translation:"acuerdo",definition:"An agreement or harmony between people or groups.",sentence:"They made an _______."},
-{word:"adequate",translation:"adecuado / suficiente",definition:"Good enough or sufficient for a particular purpose.",sentence:"We have _______ food."},
-{word:"advancements",translation:"avances",definition:"Improvements or developments that make something better.",sentence:"New _______ help people."},
-{word:"aeronautics",translation:"aeronáutica",definition:"The science and technology of aircraft and flight.",sentence:"He studies _______ and planes."},
-{word:"affectionate",translation:"cariñoso",definition:"Showing love, care, or fondness.",sentence:"The _______ dog likes to hug."},
+   WORD DATA
 
-{word:"affliction",translation:"aflicción",definition:"Something that causes pain, suffering, or distress.",sentence:"The illness was an _______."},
-{word:"aggregate",translation:"total / conjunto",definition:"A total formed by combining several amounts or things.",sentence:"The _______ score was 20."},
-{word:"agony",translation:"agonía",definition:"Extreme physical or emotional pain.",sentence:"He cried in _______."},
-{word:"aide",translation:"ayudante / asistente",definition:"A person who helps another person with a job or task.",sentence:"The teacher's _______ helped me."},
-{word:"aisle",translation:"pasillo",definition:"A passage between rows of seats, shelves, or other objects.",sentence:"Walk down the _______."},
-{word:"alibi",translation:"coartada",definition:"A claim or proof that someone was somewhere else when something happened.",sentence:"He had an _______."},
-{word:"allegiance",translation:"lealtad",definition:"Loyalty or commitment to a person, group, or cause.",sentence:"The soldier showed _______ to his country."},
-{word:"ambient",translation:"ambiental / del entorno",definition:"Relating to the surrounding environment or atmosphere.",sentence:"We heard soft _______ music."},
-{word:"amnesty",translation:"amnistía",definition:"An official decision to forgive people for certain offenses.",sentence:"The leader gave _______ to the prisoners."},
-{word:"anatomy",translation:"anatomía",definition:"The structure of a body or organism.",sentence:"We studied human _______ in class."},
+   88 WORDS
 
-{word:"animosity",translation:"enemistad",definition:"Strong dislike or hostility toward someone.",sentence:"There was _______ between the teams."},
-{word:"apathy",translation:"apatía",definition:"A lack of interest, enthusiasm, or concern.",sentence:"His _______ showed he did not care."},
-{word:"approach",translation:"acercarse / enfoque",definition:"To move closer or a way of dealing with something.",sentence:"We tried a new _______."},
-{word:"archaic",translation:"arcaico",definition:"Very old-fashioned and no longer commonly used.",sentence:"That word is _______ now."},
-{word:"arrogant",translation:"arrogante",definition:"Having an exaggerated sense of one's own importance.",sentence:"The _______ boy thought he was better."},
-{word:"assignment",translation:"asignación / tarea",definition:"A task or piece of work given to someone.",sentence:"I finished my _______."},
-{word:"audacity",translation:"audacia",definition:"Bold or disrespectful behavior that shows confidence.",sentence:"She had the _______ to speak."},
-{word:"auspicious",translation:"auspicioso / favorable",definition:"Showing signs that something good may happen.",sentence:"It was an _______ start."},
-{word:"baffle",translation:"confundir",definition:"To confuse someone completely.",sentence:"The hard question may _______ me."},
-{word:"banish",translation:"desterrar / expulsar",definition:"To send someone away or get rid of something.",sentence:"The king chose to _______ the man."},
+   MODULE 1 = 8
 
-{word:"banquet",translation:"banquete",definition:"A large and formal meal for many people.",sentence:"We ate at a big _______."},
-{word:"barricade",translation:"barricada",definition:"A barrier used to block a road or passage.",sentence:"The police put up a _______."},
-{word:"bashful",translation:"tímido",definition:"Shy or easily embarrassed.",sentence:"The _______ girl hid her face."},
-{word:"battalion",translation:"batallón",definition:"A large military unit made up of several smaller units.",sentence:"The _______ walked across the field."},
-{word:"because",translation:"porque",definition:"For the reason that something happens or is true.",sentence:"I stayed home _______ I was sick."},
-{word:"belated",translation:"tardío / atrasado",definition:"Happening later than expected or intended.",sentence:"She sent a _______ birthday card."},
-{word:"beloved",translation:"amado",definition:"Loved very much.",sentence:"The dog was _______ by the family."},
-{word:"benevolent",translation:"benevolente",definition:"Kind, generous, and willing to help others.",sentence:"The _______ man helped the poor."},
-{word:"bibliography",translation:"bibliografía",definition:"A list of books and other sources used in research.",sentence:"I added a _______ to my report."},
-{word:"bilingual",translation:"bilingüe",definition:"Able to speak or use two languages.",sentence:"My friend is _______ in English and Spanish."},
+   MODULES 2-9 = 10
 
-{word:"bizarre",translation:"extraño / inusual",definition:"Very strange or unusual.",sentence:"The story had a _______ ending."},
-{word:"blockade",translation:"bloqueo",definition:"An action or barrier that prevents movement or access.",sentence:"The ships made a _______."},
-{word:"boarder",translation:"huésped / estudiante interno",definition:"A person who lives at a school or another place where they receive meals and lodging.",sentence:"The _______ lived at the school."},
-{word:"boisterous",translation:"bullicioso / ruidoso",definition:"Noisy, energetic, and cheerful.",sentence:"The _______ kids were very loud."},
-{word:"border",translation:"frontera / borde",definition:"The line separating two areas or countries.",sentence:"We crossed the _______."},
-{word:"bracelet",translation:"pulsera",definition:"A piece of jewelry worn around the wrist.",sentence:"She wore a blue _______."},
-{word:"breathe",translation:"respirar",definition:"To take air into and release it from the lungs.",sentence:"Take a deep breath and _______."},
-{word:"bridge",translation:"puente",definition:"A structure built to cross over a river, road, or other obstacle.",sentence:"We walked over the _______."},
-{word:"brilliant",translation:"brillante / excelente",definition:"Very intelligent, impressive, or extremely bright.",sentence:"She had a _______ idea."},
-{word:"bruise",translation:"moretón",definition:"A dark mark on the skin caused by an injury.",sentence:"I have a _______ on my leg."},
+========================================================= */
 
-{word:"bulletin",translation:"boletín",definition:"A short official announcement or piece of information.",sentence:"The school posted a _______."},
-{word:"bungalow",translation:"bungaló",definition:"A small house, usually with one story.",sentence:"We stayed in a small _______."},
-{word:"calligraphy",translation:"caligrafía",definition:"The art of producing beautiful handwriting.",sentence:"Her _______ is very neat."},
-{word:"callous",translation:"insensible / cruel",definition:"Showing little concern for the feelings of others.",sentence:"His _______ words hurt her."},
-{word:"camouflage",translation:"camuflaje",definition:"A way of hiding by blending into the surroundings.",sentence:"The soldier wore _______ clothes."},
-{word:"candid",translation:"sincero / franco",definition:"Honest and direct, even when the truth may be difficult.",sentence:"She gave me a _______ answer."},
-{word:"carnivorous",translation:"carnívoro",definition:"Eating mainly or entirely meat.",sentence:"A lion is a _______ animal."},
-{word:"casserole",translation:"cazuela",definition:"A dish of food cooked slowly in one container.",sentence:"Mom made a chicken _______."},
-{word:"catastrophe",translation:"catástrofe",definition:"A terrible event causing great damage or suffering.",sentence:"The storm was a huge _______."},
-{word:"cauldron",translation:"caldero",definition:"A large deep pot used for cooking.",sentence:"The witch used a _______."},
+const words = [
 
-{word:"celestial",translation:"celestial",definition:"Relating to the sky, stars, or outer space.",sentence:"We saw a _______ object in the sky."},
-{word:"characterize",translation:"caracterizar",definition:"To describe the qualities or features of someone or something.",sentence:"Details _______ the main character."},
-{word:"chimpanzee",translation:"chimpancé",definition:"An intelligent ape that lives mainly in Africa.",sentence:"The _______ climbed the tree."},
-{word:"choreography",translation:"coreografía",definition:"The planned movements and steps of a dance.",sentence:"The dancers learned the _______."},
-{word:"circumstance",translation:"circunstancia",definition:"A condition or fact that affects a situation.",sentence:"Under this _______ , we should leave."},
-{word:"clandestine",translation:"clandestino / secreto",definition:"Kept secret because it is not allowed or meant to be known.",sentence:"They had a _______ meeting."},
-{word:"Clemency",translation:"clemencia",definition:"Mercy or forgiveness shown toward someone.",sentence:"The prisoner asked for _______."},
-{word:"clientele",translation:"clientela",definition:"The customers who regularly use a business.",sentence:"The store has many regular _______."},
-{word:"cohesive",translation:"cohesivo / unido",definition:"United and working well together.",sentence:"The team was _______ and worked well."},
-{word:"coincidence",translation:"coincidencia",definition:"A surprising situation in which things happen at the same time by chance.",sentence:"It was a strange _______."},
+/* MODULE 1 */
 
-{word:"colleague",translation:"colega / compañero de trabajo",definition:"A person who works with another person.",sentence:"My _______ helped me at work."},
-{word:"colloquial",translation:"coloquial",definition:"Used in ordinary conversation rather than formal speech.",sentence:"That word is common in _______ English."},
-{word:"compensation",translation:"compensación",definition:"Something given to make up for a loss, injury, or work.",sentence:"She got _______ for her work."},
-{word:"compulsory",translation:"obligatorio",definition:"Required by a rule or law.",sentence:"School is _______ for children."},
-{word:"condolence",translation:"condolencia",definition:"An expression of sympathy for someone who has experienced a loss.",sentence:"We sent our _______ to the family."},
-{word:"configuration",translation:"configuración",definition:"The arrangement or setup of parts.",sentence:"The computer has a new _______."},
-{word:"constellation",translation:"constelación",definition:"A group of stars that forms a recognizable pattern.",sentence:"Orion is a _______."},
-{word:"courageous",translation:"valiente",definition:"Showing bravery, especially in a difficult situation.",sentence:"The _______ firefighter helped the child."},
-{word:"creation",translation:"creación",definition:"Something that has been made or brought into existence.",sentence:"This painting is her new _______."},
-{word:"credentials",translation:"credenciales",definition:"Qualifications, achievements, or documents showing that someone is qualified.",sentence:"He showed his _______ to the boss."},
+{
 
-{word:"criticism",translation:"crítica",definition:"An opinion that points out problems or faults.",sentence:"He listened to the teacher's _______."},
-{word:"cuisine",translation:"cocina / gastronomía",definition:"A particular style of cooking or preparing food.",sentence:"I love Puerto Rican _______."},
-{word:"culminate",translation:"culminar",definition:"To reach the highest point or final stage.",sentence:"The show will _______ with a song."},
-{word:"customary",translation:"habitual / acostumbrado",definition:"Usual or traditional.",sentence:"It is _______ to say hello."},
-{word:"dandelion",translation:"diente de león",definition:"A common yellow-flowered plant whose seeds form a white puff.",sentence:"The child blew on the _______."},
-{word:"dangerous",translation:"peligroso",definition:"Likely to cause harm or injury.",sentence:"That road is _______."},
-{word:"debatable",translation:"discutible",definition:"Open to discussion or disagreement.",sentence:"The answer is _______."},
-{word:"December",translation:"diciembre",definition:"The twelfth month of the year.",sentence:"Christmas is in _______."},
-{word:"effective",translation:"efectivo / eficaz",definition:"Successful in producing the desired result.",sentence:"This study plan is _______."},
-{word:"eligible",translation:"elegible / que cumple los requisitos",definition:"Qualified or allowed to participate or receive something.",sentence:"She is _______ to play."}
+ word:"abbreviation",
+
+ translation:"abreviatura",
+
+ definition:"A shortened form of a word or phrase.",
+
+ sentence:"Dr. is an abbreviation."
+
+},
+
+{
+
+ word:"abroad",
+
+ translation:"en el extranjero",
+
+ definition:"In or to a foreign country.",
+
+ sentence:"We travel abroad."
+
+},
+
+{
+
+ word:"access",
+
+ translation:"acceso",
+
+ definition:"The ability or opportunity to enter, use, or reach something.",
+
+ sentence:"I have access."
+
+},
+
+{
+
+ word:"accord",
+
+ translation:"acuerdo",
+
+ definition:"An agreement or harmony between people or groups.",
+
+ sentence:"We are in accord."
+
+},
+
+{
+
+ word:"adequate",
+
+ translation:"adecuado / suficiente",
+
+ definition:"Good enough or sufficient for a particular purpose.",
+
+ sentence:"The time is adequate."
+
+},
+
+{
+
+ word:"advancements",
+
+ translation:"avances",
+
+ definition:"Improvements or developments that make something better.",
+
+ sentence:"Science has advancements."
+
+},
+
+{
+
+ word:"aeronautics",
+
+ translation:"aeronáutica",
+
+ definition:"The science and technology of aircraft and flight.",
+
+ sentence:"I study aeronautics."
+
+},
+
+{
+
+ word:"affectionate",
+
+ translation:"cariñoso",
+
+ definition:"Showing love, care, or fondness.",
+
+ sentence:"The dog is affectionate."
+
+},
+
+
+/* MODULE 2 */
+
+{
+
+ word:"affliction",
+
+ translation:"aflicción",
+
+ definition:"Something that causes pain, suffering, or distress.",
+
+ sentence:"The illness is an affliction."
+
+},
+
+{
+
+ word:"aggregate",
+
+ translation:"total / conjunto",
+
+ definition:"A total formed by combining several amounts or things.",
+
+ sentence:"The aggregate is the total."
+
+},
+
+{
+
+ word:"agony",
+
+ translation:"agonía",
+
+ definition:"Extreme physical or emotional pain.",
+
+ sentence:"He feels agony."
+
+},
+
+{
+
+ word:"aide",
+
+ translation:"ayudante / asistente",
+
+ definition:"A person who helps another person with a job or task.",
+
+ sentence:"The aide helps me."
+
+},
+
+{
+
+ word:"aisle",
+
+ translation:"pasillo",
+
+ definition:"A passage between rows of seats, shelves, or other objects.",
+
+ sentence:"Walk down the aisle."
+
+},
+
+{
+
+ word:"alibi",
+
+ translation:"coartada",
+
+ definition:"A claim or proof that someone was somewhere else when something happened.",
+
+ sentence:"He has an alibi."
+
+},
+
+{
+
+ word:"allegiance",
+
+ translation:"lealtad",
+
+ definition:"Loyalty or commitment to a person, group, or cause.",
+
+ sentence:"He shows allegiance."
+
+},
+
+{
+
+ word:"ambient",
+
+ translation:"ambiental / del entorno",
+
+ definition:"Relating to the surrounding environment or atmosphere.",
+
+ sentence:"I hear ambient music."
+
+},
+
+{
+
+ word:"amnesty",
+
+ translation:"amnistía",
+
+ definition:"An official decision to forgive people for certain offenses.",
+
+ sentence:"The country gave amnesty."
+
+},
+
+
+/* MODULE 3 */
+
+{
+
+ word:"anatomy",
+
+ translation:"anatomía",
+
+ definition:"The structure of a body or organism.",
+
+ sentence:"We study anatomy."
+
+},
+
+{
+
+ word:"animosity",
+
+ translation:"enemistad",
+
+ definition:"Strong dislike or hostility toward someone.",
+
+ sentence:"They show animosity."
+
+},
+
+{
+
+ word:"apathy",
+
+ translation:"apatía",
+
+ definition:"A lack of interest, enthusiasm, or concern.",
+
+ sentence:"He shows apathy."
+
+},
+
+{
+
+ word:"approach",
+
+ translation:"acercarse / enfoque",
+
+ definition:"To move closer or a way of dealing with something.",
+
+ sentence:"Please approach me."
+
+},
+
+{
+
+ word:"archaic",
+
+ translation:"arcaico",
+
+ definition:"Very old-fashioned and no longer commonly used.",
+
+ sentence:"The word is archaic."
+
+},
+
+{
+
+ word:"arrogant",
+
+ translation:"arrogante",
+
+ definition:"Having an exaggerated sense of one's own importance.",
+
+ sentence:"The boy is arrogant."
+
+},
+
+{
+
+ word:"assignment",
+
+ translation:"asignación / tarea",
+
+ definition:"A task or piece of work given to someone.",
+
+ sentence:"I have an assignment."
+
+},
+
+{
+
+ word:"audacity",
+
+ translation:"audacia",
+
+ definition:"Bold or disrespectful behavior that shows confidence.",
+
+ sentence:"She has audacity."
+
+},
+
+{
+
+ word:"auspicious",
+
+ translation:"auspicioso / favorable",
+
+ definition:"Showing signs that something good may happen.",
+
+ sentence:"It is an auspicious day."
+
+},
+
+{
+
+ word:"baffle",
+
+ translation:"confundir",
+
+ definition:"To confuse someone completely.",
+
+ sentence:"The puzzle can baffle me."
+
+},
+
+
+/* MODULE 4 */
+
+{
+
+ word:"banish",
+
+ translation:"desterrar / expulsar",
+
+ definition:"To send someone away or get rid of something.",
+
+ sentence:"They banish the thief."
+
+},
+
+{
+
+ word:"banquet",
+
+ translation:"banquete",
+
+ definition:"A large and formal meal for many people.",
+
+ sentence:"We eat at a banquet."
+
+},
+
+{
+
+ word:"barricade",
+
+ translation:"barricada",
+
+ definition:"A barrier used to block a road or passage.",
+
+ sentence:"The barricade blocks the road."
+
+},
+
+{
+
+ word:"bashful",
+
+ translation:"tímido",
+
+ definition:"Shy or easily embarrassed.",
+
+ sentence:"The child is bashful."
+
+},
+
+{
+
+ word:"battalion",
+
+ translation:"batallón",
+
+ definition:"A large military unit made up of several smaller units.",
+
+ sentence:"The battalion marches."
+
+},
+
+{
+
+ word:"because",
+
+ translation:"porque",
+
+ definition:"For the reason that something happens or is true.",
+
+ sentence:"I stayed because it rained."
+
+},
+
+{
+
+ word:"belated",
+
+ translation:"tardío / atrasado",
+
+ definition:"Happening later than expected or intended.",
+
+ sentence:"It was a belated gift."
+
+},
+
+{
+
+ word:"beloved",
+
+ translation:"amado",
+
+ definition:"Loved very much.",
+
+ sentence:"The dog is beloved."
+
+},
+
+{
+
+ word:"benevolent",
+
+ translation:"benevolente",
+
+ definition:"Kind, generous, and willing to help others.",
+
+ sentence:"She is benevolent."
+
+},
+
+{
+
+ word:"bibliography",
+
+ translation:"bibliografía",
+
+ definition:"A list of books and other sources used in research.",
+
+ sentence:"I read the bibliography."
+
+},
+
+
+/* MODULE 5 */
+
+{
+
+ word:"bilingual",
+
+ translation:"bilingüe",
+
+ definition:"Able to speak or use two languages.",
+
+ sentence:"She is bilingual."
+
+},
+
+{
+
+ word:"bizarre",
+
+ translation:"extraño / extraño de manera inusual",
+
+ definition:"Very strange or unusual.",
+
+ sentence:"That story is bizarre."
+
+},
+
+{
+
+ word:"blockade",
+
+ translation:"bloqueo",
+
+ definition:"An action or barrier that prevents movement or access.",
+
+ sentence:"The blockade stops ships."
+
+},
+
+{
+
+ word:"boarder",
+
+ translation:"huésped / estudiante interno",
+
+ definition:"A person who lives at a school or another place where they receive meals and lodging.",
+
+ sentence:"The boarder lives here."
+
+},
+
+{
+
+ word:"boisterous",
+
+ translation:"bullicioso / ruidoso",
+
+ definition:"Noisy, energetic, and cheerful.",
+
+ sentence:"The crowd is boisterous."
+
+},
+
+{
+
+ word:"border",
+
+ translation:"frontera / borde",
+
+ definition:"The line separating two areas or countries.",
+
+ sentence:"We cross the border."
+
+},
+
+{
+
+ word:"bracelet",
+
+ translation:"pulsera",
+
+ definition:"A piece of jewelry worn around the wrist.",
+
+ sentence:"I wear a bracelet."
+
+},
+
+{
+
+ word:"breathe",
+
+ translation:"respirar",
+
+ definition:"To take air into and release it from the lungs.",
+
+ sentence:"I breathe slowly."
+
+},
+
+{
+
+ word:"bridge",
+
+ translation:"puente",
+
+ definition:"A structure built to cross over a river, road, or other obstacle.",
+
+ sentence:"We cross the bridge."
+
+},
+
+{
+
+ word:"brilliant",
+
+ translation:"brillante / excelente",
+
+ definition:"Very intelligent, impressive, or extremely bright.",
+
+ sentence:"The student is brilliant."
+
+},
+
+
+/* MODULE 6 */
+
+{
+
+ word:"bruise",
+
+ translation:"moretón",
+
+ definition:"A dark mark on the skin caused by an injury.",
+
+ sentence:"I have a bruise."
+
+},
+
+{
+
+ word:"bulletin",
+
+ translation:"boletín",
+
+ definition:"A short official announcement or piece of information.",
+
+ sentence:"I read the bulletin."
+
+},
+
+{
+
+ word:"bungalow",
+
+ translation:"bungaló",
+
+ definition:"A small house, usually with one story.",
+
+ sentence:"We live in a bungalow."
+
+},
+
+{
+
+ word:"calligraphy",
+
+ translation:"caligrafía",
+
+ definition:"The art of producing beautiful handwriting.",
+
+ sentence:"I like calligraphy."
+
+},
+
+{
+
+ word:"callous",
+
+ translation:"insensible / cruel",
+
+ definition:"Showing little concern for the feelings of others.",
+
+ sentence:"He is callous."
+
+},
+
+{
+
+ word:"camouflage",
+
+ translation:"camuflaje",
+
+ definition:"A way of hiding by blending into the surroundings.",
+
+ sentence:"The soldier uses camouflage."
+
+},
+
+{
+
+ word:"candid",
+
+ translation:"sincero / franco",
+
+ definition:"Honest and direct, even when the truth may be difficult.",
+
+ sentence:"She is candid."
+
+},
+
+{
+
+ word:"carnivorous",
+
+ translation:"carnívoro",
+
+ definition:"Eating mainly or entirely meat.",
+
+ sentence:"The lion is carnivorous."
+
+},
+
+{
+
+ word:"casserole",
+
+ translation:"cazuela",
+
+ definition:"A dish of food cooked slowly in one container.",
+
+ sentence:"We eat a casserole."
+
+},
+
+{
+
+ word:"catastrophe",
+
+ translation:"catástrofe",
+
+ definition:"A terrible event causing great damage or suffering.",
+
+ sentence:"The storm was a catastrophe."
+
+},
+
+
+/* MODULE 7 */
+
+{
+
+ word:"cauldron",
+
+ translation:"caldero",
+
+ definition:"A large deep pot used for cooking.",
+
+ sentence:"The witch has a cauldron."
+
+},
+
+{
+
+ word:"celestial",
+
+ translation:"celestial",
+
+ definition:"Relating to the sky, stars, or outer space.",
+
+ sentence:"I see celestial stars."
+
+},
+
+{
+
+ word:"characterize",
+
+ translation:"caracterizar",
+
+ definition:"To describe the qualities or features of someone or something.",
+
+ sentence:"Words can characterize people."
+
+},
+
+{
+
+ word:"chimpanzee",
+
+ translation:"chimpancé",
+
+ definition:"An intelligent ape that lives mainly in Africa.",
+
+ sentence:"The chimpanzee is playful."
+
+},
+
+{
+
+ word:"choreography",
+
+ translation:"coreografía",
+
+ definition:"The planned movements and steps of a dance.",
+
+ sentence:"I like the choreography."
+
+},
+
+{
+
+ word:"circumstance",
+
+ translation:"circunstancia",
+
+ definition:"A condition or fact that affects a situation.",
+
+ sentence:"The circumstance is unusual."
+
+},
+
+{
+
+ word:"clandestine",
+
+ translation:"clandestino / secreto",
+
+ definition:"Kept secret because it is not allowed or meant to be known.",
+
+ sentence:"It was a clandestine meeting."
+
+},
+
+{
+
+ word:"Clemency",
+
+ translation:"clemencia",
+
+ definition:"Mercy or forgiveness shown toward someone.",
+
+ sentence:"He asks for clemency."
+
+},
+
+{
+
+ word:"clientele",
+
+ translation:"clientela",
+
+ definition:"The customers who regularly use a business.",
+
+ sentence:"The store has good clientele."
+
+},
+
+{
+
+ word:"cohesive",
+
+ translation:"cohesivo / unido",
+
+ definition:"United and working well together.",
+
+ sentence:"The team is cohesive."
+
+},
+
+
+/* MODULE 8 */
+
+{
+
+ word:"coincidence",
+
+ translation:"coincidencia",
+
+ definition:"A surprising situation in which things happen at the same time by chance.",
+
+ sentence:"That is a coincidence."
+
+},
+
+{
+
+ word:"colleague",
+
+ translation:"colega / compañero de trabajo",
+
+ definition:"A person who works with another person.",
+
+ sentence:"My colleague helps me."
+
+},
+
+{
+
+ word:"colloquial",
+
+ translation:"coloquial",
+
+ definition:"Used in ordinary conversation rather than formal speech.",
+
+ sentence:"This phrase is colloquial."
+
+},
+
+{
+
+ word:"compensation",
+
+ translation:"compensación",
+
+ definition:"Something given to make up for a loss, injury, or work.",
+
+ sentence:"She gets compensation."
+
+},
+
+{
+
+ word:"compulsory",
+
+ translation:"obligatorio",
+
+ definition:"Required by a rule or law.",
+
+ sentence:"The class is compulsory."
+
+},
+
+{
+
+ word:"condolence",
+
+ translation:"condolencia",
+
+ definition:"An expression of sympathy for someone who has experienced a loss.",
+
+ sentence:"We send our condolence."
+
+},
+
+{
+
+ word:"configuration",
+
+ translation:"configuración",
+
+ definition:"The arrangement or setup of parts.",
+
+ sentence:"The configuration is simple."
+
+},
+
+{
+
+ word:"constellation",
+
+ translation:"constelación",
+
+ definition:"A group of stars that forms a recognizable pattern.",
+
+ sentence:"I see a constellation."
+
+},
+
+{
+
+ word:"courageous",
+
+ translation:"valiente",
+
+ definition:"Showing bravery, especially in a difficult situation.",
+
+ sentence:"The firefighter is courageous."
+
+},
+
+{
+
+ word:"creation",
+
+ translation:"creación",
+
+ definition:"Something that has been made or brought into existence.",
+
+ sentence:"This is my creation."
+
+},
+
+
+/* MODULE 9 */
+
+{
+
+ word:"credentials",
+
+ translation:"credenciales",
+
+ definition:"Qualifications, achievements, or documents showing that someone is qualified.",
+
+ sentence:"She has good credentials."
+
+},
+
+{
+
+ word:"criticism",
+
+ translation:"crítica",
+
+ definition:"An opinion that points out problems or faults.",
+
+ sentence:"I accept criticism."
+
+},
+
+{
+
+ word:"cuisine",
+
+ translation:"cocina / gastronomía",
+
+ definition:"A particular style of cooking or preparing food.",
+
+ sentence:"I like Puerto Rican cuisine."
+
+},
+
+{
+
+ word:"culminate",
+
+ translation:"culminar",
+
+ definition:"To reach the highest point or final stage.",
+
+ sentence:"The show will culminate tonight."
+
+},
+
+{
+
+ word:"customary",
+
+ translation:"habitual / acostumbrado",
+
+ definition:"Usual or traditional.",
+
+ sentence:"It is customary here."
+
+},
+
+{
+
+ word:"dandelion",
+
+ translation:"diente de león",
+
+ definition:"A common yellow-flowered plant whose seeds form a white puff.",
+
+ sentence:"I see a dandelion."
+
+},
+
+{
+
+ word:"dangerous",
+
+ translation:"peligroso",
+
+ definition:"Likely to cause harm or injury.",
+
+ sentence:"The road is dangerous."
+
+},
+
+{
+
+ word:"debatable",
+
+ translation:"discutible",
+
+ definition:"Open to discussion or disagreement.",
+
+ sentence:"The answer is debatable."
+
+},
+
+{
+
+ word:"December",
+
+ translation:"diciembre",
+
+ definition:"The twelfth month of the year.",
+
+ sentence:"December is a month."
+
+},
+
+{
+
+ word:"effective",
+
+ translation:"efectivo / eficaz",
+
+ definition:"Successful in producing the desired result.",
+
+ sentence:"The plan is effective."
+
+},
+
+{
+
+ word:"eligible",
+
+ translation:"elegible / que cumple los requisitos",
+
+ definition:"Qualified or allowed to participate or receive something.",
+
+ sentence:"I am eligible."
+
+}
 
 ];
 
 
-/* MODULES: 8 + 10 + 10 + 10 + 10 + 10 + 10 + 10 + 10 = 88 */
+/* =========================================================
 
-const modules=[];
+   CREATE MODULES
+
+========================================================= */
+
+const modules = [];
+
 modules.push(words.slice(0,8));
 
-for(let i=8;i<words.length;i+=10){
-  modules.push(words.slice(i,i+10));
+for(let i = 8; i < words.length; i += 10){
+
+  modules.push(words.slice(i, i + 10));
+
 }
 
 
-/* VARIABLES */
+/* =========================================================
 
-let currentModule=[];
-let currentModuleNumber=0;
-let stage="";
-let currentIndex=0;
-let score=0;
-let spellingCorrect=0;
-let sentenceCorrect=0;
-let spellingAnswered=0;
-let sentenceAnswered=0;
-let hangmanScore=0;
-let failedWords=[];
-let reviewWords=[];
-let reviewIndex=0;
-let hangmanWord="";
-let guessedLetters=[];
-let attemptsLeft=6;
-let hangmanCurrent=null;
+   GAME VARIABLES
+
+========================================================= */
+
+let currentModule = [];
+
+let currentModuleNumber = 0;
+
+let stage = "";
+
+let currentIndex = 0;
+
+let score = 0;
+
+let spellingCorrect = 0;
+
+let sentenceCorrect = 0;
+
+let spellingAnswered = 0;
+
+let sentenceAnswered = 0;
+
+let hangmanScore = 0;
+
+let failedWords = [];
+
+let reviewWords = [];
+
+let reviewIndex = 0;
+
+let hangmanWord = "";
+
+let guessedLetters = [];
+
+let attemptsLeft = 6;
+
+let hangmanCurrent = null;
 
 
-/* HOME */
+/* =========================================================
 
-const moduleButtons=document.getElementById("moduleButtons");
+   HOME
 
-modules.forEach((module,index)=>{
-  const button=document.createElement("button");
-  button.className="module-btn";
-  button.innerHTML=`Module ${index+1}<br><span class="small">${module.length} words</span>`;
-  button.onclick=()=>startModule(index);
-  moduleButtons.appendChild(button);
+========================================================= */
+
+const moduleButtons = document.getElementById("moduleButtons");
+
+modules.forEach((module, index) => {
+
+  const button = document.createElement("button");
+
+  button.className = "module-btn";
+
+  button.innerHTML =
+
+    `Module ${index + 1}<br>
+
+     <span class="small">${module.length} words</span>`;
+
+  button.onclick = () => startModule(index);
+
+  moduleButtons.appendChild(button);
+
 });
 
 
-/* START */
+/* =========================================================
+
+   START MODULE
+
+========================================================= */
 
 function startModule(index){
 
-  currentModuleNumber=index;
-  currentModule=modules[index];
-  currentIndex=0;
-  score=0;
-  spellingCorrect=0;
-  sentenceCorrect=0;
-  spellingAnswered=0;
-  sentenceAnswered=0;
-  hangmanScore=0;
-  failedWords=[];
-  reviewWords=[];
+  currentModuleNumber = index;
 
-  document.getElementById("home").classList.add("hidden");
-  document.getElementById("final").classList.add("hidden");
-  document.getElementById("game").classList.remove("hidden");
+  currentModule = modules[index];
 
-  updateScore();
-  startLearn();
+  currentIndex = 0;
+
+  score = 0;
+
+  spellingCorrect = 0;
+
+  sentenceCorrect = 0;
+
+  spellingAnswered = 0;
+
+  sentenceAnswered = 0;
+
+  hangmanScore = 0;
+
+  failedWords = [];
+
+  reviewWords = [];
+
+  document.getElementById("home").classList.add("hidden");
+
+  document.getElementById("final").classList.add("hidden");
+
+  document.getElementById("game").classList.remove("hidden");
+
+  updateScore();
+
+  startLearn();
+
 }
 
 
-/* LEARN */
+/* =========================================================
+
+   STAGE 1 — LEARN
+
+========================================================= */
 
 function startLearn(){
-  stage="learn";
-  currentIndex=0;
-  showLearn();
+
+  stage = "learn";
+
+  currentIndex = 0;
+
+  showLearn();
+
 }
+
 
 function showLearn(){
 
-  const w=currentModule[currentIndex];
+  const w = currentModule[currentIndex];
 
-  document.getElementById("stageTitle").innerHTML=
-    `<h2>📖 Learn</h2>
-     <div class="small">Word ${currentIndex+1} of ${currentModule.length}</div>`;
+  document.getElementById("stageTitle").innerHTML =
 
-  document.getElementById("content").innerHTML=`
+    `<h2>📖 Learn</h2>
 
-    <div class="word">${w.word}</div>
+     <div class="small">
 
-    <div class="translation">
-      🇪🇸 ${w.translation}
-    </div>
+     Word ${currentIndex + 1} of ${currentModule.length}
 
-    <div class="definition">
-      <strong>Definition:</strong><br>
-      ${w.definition}
-    </div>
+     </div>`;
 
-    <button class="listen-btn" onclick="speakWord('${w.word}')">
-      🔊 Listen
-    </button>
+  document.getElementById("content").innerHTML = `
 
-    <button onclick="nextLearn()">
-      Continue →
-    </button>
-  `;
+    <div class="word">${w.word}</div>
 
-  updateProgress(currentIndex,currentModule.length);
+    <div class="translation">
 
-  /* AUTOMATIC PRONUNCIATION */
-  speakWord(w.word);
+      🇪🇸 ${w.translation}
+
+    </div>
+
+    <div class="definition">
+
+      <strong>Definition:</strong><br>
+
+      ${w.definition}
+
+    </div>
+
+    <button class="listen-btn" onclick="speakWord('${w.word}')">
+
+      🔊 Repeat Word
+
+    </button>
+
+    <button onclick="nextLearn()">
+
+      Continue →
+
+    </button>
+
+  `;
+
+  updateProgress(currentIndex, currentModule.length);
+
+  setTimeout(() => speakWord(w.word), 250);
+
 }
 
 
 function nextLearn(){
 
-  currentIndex++;
+  currentIndex++;
 
-  if(currentIndex<currentModule.length){
-    showLearn();
-  }else{
-    startListen();
-  }
+  if(currentIndex < currentModule.length){
+
+    showLearn();
+
+  } else {
+
+    startListen();
+
+  }
+
 }
 
 
-/* SPEECH */
+/* =========================================================
+
+   SPEECH
+
+========================================================= */
+
+function speakText(text){
+
+  if("speechSynthesis" in window){
+
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    utterance.lang = "en-US";
+
+    utterance.rate = 0.72;
+
+    window.speechSynthesis.speak(utterance);
+
+  }
+
+}
 
 function speakWord(word){
-
-  if(!("speechSynthesis" in window)) return;
-
-  window.speechSynthesis.cancel();
-
-  const utterance=new SpeechSynthesisUtterance(word);
-
-  utterance.lang="en-US";
-  utterance.rate=0.7;
-  utterance.pitch=1;
-
-  window.speechSynthesis.speak(utterance);
+  speakText(word);
 }
 
 
-/* LISTEN */
+/* =========================================================
+
+   STAGE 2 — LISTEN & CHOOSE
+
+========================================================= */
 
 function startListen(){
 
-  stage="listen";
-  currentIndex=0;
-  showListen();
+  stage = "listen";
+
+  currentIndex = 0;
+
+  showListen();
+
 }
+
 
 function showListen(){
 
-  const correct=currentModule[currentIndex];
+  const correct = currentModule[currentIndex];
 
-  let choices=[correct];
-  let pool=currentModule.filter(w=>w.word!==correct.word);
+  let choices = [correct];
 
-  pool=shuffle(pool);
-  choices.push(...pool.slice(0,3));
-  choices=shuffle(choices);
+  let pool = currentModule.filter(w => w.word !== correct.word);
 
-  document.getElementById("stageTitle").innerHTML=
-    `<h2>🔊 Listen & Choose</h2>
-     <div class="small">Word ${currentIndex+1} of ${currentModule.length}</div>`;
+  pool = shuffle(pool);
 
-  document.getElementById("content").innerHTML=`
+  choices.push(...pool.slice(0,3));
 
-    <div class="translation">
-      Listen carefully.
-    </div>
+  choices = shuffle(choices);
 
-    <button class="listen-btn" onclick="speakWord('${correct.word}')">
-      🔊 Play Word
-    </button>
+  document.getElementById("stageTitle").innerHTML =
 
-    <div id="listenOptions"></div>
-  `;
+    `<h2>🔊 Listen & Choose</h2>
 
-  const box=document.getElementById("listenOptions");
+     <div class="small">
 
-  choices.forEach(choice=>{
+     Word ${currentIndex + 1} of ${currentModule.length}
 
-    const btn=document.createElement("button");
+     </div>`;
 
-    btn.className="option";
-    btn.textContent=choice.word;
+  document.getElementById("content").innerHTML = `
 
-    btn.onclick=()=>{
+    <div class="translation">
 
-      const all=box.querySelectorAll("button");
-      all.forEach(b=>b.disabled=true);
+      Listen carefully.
 
-      if(choice.word===correct.word){
+    </div>
 
-        btn.classList.add("correct");
-        score+=10;
+    <button class="listen-btn" onclick="speakWord('${correct.word}')">
 
-      }else{
+      🔊 Repeat Word
 
-        btn.classList.add("wrong");
+    </button>
 
-        all.forEach(b=>{
-          if(b.textContent===correct.word){
-            b.classList.add("correct");
-          }
-        });
+    <div id="listenOptions"></div>
 
-        if(!failedWords.includes(correct)){
-          failedWords.push(correct);
-        }
-      }
+  `;
 
-      updateScore();
+  const box = document.getElementById("listenOptions");
 
-      setTimeout(()=>{
+  choices.forEach(choice => {
 
-        currentIndex++;
+    const btn = document.createElement("button");
 
-        if(currentIndex<currentModule.length){
-          showListen();
-        }else{
-          startSpelling();
-        }
+    btn.className = "option";
 
-      },700);
-    };
+    btn.textContent = choice.word;
 
-    box.appendChild(btn);
-  });
+    btn.onclick = () => {
 
-  updateProgress(currentIndex,currentModule.length);
+      const all = box.querySelectorAll("button");
+
+      all.forEach(b => b.disabled = true);
+
+      if(choice.word === correct.word){
+
+        btn.classList.add("correct");
+
+        score += 10;
+
+      } else {
+
+        btn.classList.add("wrong");
+
+        all.forEach(b => {
+
+          if(b.textContent === correct.word){
+
+            b.classList.add("correct");
+
+          }
+
+        });
+
+        if(!failedWords.includes(correct)){
+
+          failedWords.push(correct);
+
+        }
+
+      }
+
+      updateScore();
+
+      setTimeout(() => {
+
+        currentIndex++;
+
+        if(currentIndex < currentModule.length){
+
+          showListen();
+
+        } else {
+
+          startSpelling();
+
+        }
+
+      },700);
+
+    };
+
+    box.appendChild(btn);
+
+  });
+
+  updateProgress(currentIndex, currentModule.length);
+
+  setTimeout(() => speakWord(correct.word), 250);
+
 }
 
 
-/* SPELLING */
+/* =========================================================
+
+   STAGE 3 — SPELLING
+
+========================================================= */
 
 function startSpelling(){
 
-  stage="spelling";
-  currentIndex=0;
-  showSpelling();
+  stage = "spelling";
+
+  currentIndex = 0;
+
+  showSpelling();
+
 }
+
 
 function showSpelling(){
 
-  const correct=currentModule[currentIndex];
+  const correct = currentModule[currentIndex];
 
-  let choices=makeMisspellings(correct.word);
-  choices=shuffle([correct.word,...choices]);
+  let choices = makeMisspellings(correct.word);
 
-  document.getElementById("stageTitle").innerHTML=
-    `<h2>✏️ Spelling Practice</h2>
-     <div class="small">Word ${currentIndex+1} of ${currentModule.length}</div>`;
+  choices = shuffle([correct.word, ...choices]);
 
-  document.getElementById("content").innerHTML=`
+  document.getElementById("stageTitle").innerHTML =
 
-    <div class="translation">
-      🇪🇸 ${correct.translation}
-    </div>
+    `<h2>✏️ Spelling Practice</h2>
 
-    <div class="definition">
-      <strong>Definition:</strong><br>
-      ${correct.definition}
-    </div>
+     <div class="small">
 
-    <h3 style="text-align:center">
-      Which spelling is correct?
-    </h3>
+     Word ${currentIndex + 1} of ${currentModule.length}
 
-    <div id="spellingOptions"></div>
-  `;
+     </div>`;
 
-  const box=document.getElementById("spellingOptions");
+  document.getElementById("content").innerHTML = `
 
-  choices.forEach(choice=>{
+    <div class="translation">
 
-    const btn=document.createElement("button");
+      🇪🇸 ${correct.translation}
 
-    btn.className="option";
-    btn.textContent=choice;
+    </div>
 
-    btn.onclick=()=>{
+    <div class="definition">
 
-      const all=box.querySelectorAll("button");
-      all.forEach(b=>b.disabled=true);
+      <strong>Definition:</strong><br>
 
-      spellingAnswered++;
+      ${correct.definition}
 
-      if(choice===correct.word){
+    </div>
 
-        btn.classList.add("correct");
-        score+=20;
-        spellingCorrect++;
+    <h3 style="text-align:center">
 
-      }else{
+      Which spelling is correct?
 
-        btn.classList.add("wrong");
+    </h3>
 
-        all.forEach(b=>{
-          if(b.textContent===correct.word){
-            b.classList.add("correct");
-          }
-        });
+    <div id="spellingOptions"></div>
 
-        if(!failedWords.includes(correct)){
-          failedWords.push(correct);
-        }
-      }
+  `;
 
-      updateScore();
+  const box = document.getElementById("spellingOptions");
 
-      setTimeout(()=>{
+  choices.forEach(choice => {
 
-        currentIndex++;
+    const btn = document.createElement("button");
 
-        if(currentIndex<currentModule.length){
-          showSpelling();
-        }else{
-          startSentence();
-        }
+    btn.className = "option";
 
-      },700);
-    };
+    btn.textContent = choice;
 
-    box.appendChild(btn);
-  });
+    btn.onclick = () => {
 
-  updateProgress(currentIndex,currentModule.length);
+      const all = box.querySelectorAll("button");
+
+      all.forEach(b => b.disabled = true);
+
+      spellingAnswered++;
+
+      if(choice === correct.word){
+
+        btn.classList.add("correct");
+
+        score += 20;
+
+        spellingCorrect++;
+
+      } else {
+
+        btn.classList.add("wrong");
+
+        all.forEach(b => {
+
+          if(b.textContent === correct.word){
+
+            b.classList.add("correct");
+
+          }
+
+        });
+
+        if(!failedWords.includes(correct)){
+
+          failedWords.push(correct);
+
+        }
+
+      }
+
+      updateScore();
+
+      setTimeout(() => {
+
+        currentIndex++;
+
+        if(currentIndex < currentModule.length){
+
+          showSpelling();
+
+        } else {
+
+          startSentence();
+
+        }
+
+      },700);
+
+    };
+
+    box.appendChild(btn);
+
+  });
+
+  updateProgress(currentIndex, currentModule.length);
+
 }
 
 
-/* MISSPELLINGS */
+/* =========================================================
+
+   CREATE MISSPELLINGS
+
+========================================================= */
 
 function makeMisspellings(word){
 
-  const results=[];
+  const results = [];
 
-  if(word.length>5){
+  // Remove a letter
 
-    const pos=Math.floor(word.length/2);
+  if(word.length > 5){
 
-    results.push(
-      word.slice(0,pos)+word.slice(pos+1)
-    );
-  }
+    const pos = Math.floor(word.length / 2);
 
-  const duplicatePos=Math.min(2,word.length-1);
+    results.push(
 
-  results.push(
-    word.slice(0,duplicatePos)+
-    word[duplicatePos]+
-    word.slice(duplicatePos)
-  );
+      word.slice(0,pos) + word.slice(pos+1)
 
-  if(word.length>4){
+    );
 
-    const pos=Math.min(2,word.length-2);
+  }
 
-    let arr=word.split("");
-    let temp=arr[pos];
+  // Duplicate a letter
 
-    arr[pos]=arr[pos+1];
-    arr[pos+1]=temp;
+  const duplicatePos = Math.min(2, word.length - 1);
 
-    results.push(arr.join(""));
-  }
+  results.push(
 
-  while(results.length<3){
+    word.slice(0,duplicatePos) +
 
-    let arr=word.split("");
-    let pos=Math.floor(Math.random()*arr.length);
-    const letters="abcdefghijklmnopqrstuvwxyz";
+    word[duplicatePos] +
 
-    let newLetter=letters[
-      Math.floor(Math.random()*letters.length)
-    ];
+    word.slice(duplicatePos)
 
-    if(newLetter===arr[pos]){
-      newLetter="x";
-    }
+  );
 
-    arr[pos]=newLetter;
+  // Swap two letters
 
-    const candidate=arr.join("");
+  if(word.length > 4){
 
-    if(candidate!==word&&!results.includes(candidate)){
-      results.push(candidate);
-    }
-  }
+    const pos = Math.min(2, word.length - 2);
 
-  return [...new Set(results)].slice(0,3);
+    let arr = word.split("");
+
+    let temp = arr[pos];
+
+    arr[pos] = arr[pos+1];
+
+    arr[pos+1] = temp;
+
+    results.push(arr.join(""));
+
+  }
+
+  // Guarantee 3 unique wrong answers
+
+  while(results.length < 3){
+
+    let arr = word.split("");
+
+    let pos = Math.floor(Math.random() * arr.length);
+
+    const letters = "abcdefghijklmnopqrstuvwxyz";
+
+    let newLetter =
+
+      letters[Math.floor(Math.random() * letters.length)];
+
+    if(newLetter === arr[pos]){
+
+      newLetter = "x";
+
+    }
+
+    arr[pos] = newLetter;
+
+    const candidate = arr.join("");
+
+    if(candidate !== word && !results.includes(candidate)){
+
+      results.push(candidate);
+
+    }
+
+  }
+
+  return [...new Set(results)].slice(0,3);
+
 }
 
 
-/* SENTENCE */
+/* =========================================================
+
+   STAGE 4 — SENTENCE
+
+========================================================= */
 
 function startSentence(){
 
-  stage="sentence";
-  currentIndex=0;
-  showSentence();
+  stage = "sentence";
+
+  currentIndex = 0;
+
+  showSentence();
+
 }
+
 
 function showSentence(){
 
-  const correct=currentModule[currentIndex];
+  const correct = currentModule[currentIndex];
 
-  let choices=[correct];
+  let choices = [correct];
 
-  let pool=currentModule.filter(
-    w=>w.word!==correct.word
-  );
+  let pool = currentModule.filter(w => w.word !== correct.word);
 
-  pool=shuffle(pool);
+  pool = shuffle(pool);
 
-  choices.push(...pool.slice(0,3));
-  choices=shuffle(choices);
+  choices.push(...pool.slice(0,3));
 
-  document.getElementById("stageTitle").innerHTML=
-    `<h2>📝 Sentence Practice</h2>
-     <div class="small">Word ${currentIndex+1} of ${currentModule.length}</div>`;
+  choices = shuffle(choices);
 
-  document.getElementById("content").innerHTML=`
+  document.getElementById("stageTitle").innerHTML =
 
-    <div class="definition">
-      ${correct.sentence}
-    </div>
+    `<h2>📝 Sentence Practice</h2>
 
-    <h3 style="text-align:center">
-      Which word completes the sentence?
-    </h3>
+     <div class="small">
 
-    <div id="sentenceOptions"></div>
-  `;
+     Word ${currentIndex + 1} of ${currentModule.length}
 
-  const box=document.getElementById("sentenceOptions");
+     </div>`;
 
-  choices.forEach(choice=>{
+  document.getElementById("content").innerHTML = `
 
-    const btn=document.createElement("button");
+    <div class="definition">
 
-    btn.className="option";
-    btn.textContent=choice.word;
+      ${correct.sentence}
 
-    btn.onclick=()=>{
+    </div>
 
-      const all=box.querySelectorAll("button");
-      all.forEach(b=>b.disabled=true);
 
-      sentenceAnswered++;
+    <button class="listen-btn" onclick='speakText(${JSON.stringify(correct.sentence)})'>
+      🔊 Repeat Sentence
+    </button>
 
-      if(choice.word===correct.word){
+    <h3 style="text-align:center">
 
-        btn.classList.add("correct");
-        score+=20;
-        sentenceCorrect++;
+      Which word completes the sentence?
 
-      }else{
+    </h3>
 
-        btn.classList.add("wrong");
+    <div id="sentenceOptions"></div>
 
-        all.forEach(b=>{
-          if(b.textContent===correct.word){
-            b.classList.add("correct");
-          }
-        });
+  `;
 
-        if(!failedWords.includes(correct)){
-          failedWords.push(correct);
-        }
-      }
+  setTimeout(() => speakText(correct.sentence), 250);
 
-      updateScore();
+  const box = document.getElementById("sentenceOptions");
 
-      setTimeout(()=>{
+  choices.forEach(choice => {
 
-        currentIndex++;
+    const btn = document.createElement("button");
 
-        if(currentIndex<currentModule.length){
-          showSentence();
-        }else{
-          startHangman();
-        }
+    btn.className = "option";
 
-      },700);
-    };
+    btn.textContent = choice.word;
 
-    box.appendChild(btn);
-  });
+    btn.onclick = () => {
 
-  updateProgress(currentIndex,currentModule.length);
+      const all = box.querySelectorAll("button");
+
+      all.forEach(b => b.disabled = true);
+
+      sentenceAnswered++;
+
+      if(choice.word === correct.word){
+
+        btn.classList.add("correct");
+
+        score += 20;
+
+        sentenceCorrect++;
+
+      } else {
+
+        btn.classList.add("wrong");
+
+        all.forEach(b => {
+
+          if(b.textContent === correct.word){
+
+            b.classList.add("correct");
+
+          }
+
+        });
+
+        if(!failedWords.includes(correct)){
+
+          failedWords.push(correct);
+
+        }
+
+      }
+
+      updateScore();
+
+      setTimeout(() => {
+
+        currentIndex++;
+
+        if(currentIndex < currentModule.length){
+
+          showSentence();
+
+        } else {
+
+          startHangman();
+
+        }
+
+      },700);
+
+    };
+
+    box.appendChild(btn);
+
+  });
+
+  updateProgress(currentIndex, currentModule.length);
+
 }
 
 
-/* HANGMAN */
+/* =========================================================
+
+   STAGE 5 — HANGMAN
+
+========================================================= */
 
 function startHangman(){
 
-  stage="hangman";
-  currentIndex=0;
-  showHangman();
+  stage = "hangman";
+
+  currentIndex = 0;
+
+  showHangman();
+
 }
+
 
 function showHangman(){
 
-  hangmanCurrent=currentModule[currentIndex];
-  hangmanWord=hangmanCurrent.word.toLowerCase();
-  guessedLetters=[];
-  attemptsLeft=6;
+  hangmanCurrent = currentModule[currentIndex];
 
-  renderHangman();
+  hangmanWord = hangmanCurrent.word.toLowerCase();
+
+  guessedLetters = [];
+
+  attemptsLeft = 6;
+
+  renderHangman();
+
 }
+
 
 function renderHangman(){
 
-  const w=hangmanCurrent;
+  const w = hangmanCurrent;
 
-  let display="";
+  let display = "";
 
-  for(const letter of hangmanWord){
+  for(const letter of hangmanWord){
 
-    if(letter===" "){
-      display+="  ";
-    }
-    else if(guessedLetters.includes(letter)){
-      display+=letter.toUpperCase()+" ";
-    }
-    else{
-      display+="_ ";
-    }
-  }
+    if(letter === " "){
 
-  document.getElementById("stageTitle").innerHTML=
-    `<h2>🎮 Hangman</h2>
-     <div class="small">Word ${currentIndex+1} of ${currentModule.length}</div>`;
+      display += "  ";
 
-  document.getElementById("content").innerHTML=`
+    }
 
-    <div class="translation">
-      🇪🇸 ${w.translation}
-    </div>
+    else if(guessedLetters.includes(letter)){
 
-    <div class="definition">
-      <strong>Definition:</strong><br>
-      ${w.definition}
-    </div>
+      display += letter.toUpperCase() + " ";
 
-    <div style="text-align:center">
-      ❤️ Attempts left: ${attemptsLeft}
-    </div>
+    }
 
-    <div class="hangman-word">
-      ${display}
-    </div>
+    else{
 
-    <div class="letters" id="letters"></div>
-  `;
+      display += "_ ";
 
-  const lettersBox=document.getElementById("letters");
-  const alphabet="abcdefghijklmnopqrstuvwxyz";
+    }
 
-  for(const letter of alphabet){
+  }
 
-    const btn=document.createElement("button");
+  document.getElementById("stageTitle").innerHTML =
 
-    btn.className="letter-btn";
-    btn.textContent=letter.toUpperCase();
+    `<h2>🎮 Hangman</h2>
 
-    if(guessedLetters.includes(letter)){
-      btn.disabled=true;
-      btn.classList.add("used");
-    }
+     <div class="small">
 
-    btn.onclick=()=>guessLetter(letter);
+     Word ${currentIndex + 1} of ${currentModule.length}
 
-    lettersBox.appendChild(btn);
-  }
+     </div>`;
 
-  updateProgress(currentIndex,currentModule.length);
+  document.getElementById("content").innerHTML = `
+
+    <div class="translation">
+
+      🇪🇸 ${w.translation}
+
+    </div>
+
+    <div class="definition">
+
+      <strong>Definition:</strong><br>
+
+      ${w.definition}
+
+    </div>
+
+    <div style="text-align:center">
+
+      ❤️ Attempts left: ${attemptsLeft}
+
+    </div>
+
+    <div class="hangman-word">
+
+      ${display}
+
+    </div>
+
+    <div class="letters" id="letters"></div>
+
+  `;
+
+  const lettersBox = document.getElementById("letters");
+
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+  for(const letter of alphabet){
+
+    const btn = document.createElement("button");
+
+    btn.className = "letter-btn";
+
+    btn.textContent = letter.toUpperCase();
+
+    if(guessedLetters.includes(letter)){
+
+      btn.disabled = true;
+
+      btn.classList.add("used");
+
+    }
+
+    btn.onclick = () => guessLetter(letter);
+
+    lettersBox.appendChild(btn);
+
+  }
+
+  updateProgress(currentIndex, currentModule.length);
+
 }
 
 
 function guessLetter(letter){
 
-  if(guessedLetters.includes(letter)) return;
+  if(guessedLetters.includes(letter)) return;
 
-  guessedLetters.push(letter);
+  guessedLetters.push(letter);
 
-  if(hangmanWord.includes(letter)){
+  if(hangmanWord.includes(letter)){
 
-    score+=10;
-    hangmanScore+=10;
+    score += 10;
 
-  }else{
+    hangmanScore += 10;
 
-    attemptsLeft--;
-  }
+  } else {
 
-  updateScore();
+    attemptsLeft--;
 
-  const complete=
-    [...new Set(hangmanWord.replace(/ /g,""))]
-    .every(letter=>guessedLetters.includes(letter));
+  }
 
-  if(complete){
+  updateScore();
 
-    score+=50;
-    hangmanScore+=50;
+  const complete =
 
-    updateScore();
+    [...new Set(hangmanWord.replace(/ /g,""))]
 
-    document.getElementById("content").innerHTML=`
+    .every(letter => guessedLetters.includes(letter));
 
-      <div class="feedback">
-        🎉 Correct!
-      </div>
+  if(complete){
 
-      <div class="word">
-        ${wSafe(hangmanWord)}
-      </div>
+    score += 50;
 
-      <div class="feedback success">
-        +50 completion bonus!
-      </div>
+    hangmanScore += 50;
 
-      <button onclick="nextHangman()">
-        Continue →
-      </button>
-    `;
+    updateScore();
 
-    return;
-  }
+    document.getElementById("content").innerHTML = `
 
-  if(attemptsLeft<=0){
+      <div class="feedback">
 
-    if(!failedWords.includes(hangmanCurrent)){
-      failedWords.push(hangmanCurrent);
-    }
+        🎉 Correct!
 
-    document.getElementById("content").innerHTML=`
+      </div>
 
-      <div class="feedback danger">
-        Not quite!
-      </div>
+      <div class="word">
 
-      <div class="word">
-        ${hangmanCurrent.word}
-      </div>
+        ${wSafe(hangmanWord)}
 
-      <div class="definition">
-        The correct spelling is:
-        <strong>${hangmanCurrent.word}</strong>
-      </div>
+      </div>
 
-      <button onclick="nextHangman()">
-        Continue →
-      </button>
-    `;
+      <div class="feedback success">
 
-    return;
-  }
+        +50 completion bonus!
 
-  renderHangman();
+      </div>
+
+      <button onclick="nextHangman()">
+
+        Continue →
+
+      </button>
+
+    `;
+
+    return;
+
+  }
+
+  if(attemptsLeft <= 0){
+
+    if(!failedWords.includes(hangmanCurrent)){
+
+      failedWords.push(hangmanCurrent);
+
+    }
+
+    document.getElementById("content").innerHTML = `
+
+      <div class="feedback danger">
+
+        Not quite!
+
+      </div>
+
+      <div class="word">
+
+        ${hangmanCurrent.word}
+
+      </div>
+
+      <div class="definition">
+
+        The correct spelling is:
+
+        <strong>${hangmanCurrent.word}</strong>
+
+      </div>
+
+      <button onclick="nextHangman()">
+
+        Continue →
+
+      </button>
+
+    `;
+
+    return;
+
+  }
+
+  renderHangman();
+
 }
 
 
 function nextHangman(){
 
-  currentIndex++;
+  currentIndex++;
 
-  if(currentIndex<currentModule.length){
-    showHangman();
-  }else{
-    startReview();
-  }
+  if(currentIndex < currentModule.length){
+
+    showHangman();
+
+  } else {
+
+    startReview();
+
+  }
+
 }
 
 
-/* REVIEW */
+/* =========================================================
+
+   STAGE 6 — REVIEW ERRORS
+
+========================================================= */
 
 function startReview(){
 
-  reviewWords=[
-    ...new Map(
-      failedWords.map(w=>[w.word,w])
-    ).values()
-  ];
+  /*
 
-  reviewIndex=0;
+    Remove duplicates.
 
-  if(reviewWords.length===0){
-    showFinal();
-  }else{
-    showReviewIntro();
-  }
+    A word only needs to be reviewed once even if
+
+    Ángel missed it in more than one stage.
+
+  */
+
+  reviewWords = [...new Map(
+
+    failedWords.map(w => [w.word,w])
+
+  ).values()];
+
+  reviewIndex = 0;
+
+  if(reviewWords.length === 0){
+
+    showFinal();
+
+  } else {
+
+    showReviewIntro();
+
+  }
+
 }
 
 
 function showReviewIntro(){
 
-  document.getElementById("stageTitle").innerHTML=
-    `<h2>🔥 Final Review</h2>`;
+  document.getElementById("stageTitle").innerHTML =
 
-  document.getElementById("content").innerHTML=`
+    `<h2>🔥 Final Review</h2>`;
 
-    <div class="feedback">
-      You missed ${reviewWords.length}
-      ${reviewWords.length===1?"word":"words"}.
-    </div>
+  document.getElementById("content").innerHTML = `
 
-    <div class="definition">
-      Let's practice the words that need more work.
-    </div>
+    <div class="feedback">
 
-    <button onclick="reviewSpelling()">
-      Start Review →
-    </button>
-  `;
+      You missed ${reviewWords.length}
+
+      ${reviewWords.length === 1 ? "word" : "words"}.
+
+    </div>
+
+    <div class="definition">
+
+      Let's practice the words that need more work.
+
+    </div>
+
+    <button onclick="reviewSpelling()">
+
+      Start Review →
+
+    </button>
+
+  `;
+
 }
 
 
@@ -921,81 +2691,110 @@ function showReviewIntro(){
 
 function reviewSpelling(){
 
-  if(reviewIndex>=reviewWords.length){
+  if(reviewIndex >= reviewWords.length){
 
-    reviewIndex=0;
-    reviewSentence();
-    return;
-  }
+    reviewIndex = 0;
 
-  const correct=reviewWords[reviewIndex];
+    reviewSentence();
 
-  let choices=makeMisspellings(correct.word);
-  choices=shuffle([correct.word,...choices]);
+    return;
 
-  document.getElementById("stageTitle").innerHTML=
-    `<h2>🔥 Review Spelling</h2>
-     <div class="small">${reviewIndex+1} of ${reviewWords.length}</div>`;
+  }
 
-  document.getElementById("content").innerHTML=`
+  const correct = reviewWords[reviewIndex];
 
-    <div class="translation">
-      🇪🇸 ${correct.translation}
-    </div>
+  let choices = makeMisspellings(correct.word);
 
-    <div class="definition">
-      ${correct.definition}
-    </div>
+  choices = shuffle([correct.word,...choices]);
 
-    <h3 style="text-align:center">
-      Which spelling is correct?
-    </h3>
+  document.getElementById("stageTitle").innerHTML =
 
-    <div id="reviewOptions"></div>
-  `;
+    `<h2>🔥 Review Spelling</h2>
 
-  const box=document.getElementById("reviewOptions");
+     <div class="small">
 
-  choices.forEach(choice=>{
+     ${reviewIndex + 1} of ${reviewWords.length}
 
-    const btn=document.createElement("button");
+     </div>`;
 
-    btn.className="option";
-    btn.textContent=choice;
+  document.getElementById("content").innerHTML = `
 
-    btn.onclick=()=>{
+    <div class="translation">
 
-      const all=box.querySelectorAll("button");
-      all.forEach(b=>b.disabled=true);
+      🇪🇸 ${correct.translation}
 
-      if(choice===correct.word){
+    </div>
 
-        btn.classList.add("correct");
-        score+=20;
+    <div class="definition">
 
-      }else{
+      ${correct.definition}
 
-        btn.classList.add("wrong");
+    </div>
 
-        all.forEach(b=>{
-          if(b.textContent===correct.word){
-            b.classList.add("correct");
-          }
-        });
-      }
+    <h3 style="text-align:center">
 
-      updateScore();
+      Which spelling is correct?
 
-      setTimeout(()=>{
+    </h3>
 
-        reviewIndex++;
-        reviewSpelling();
+    <div id="reviewOptions"></div>
 
-      },700);
-    };
+  `;
 
-    box.appendChild(btn);
-  });
+  const box = document.getElementById("reviewOptions");
+
+  choices.forEach(choice => {
+
+    const btn = document.createElement("button");
+
+    btn.className = "option";
+
+    btn.textContent = choice;
+
+    btn.onclick = () => {
+
+      const all = box.querySelectorAll("button");
+
+      all.forEach(b => b.disabled = true);
+
+      if(choice === correct.word){
+
+        btn.classList.add("correct");
+
+        score += 20;
+
+      } else {
+
+        btn.classList.add("wrong");
+
+        all.forEach(b => {
+
+          if(b.textContent === correct.word){
+
+            b.classList.add("correct");
+
+          }
+
+        });
+
+      }
+
+      updateScore();
+
+      setTimeout(() => {
+
+        reviewIndex++;
+
+        reviewSpelling();
+
+      },700);
+
+    };
+
+    box.appendChild(btn);
+
+  });
+
 }
 
 
@@ -1003,85 +2802,110 @@ function reviewSpelling(){
 
 function reviewSentence(){
 
-  if(reviewIndex>=reviewWords.length){
+  if(reviewIndex >= reviewWords.length){
 
-    reviewIndex=0;
-    reviewHangman();
-    return;
-  }
+    reviewIndex = 0;
 
-  const correct=reviewWords[reviewIndex];
+    reviewHangman();
 
-  let choices=[correct];
+    return;
 
-  let pool=currentModule.filter(
-    w=>w.word!==correct.word
-  );
+  }
 
-  choices.push(...shuffle(pool).slice(0,3));
-  choices=shuffle(choices);
+  const correct = reviewWords[reviewIndex];
 
-  document.getElementById("stageTitle").innerHTML=
-    `<h2>🔥 Review Sentence</h2>
-     <div class="small">${reviewIndex+1} of ${reviewWords.length}</div>`;
+  let choices = [correct];
 
-  document.getElementById("content").innerHTML=`
+  let pool = currentModule.filter(w => w.word !== correct.word);
 
-    <div class="definition">
-      ${correct.sentence}
-    </div>
+  choices.push(...shuffle(pool).slice(0,3));
 
-    <h3 style="text-align:center">
-      Choose the correct word.
-    </h3>
+  choices = shuffle(choices);
 
-    <div id="reviewSentenceOptions"></div>
-  `;
+  document.getElementById("stageTitle").innerHTML =
 
-  const box=document.getElementById(
-    "reviewSentenceOptions"
-  );
+    `<h2>🔥 Review Sentence</h2>
 
-  choices.forEach(choice=>{
+     <div class="small">
 
-    const btn=document.createElement("button");
+     ${reviewIndex + 1} of ${reviewWords.length}
 
-    btn.className="option";
-    btn.textContent=choice.word;
+     </div>`;
 
-    btn.onclick=()=>{
+  document.getElementById("content").innerHTML = `
 
-      const all=box.querySelectorAll("button");
-      all.forEach(b=>b.disabled=true);
+    <div class="definition">
 
-      if(choice.word===correct.word){
+      ${correct.sentence}
 
-        btn.classList.add("correct");
-        score+=20;
+    </div>
 
-      }else{
+    <h3 style="text-align:center">
 
-        btn.classList.add("wrong");
+      Choose the correct word.
 
-        all.forEach(b=>{
-          if(b.textContent===correct.word){
-            b.classList.add("correct");
-          }
-        });
-      }
+    </h3>
 
-      updateScore();
+    <div id="reviewSentenceOptions"></div>
 
-      setTimeout(()=>{
+  `;
 
-        reviewIndex++;
-        reviewSentence();
+  const box =
 
-      },700);
-    };
+    document.getElementById("reviewSentenceOptions");
 
-    box.appendChild(btn);
-  });
+  choices.forEach(choice => {
+
+    const btn = document.createElement("button");
+
+    btn.className = "option";
+
+    btn.textContent = choice.word;
+
+    btn.onclick = () => {
+
+      const all = box.querySelectorAll("button");
+
+      all.forEach(b => b.disabled = true);
+
+      if(choice.word === correct.word){
+
+        btn.classList.add("correct");
+
+        score += 20;
+
+      } else {
+
+        btn.classList.add("wrong");
+
+        all.forEach(b => {
+
+          if(b.textContent === correct.word){
+
+            b.classList.add("correct");
+
+          }
+
+        });
+
+      }
+
+      updateScore();
+
+      setTimeout(() => {
+
+        reviewIndex++;
+
+        reviewSentence();
+
+      },700);
+
+    };
+
+    box.appendChild(btn);
+
+  });
+
 }
 
 
@@ -1089,250 +2913,357 @@ function reviewSentence(){
 
 function reviewHangman(){
 
-  if(reviewIndex>=reviewWords.length){
-    showFinal();
-    return;
-  }
+  if(reviewIndex >= reviewWords.length){
 
-  hangmanCurrent=reviewWords[reviewIndex];
-  hangmanWord=hangmanCurrent.word.toLowerCase();
-  guessedLetters=[];
-  attemptsLeft=6;
+    showFinal();
 
-  renderReviewHangman();
+    return;
+
+  }
+
+  hangmanCurrent = reviewWords[reviewIndex];
+
+  hangmanWord = hangmanCurrent.word.toLowerCase();
+
+  guessedLetters = [];
+
+  attemptsLeft = 6;
+
+  renderReviewHangman();
+
 }
 
 
 function renderReviewHangman(){
 
-  let display="";
+  let display = "";
 
-  for(const letter of hangmanWord){
+  for(const letter of hangmanWord){
 
-    if(guessedLetters.includes(letter)){
-      display+=letter.toUpperCase()+" ";
-    }else{
-      display+="_ ";
-    }
-  }
+    if(guessedLetters.includes(letter)){
 
-  document.getElementById("stageTitle").innerHTML=
-    `<h2>🔥 Review Hangman</h2>
-     <div class="small">${reviewIndex+1} of ${reviewWords.length}</div>`;
+      display += letter.toUpperCase() + " ";
 
-  document.getElementById("content").innerHTML=`
+    } else {
 
-    <div class="translation">
-      🇪🇸 ${hangmanCurrent.translation}
-    </div>
+      display += "_ ";
 
-    <div class="definition">
-      ${hangmanCurrent.definition}
-    </div>
+    }
 
-    <div style="text-align:center">
-      ❤️ Attempts left: ${attemptsLeft}
-    </div>
+  }
 
-    <div class="hangman-word">
-      ${display}
-    </div>
+  document.getElementById("stageTitle").innerHTML =
 
-    <div class="letters" id="reviewLetters"></div>
-  `;
+    `<h2>🔥 Review Hangman</h2>
 
-  const box=document.getElementById("reviewLetters");
-  const alphabet="abcdefghijklmnopqrstuvwxyz";
+     <div class="small">
 
-  for(const letter of alphabet){
+     ${reviewIndex + 1} of ${reviewWords.length}
 
-    const btn=document.createElement("button");
+     </div>`;
 
-    btn.className="letter-btn";
-    btn.textContent=letter.toUpperCase();
+  document.getElementById("content").innerHTML = `
 
-    if(guessedLetters.includes(letter)){
-      btn.disabled=true;
-      btn.classList.add("used");
-    }
+    <div class="translation">
 
-    btn.onclick=()=>reviewGuess(letter);
+      🇪🇸 ${hangmanCurrent.translation}
 
-    box.appendChild(btn);
-  }
+    </div>
+
+    <div class="definition">
+
+      ${hangmanCurrent.definition}
+
+    </div>
+
+    <div style="text-align:center">
+
+      ❤️ Attempts left: ${attemptsLeft}
+
+    </div>
+
+    <div class="hangman-word">
+
+      ${display}
+
+    </div>
+
+    <div class="letters" id="reviewLetters"></div>
+
+  `;
+
+  const box = document.getElementById("reviewLetters");
+
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+  for(const letter of alphabet){
+
+    const btn = document.createElement("button");
+
+    btn.className = "letter-btn";
+
+    btn.textContent = letter.toUpperCase();
+
+    if(guessedLetters.includes(letter)){
+
+      btn.disabled = true;
+
+      btn.classList.add("used");
+
+    }
+
+    btn.onclick = () => reviewGuess(letter);
+
+    box.appendChild(btn);
+
+  }
+
 }
 
 
 function reviewGuess(letter){
 
-  if(guessedLetters.includes(letter)) return;
+  if(guessedLetters.includes(letter)) return;
 
-  guessedLetters.push(letter);
+  guessedLetters.push(letter);
 
-  if(hangmanWord.includes(letter)){
-    score+=10;
-  }else{
-    attemptsLeft--;
-  }
+  if(hangmanWord.includes(letter)){
 
-  updateScore();
+    score += 10;
 
-  const complete=
-    [...new Set(hangmanWord)]
-    .every(letter=>guessedLetters.includes(letter));
+  } else {
 
-  if(complete){
+    attemptsLeft--;
 
-    score+=50;
+  }
 
-    updateScore();
+  updateScore();
 
-    document.getElementById("content").innerHTML=`
+  const complete =
 
-      <div class="feedback">
-        🎉 You got it!
-      </div>
+    [...new Set(hangmanWord)]
 
-      <div class="word">
-        ${hangmanCurrent.word}
-      </div>
+    .every(letter => guessedLetters.includes(letter));
 
-      <button onclick="nextReviewHangman()">
-        Continue →
-      </button>
-    `;
+  if(complete){
 
-    return;
-  }
+    score += 50;
 
-  if(attemptsLeft<=0){
+    updateScore();
 
-    document.getElementById("content").innerHTML=`
+    document.getElementById("content").innerHTML = `
 
-      <div class="feedback danger">
-        Keep practicing!
-      </div>
+      <div class="feedback">
 
-      <div class="word">
-        ${hangmanCurrent.word}
-      </div>
+        🎉 You got it!
 
-      <button onclick="nextReviewHangman()">
-        Continue →
-      </button>
-    `;
+      </div>
 
-    return;
-  }
+      <div class="word">
 
-  renderReviewHangman();
+        ${hangmanCurrent.word}
+
+      </div>
+
+      <button onclick="nextReviewHangman()">
+
+        Continue →
+
+      </button>
+
+    `;
+
+    return;
+
+  }
+
+  if(attemptsLeft <= 0){
+
+    document.getElementById("content").innerHTML = `
+
+      <div class="feedback danger">
+
+        Keep practicing!
+
+      </div>
+
+      <div class="word">
+
+        ${hangmanCurrent.word}
+
+      </div>
+
+      <button onclick="nextReviewHangman()">
+
+        Continue →
+
+      </button>
+
+    `;
+
+    return;
+
+  }
+
+  renderReviewHangman();
+
 }
 
 
 function nextReviewHangman(){
 
-  reviewIndex++;
-  reviewHangman();
+  reviewIndex++;
+
+  reviewHangman();
+
 }
 
 
-/* FINAL */
+/* =========================================================
+
+   FINAL SCORE
+
+========================================================= */
 
 function showFinal(){
 
-  document.getElementById("game").classList.add("hidden");
-  document.getElementById("final").classList.remove("hidden");
+  document.getElementById("game").classList.add("hidden");
 
-  document.getElementById("finalScore").textContent=score;
+  document.getElementById("final").classList.remove("hidden");
 
-  document.getElementById("spellingCorrect").textContent=
-    `${spellingCorrect} / ${currentModule.length}`;
+  document.getElementById("finalScore").textContent = score;
 
-  document.getElementById("sentenceCorrect").textContent=
-    `${sentenceCorrect} / ${currentModule.length}`;
+  document.getElementById("spellingCorrect").textContent =
 
-  document.getElementById("hangmanPoints").textContent=
-    hangmanScore;
+    `${spellingCorrect} / ${currentModule.length}`;
 
-  const totalQuestions=
-    spellingAnswered+sentenceAnswered;
+  document.getElementById("sentenceCorrect").textContent =
 
-  document.getElementById("totalQuestions").textContent=
-    totalQuestions;
+    `${sentenceCorrect} / ${currentModule.length}`;
 
-  let accuracy=0;
+  document.getElementById("hangmanPoints").textContent =
 
-  if(totalQuestions>0){
+    hangmanScore;
 
-    accuracy=Math.round(
-      ((spellingCorrect+sentenceCorrect)/
-      totalQuestions)*100
-    );
-  }
+  const totalQuestions =
 
-  document.getElementById("accuracy").textContent=
-    accuracy+"%";
+    spellingAnswered + sentenceAnswered;
 
-  let message="";
+  document.getElementById("totalQuestions").textContent =
 
-  if(accuracy>=90){
-    message="🌟 Excellent! You really know these words!";
-  }
-  else if(accuracy>=80){
-    message="👏 Great job! Keep practicing the tricky words.";
-  }
-  else if(accuracy>=70){
-    message="💪 Good effort! A little more practice will help.";
-  }
-  else{
-    message="📚 Keep practicing. You can master these words!";
-  }
+    totalQuestions;
 
-  document.getElementById("finalMessage").textContent=
-    message;
+  let accuracy = 0;
+
+  if(totalQuestions > 0){
+
+    accuracy = Math.round(
+
+      ((spellingCorrect + sentenceCorrect) /
+
+      (totalQuestions)) * 100
+
+    );
+
+  }
+
+  document.getElementById("accuracy").textContent =
+
+    accuracy + "%";
+
+  let message = "";
+
+  if(accuracy >= 90){
+
+    message = "🌟 Excellent! You really know these words!";
+
+  }
+
+  else if(accuracy >= 80){
+
+    message = "👏 Great job! Keep practicing the tricky words.";
+
+  }
+
+  else if(accuracy >= 70){
+
+    message = "💪 Good effort! A little more practice will help.";
+
+  }
+
+  else{
+
+    message = "📚 Keep practicing. You can master these words!";
+
+  }
+
+  document.getElementById("finalMessage").textContent =
+
+    message;
+
 }
 
 
-/* HELPERS */
+/* =========================================================
+
+   HELPERS
+
+========================================================= */
 
 function shuffle(array){
 
-  return array
-    .map(value=>({value,sort:Math.random()}))
-    .sort((a,b)=>a.sort-b.sort)
-    .map(({value})=>value);
+  return array
+
+    .map(value => ({value, sort:Math.random()}))
+
+    .sort((a,b) => a.sort-b.sort)
+
+    .map(({value}) => value);
+
 }
 
 
 function updateScore(){
-  document.getElementById("score").textContent=score;
+
+  document.getElementById("score").textContent = score;
+
 }
 
 
 function updateProgress(index,total){
 
-  const percent=(index/total)*100;
+  const percent =
 
-  document.getElementById("progressBar").style.width=
-    percent+"%";
+    ((index) / total) * 100;
+
+  document.getElementById("progressBar").style.width =
+
+    percent + "%";
+
 }
 
 
 function wSafe(word){
 
-  return word.charAt(0).toUpperCase()+
-         word.slice(1);
+  return word.charAt(0).toUpperCase() +
+
+         word.slice(1);
+
 }
 
 
 function goHome(){
 
-  document.getElementById("final").classList.add("hidden");
-  document.getElementById("game").classList.add("hidden");
-  document.getElementById("home").classList.remove("hidden");
+  document.getElementById("final").classList.add("hidden");
+
+  document.getElementById("game").classList.add("hidden");
+
+  document.getElementById("home").classList.remove("hidden");
+
 }
 
 </script>
 
 </body>
+
 </html>
