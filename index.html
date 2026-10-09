@@ -2,3536 +2,2823 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spelling Master</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Spelling Master</title>
 <style>
 * {
-  box-sizing: border-box;
+box-sizing: border-box;
 }
-
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f7fb;
-  color: #172033;
+margin: 0;
+font-family: Arial, sans-serif;
+background: #f4f7fb;
+color: #172033;
 }
-
 header {
-  background: #3157d5;
-  color: white;
-  padding: 18px 20px;
-  text-align: center;
+background: #3157d5;
+color: white;
+padding: 18px 20px;
+text-align: center;
 }
-
 header h1 {
-  margin: 0;
-  font-size: 27px;
+margin: 0;
+font-size: 27px;
 }
-
 header p {
-  margin: 6px 0 0;
+margin: 6px 0 0;
 }
-
 .container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
+max-width: 900px;
+margin: auto;
+padding: 20px;
 }
-
 .card,
 .stage {
-  background: white;
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 5px 20px rgba(0,0,0,.08);
-  margin-bottom: 16px;
+background: white;
+border-radius: 20px;
+padding: 24px;
+box-shadow: 0 5px 20px rgba(0,0,0,.08);
+margin-bottom: 16px;
 }
-
 .stage {
-  display: none;
+display: none;
 }
-
 .stage.active {
-  display: block;
+display: block;
 }
-
 .hidden {
-  display: none !important;
+display: none !important;
 }
-
 .module-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 16px;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 16px;
 }
-
 .module-card h3 {
-  margin-top: 0;
+margin-top: 0;
 }
-
 .module-card p {
-  margin: 7px 0;
-  color: #667085;
+margin: 7px 0;
+color: #667085;
 }
-
 .topbar {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
+display: flex;
+gap: 10px;
+flex-wrap: wrap;
+margin-bottom: 16px;
 }
-
 button {
-  border: none;
-  border-radius: 12px;
-  padding: 12px 18px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
+border: none;
+border-radius: 12px;
+padding: 12px 18px;
+font-size: 16px;
+font-weight: bold;
+cursor: pointer;
 }
-
 button:disabled {
-  opacity: .38;
-  cursor: not-allowed;
+opacity: .38;
+cursor: not-allowed;
 }
-
 .primary {
-  background: #3157d5;
-  color: white;
+background: #3157d5;
+color: white;
 }
-
 .secondary {
-  background: #e7ecf7;
-  color: #172033;
+background: #e7ecf7;
+color: #172033;
 }
-
 .restart {
-  background: #fff0d6;
-  color: #9a5a00;
+background: #fff0d6;
+color: #9a5a00;
 }
-
 .stage-title {
-  text-align: center;
-  font-size: 25px;
-  margin-bottom: 8px;
+text-align: center;
+font-size: 25px;
+margin-bottom: 8px;
 }
-
 .stage-subtitle {
-  text-align: center;
-  color: #667085;
-  margin-bottom: 24px;
+text-align: center;
+color: #667085;
+margin-bottom: 24px;
 }
-
 .big-button {
-  display: block;
-  margin: 13px auto;
-  min-width: 190px;
+display: block;
+margin: 13px auto;
+min-width: 190px;
 }
-
 .word {
-  font-size: 38px;
-  font-weight: bold;
-  text-align: center;
-  letter-spacing: 2px;
-  margin: 28px 0;
+font-size: 38px;
+font-weight: bold;
+text-align: center;
+letter-spacing: 2px;
+margin: 28px 0;
 }
-
 .options {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 12px;
 }
-
 .option {
-  background: #eef2ff;
-  color: #24346b;
-  min-height: 56px;
+background: #eef2ff;
+color: #24346b;
+min-height: 56px;
 }
-
 .option:hover:not(:disabled) {
-  background: #dce4ff;
+background: #dce4ff;
 }
-
 .feedback {
-  text-align: center;
-  font-size: 19px;
-  font-weight: bold;
-  min-height: 28px;
-  margin: 17px 0;
+text-align: center;
+font-size: 19px;
+font-weight: bold;
+min-height: 28px;
+margin: 17px 0;
 }
-
 .correct {
-  color: #16803c;
+color: #16803c;
 }
-
 .incorrect {
-  color: #c62828;
+color: #c62828;
 }
-
 .sentence {
-  text-align: center;
-  font-size: 23px;
-  line-height: 1.5;
-  margin: 28px 0;
+text-align: center;
+font-size: 23px;
+line-height: 1.5;
+margin: 28px 0;
 }
-
 .hangman-wrap {
-  display: flex;
-  justify-content: center;
+display: flex;
+justify-content: center;
 }
-
 .hangman-svg {
-  width: 280px;
-  height: 280px;
+width: 280px;
+height: 280px;
 }
-
 .final-word {
-  text-align: center;
-  font-size: 30px;
-  letter-spacing: 4px;
-  margin: 15px;
+text-align: center;
+font-size: 30px;
+letter-spacing: 2px;
+ overflow-wrap: anywhere;
+margin: 15px;
 }
-
 .keyboard {
-  max-width: 680px;
-  margin: 18px auto;
+max-width: 680px;
+margin: 18px auto;
 }
-
 .keyboard-row {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  margin: 5px 0;
+display: flex;
+justify-content: center;
+gap: 5px;
+margin: 5px 0;
 }
-
 .key {
-  width: 45px;
-  height: 45px;
-  padding: 0;
-  background: #e8edf7;
-  color: #172033;
-  text-transform: lowercase;
+width: 45px;
+height: 45px;
+padding: 0;
+background: #e8edf7;
+color: #172033;
+text-transform: lowercase;
 }
-
 .score-number,
 .mastery {
-  font-size: 52px;
-  font-weight: bold;
-  text-align: center;
-  color: #3157d5;
+font-size: 52px;
+font-weight: bold;
+text-align: center;
+color: #3157d5;
 }
-
 .badge {
-  font-size: 24px;
-  text-align: center;
-  margin: 10px;
+font-size: 24px;
+text-align: center;
+margin: 10px;
 }
-
 .score-box {
-  background: #f1f5ff;
-  border-radius: 15px;
-  padding: 18px;
-  margin-top: 18px;
+background: #f1f5ff;
+border-radius: 15px;
+padding: 18px;
+margin-top: 18px;
 }
-
 .progress {
-  height: 10px;
-  background: #e7ebf3;
-  border-radius: 20px;
-  overflow: hidden;
+height: 10px;
+background: #e7ebf3;
+border-radius: 20px;
+overflow: hidden;
 }
-
 .progress div {
-  height: 100%;
-  background: #3157d5;
+height: 100%;
+background: #3157d5;
 }
-
 .result {
-  text-align: center;
+text-align: center;
 }
-
 .top-scores {
-  margin-top: 20px;
-  text-align: left;
+margin-top: 20px;
+text-align: left;
 }
-
 .top-score-row {
-  padding: 9px 0;
-  border-bottom: 1px solid #e6e9ef;
+padding: 9px 0;
+border-bottom: 1px solid #e6e9ef;
 }
-
 .home-note {
-  text-align: center;
-  color: #667085;
+text-align: center;
+color: #667085;
 }
-
 .player-box {
-  background: #f1f5ff;
-  padding: 15px;
-  border-radius: 14px;
-  margin-bottom: 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+background: #f1f5ff;
+padding: 15px;
+border-radius: 14px;
+margin-bottom: 18px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 10px;
 }
-
 @media (max-width: 600px) {
-
-  .container {
-    padding: 12px;
-  }
-
-  .options {
-    grid-template-columns: 1fr;
-  }
-
-  .word {
-    font-size: 31px;
-  }
-
-  .key {
-    width: 31px;
-    height: 42px;
-    font-size: 14px;
-  }
-
-  .keyboard-row {
-    gap: 3px;
-  }
-
-  .player-box {
-    flex-direction: column;
-  }
+.container {
+padding: 12px;
 }
+.options {
+grid-template-columns: 1fr;
+}
+.word {
+font-size: 31px;
+}
+.key {
+width: 31px;
+height: 42px;
+font-size: 14px;
+}
+.keyboard-row {
+gap: 3px;
+}
+.player-box {
+flex-direction: column;
+}
+}
+.answer-highlight { background: #d9f5df !important; color: #135c2a !important; outline: 3px solid #16803c; opacity: 1 !important; }
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.match-grid h3{text-align:center}.match-card{display:block;width:100%;min-height:64px;margin:10px 0;padding:12px;font-size:16px;background:#eef2ff;color:#24346b;overflow-wrap:anywhere;border:2px solid transparent}.match-card.selected{border-color:#3157d5;background:#dce4ff}.match-card.matched{background:#d9f5df;color:#135c2a;opacity:1;border-color:#16803c}.match-card.dragover{border-color:#3157d5;background:#dce4ff}.match-card:focus-visible{outline:3px solid #3157d5;outline-offset:2px}@media(max-width:600px){.match-grid{gap:8px}.match-card{font-size:14px;padding:8px;min-height:74px}}
+.stage-circle{width:36px;height:36px;min-width:36px;padding:0;border-radius:50%;font-size:14px;display:inline-flex;align-items:center;justify-content:center}.stage-circle:focus-visible{outline:3px solid #3157d5;outline-offset:3px}
+.start-module{font-size:14px;padding:8px 14px;border-radius:9px}.module-card{padding:18px;border-radius:14px;box-shadow:0 2px 9px rgba(0,0,0,.05);margin:0}.module-card h3{font-size:18px;margin-bottom:8px}.module-card p{font-size:14px}.overall-score{font-size:24px;color:#3157d5;font-weight:bold}#overallMastery .card{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;box-shadow:none;background:#f1f5ff}#overallMastery h3{margin:0;font-size:16px}
+#stage1 .word{margin-bottom:12px}#learnDefinition{margin-top:0;margin-bottom:14px}#learnTranslation{font-weight:700}
 </style>
 </head>
-
 <body>
-
 <header>
-  <h1>📘 Spelling Master</h1>
-  <p id="headerProgress">Choose a module to begin</p>
-</header>
-
+<h1>📘 Spelling Master</h1>
+<p id="headerProgress">Choose a module to begin</p> </header>
 <div class="container">
-
 <!-- ================= HOME ================= -->
-
 <section id="home">
+<div class="card">
+<h2>📚 Modules</h2>
+<p class="home-note">
+88 words • 9 modules
+</p>
 
-  <div class="card">
-
-    <div class="player-box">
-      <div>
-        👤 Player:
-        <strong id="playerNameDisplay">Player</strong>
-      </div>
-
-      <button class="secondary" onclick="changePlayer()">
-        Change Player
-      </button>
-    </div>
-
-    <h2>📚 Modules</h2>
-
-    <p class="home-note">
-      88 words • 9 modules
-    </p>
-
-    <div id="overallMastery"></div>
-
-    <div id="moduleGrid" class="module-grid"></div>
-
-  </div>
-
+<div id="overallMastery"></div>
+<div id="spacedReviewBox" class="score-box"></div>
+<div id="moduleGrid" class="module-grid"></div>
+</div>
 </section>
-
-
 <!-- ================= GAME ================= -->
-
 <section id="game" class="hidden">
-
-  <!-- ALWAYS AVAILABLE -->
-
-  <div class="topbar">
-
-    <button class="secondary" onclick="goHome()">
-      🏠 Home
-    </button>
-
-    <button class="restart" onclick="restartModule()">
-      🔄 Restart Module
-    </button>
-
-  </div>
-
-
-  <!-- ================= STAGE 1 ================= -->
-
-  <div id="stage1" class="stage">
-
-    <div class="stage-title">
-      Stage 1 — Learn
-    </div>
-
-    <div class="stage-subtitle">
-      Look at the word and listen carefully.
-    </div>
-
-    <div id="learnWord" class="word"></div>
-
-    <button class="primary big-button" onclick="speakCurrent()">
-      🔊 Listen
-    </button>
-
-    <button class="primary big-button" onclick="finishLearn()">
-      Continue →
-    </button>
-
-  </div>
-
-
-  <!-- ================= STAGE 2 ================= -->
-
-  <div id="stage2" class="stage">
-
-    <div class="stage-title">
-      Stage 2 — Listen & Choose
-    </div>
-
-    <div class="stage-subtitle">
-      Listen to the word and choose the word you hear.
-    </div>
-
-    <button class="primary big-button" onclick="speakCurrent()">
-      🔊 Play Word
-    </button>
-
-    <div id="stage2Options" class="options"></div>
-
-    <div id="feedback2" class="feedback"></div>
-
-  </div>
-
-
-  <!-- ================= STAGE 3 ================= -->
-
-  <div id="stage3" class="stage">
-
-    <div class="stage-title">
-      Stage 3 — Spelling
-    </div>
-
-    <div class="stage-subtitle">
-      Listen and choose the correctly spelled word.
-    </div>
-
-    <button class="primary big-button" onclick="speakCurrent()">
-      🔊 Play Word
-    </button>
-
-    <div id="stage3Options" class="options"></div>
-
-    <div id="feedback3" class="feedback"></div>
-
-  </div>
-
-
-  <!-- ================= STAGE 4 ================= -->
-
-  <div id="stage4" class="stage">
-
-    <div class="stage-title">
-      Stage 4 — Sentence
-    </div>
-
-    <div class="stage-subtitle">
-      Choose the word that correctly completes the sentence.
-    </div>
-
-    <div id="sentenceText" class="sentence"></div>
-
-    <div id="stage4Options" class="options"></div>
-
-    <div id="feedback4" class="feedback"></div>
-
-  </div>
-
-
-  <!-- ================= STAGE 5 ================= -->
-
-  <div id="stage5" class="stage">
-
-    <div class="stage-title">
-      Stage 5 — Hangman
-    </div>
-
-    <div class="stage-subtitle">
-      Spell the word letter by letter.
-    </div>
-
-    <div class="hangman-wrap">
-
-      <svg
-        class="hangman-svg"
-        viewBox="0 0 300 300"
-        xmlns="http://www.w3.org/2000/svg">
-
-        <g
-          fill="none"
-          stroke="currentColor"
-          stroke-width="6"
-          stroke-linecap="round"
-          stroke-linejoin="round">
-
-          <!-- Gallows -->
-
-          <path d="M45 270 Q95 260 145 270"/>
-          <path d="M75 265 L75 45"/>
-          <path d="M75 45 Q135 38 200 48"/>
-          <path d="M200 48 L200 82"/>
-
-          <!-- Character -->
-
-          <circle
-            id="h1"
-            cx="200"
-            cy="108"
-            r="27"
-            class="hidden"/>
-
-          <path
-            id="h2"
-            d="M200 135 Q194 170 200 205"
-            class="hidden"/>
-
-          <path
-            id="h3"
-            d="M198 153 Q170 165 150 185"
-            class="hidden"/>
-
-          <path
-            id="h4"
-            d="M200 153 Q228 165 248 185"
-            class="hidden"/>
-
-          <path
-            id="h5"
-            d="M199 203 Q177 230 165 250"
-            class="hidden"/>
-
-          <path
-            id="h6"
-            d="M201 203 Q223 230 235 250"
-            class="hidden"/>
-
-        </g>
-
-      </svg>
-
-    </div>
-
-    <div id="hangmanWord" class="final-word"></div>
-
-    <div id="hangmanFeedback" class="feedback"></div>
-
-    <div class="keyboard">
-
-      <div class="keyboard-row" id="mainRow1"></div>
-      <div class="keyboard-row" id="mainRow2"></div>
-      <div class="keyboard-row" id="mainRow3"></div>
-
-    </div>
-
-  </div>
-
-
-  <!-- ================= FINAL REVIEW INTRO ================= -->
-
-  <div id="reviewIntro" class="stage">
-
-    <div class="stage-title">
-      🔁 Final Review
-    </div>
-
-    <div class="stage-subtitle">
-      Let's practice this word again.
-    </div>
-
-    <div id="reviewWord" class="word"></div>
-
-    <button class="primary big-button" onclick="startReview()">
-      Start Review →
-    </button>
-
-  </div>
-
-
-  <!-- ================= REVIEW SPELLING ================= -->
-
-  <div id="reviewSpelling" class="stage">
-
-    <div class="stage-title">
-      Final Review — Spelling
-    </div>
-
-    <div class="stage-subtitle">
-      Choose the correctly spelled word.
-    </div>
-
-    <button class="primary big-button" onclick="speakCurrent()">
-      🔊 Play Word
-    </button>
-
-    <div id="reviewSpellOptions" class="options"></div>
-
-    <div id="reviewSpellFeedback" class="feedback"></div>
-
-  </div>
-
-
-  <!-- ================= REVIEW SENTENCE ================= -->
-
-  <div id="reviewSentence" class="stage">
-
-    <div class="stage-title">
-      Final Review — Sentence
-    </div>
-
-    <div class="stage-subtitle">
-      Choose the word that completes the sentence.
-    </div>
-
-    <div id="reviewSentenceText" class="sentence"></div>
-
-    <div id="reviewSentenceOptions" class="options"></div>
-
-    <div id="reviewSentenceFeedback" class="feedback"></div>
-
-  </div>
-
-
-  <!-- ================= REVIEW HANGMAN ================= -->
-
-  <div id="reviewHangman" class="stage">
-
-    <div class="stage-title">
-      Final Review — Hangman
-    </div>
-
-    <div class="stage-subtitle">
-      Try the word again.
-    </div>
-
-    <div class="hangman-wrap">
-
-      <svg
-        class="hangman-svg"
-        viewBox="0 0 300 300">
-
-        <g
-          fill="none"
-          stroke="currentColor"
-          stroke-width="6"
-          stroke-linecap="round"
-          stroke-linejoin="round">
-
-          <path d="M45 270 Q95 260 145 270"/>
-          <path d="M75 265 L75 45"/>
-          <path d="M75 45 Q135 38 200 48"/>
-          <path d="M200 48 L200 82"/>
-
-          <circle
-            id="r1"
-            cx="200"
-            cy="108"
-            r="27"
-            class="hidden"/>
-
-          <path
-            id="r2"
-            d="M200 135 Q194 170 200 205"
-            class="hidden"/>
-
-          <path
-            id="r3"
-            d="M198 153 Q170 165 150 185"
-            class="hidden"/>
-
-          <path
-            id="r4"
-            d="M200 153 Q228 165 248 185"
-            class="hidden"/>
-
-          <path
-            id="r5"
-            d="M199 203 Q177 230 165 250"
-            class="hidden"/>
-
-          <path
-            id="r6"
-            d="M201 203 Q223 230 235 250"
-            class="hidden"/>
-
-        </g>
-
-      </svg>
-
-    </div>
-
-    <div id="reviewHangmanWord" class="final-word"></div>
-
-    <div id="reviewHangmanFeedback" class="feedback"></div>
-
-    <div class="keyboard">
-
-      <div class="keyboard-row" id="reviewRow1"></div>
-      <div class="keyboard-row" id="reviewRow2"></div>
-      <div class="keyboard-row" id="reviewRow3"></div>
-
-    </div>
-
-  </div>
-
-
-  <!-- ================= RESULTS ================= -->
-
-  <div id="result" class="stage">
-
-    <div class="result">
-
-      <div id="resultTitle" class="stage-title">
-        🎉 Module Complete!
-      </div>
-
-      <div id="resultScore" class="mastery">
-        0%
-      </div>
-
-      <div id="resultBadge" class="badge"></div>
-
-      <div class="score-box">
-
-        <p>
-          <strong>Attempt:</strong>
-          <span id="resultAttempt"></span>
-        </p>
-
-        <p>
-          <strong>Player:</strong>
-          <span id="resultPlayer"></span>
-        </p>
-
-        <p>
-          <strong>Best:</strong>
-          <span id="resultBest"></span>
-        </p>
-
-      </div>
-
-      <div id="resultTopScores" class="top-scores"></div>
-
-      <button
-        class="primary big-button"
-        onclick="restartModule()">
-        🔄 Try Again
-      </button>
-
-      <button
-        class="secondary big-button"
-        onclick="goHome()">
-        🏠 Home
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
+<div id="moduleNavigation" class="card">
+<p id="moduleProgressText" style="margin-top:0" aria-live="polite"></p>
+<div id="moduleProgressBar" class="progress" role="progressbar" aria-label="Module progress" aria-valuemin="0" aria-valuemax="100"><div id="moduleProgressFill"></div></div>
+
+<div id="stageNavigation" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+</div>
+<!-- ALWAYS AVAILABLE -->
+<div class="topbar">
+<button class="secondary" onclick="goHome()">
+🏠 Home
+</button>
+<button class="restart" onclick="restartModule()">
+🔄 Restart Module
+</button>
+</div>
+<!-- ================= STAGE 1 ================= -->
+<div id="stage1" class="stage">
+<div class="stage-title">
+LEARN
 </div>
 
+<div id="learnWord" class="word"></div>
+<p id="learnDefinition" class="home-note"></p><p class="home-note" style="display:flex;align-items:center;justify-content:center;gap:8px"><svg role="img" aria-label="Spain flag" width="26" height="18" viewBox="0 0 26 18" xmlns="http://www.w3.org/2000/svg"><rect width="26" height="18" rx="2" fill="#aa151b"/><path d="M0 4.5h26v9H0z" fill="#f1bf00"/><path d="M7 7h4v4c0 2-4 2-4 0z" fill="#aa151b" stroke="#fff" stroke-width=".4"/><path d="M7 6h4v1H7z" fill="#b8860b"/><path d="M6 7v5m6-5v5" stroke="#eee" stroke-width=".7"/></svg><span id="learnTranslation"></span></p>
+<button class="primary big-button" onclick="speakCurrent()">
+🔊 Listen again
+</button>
+<button class="primary big-button" onclick="finishLearn()"> Next word → </button>
+</div>
+<!-- ================= STAGE 2 ================= -->
+<div id="meaningStage" class="stage">
+<div class="stage-title">Match</div>
 
+<p id="matchPageLabel" class="home-note"></p>
+<div class="match-grid"><div><h3>English</h3><div id="matchEnglish"></div></div><div><h3>Español</h3><div id="matchSpanish"></div></div></div>
+<div id="meaningFeedback" class="feedback" role="status" aria-live="polite"></div>
+</div>
+<div id="typingStage" class="stage">
+<div class="stage-title">Memory check — Write the word</div>
+<p class="stage-subtitle">Listen and write the English word without choices.</p>
+<button class="secondary big-button" onclick="speakCurrent()">🔊 Listen again</button>
+<form onsubmit="event.preventDefault();answerTyping()">
+<label for="typingInput">Your word</label>
+<input id="typingInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="padding:14px;width:100%;font-size:24px;border:2px solid #3157d5;border-radius:12px">
+<button id="typingSubmit" class="primary big-button" type="submit">Check answer</button>
+</form><div id="typingFeedback" class="feedback" role="status"></div></div>
+
+<div id="stage2" class="stage">
+<div class="stage-title">
+Listen & Choose
+</div>
+
+<button class="primary big-button" onclick="speakCurrent()">
+🔊 Play Word
+</button>
+<div id="stage2Options" class="options"></div>
+<div id="feedback2" class="feedback"></div>
+</div>
+<!-- ================= STAGE 3 ================= -->
+<div id="stage3" class="stage">
+<div class="stage-title">
+Spelling
+</div>
+<button class="primary big-button" onclick="speakCurrent()">
+🔊 Play Word
+</button>
+<div id="stage3Options" class="options"></div>
+<div id="feedback3" class="feedback"></div>
+</div>
+<!-- ================= STAGE 4 ================= -->
+<div id="stage4" class="stage">
+<div class="stage-title">
+Sentence
+</div>
+<button class="secondary big-button" onclick="speakSentence()">🔊 Listen to the sentence again</button>
+<div id="sentenceText" class="sentence"></div>
+<div id="stage4Options" class="options"></div>
+<div id="feedback4" class="feedback"></div>
+</div>
+<!-- ================= STAGE 5 ================= -->
+<div id="stage5" class="stage">
+<div class="stage-title">
+Hangman
+</div>
+<div class="hangman-wrap">
+<svg
+class="hangman-svg" role="img" aria-label="Hangman drawing: one body part per wrong letter"
+viewBox="0 0 300 300"
+xmlns="http://www.w3.org/2000/svg">
+<g
+fill="none"
+stroke="currentColor"
+stroke-width="6"
+stroke-linecap="round"
+stroke-linejoin="round">
+<!-- Gallows -->
+<path d="M45 270 Q95 260 145 270"/>
+<path d="M75 265 L75 45"/>
+<path d="M75 45 Q135 38 200 48"/>
+<path d="M200 48 L200 82"/>
+<!-- Character -->
+<circle
+id="h1"
+cx="200"
+cy="108"
+r="27"
+class="hidden"/>
+<path
+id="h2"
+d="M200 135 Q194 170 200 205"
+class="hidden"/>
+<path
+id="h3"
+d="M198 153 Q170 165 150 185"
+class="hidden"/>
+<path
+id="h4"
+d="M200 153 Q228 165 248 185"
+class="hidden"/>
+<path
+id="h5"
+d="M199 203 Q177 230 165 250"
+class="hidden"/>
+<path
+id="h6"
+d="M201 203 Q223 230 235 250"
+class="hidden"/>
+</g>
+</svg>
+</div>
+<div id="hangmanWord" class="final-word"></div>
+<button class="secondary big-button" onclick="speakCurrent()">🔊 Listen to the word</button>
+<div id="hangmanFeedback" class="feedback"></div>
+<div class="keyboard">
+<div class="keyboard-row" id="mainRow1"></div> <div class="keyboard-row" id="mainRow2"></div> <div class="keyboard-row" id="mainRow3"></div>
+</div>
+</div>
+<!-- ================= FINAL REVIEW INTRO ================= -->
+<div id="reviewIntro" class="stage">
+<div class="stage-title">
+🔁 Final Review
+</div>
+<div class="stage-subtitle">
+Let's practice this word again. Practice does not change your first-pass score.
+</div>
+<div id="reviewWord" class="word"></div>
+<button class="primary big-button" onclick="startReview()"> Start Review → </button>
+</div>
+<!-- ================= REVIEW SPELLING ================= -->
+<div id="reviewSpelling" class="stage">
+<div class="stage-title">
+Final Review — Spelling
+</div>
+<div class="stage-subtitle">
+Choose the correctly spelled word.
+</div>
+<button class="primary big-button" onclick="speakCurrent()">
+🔊 Play Word
+</button>
+<div id="reviewSpellOptions" class="options"></div>
+<div id="reviewSpellFeedback" class="feedback"></div>
+</div>
+<!-- ================= REVIEW SENTENCE ================= -->
+<div id="reviewSentence" class="stage">
+<div class="stage-title">
+Final Review — Sentence
+</div>
+<div class="stage-subtitle">
+Choose the word that completes the sentence.
+</div>
+<button class="secondary big-button" onclick="speakSentence()">🔊 Listen to the sentence again</button>
+<div id="reviewSentenceText" class="sentence"></div>
+<div id="reviewSentenceOptions" class="options"></div>
+<div id="reviewSentenceFeedback" class="feedback"></div>
+</div>
+<!-- ================= REVIEW HANGMAN ================= -->
+<div id="reviewHangman" class="stage">
+<div class="stage-title">
+Final Review — Hangman
+</div>
+<div class="stage-subtitle">
+Try the word again.
+</div>
+<div class="hangman-wrap">
+<svg
+class="hangman-svg" role="img" aria-label="Hangman drawing: one body part per wrong letter"
+viewBox="0 0 300 300">
+<g
+fill="none"
+stroke="currentColor"
+stroke-width="6"
+stroke-linecap="round"
+stroke-linejoin="round">
+<path d="M45 270 Q95 260 145 270"/>
+<path d="M75 265 L75 45"/>
+<path d="M75 45 Q135 38 200 48"/>
+<path d="M200 48 L200 82"/>
+<circle
+id="r1"
+cx="200"
+cy="108"
+r="27"
+class="hidden"/>
+<path
+id="r2"
+d="M200 135 Q194 170 200 205"
+class="hidden"/>
+<path
+id="r3"
+d="M198 153 Q170 165 150 185"
+class="hidden"/>
+<path
+id="r4"
+d="M200 153 Q228 165 248 185"
+class="hidden"/>
+<path
+id="r5"
+d="M199 203 Q177 230 165 250"
+class="hidden"/>
+<path
+id="r6"
+d="M201 203 Q223 230 235 250"
+class="hidden"/>
+</g>
+</svg>
+</div>
+<div id="reviewHangmanWord" class="final-word"></div>
+<button class="secondary big-button" onclick="speakCurrent()">🔊 Listen to the word</button>
+<div id="reviewHangmanFeedback" class="feedback"></div>
+<div class="keyboard">
+<div class="keyboard-row" id="reviewRow1"></div> <div class="keyboard-row" id="reviewRow2"></div> <div class="keyboard-row" id="reviewRow3"></div>
+</div>
+</div>
+<!-- ================= RESULTS ================= -->
+<div id="result" class="stage">
+<div class="result">
+<div id="resultTitle" class="stage-title">
+🎉 Module Complete!
+</div>
+<div id="resultScore" class="mastery">
+0%
+</div>
+<div id="resultBadge" class="badge"></div>
+<div class="score-box">
+<p>
+<strong>Attempt:</strong>
+<span id="resultAttempt"></span>
+</p>
+<p>
+<strong>Best:</strong>
+<span id="resultBest"></span>
+</p>
+</div>
+<p id="scoreExplanation" class="home-note"></p>
+<div id="resultTopScores" class="top-scores"></div>
+<button
+class="primary big-button"
+onclick="restartModule()">
+🔄 Try Again
+</button>
+<button
+class="secondary big-button"
+onclick="goHome()">
+🏠 Home
+</button>
+</div>
+</div>
+<button id="answerContinue" class="primary big-button hidden" onclick="continueAfterAnswer()">Continue →</button>
+</section>
+</div>
 <script>
-
 /* =========================================================
-   88 WORDS
-   MODULE 1 = 8 WORDS
-   MODULES 2-9 = 10 WORDS EACH
+88 WORDS
+MODULE 1 = 8 WORDS
+MODULES 2-9 = 10 WORDS EACH
 ========================================================= */
-
 const WORDS = [
-
-  "abbreviation",
-  "abroad",
-  "access",
-  "accord",
-  "adequate",
-  "advancements",
-  "aeronautics",
-  "affectionate",
-
-  "affliction",
-  "aggregate",
-  "agony",
-  "aide",
-  "aisle",
-  "alibi",
-  "allegiance",
-  "ambient",
-  "amnesty",
-  "anatomy",
-
-  "animosity",
-  "apathy",
-  "approach",
-  "archaic",
-  "arrogant",
-  "assignment",
-  "audacity",
-  "auspicious",
-  "baffle",
-  "banish",
-  "banquet",
-
-  "barricade",
-  "bashful",
-  "battalion",
-  "because",
-  "belated",
-  "beloved",
-  "benevolent",
-  "bibliography",
-  "bilingual",
-  "bizarre",
-
-  "blockade",
-  "boarder",
-  "boisterous",
-  "border",
-  "bracelet",
-  "breathe",
-  "bridge",
-  "brilliant",
-  "bruise",
-  "bulletin",
-
-  "bungalow",
-  "calligraphy",
-  "callous",
-  "camouflage",
-  "candid",
-  "carnivorous",
-  "casserole",
-  "catastrophe",
-  "cauldron",
-  "celestial",
-
-  "characterize",
-  "chimpanzee",
-  "choreography",
-  "circumstance",
-  "clandestine",
-  "Clemency",
-  "clientele",
-  "cohesive",
-  "coincidence",
-  "colleague",
-
-  "colloquial",
-  "compensation",
-  "compulsory",
-  "condolence",
-  "configuration",
-  "constellation",
-  "courageous",
-  "creation",
-  "credentials",
-  "criticism",
-
-  "cuisine",
-  "culminate",
-  "customary",
-  "dandelion",
-  "dangerous",
-  "debatable",
-  "December",
-  "effective",
-  "eligible"
+"abbreviation",
+"abroad",
+"access",
+"accord",
+"adequate",
+"advancements",
+"aeronautics",
+"affectionate",
+"affliction",
+"aggregate",
+"agony",
+"aide",
+"aisle",
+"alibi",
+"allegiance",
+"ambient",
+"amnesty",
+"anatomy",
+"animosity",
+"apathy",
+"approach",
+"archaic",
+"arrogant",
+"assignment",
+"audacity",
+"auspicious",
+"baffle",
+"banish",
+"banquet",
+"barricade",
+"bashful",
+"battalion",
+"because",
+"belated",
+"beloved",
+"benevolent",
+"bibliography",
+"bilingual",
+"bizarre",
+"blockade",
+"boarder",
+"boisterous",
+"border",
+"bracelet",
+"breathe",
+"bridge",
+"brilliant",
+"bruise",
+"bulletin",
+"bungalow",
+"calligraphy",
+"callous",
+"camouflage",
+"candid",
+"carnivorous",
+"casserole",
+"catastrophe",
+"cauldron",
+"celestial",
+"characterize",
+"chimpanzee",
+"choreography",
+"circumstance",
+"clandestine",
+"clemency",
+"clientele",
+"cohesive",
+"coincidence",
+"colleague",
+"colloquial",
+"compensation",
+"compulsory",
+"condolence",
+"configuration",
+"constellation",
+"courageous",
+"creation",
+"credentials",
+"criticism",
+"cuisine",
+"culminate",
+"customary",
+"dandelion",
+"dangerous",
+"debatable",
+"December",
+"effective",
+"eligible"
 ];
-
-
 /* =========================================================
-   MODULE STRUCTURE
+MODULE STRUCTURE
 ========================================================= */
-
 const MODULES = [];
-
 MODULES.push(WORDS.slice(0, 8));
-
-for (let i = 8; i < WORDS.length; i += 10) {
-  MODULES.push(WORDS.slice(i, i + 10));
-}
-
-
+for (let i = 8; i < WORDS.length; i += 10) { MODULES.push(WORDS.slice(i, i + 10)); }
 /* =========================================================
-   SENTENCES
+SENTENCES
 ========================================================= */
-
 const SENTENCES = {
-
-  abbreviation:
-    '“etc.” is an __________.',
-
-  abroad:
-    'She traveled __________ for the summer.',
-
-  access:
-    'Students need __________ to the library.',
-
-  accord:
-    'The two teams reached an __________.',
-
-  adequate:
-    'The supplies were __________ for the trip.',
-
-  advancements:
-    'Scientific __________ can change our lives.',
-
-  aeronautics:
-    'He studied __________ and aviation.',
-
-  affectionate:
-    'The puppy was very __________.',
-
-  affliction:
-    'The illness was a serious __________.',
-
-  aggregate:
-    'The __________ score was 95.',
-
-  agony:
-    'He cried out in __________.',
-
-  aide:
-    'The teacher asked an __________ to help.',
-
-  aisle:
-    'Please walk down the __________.',
-
-  alibi:
-    'He gave an __________ for his whereabouts.',
-
-  allegiance:
-    'They pledged __________ to their country.',
-
-  ambient:
-    'The __________ light made the room comfortable.',
-
-  amnesty:
-    'The government granted __________.',
-
-  anatomy:
-    'We studied human __________.',
-
-  animosity:
-    'There was no __________ between them.',
-
-  apathy:
-    'His __________ made it hard to motivate him.',
-
-  approach:
-    'We need a different __________.',
-
-  archaic:
-    'That word is now considered __________.',
-
-  arrogant:
-    'His __________ attitude upset everyone.',
-
-  assignment:
-    'I finished my __________.',
-
-  audacity:
-    'She had the __________ to speak up.',
-
-  auspicious:
-    'It was an __________ beginning.',
-
-  baffle:
-    'The puzzle may __________ the students.',
-
-  banish:
-    'The king decided to __________ fear.',
-
-  banquet:
-    'Everyone attended the __________.',
-
-  barricade:
-    'Police placed a __________ across the road.',
-
-  bashful:
-    'The __________ child hid behind her mother.',
-
-  battalion:
-    'A __________ of soldiers arrived.',
-
-  because:
-    'I stayed home __________ it was raining.',
-
-  belated:
-    'She sent a __________ birthday card.',
-
-  beloved:
-    'The dog was a __________ family pet.',
-
-  benevolent:
-    'The __________ donor helped the community.',
-
-  bibliography:
-    'The book includes a __________.',
-
-  bilingual:
-    'She is __________ in English and Spanish.',
-
-  bizarre:
-    'The story had a __________ ending.',
-
-  blockade:
-    'The ships formed a __________.',
-
-  boarder:
-    'The student was a __________ at the school.',
-
-  boisterous:
-    'The __________ crowd was very loud.',
-
-  border:
-    'We crossed the __________.',
-
-  bracelet:
-    'She wore a silver __________.',
-
-  breathe:
-    'Remember to __________ slowly.',
-
-  bridge:
-    'We crossed the __________.',
-
-  brilliant:
-    'The scientist had a __________ idea.',
-
-  bruise:
-    'He got a __________ on his arm.',
-
-  bulletin:
-    'The announcement appeared on the __________.',
-
-  bungalow:
-    'They stayed in a small __________.',
-
-  calligraphy:
-    'Her __________ was beautiful.',
-
-  callous:
-    'His __________ response hurt her feelings.',
-
-  camouflage:
-    'The soldiers wore __________.',
-
-  candid:
-    'She gave a __________ answer.',
-
-  carnivorous:
-    'A lion is a __________ animal.',
-
-  casserole:
-    'Mom prepared a chicken __________.',
-
-  catastrophe:
-    'The storm became a __________.',
-
-  cauldron:
-    'The witch stirred the __________.',
-
-  celestial:
-    'We observed a __________ body.',
-
-  characterize:
-    'These traits __________ the hero.',
-
-  chimpanzee:
-    'The __________ is an intelligent animal.',
-
-  choreography:
-    'The dancer practiced the __________.',
-
-  circumstance:
-    'Under no __________ should you quit.',
-
-  clandestine:
-    'They held a __________ meeting.',
-
-  Clemency:
-    'The prisoner asked for __________.',
-
-  clientele:
-    'The store has loyal __________.',
-
-  cohesive:
-    'The team was __________ and worked well.',
-
-  coincidence:
-    'Meeting there was a strange __________.',
-
-  colleague:
-    'My __________ helped me finish the project.',
-
-  colloquial:
-    'That expression is __________.',
-
-  compensation:
-    'She received __________ for the work.',
-
-  compulsory:
-    'Attendance is __________.',
-
-  condolence:
-    'We sent our __________ to the family.',
-
-  configuration:
-    'The computer has a new __________.',
-
-  constellation:
-    'We identified a __________ in the sky.',
-
-  courageous:
-    'The firefighter was __________.',
-
-  creation:
-    'The painting was her own __________.',
-
-  credentials:
-    'Please provide your __________.',
-
-  criticism:
-    'Constructive __________ can help us improve.',
-
-  cuisine:
-    'We enjoyed the local __________.',
-
-  culminate:
-    'The festival will __________ with a concert.',
-
-  customary:
-    'It is __________ to greet guests.',
-
-  dandelion:
-    'A __________ grew in the yard.',
-
-  dangerous:
-    'The road can be __________ at night.',
-
-  debatable:
-    'The answer is __________.',
-
-  December:
-    'Christmas is in __________.',
-
-  effective:
-    'The new method was __________.',
-
-  eligible:
-    'She is __________ to participate.'
+  "abbreviation": "“Dr.” is an _____ for “Doctor.”",
+  "abroad": "She went _____ to visit another country.",
+  "access": "The key gives us _____ to the room.",
+  "accord": "They signed an _____ to work together.",
+  "adequate": "The food is _____; there is enough.",
+  "advancements": "New _____ make our phones work better.",
+  "aeronautics": "He studies _____ to learn how planes fly.",
+  "affectionate": "The _____ dog loves hugs.",
+  "affliction": "Her illness is an _____ that causes pain.",
+  "aggregate": "The _____ score adds all the game scores.",
+  "agony": "His broken leg caused _____, or great pain.",
+  "aide": "The teacher’s _____ helps in class.",
+  "aisle": "Walk down the _____ between the seats.",
+  "alibi": "His _____ showed he was home, not at the crime.",
+  "allegiance": "They promised _____, or loyalty, to their country.",
+  "ambient": "The _____ light comes from the room around us.",
+  "amnesty": "The group received _____, an official pardon for their crimes.",
+  "anatomy": "We study _____ to learn about body parts.",
+  "animosity": "Their _____ showed in their angry looks.",
+  "apathy": "His _____ showed that he did not care.",
+  "approach": "Try a new _____, or way to solve it.",
+  "archaic": "This word is _____; no one uses it now.",
+  "arrogant": "The _____ boy thinks he is better than us.",
+  "assignment": "Our _____ is to read two pages.",
+  "audacity": "He had the _____ to take my lunch without asking!",
+  "auspicious": "Good weather is an _____ sign for our picnic.",
+  "baffle": "This hard puzzle may _____ me.",
+  "banish": "The king will _____ him and make him leave.",
+  "banquet": "We had a _____, a big special dinner.",
+  "barricade": "A _____ blocks the road.",
+  "bashful": "The _____ child is too shy to speak.",
+  "battalion": "A _____ is a large group of soldiers.",
+  "because": "I stayed home _____ I was sick.",
+  "belated": "The card was _____; it arrived late.",
+  "beloved": "Our _____ dog is loved by everyone.",
+  "benevolent": "The _____ woman kindly helps others.",
+  "bibliography": "The _____ lists the books I used.",
+  "bilingual": "She is _____; she speaks two languages.",
+  "bizarre": "A purple cow is a _____ sight.",
+  "blockade": "The ships formed a _____ to stop other ships.",
+  "boarder": "The _____ pays to live and eat in our home.",
+  "boisterous": "The _____ children laugh and shout loudly.",
+  "border": "The _____ separates the two countries.",
+  "bracelet": "She wears a _____ on her wrist.",
+  "breathe": "We _____ air in and out.",
+  "bridge": "The _____ lets us cross the river.",
+  "brilliant": "Her _____ idea solved the problem.",
+  "bruise": "The bump left a purple _____ on my arm.",
+  "bulletin": "The _____ has our school news.",
+  "bungalow": "They live in a _____ with one floor.",
+  "calligraphy": "She uses _____ to make fancy letters.",
+  "callous": "His _____ words showed he did not care about her pain.",
+  "camouflage": "The green _____ helps him hide in the trees.",
+  "candid": "Her _____ answer was honest and direct.",
+  "carnivorous": "A lion is _____; it eats meat.",
+  "casserole": "Mom baked a chicken _____ in a deep dish.",
+  "catastrophe": "The flood was a _____; it ruined many homes.",
+  "cauldron": "The witch stirred a large iron _____.",
+  "celestial": "Stars are _____ objects in the sky.",
+  "characterize": "Kindness and honesty _____ her personality.",
+  "chimpanzee": "The _____ is an ape that uses tools.",
+  "choreography": "The _____ tells dancers which steps to do.",
+  "circumstance": "A flat tire was the _____ that made us late.",
+  "clandestine": "They held a _____ meeting in secret.",
+  "clemency": "The judge showed _____ by reducing the punishment.",
+  "clientele": "The shop’s _____ are its regular customers.",
+  "cohesive": "Our _____ team works well together.",
+  "coincidence": "Having the same birthday was a _____.",
+  "colleague": "My _____ works with me.",
+  "colloquial": "“Wanna” is _____; we use it in casual talk.",
+  "compensation": "She got _____, or payment, for her work.",
+  "compulsory": "School is _____; children must attend.",
+  "condolence": "I sent a message of _____ after his mother died.",
+  "configuration": "The desk _____ has all desks in a circle.",
+  "constellation": "A _____ is a group of stars in a pattern.",
+  "courageous": "The _____ child was brave.",
+  "creation": "This painting is my _____; I made it.",
+  "credentials": "Her _____ show that she can teach.",
+  "criticism": "Helpful _____ tells me how to improve.",
+  "cuisine": "Italian _____ includes pasta and pizza.",
+  "culminate": "The show will _____ with the final song.",
+  "customary": "It is _____ for us to sing on birthdays.",
+  "dandelion": "The _____ is a yellow flower with seeds that blow away.",
+  "dangerous": "Fire is _____; it can hurt you.",
+  "debatable": "The best game is _____; we do not all agree.",
+  "December": "_____ is the last month of the year.",
+  "effective": "The _____ medicine stopped my cough.",
+  "eligible": "You are _____ to play if you meet the age rule."
 };
-
-
+const TRANSLATIONS = {
+  "abbreviation": "Abreviatura",
+  "abroad": "En el extranjero",
+  "access": "Acceso",
+  "accord": "Acuerdo",
+  "adequate": "Suficiente",
+  "advancements": "Avances",
+  "aeronautics": "Aeronáutica",
+  "affectionate": "Cariñoso",
+  "affliction": "Aflicción",
+  "aggregate": "Total combinado",
+  "agony": "Agonía",
+  "aide": "Ayudante",
+  "aisle": "Pasillo",
+  "alibi": "Coartada",
+  "allegiance": "Lealtad",
+  "ambient": "Ambiental",
+  "amnesty": "Amnistía",
+  "anatomy": "Anatomía",
+  "animosity": "Enemistad",
+  "apathy": "Apatía",
+  "approach": "Manera de abordar algo",
+  "archaic": "Anticuado",
+  "arrogant": "Arrogante",
+  "assignment": "Tarea",
+  "audacity": "Atrevimiento",
+  "auspicious": "Prometedor",
+  "baffle": "Confundir",
+  "banish": "Desterrar",
+  "banquet": "Banquete",
+  "barricade": "Barricada",
+  "bashful": "Tímido",
+  "battalion": "Batallón",
+  "because": "Porque",
+  "belated": "Tardío",
+  "beloved": "Querido",
+  "benevolent": "Bondadoso",
+  "bibliography": "Bibliografía",
+  "bilingual": "Bilingüe",
+  "bizarre": "Extraño",
+  "blockade": "Bloqueo",
+  "boarder": "Huésped con alojamiento y comida",
+  "boisterous": "Bullicioso",
+  "border": "Frontera",
+  "bracelet": "Pulsera",
+  "breathe": "Respirar",
+  "bridge": "Puente",
+  "brilliant": "Brillante",
+  "bruise": "Moretón",
+  "bulletin": "Boletín",
+  "bungalow": "Casa de una planta",
+  "calligraphy": "Caligrafía",
+  "callous": "Insensible",
+  "camouflage": "Camuflaje",
+  "candid": "Sincero",
+  "carnivorous": "Carnívoro",
+  "casserole": "Guiso al horno",
+  "catastrophe": "Catástrofe",
+  "cauldron": "Caldero",
+  "celestial": "Celestial",
+  "characterize": "Caracterizar",
+  "chimpanzee": "Chimpancé",
+  "choreography": "Coreografía",
+  "circumstance": "Circunstancia",
+  "clandestine": "Clandestino",
+  "clemency": "Clemencia",
+  "clientele": "Clientela",
+  "cohesive": "Unido",
+  "coincidence": "Coincidencia",
+  "colleague": "Compañero de trabajo",
+  "colloquial": "Coloquial",
+  "compensation": "Compensación",
+  "compulsory": "Obligatorio",
+  "condolence": "Condolencia",
+  "configuration": "Configuración",
+  "constellation": "Constelación",
+  "courageous": "Valiente",
+  "creation": "Creación",
+  "credentials": "Credenciales",
+  "criticism": "Crítica",
+  "cuisine": "Cocina de un lugar",
+  "culminate": "Culminar",
+  "customary": "Habitual",
+  "dandelion": "Diente de león",
+  "dangerous": "Peligroso",
+  "debatable": "Discutible",
+  "December": "Diciembre",
+  "effective": "Eficaz",
+  "eligible": "Elegible"
+};
+const DEFINITIONS = {
+  "abbreviation": "A short form of a word or phrase.",
+  "abroad": "In another country.",
+  "access": "The ability or permission to enter or use something.",
+  "accord": "An agreement between people or groups.",
+  "adequate": "Enough for what is needed.",
+  "advancements": "New improvements or progress.",
+  "aeronautics": "The study of aircraft and flying.",
+  "affectionate": "Showing love and care.",
+  "affliction": "An illness or problem that causes suffering.",
+  "aggregate": "The total formed by adding parts together.",
+  "agony": "Very strong pain.",
+  "aide": "A person who helps someone with work.",
+  "aisle": "A passage between rows of seats or shelves.",
+  "alibi": "Proof that someone was elsewhere when a crime happened.",
+  "allegiance": "Loyalty to a country or group.",
+  "ambient": "Coming from the surrounding area.",
+  "amnesty": "An official pardon for a group of people.",
+  "anatomy": "The study of body parts.",
+  "animosity": "Strong dislike or anger toward someone.",
+  "apathy": "A lack of interest or care.",
+  "approach": "A way of doing or solving something.",
+  "archaic": "Very old and no longer commonly used.",
+  "arrogant": "Acting as if you are better than others.",
+  "assignment": "A task someone asks you to do.",
+  "audacity": "Bold behavior that may be rude.",
+  "auspicious": "Showing signs that something will go well.",
+  "baffle": "To confuse someone.",
+  "banish": "To force someone to leave a place.",
+  "banquet": "A large, special meal for many people.",
+  "barricade": "A barrier that blocks the way.",
+  "bashful": "Shy and easily embarrassed.",
+  "battalion": "A large group of soldiers.",
+  "because": "For the reason that.",
+  "belated": "Arriving or happening late.",
+  "beloved": "Loved very much.",
+  "benevolent": "Kind and willing to help.",
+  "bibliography": "A list of books or sources used in a project.",
+  "bilingual": "Able to speak two languages.",
+  "bizarre": "Very strange or unusual.",
+  "blockade": "An action that stops people or goods from entering or leaving.",
+  "boarder": "A person who pays for a room and meals in a home.",
+  "boisterous": "Noisy and full of energy.",
+  "border": "The line that separates two places or countries.",
+  "bracelet": "Jewelry worn around the wrist.",
+  "breathe": "To take air into and out of your lungs.",
+  "bridge": "A structure that lets you cross a river or road.",
+  "brilliant": "Very smart or excellent.",
+  "bruise": "A mark on the skin caused by a bump or hit.",
+  "bulletin": "A short notice with news or information.",
+  "bungalow": "A small house with one floor.",
+  "calligraphy": "The art of making beautiful letters by hand.",
+  "callous": "Not caring about another person's pain.",
+  "camouflage": "Colors or patterns that help something blend in and hide.",
+  "candid": "Honest and direct.",
+  "carnivorous": "Eating meat.",
+  "casserole": "A meal baked in a deep dish.",
+  "catastrophe": "A very serious disaster.",
+  "cauldron": "A large metal pot.",
+  "celestial": "Related to the sky or outer space.",
+  "characterize": "To describe the qualities that make someone or something distinct.",
+  "chimpanzee": "An intelligent ape that can use tools.",
+  "choreography": "The planned steps in a dance.",
+  "circumstance": "A fact or condition that affects a situation.",
+  "clandestine": "Done in secret.",
+  "clemency": "Mercy shown by reducing a punishment.",
+  "clientele": "The regular customers of a business.",
+  "cohesive": "United and working well together.",
+  "coincidence": "Things happening together by chance.",
+  "colleague": "A person you work with.",
+  "colloquial": "Used in casual, everyday conversation.",
+  "compensation": "Payment for work or a loss.",
+  "compulsory": "Required; something you must do.",
+  "condolence": "An expression of sympathy after someone dies.",
+  "configuration": "The way parts are arranged.",
+  "constellation": "A group of stars that forms a pattern.",
+  "courageous": "Brave, even when afraid.",
+  "creation": "Something that someone has made.",
+  "credentials": "Documents that show a person's skills or qualifications.",
+  "criticism": "Comments about what is good or what needs improvement.",
+  "cuisine": "The style of food from a place.",
+  "culminate": "To end with an important event.",
+  "customary": "Usual or done as a tradition.",
+  "dandelion": "A plant with yellow flowers and seeds that blow away.",
+  "dangerous": "Able to cause harm.",
+  "debatable": "Open to different opinions.",
+  "December": "The last month of the year.",
+  "effective": "Working well and giving the wanted result.",
+  "eligible": "Meeting the requirements to take part."
+};
+const MEANINGS = {
+  "abbreviation": "Forma corta de una palabra o frase",
+  "abroad": "En otro país",
+  "access": "Permiso o posibilidad de entrar o usar algo",
+  "accord": "Acuerdo entre dos partes",
+  "adequate": "Suficiente para lo que se necesita",
+  "advancements": "Avances o mejoras",
+  "aeronautics": "Estudio de cómo vuelan los aviones",
+  "affectionate": "Que muestra cariño",
+  "affliction": "Enfermedad o problema que causa sufrimiento",
+  "aggregate": "Total al sumar varias cantidades",
+  "agony": "Dolor muy fuerte",
+  "aide": "Persona que ayuda a otra en su trabajo",
+  "aisle": "Pasillo entre filas de asientos",
+  "alibi": "Prueba de que alguien estaba en otro lugar",
+  "allegiance": "Lealtad a un país o grupo",
+  "ambient": "Del ambiente que nos rodea",
+  "amnesty": "Perdón oficial para un grupo por sus delitos",
+  "anatomy": "Estudio de las partes del cuerpo",
+  "animosity": "Enojo o rechazo fuerte hacia alguien",
+  "apathy": "Falta de interés",
+  "approach": "Manera de hacer algo",
+  "archaic": "Muy antiguo y ya poco usado",
+  "arrogant": "Que se cree mejor que los demás",
+  "assignment": "Tarea que alguien te pide hacer",
+  "audacity": "Atrevimiento que puede mostrar falta de respeto",
+  "auspicious": "Que indica que algo puede salir bien",
+  "baffle": "Confundir a alguien",
+  "banish": "Expulsar a alguien de un lugar",
+  "banquet": "Comida especial para muchas personas",
+  "barricade": "Barrera que impide el paso",
+  "bashful": "Tímido o vergonzoso",
+  "battalion": "Grupo grande de soldados",
+  "because": "Porque",
+  "belated": "Que llega tarde",
+  "beloved": "Muy querido",
+  "benevolent": "Amable y dispuesto a ayudar",
+  "bibliography": "Lista de libros usados para un trabajo",
+  "bilingual": "Que habla dos idiomas",
+  "bizarre": "Muy extraño",
+  "blockade": "Acción de impedir la entrada o salida de un lugar",
+  "boarder": "Persona que paga por vivir y comer en una casa ajena",
+  "boisterous": "Muy ruidoso y lleno de energía",
+  "border": "Límite entre dos países o lugares",
+  "bracelet": "Joya que se usa en la muñeca",
+  "breathe": "Respirar",
+  "bridge": "Estructura para cruzar un río o camino",
+  "brilliant": "Muy inteligente o excelente",
+  "bruise": "Marca en la piel causada por un golpe",
+  "bulletin": "Aviso con noticias o información",
+  "bungalow": "Casa pequeña de una sola planta",
+  "calligraphy": "Arte de escribir letras bonitas",
+  "callous": "Que no se preocupa por el dolor de otros",
+  "camouflage": "Colores o formas que ayudan a esconderse en el entorno",
+  "candid": "Honesto y directo",
+  "carnivorous": "Que come carne",
+  "casserole": "Comida que se hornea en un recipiente hondo",
+  "catastrophe": "Desastre muy grave",
+  "cauldron": "Olla grande de metal",
+  "celestial": "Relacionado con el cielo o el espacio",
+  "characterize": "Describir los rasgos que distinguen a alguien",
+  "chimpanzee": "Tipo de simio inteligente",
+  "choreography": "Pasos planeados para un baile",
+  "circumstance": "Hecho o condición que afecta una situación",
+  "clandestine": "Secreto u oculto",
+  "clemency": "Misericordia al reducir un castigo",
+  "clientele": "Clientes habituales de un negocio",
+  "cohesive": "Unido y que trabaja bien como grupo",
+  "coincidence": "Algo que ocurre por casualidad",
+  "colleague": "Persona que trabaja contigo",
+  "colloquial": "Usado en una conversación informal",
+  "compensation": "Pago por un trabajo",
+  "compulsory": "Obligatorio",
+  "condolence": "Expresión de apoyo cuando alguien muere",
+  "configuration": "Forma de organizar las partes de algo",
+  "constellation": "Grupo de estrellas que forma una figura",
+  "courageous": "Valiente",
+  "creation": "Algo que alguien ha hecho o creado",
+  "credentials": "Documentos que muestran preparación o capacidad",
+  "criticism": "Comentario sobre lo que está bien o se puede mejorar",
+  "cuisine": "Comida típica de un lugar",
+  "culminate": "Terminar con un evento importante",
+  "customary": "Habitual o según la costumbre",
+  "dandelion": "Planta de flor amarilla y semillas que vuelan",
+  "dangerous": "Que puede causar daño",
+  "debatable": "Sobre lo que hay distintas opiniones",
+  "December": "Diciembre",
+  "effective": "Que funciona y da el resultado esperado",
+  "eligible": "Que cumple los requisitos para participar"
+};
 /* =========================================================
-   PLAYER / GAME STATE
+PLAYER / GAME STATE
 ========================================================= */
-
 let playerName =
-  localStorage.getItem("spellingMasterPlayer") || "";
-
+localStorage.getItem("spellingMasterPlayer") || "Player"
+let stageNumber = 1;
+let stageOrder = [];
+let stageCursor = 0;
+let continueAction = null;
+let speechGeneration = 0;
 let currentModule = 0;
 let currentIndex = 0;
 let currentStage = 1;
-
-let mode = "main";
-
+let mode = "main"
 let attempt = 1;
-
 let currentProgress = [];
-
 let reviewQueue = [];
 let reviewIndex = 0;
+let reviewResults = {};
+let hangmanFinished = false;
+let pendingTimers = new Set();
+function schedule(fn, delay) {
+ const id = window.setTimeout(() => {pendingTimers.delete(id); fn();}, delay);
+ pendingTimers.add(id); return id;
+}
+function clearPending() {
+speechGeneration++;
+continueAction = null;
+const next = document.getElementById("answerContinue");
+if(next) next.classList.add("hidden");
+ pendingTimers.forEach(id => window.clearTimeout(id)); pendingTimers.clear();
+ if ("speechSynthesis" in window) speechSynthesis.cancel();
+}
 
 let hangmanMistakes = 0;
 let guessedLetters = [];
-
-
 /* =========================================================
-   STORAGE
+STORAGE
 ========================================================= */
-
 function loadRecords(moduleIndex) {
-
-  return JSON.parse(
-    localStorage.getItem(
-      "spellingMaster_module_" + moduleIndex
-    ) || "[]"
-  );
-
+return JSON.parse(
+localStorage.getItem(
+"spellingMaster_v3_" + encodeURIComponent(playerName) + "_module_" + moduleIndex
+) || "[]"
+);
 }
-
-
 function saveRecords(moduleIndex, records) {
-
-  localStorage.setItem(
-    "spellingMaster_module_" + moduleIndex,
-    JSON.stringify(records)
-  );
-
+localStorage.setItem(
+"spellingMaster_v3_" + encodeURIComponent(playerName) + "_module_" + moduleIndex,
+JSON.stringify(records)
+);
 }
-
-
 /* =========================================================
-   PLAYER
+PLAYER
 ========================================================= */
-
-function ensurePlayer() {
-
-  if (!playerName) {
-
-    playerName =
-      prompt(
-        "Enter player name:",
-        "Ángel Samuel"
-      ) || "Player";
-
-    localStorage.setItem(
-      "spellingMasterPlayer",
-      playerName
-    );
-
-  }
-
-}
-
-
-function changePlayer() {
-
-  const name =
-    prompt(
-      "Enter player name:",
-      playerName
-    );
-
-  if (
-    name &&
-    name.trim()
-  ) {
-
-    playerName =
-      name.trim();
-
-    localStorage.setItem(
-      "spellingMasterPlayer",
-      playerName
-    );
-
-    renderHome();
-
-  }
-
-}
-
-
-/* =========================================================
-   HOME
-========================================================= */
-
 function renderHome() {
-
-  document
-    .getElementById("home")
-    .classList.remove("hidden");
-
-  document
-    .getElementById("game")
-    .classList.add("hidden");
-
-  document
-    .getElementById("headerProgress")
-    .textContent =
-      "Choose a module to begin";
-
-  document
-    .getElementById("playerNameDisplay")
-    .textContent =
-      playerName || "Player";
-
-
-  const grid =
-    document.getElementById("moduleGrid");
-
-  grid.innerHTML = "";
-
-
-  MODULES.forEach(
-    (words, moduleIndex) => {
-
-      const records =
-        loadRecords(moduleIndex);
-
-      const best =
-        records.length
-          ? Math.max(
-              ...records.map(
-                r => r.score
-              )
-            )
-          : null;
-
-      const last =
-        records.length
-          ? records[records.length - 1].score
-          : null;
-
-
-      const card =
-        document.createElement("div");
-
-      card.className =
-        "card module-card";
-
-
-      card.innerHTML = `
-
-        <h3>
-          📘 Module ${moduleIndex + 1}
-        </h3>
-
-        <p>
-          ${words.length} words
-        </p>
-
-        <p>
-          🏆 Best:
-          ${best === null ? "—" : best + "%"}
-        </p>
-
-        <p>
-          🟢 Last:
-          ${last === null ? "—" : last + "%"}
-        </p>
-
-        <p>
-          🔢 Attempts:
-          ${records.length}
-        </p>
-
-        <div class="progress">
-          <div
-            style="width:${best || 0}%">
-          </div>
-        </div>
-
-        <br>
-
-        <button
-          class="primary"
-          onclick="startModule(${moduleIndex})">
-          Start / Continue
-        </button>
-
-        <button
-          class="secondary"
-          onclick="showTopScores(${moduleIndex})">
-          🏆 Top Scores
-        </button>
-
-      `;
-
-      grid.appendChild(card);
-
-    }
-  );
-
-
-  updateOverallMastery();
-
+clearPending();
+document
+.getElementById("home")
+.classList.remove("hidden");
+document
+.getElementById("game")
+.classList.add("hidden");
+document
+.getElementById("headerProgress")
+.textContent =
+"Choose a module to begin"
+const grid =
+document.getElementById("moduleGrid");
+grid.innerHTML = ""
+MODULES.forEach(
+(words, moduleIndex) => {
+const records =
+loadRecords(moduleIndex);
+const best =
+records.length
+? Math.max(
+...records.map(
+r => r.score
+)
+)
+: null;
+const last =
+records.length
+? records[records.length - 1].score
+: null;
+const card =
+document.createElement("div");
+card.className =
+"card module-card"
+card.innerHTML = `
+<h3>
+📘 Module ${moduleIndex + 1}
+</h3>
+<p>
+${words.length} words
+</p>
+<p>
+Best:
+${best === null ? "—" : best + "%"}
+</p>
+<div class="progress">
+<div
+style="width:${best || 0}%">
+</div>
+</div>
+<br>
+<button
+class="primary start-module"
+onclick="startModule(${moduleIndex})">
+Start Module
+</button>
+`;
+grid.appendChild(card);
 }
-
-
+);
+updateOverallMastery();
+}
 function updateOverallMastery() {
-
-  let scores = [];
-
-  MODULES.forEach(
-    (_, moduleIndex) => {
-
-      const records =
-        loadRecords(moduleIndex);
-
-      if (records.length) {
-
-        scores.push(
-          Math.max(
-            ...records.map(
-              r => r.score
-            )
-          )
-        );
-
-      }
-
-    }
-  );
-
-
-  const box =
-    document.getElementById(
-      "overallMastery"
-    );
-
-
-  if (!scores.length) {
-
-    box.innerHTML = "";
-
-    return;
-
-  }
-
-
-  const overall =
-    Math.round(
-      scores.reduce(
-        (a,b) => a+b,
-        0
-      ) / scores.length
-    );
-
-
-  box.innerHTML = `
-
-    <div class="card">
-
-      <h3>
-        🌟 Overall Mastery
-      </h3>
-
-      <div class="score-number">
-        ${overall}%
-      </div>
-
-      <p class="home-note">
-        Based on completed modules.
-      </p>
-
-    </div>
-
-  `;
-
+ const complete=MODULES.filter((_,index)=>loadRecords(index).length>0).length;
+ const percentage=Math.round(complete/MODULES.length*100);
+ const box=document.getElementById('overallMastery');
+ box.innerHTML=`<div class="card"><h3>Modules completed: ${complete} / ${MODULES.length}</h3><div class="overall-score">${percentage}%</div></div>`;
 }
-
-
-/* =========================================================
-   TOP SCORES
-========================================================= */
-
 function showTopScores(moduleIndex) {
-
-  const records =
-    loadRecords(moduleIndex)
-      .sort(
-        (a,b) =>
-          b.score - a.score
-      )
-      .slice(0,5);
-
-
-  if (!records.length) {
-
-    alert(
-      `Module ${moduleIndex + 1}
-      
+const records =
+loadRecords(moduleIndex)
+.sort(
+(a,b) =>
+b.score - a.score
+)
+.slice(0,5);
+if (!records.length) {
+alert(
+`Module ${moduleIndex + 1}
 No scores yet.`
-    );
-
-    return;
-
-  }
-
-
-  const medals =
-    [
-      "🥇",
-      "🥈",
-      "🥉",
-      "4️⃣",
-      "5️⃣"
-    ];
-
-
-  let message =
-    `🏆 MODULE ${moduleIndex + 1} — TOP SCORES\n\n`;
-
-
-  records.forEach(
-    (record,index) => {
-
-      message +=
-        `${medals[index]} Attempt ${record.attempt} — ${record.name} — ${record.score}%\n`;
-
-    }
-  );
-
-
-  alert(message);
-
+);
+return;
 }
-
-
+const medals =
+[
+"🥇",
+"🥈",
+"🥉",
+"4️⃣",
+"5️⃣"
+];
+let message =
+`🏆 MODULE ${moduleIndex + 1} — TOP SCORES\n\n`;
+records.forEach(
+(record,index) => {
+message +=
+`${medals[index]} Attempt ${record.attempt} — ${escapeHtml(record.name)} — ${record.score}%\n`;
+}
+);
+alert(message);
+}
 /* =========================================================
-   START MODULE
+START MODULE
 ========================================================= */
-
 function startModule(moduleIndex) {
 
-  ensurePlayer();
-
-
-  currentModule =
-    moduleIndex;
-
-  currentIndex = 0;
-
-  mode = "main";
-
-
-  const records =
-    loadRecords(
-      currentModule
-    );
-
-
-  attempt =
-    records.length + 1;
-
-
-  currentProgress =
-    MODULES[currentModule].map(
-      () => ({
-        learn: 20,
-        listen: 0,
-        spelling: 0,
-        sentence: 0,
-        hangman: 0
-      })
-    );
-
-
-  reviewQueue = [];
-
-  reviewIndex = 0;
-
-
-  document
-    .getElementById("home")
-    .classList.add("hidden");
-
-  document
-    .getElementById("game")
-    .classList.remove("hidden");
-
-
-  setupWord();
-
+currentModule =
+moduleIndex;
+currentIndex = 0;
+mode = "main"
+const records =
+loadRecords(
+currentModule
+);
+attempt =
+records.length + 1;
+currentProgress =
+MODULES[currentModule].map(
+() => ({
+learn: 20,
+listen: 0,
+spelling: 0,
+sentence: 0,
+meaning: 0,
+hangman: 0
+})
+);
+reviewQueue = [];
+reviewIndex = 0;
+reviewResults = {};
+clearPending();
+document
+.getElementById("home")
+.classList.add("hidden");
+document
+.getElementById("game")
+.classList.remove("hidden");
+stageNumber = 1;
+stageOrder = shuffle(MODULES[currentModule].map((_,i)=>i));
+stageCursor = 0;
+setupWord();
 }
-
-
 /* =========================================================
-   SETUP WORD
+SETUP WORD
 ========================================================= */
-
 function setupWord() {
-
-  const word =
-    MODULES[currentModule]
-      [currentIndex];
-
-
-  document
-    .getElementById("headerProgress")
-    .textContent =
-      `Module ${currentModule + 1} • Word ${currentIndex + 1} of ${MODULES[currentModule].length}`;
-
-
-  document
-    .getElementById("learnWord")
-    .textContent =
-      word.toLowerCase();
-
-
-  showStage("stage1");
-
+const word =
+MODULES[currentModule]
+[currentIndex];
+document
+.getElementById("headerProgress")
+.textContent =
+`Module ${currentModule + 1} • Word ${currentIndex + 1} of ${MODULES[currentModule].length}`;
+document
+.getElementById("learnWord")
+.textContent =
+word;
+showStage("stage1");
 }
-
-
 /* =========================================================
-   STAGE DISPLAY
+STAGE DISPLAY
 ========================================================= */
-
 function showStage(id) {
-
-  document
-    .querySelectorAll(".stage")
-    .forEach(
-      stage =>
-        stage.classList.remove(
-          "active"
-        )
-    );
-
-
-  document
-    .getElementById(id)
-    .classList.add("active");
-
-
-  currentStage = id;
-
+continueAction=null;
+document.getElementById("answerContinue").classList.add("hidden");
+document
+.querySelectorAll(".stage")
+.forEach(
+stage =>
+stage.classList.remove(
+"active"
+)
+);
+document
+.getElementById(id)
+.classList.add("active");
+currentStage = id;
 }
-
-
 /* =========================================================
-   SPEECH
+SPEECH
 ========================================================= */
-
 function getCurrentWord() {
-
-  if (mode === "review") {
-
-    return reviewQueue[
-      reviewIndex
-    ];
-
-  }
-
-  return MODULES[currentModule]
-    [currentIndex];
-
-}
-
-
-function speakCurrent() {
-
-  const word =
-    getCurrentWord();
-
-
-  if (
-    "speechSynthesis"
-    in window
-  ) {
-
-    speechSynthesis.cancel();
-
-
-    const speech =
-      new SpeechSynthesisUtterance(
-        word.toLowerCase()
-      );
-
-
-    speech.lang =
-      "en-US";
-
-    speech.rate =
-      0.75;
-
-
-    speechSynthesis.speak(
-      speech
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   STAGE 1
-========================================================= */
-
-function finishLearn() {
-
-  currentProgress[
-    currentIndex
-  ].learn = 20;
-
-
-  buildStage2();
-
-  showStage("stage2");
-
-}
-
-
-/* =========================================================
-   RANDOM CHOICES
-========================================================= */
-
-function randomChoices(
-  correct,
-  count,
-  source
-) {
-
-  const correctLower =
-    correct.toLowerCase();
-
-
-  const pool =
-    source.filter(
-      word =>
-        word.toLowerCase()
-        !== correctLower
-    );
-
-
-  shuffle(pool);
-
-
-  const choices =
-    [
-      correct,
-      ...pool.slice(
-        0,
-        count - 1
-      )
-    ];
-
-
-  return shuffle(
-    choices
-  );
-
-}
-
-
-/* =========================================================
-   STAGE 2
-   REAL WORDS ONLY
-========================================================= */
-
-function buildStage2() {
-
-  const word =
-    MODULES[currentModule]
-      [currentIndex];
-
-
-  const box =
-    document.getElementById(
-      "stage2Options"
-    );
-
-
-  box.innerHTML = "";
-
-
-  document
-    .getElementById(
-      "feedback2"
-    )
-    .textContent = "";
-
-
-  const choices =
-    randomChoices(
-      word,
-      4,
-      MODULES[currentModule]
-    );
-
-
-  choices.forEach(
-    choice => {
-
-      const button =
-        document.createElement(
-          "button"
-        );
-
-
-      button.className =
-        "option";
-
-
-      button.textContent =
-        choice.toLowerCase();
-
-
-      button.onclick =
-        () =>
-          answerStage2(
-            choice
-          );
-
-
-      box.appendChild(
-        button
-      );
-
-    }
-  );
-
-
-  setTimeout(
-    speakCurrent,
-    350
-  );
-
-}
-
-
-function answerStage2(answer) {
-
-  document
-    .querySelectorAll(
-      "#stage2Options button"
-    )
-    .forEach(
-      button =>
-        button.disabled = true
-    );
-
-
-  const word =
-    MODULES[currentModule]
-      [currentIndex];
-
-
-  const correct =
-    answer.toLowerCase()
-    === word.toLowerCase();
-
-
-  currentProgress[
-    currentIndex
-  ].listen =
-    correct
-      ? 20
-      : 0;
-
-
-  document
-    .getElementById(
-      "feedback2"
-    )
-    .innerHTML =
-      correct
-        ? '<span class="correct">✓ Correct!</span>'
-        : '<span class="incorrect">✗ Incorrect</span>';
-
-
-  setTimeout(
-    () => {
-
-      buildStage3();
-
-      showStage(
-        "stage3"
-      );
-
-    },
-    700
-  );
-
-}
-
-
-/* =========================================================
-   MISSPELLINGS FOR STAGE 3
-========================================================= */
-
-function createMisspellings(
-  word
-) {
-
-  const w =
-    word.toLowerCase();
-
-
-  const variants =
-    new Set();
-
-
-  if (w.length > 5) {
-
-    variants.add(
-      w.slice(0,3) +
-      w.slice(4)
-    );
-
-  }
-
-
-  if (w.length > 6) {
-
-    variants.add(
-      w.slice(0,4) +
-      "e" +
-      w.slice(4)
-    );
-
-  }
-
-
-  variants.add(
-    w.replace(
-      /[aeiou]/,
-      ""
-    )
-  );
-
-
-  variants.add(
-    w + "i"
-  );
-
-
-  let n = 1;
-
-
-  while (
-    variants.size < 3
-  ) {
-
-    variants.add(
-      w.slice(
-        0,
-        -n
-      ) +
-      "x" +
-      w.slice(-n)
-    );
-
-
-    n++;
-
-  }
-
-
-  return [
-    ...variants
-  ]
-  .filter(
-    value =>
-      value !== w
-  )
-  .slice(0,3);
-
-}
-
-
-/* =========================================================
-   STAGE 3
-========================================================= */
-
-function buildStage3() {
-
-  const word =
-    MODULES[currentModule]
-      [currentIndex];
-
-
-  const box =
-    document.getElementById(
-      "stage3Options"
-    );
-
-
-  box.innerHTML = "";
-
-
-  document
-    .getElementById(
-      "feedback3"
-    )
-    .textContent = "";
-
-
-  const choices =
-    [
-      word,
-      ...createMisspellings(
-        word
-      )
-    ];
-
-
-  shuffle(
-    choices
-  );
-
-
-  choices.forEach(
-    choice => {
-
-      const button =
-        document.createElement(
-          "button"
-        );
-
-
-      button.className =
-        "option";
-
-
-      button.textContent =
-        choice.toLowerCase();
-
-
-      button.onclick =
-        () =>
-          answerStage3(
-            choice
-          );
-
-
-      box.appendChild(
-        button
-      );
-
-    }
-  );
-
-
-  setTimeout(
-    speakCurrent,
-    350
-  );
-
-}
-
-
-function answerStage3(answer) {
-
-  document
-    .querySelectorAll(
-      "#stage3Options button"
-    )
-    .forEach(
-      button =>
-        button.disabled = true
-    );
-
-
-  const word =
-    MODULES[currentModule]
-      [currentIndex];
-
-
-  const correct =
-    answer.toLowerCase()
-    === word.toLowerCase();
-
-
-  currentProgress[
-    currentIndex
-  ].spelling =
-    correct
-      ? 20
-      : 0;
-
-
-  document
-    .getElementById(
-      "feedback3"
-    )
-    .innerHTML =
-      correct
-        ? '<span class="correct">✓ Correct spelling!</span>'
-        : '<span class="incorrect">✗ Incorrect spelling</span>';
-
-
-  setTimeout(
-    () => {
-
-      buildStage4();
-
-      showStage(
-        "stage4"
-      );
-
-    },
-    700
-  );
-
-}
-
-
-/* =========================================================
-   STAGE 4
-========================================================= */
-
-function buildStage4() {
-
-  const word =
-    MODULES[currentModule]
-      [currentIndex];
-
-
-  const box =
-    document.getElementById(
-      "stage4Options"
-    );
-
-
-  box.innerHTML = "";
-
-
-  document
-    .getElementById(
-      "feedback4"
-    )
-    .textContent = "";
-
-
-  document
-    .getElementById(
-      "sentenceText"
-    )
-    .textContent =
-      SENTENCES[word]
-      ||
-      `Choose the word that correctly completes the sentence.`;
-
-
-  const choices =
-    randomChoices(
-      word,
-      4,
-      MODULES[currentModule]
-    );
-
-
-  choices.forEach(
-    choice => {
-
-      const button =
-        document.createElement(
-          "button"
-        );
-
-
-      button.className =
-        "option";
-
-
-      button.textContent =
-        choice.toLowerCase();
-
-
-      button.onclick =
-        () =>
-          answerStage4(
-            choice
-          );
-
-
-      box.appendChild(
-        button
-      );
-
-    }
-  );
-
-}
-
-
-function answerStage4(answer) {
-
-  document
-    .querySelectorAll(
-      "#stage4Options button"
-    )
-    .forEach(
-      button =>
-        button.disabled = true
-    );
-
-
-  const word =
-    MODULES[currentModule]
-      [currentIndex];
-
-
-  const correct =
-    answer.toLowerCase()
-    === word.toLowerCase();
-
-
-  currentProgress[
-    currentIndex
-  ].sentence =
-    correct
-      ? 20
-      : 0;
-
-
-  document
-    .getElementById(
-      "feedback4"
-    )
-    .innerHTML =
-      correct
-        ? '<span class="correct">✓ Correct!</span>'
-        : '<span class="incorrect">✗ Incorrect</span>';
-
-
-  setTimeout(
-    () => {
-
-      startHangman(
-        false
-      );
-
-      showStage(
-        "stage5"
-      );
-
-    },
-    700
-  );
-
-}
-
-
-/* =========================================================
-   HANGMAN KEYBOARD
-========================================================= */
-
-const KEY_ROWS = [
-
-  [
-    "q","w","e","r","t",
-    "y","u","i","o","p"
-  ],
-
-  [
-    "a","s","d","f","g",
-    "h","j","k","l"
-  ],
-
-  [
-    "z","x","c","v",
-    "b","n","m"
-  ]
-
+if (mode === "review") {
+return reviewQueue[
+reviewIndex
 ];
-
-
+}
+return MODULES[currentModule]
+[currentIndex];
+}
+function speakCurrent() {
+speechGeneration++;
+const word =
+getCurrentWord();
+if (
+"speechSynthesis"
+in window
+) {
+speechSynthesis.cancel();
+const speech =
+new SpeechSynthesisUtterance(
+word.toLowerCase()
+);
+speech.lang =
+"en-US"
+speech.rate =
+0.75;
+speechSynthesis.speak(
+speech
+);
+}
+}
+/* =========================================================
+STAGE 1
+========================================================= */
+function finishLearn() {
+currentProgress[
+currentIndex
+].learn = 20;
+buildStage2();
+showStage("stage2");
+}
+/* =========================================================
+RANDOM CHOICES
+========================================================= */
+function randomChoices(
+correct,
+count,
+source
+) {
+const correctLower =
+correct.toLowerCase();
+const pool =
+source.filter(
+word =>
+word.toLowerCase()
+!== correctLower
+);
+shuffle(pool);
+const choices =
+[
+correct,
+...pool.slice(
+0,
+count - 1
+)
+];
+return shuffle(
+choices
+);
+}
+/* =========================================================
+STAGE 2
+REAL WORDS ONLY
+========================================================= */
+function buildStage2() {
+const word =
+MODULES[currentModule]
+[currentIndex];
+const box =
+document.getElementById(
+"stage2Options"
+);
+box.innerHTML = ""
+document
+.getElementById(
+"feedback2"
+)
+.textContent = ""
+const choices =
+randomChoices(
+word,
+4,
+MODULES[currentModule]
+);
+choices.forEach(
+choice => {
+const button =
+document.createElement(
+"button"
+);
+button.className =
+"option"
+button.textContent =
+choice;
+button.onclick =
+() =>
+answerStage2(
+choice
+);
+box.appendChild(
+button
+);
+}
+);
+schedule(
+speakCurrent,
+350
+);
+}
+function answerStage2(answer) {
+if (continueAction) return;
+document
+.querySelectorAll(
+"#stage2Options button"
+)
+.forEach(
+button =>
+button.disabled = true
+);
+const word =
+MODULES[currentModule]
+[currentIndex];
+const correct =
+answer.toLowerCase()
+=== word.toLowerCase();
+currentProgress[
+currentIndex
+].listen =
+correct
+? 20
+: 0;
+document
+.getElementById(
+"feedback2"
+)
+.innerHTML =
+correct
+? '<span class="correct">✓ Correct!</span>'
+: `<span class="incorrect">✗ Incorrect. Correct answer: ${word}</span>`;
+continueAction = advanceStageWord;
+schedule(() => { continueAction = null; advanceStageWord(); }, correct ? 1000 : 1800);
+}
+/* =========================================================
+MISSPELLINGS FOR STAGE 3
+========================================================= */
+function createMisspellings(
+word
+) {
+const w =
+word.toLowerCase();
+const variants =
+new Set();
+if (w.length > 5) {
+variants.add(
+w.slice(0,3) +
+w.slice(4)
+);
+}
+if (w.length > 6) {
+variants.add(
+w.slice(0,4) +
+"e" +
+w.slice(4)
+);
+}
+variants.add(
+w.replace(
+/[aeiou]/,
+""
+)
+);
+variants.add(
+w + "i"
+);
+let n = 1;
+while (
+variants.size < 3
+) {
+variants.add(
+w.slice(
+0,
+-n
+) +
+"x" +
+w.slice(-n)
+);
+n++;
+}
+return [
+...variants
+]
+.filter(
+value =>
+value !== w
+)
+.slice(0,3);
+}
+/* =========================================================
+STAGE 3
+========================================================= */
+function buildStage3() {
+const word =
+MODULES[currentModule]
+[currentIndex];
+const box =
+document.getElementById(
+"stage3Options"
+);
+box.innerHTML = ""
+document
+.getElementById(
+"feedback3"
+)
+.textContent = ""
+const choices =
+[
+word,
+...createMisspellings(
+word
+)
+];
+shuffle(
+choices
+);
+choices.forEach(
+choice => {
+const button =
+document.createElement(
+"button"
+);
+button.className =
+"option"
+button.textContent =
+choice;
+button.onclick =
+() =>
+answerStage3(
+choice
+);
+box.appendChild(
+button
+);
+}
+);
+schedule(
+speakCurrent,
+350
+);
+}
+function answerStage3(answer) {
+document
+.querySelectorAll(
+"#stage3Options button"
+)
+.forEach(
+button =>
+button.disabled = true
+);
+const word =
+MODULES[currentModule]
+[currentIndex];
+if (continueAction) return;
+const correct =
+answer.toLowerCase()
+=== word.toLowerCase();
+currentProgress[
+currentIndex
+].spelling =
+correct
+? 20
+: 0;
+document
+.getElementById(
+"feedback3"
+)
+.innerHTML =
+correct
+? '<span class="correct">✓ Correct spelling!</span>'
+: `<span class="incorrect">✗ Correct answer: ${word}</span>`;
+offerContinue(advanceStageWord);
+}
+/* =========================================================
+STAGE 4
+========================================================= */
+function buildStage4() {
+const word =
+MODULES[currentModule]
+[currentIndex];
+const box =
+document.getElementById(
+"stage4Options"
+);
+box.innerHTML = ""
+document
+.getElementById(
+"feedback4"
+)
+.textContent = ""
+document
+.getElementById(
+"sentenceText"
+)
+.textContent =
+SENTENCES[word]
+||
+`Choose the word that correctly completes the sentence.`;
+const choices =
+randomChoices(
+word,
+4,
+MODULES[currentModule]
+);
+choices.forEach(
+choice => {
+const button =
+document.createElement(
+"button"
+);
+button.className =
+"option"
+button.textContent =
+choice;
+button.onclick =
+() =>
+answerStage4(
+choice
+);
+box.appendChild(
+button
+);
+}
+);
+}
+function answerStage4(answer) {
+if (continueAction) return;
+document
+.querySelectorAll(
+"#stage4Options button"
+)
+.forEach(
+button =>
+button.disabled = true
+);
+const word =
+MODULES[currentModule]
+[currentIndex];
+const correct =
+answer.toLowerCase()
+=== word.toLowerCase();
+currentProgress[
+currentIndex
+].sentence =
+correct
+? 20
+: 0;
+document
+.getElementById(
+"feedback4"
+)
+.innerHTML =
+correct
+? '<span class="correct">✓ Correct!</span>'
+: `<span class="incorrect">✗ Incorrect. Correct answer: ${word}</span>`;
+continueAction = advanceStageWord;
+document.querySelectorAll("#stage4Options button").forEach(button => {
+ if(button.textContent.toLowerCase() === word.toLowerCase()) {button.classList.add("answer-highlight");button.setAttribute("aria-label", word + ", correct answer");}
+});
+schedule(() => { continueAction = null; advanceStageWord(); }, correct ? 1000 : 1800);
+}
+/* =========================================================
+HANGMAN KEYBOARD
+========================================================= */
+const KEY_ROWS = [
+[
+"q","w","e","r","t",
+"y","u","i","o","p"
+],
+[
+"a","s","d","f","g",
+"h","j","k","l"
+],
+[
+"z","x","c","v",
+"b","n","m"
+]
+];
 function buildKeyboard(
-  prefix
+prefix
 ) {
-
-  KEY_ROWS.forEach(
-    (row,rowIndex) => {
-
-      const id =
-        prefix +
-        "Row" +
-        (rowIndex + 1);
-
-
-      const container =
-        document.getElementById(
-          id
-        );
-
-
-      container.innerHTML = "";
-
-
-      row.forEach(
-        letter => {
-
-          const button =
-            document.createElement(
-              "button"
-            );
-
-
-          button.className =
-            "key";
-
-
-          button.textContent =
-            letter;
-
-
-          button.dataset.letter =
-            letter;
-
-
-          button.onclick =
-            () =>
-              guessLetter(
-                letter,
-                button
-              );
-
-
-          container.appendChild(
-            button
-          );
-
-        }
-      );
-
-    }
-  );
-
+KEY_ROWS.forEach(
+(row,rowIndex) => {
+const id =
+prefix +
+"Row" +
+(rowIndex + 1);
+const container =
+document.getElementById(
+id
+);
+container.innerHTML = ""
+row.forEach(
+letter => {
+const button =
+document.createElement(
+"button"
+);
+button.className =
+"key"
+button.textContent =
+letter;
+button.dataset.letter =
+letter;
+button.onclick =
+() =>
+guessLetter(
+letter,
+button
+);
+container.appendChild(
+button
+);
 }
-
-
-buildKeyboard(
-  "main"
 );
-
-buildKeyboard(
-  "review"
+}
 );
-
-
+}
+buildKeyboard(
+"main"
+);
+buildKeyboard(
+"review"
+);
 /* =========================================================
-   HANGMAN START
+HANGMAN START
 ========================================================= */
-
 function startHangman(
-  isReview
+isReview
 ) {
-
-  mode =
-    isReview
-      ? "review"
-      : "main";
-
-
-  hangmanMistakes =
-    0;
-
-
-  guessedLetters =
-    [];
-
-
-  const parts =
-    isReview
-      ? [
-          "r1",
-          "r2",
-          "r3",
-          "r4",
-          "r5",
-          "r6"
-        ]
-      : [
-          "h1",
-          "h2",
-          "h3",
-          "h4",
-          "h5",
-          "h6"
-        ];
-
-
-  parts.forEach(
-    id => {
-
-      document
-        .getElementById(id)
-        .classList.add(
-          "hidden"
-        );
-
-    }
-  );
-
-
-  const prefix =
-    isReview
-      ? "review"
-      : "main";
-
-
-  document
-    .querySelectorAll(
-      `#${prefix}Row1 .key,
-       #${prefix}Row2 .key,
-       #${prefix}Row3 .key`
-    )
-    .forEach(
-      button =>
-        button.disabled = false
-    );
-
-
-  document
-    .getElementById(
-      isReview
-        ? "reviewHangmanFeedback"
-        : "hangmanFeedback"
-    )
-    .textContent = "";
-
-
-  updateHangman();
-
+mode =
+isReview
+? "review"
+: "main"
+hangmanFinished = false;
+hangmanMistakes =
+0;
+guessedLetters =
+[];
+const parts =
+isReview
+? [
+"r1",
+"r2",
+"r3",
+"r4",
+"r5",
+"r6"
+]
+: [
+"h1",
+"h2",
+"h3",
+"h4",
+"h5",
+"h6"
+];
+parts.forEach(
+id => {
+document
+.getElementById(id)
+.classList.add(
+"hidden"
+);
 }
-
-
+);
+const prefix =
+isReview
+? "review"
+: "main"
+document
+.querySelectorAll(
+`#${prefix}Row1 .key,
+#${prefix}Row2 .key,
+#${prefix}Row3 .key`
+)
+.forEach(
+button =>
+button.disabled = false
+);
+document
+.getElementById(
+isReview
+? "reviewHangmanFeedback"
+: "hangmanFeedback"
+)
+.textContent = ""
+updateHangman();
+}
 /* =========================================================
-   HANGMAN DISPLAY
+HANGMAN DISPLAY
 ========================================================= */
-
+function lockHangman() {
+ hangmanFinished = true;
+ const prefix = mode === "review" ? "review" : "main";
+ document.querySelectorAll(`[id^="${prefix}Row"] button`).forEach(b => b.disabled = true);
+}
 function updateHangman() {
-
-  const word =
-    getCurrentWord()
-      .toLowerCase();
-
-
-  let display = "";
-
-
-  [
-    ...word
-  ].forEach(
-    letter => {
-
-      if (
-        guessedLetters
-          .includes(letter)
-      ) {
-
-        display +=
-          letter + " ";
-
-      } else {
-
-        display +=
-          "_ ";
-
-      }
-
-    }
-  );
-
-
-  document
-    .getElementById(
-      mode === "review"
-        ? "reviewHangmanWord"
-        : "hangmanWord"
-    )
-    .textContent =
-      display.trim();
-
+const word =
+getCurrentWord()
+.toLowerCase();
+let display = "";
+[
+...word
+].forEach(
+letter => {
+if (
+guessedLetters
+.includes(letter)
+) {
+display +=
+letter + " "
+} else {
+display +=
+"_ "
 }
-
-
+}
+);
+document
+.getElementById(
+mode === "review"
+? "reviewHangmanWord"
+: "hangmanWord"
+)
+.textContent =
+display.trim();
+}
 /* =========================================================
-   HANGMAN GUESS
+HANGMAN GUESS
 ========================================================= */
-
 function guessLetter(
-  letter,
-  button
+letter,
+button
 ) {
-
-  if (
-    button.disabled
-  ) {
-
-    return;
-
-  }
-
-
-  button.disabled =
-    true;
-
-
-  guessedLetters.push(
-    letter
-  );
-
-
-  const word =
-    getCurrentWord()
-      .toLowerCase();
-
-
-  if (
-    !word.includes(
-      letter
-    )
-  ) {
-
-    hangmanMistakes++;
-
-
-    const prefix =
-      mode === "review"
-        ? "r"
-        : "h";
-
-
-    const part =
-      document.getElementById(
-        prefix +
-        hangmanMistakes
-      );
-
-
-    if (part) {
-
-      part.classList.remove(
-        "hidden"
-      );
-
-    }
-
-  }
-
-
-  updateHangman();
-
-
-  const complete =
-    [
-      ...new Set(
-        word.split("")
-      )
-    ]
-    .every(
-      letter =>
-        guessedLetters
-          .includes(letter)
-    );
-
-
-  if (complete) {
-
-    const score =
-      Math.max(
-        0,
-        20 -
-        hangmanMistakes * 4
-      );
-
-
-    if (
-      mode === "review"
-    ) {
-
-      finishReviewHangman(
-        true,
-        score
-      );
-
-    } else {
-
-      finishMainHangman(
-        true,
-        score
-      );
-
-    }
-
-
-    return;
-
-  }
-
-
-  if (
-    hangmanMistakes >= 6
-  ) {
-
-    if (
-      mode === "review"
-    ) {
-
-      finishReviewHangman(
-        false,
-        0
-      );
-
-    } else {
-
-      finishMainHangman(
-        false,
-        0
-      );
-
-    }
-
-  }
-
+if (
+button.disabled || hangmanFinished
+) {
+return;
 }
-
-
+button.disabled =
+true;
+guessedLetters.push(
+letter
+);
+const word =
+getCurrentWord()
+.toLowerCase();
+if (
+!word.includes(
+letter
+)
+) {
+hangmanMistakes++;
+const prefix =
+mode === "review"
+? "r"
+: "h"
+const part =
+document.getElementById(
+prefix +
+hangmanMistakes
+);
+if (part) {
+part.classList.remove(
+"hidden"
+);
+}
+}
+updateHangman();
+const complete =
+[
+...new Set(
+word.split("")
+)
+]
+.every(
+letter =>
+guessedLetters
+.includes(letter)
+);
+if (complete) {
+lockHangman();
+const score =
+Math.max(
+0,
+20 -
+hangmanMistakes * 4
+);
+if (
+mode === "review"
+) {
+finishReviewHangman(
+true,
+score
+);
+} else {
+finishMainHangman(
+true,
+score
+);
+}
+return;
+}
+if (
+hangmanMistakes >= 6
+) {
+lockHangman();
+if (
+mode === "review"
+) {
+finishReviewHangman(
+false,
+0
+);
+} else {
+finishMainHangman(
+false,
+0
+);
+}
+}
+}
 /* =========================================================
-   WORD SCORE
+WORD SCORE
 ========================================================= */
-
 function getWordScore(
-  index
+index
 ) {
-
-  const p =
-    currentProgress[
-      index
-    ];
-
-
-  return (
-    p.learn +
-    p.listen +
-    p.spelling +
-    p.sentence +
-    p.hangman
-  );
-
+const p =
+currentProgress[
+index
+];
+return (p.listen + p.meaning + p.spelling + p.sentence + p.hangman) / 100 * 100;
 }
-
-
 /* =========================================================
-   MAIN HANGMAN COMPLETE
+MAIN HANGMAN COMPLETE
 ========================================================= */
-
 function finishMainHangman(
-  success,
-  score
+success,
+score
 ) {
-
-  currentProgress[
-    currentIndex
-  ].hangman =
-    score;
-
-
-  const feedback =
-    document.getElementById(
-      "hangmanFeedback"
-    );
-
-
-  feedback.innerHTML =
-    success
-
-      ? '<span class="correct">✓ Word complete!</span>'
-
-      : `<span class="incorrect">
-           ✗ The word was
-           ${MODULES[currentModule][currentIndex].toLowerCase()}.
-         </span>`;
-
-
-  setTimeout(
-    completeMainWord,
-    750
-  );
-
+currentProgress[
+currentIndex
+].hangman =
+score;
+const feedback =
+document.getElementById(
+"hangmanFeedback"
+);
+feedback.innerHTML =
+success
+? '<span class="correct">✓ Word complete!</span>'
+: `<span class="incorrect">
+✗ The word was
+${MODULES[currentModule][currentIndex].toLowerCase()}.
+</span>`;
+offerContinue(advanceStageWord);
 }
-
-
 /* =========================================================
-   COMPLETE MAIN WORD
+COMPLETE MAIN WORD
 ========================================================= */
-
 function completeMainWord() {
-
-  const score =
-    getWordScore(
-      currentIndex
-    );
-
-
-  if (
-    score < 100
-  ) {
-
-    reviewQueue.push(
-      MODULES[currentModule]
-        [currentIndex]
-    );
-
-  }
-
-
-  currentIndex++;
-
-
-  if (
-    currentIndex <
-    MODULES[currentModule].length
-  ) {
-
-    setupWord();
-
-    return;
-
-  }
-
-
-  if (
-    reviewQueue.length
-  ) {
-
-    reviewIndex = 0;
-
-
-    document
-      .getElementById(
-        "reviewWord"
-      )
-      .textContent =
-        reviewQueue[0]
-          .toLowerCase();
-
-
-    mode =
-      "review";
-
-
-    showStage(
-      "reviewIntro"
-    );
-
-
-  } else {
-
-    finishModule();
-
-  }
-
+const score =
+getWordScore(
+currentIndex
+);
+if (
+score < 100
+) {
+reviewQueue.push(
+MODULES[currentModule]
+[currentIndex]
+);
 }
-
-
+currentIndex++;
+if (
+currentIndex <
+MODULES[currentModule].length
+) {
+setupWord();
+return;
+}
+if (
+reviewQueue.length
+) {
+reviewIndex = 0;
+document
+.getElementById(
+"reviewWord"
+)
+.textContent =
+reviewQueue[0]
+.toLowerCase();
+mode =
+"review"
+showStage(
+"reviewIntro"
+);
+} else {
+finishModule();
+}
+}
 /* =========================================================
-   FINAL REVIEW
+FINAL REVIEW
 ========================================================= */
-
 function startReview() {
-
-  mode =
-    "review";
-
-
-  buildReviewSpelling();
-
-  showStage(
-    "reviewSpelling"
-  );
-
+reviewResults[reviewQueue[reviewIndex]] = {spelling:false, sentence:false, hangman:0};
+mode =
+"review"
+buildReviewSpelling();
+showStage(
+"reviewSpelling"
+);
 }
-
-
 /* =========================================================
-   REVIEW SPELLING
+REVIEW SPELLING
 ========================================================= */
-
 function buildReviewSpelling() {
-
-  const word =
-    reviewQueue[
-      reviewIndex
-    ];
-
-
-  const box =
-    document.getElementById(
-      "reviewSpellOptions"
-    );
-
-
-  box.innerHTML = "";
-
-
-  document
-    .getElementById(
-      "reviewSpellFeedback"
-    )
-    .textContent = "";
-
-
-  const choices =
-    [
-      word,
-      ...createMisspellings(
-        word
-      )
-    ];
-
-
-  shuffle(
-    choices
-  );
-
-
-  choices.forEach(
-    choice => {
-
-      const button =
-        document.createElement(
-          "button"
-        );
-
-
-      button.className =
-        "option";
-
-
-      button.textContent =
-        choice.toLowerCase();
-
-
-      button.onclick =
-        () =>
-          answerReviewSpell(
-            choice
-          );
-
-
-      box.appendChild(
-        button
-      );
-
-    }
-  );
-
-
-  setTimeout(
-    speakCurrent,
-    350
-  );
-
+const word =
+reviewQueue[
+reviewIndex
+];
+const box =
+document.getElementById(
+"reviewSpellOptions"
+);
+box.innerHTML = ""
+document
+.getElementById(
+"reviewSpellFeedback"
+)
+.textContent = ""
+const choices =
+[
+word,
+...createMisspellings(
+word
+)
+];
+shuffle(
+choices
+);
+choices.forEach(
+choice => {
+const button =
+document.createElement(
+"button"
+);
+button.className =
+"option"
+button.textContent =
+choice;
+button.onclick =
+() =>
+answerReviewSpell(
+choice
+);
+box.appendChild(
+button
+);
 }
-
-
+);
+schedule(
+speakCurrent,
+350
+);
+}
 function answerReviewSpell(
-  answer
+answer
 ) {
-
-  document
-    .querySelectorAll(
-      "#reviewSpellOptions button"
-    )
-    .forEach(
-      button =>
-        button.disabled = true
-    );
-
-
-  const word =
-    reviewQueue[
-      reviewIndex
-    ];
-
-
-  const correct =
-    answer.toLowerCase()
-    === word.toLowerCase();
-
-
-  const moduleWordIndex =
-    MODULES[currentModule]
-      .findIndex(
-        w =>
-          w.toLowerCase()
-          === word.toLowerCase()
-      );
-
-
-  if (correct) {
-
-    currentProgress[
-      moduleWordIndex
-    ].spelling = 20;
-
-  }
-
-
-  document
-    .getElementById(
-      "reviewSpellFeedback"
-    )
-    .innerHTML =
-      correct
-
-        ? '<span class="correct">✓ Correct!</span>'
-
-        : '<span class="incorrect">✗ Incorrect</span>';
-
-
-  setTimeout(
-    () => {
-
-      buildReviewSentence();
-
-      showStage(
-        "reviewSentence"
-      );
-
-    },
-    700
-  );
-
+document
+.querySelectorAll(
+"#reviewSpellOptions button"
+)
+.forEach(
+button =>
+button.disabled = true
+);
+const word =
+reviewQueue[
+reviewIndex
+];
+if (continueAction) return;
+const correct =
+answer.toLowerCase()
+=== word.toLowerCase();
+const moduleWordIndex =
+MODULES[currentModule]
+.findIndex(
+w =>
+w.toLowerCase()
+=== word.toLowerCase()
+);
+reviewResults[word].spelling = correct;
+document
+.getElementById(
+"reviewSpellFeedback"
+)
+.innerHTML =
+correct
+? '<span class="correct">✓ Correct!</span>'
+: `<span class="incorrect">✗ Correct answer: ${word}</span>`;
+offerContinue(() => {
+buildReviewSentence();
+showStage(
+"reviewSentence"
+);
+});
 }
-
-
 /* =========================================================
-   REVIEW SENTENCE
+REVIEW SENTENCE
 ========================================================= */
-
 function buildReviewSentence() {
-
-  const word =
-    reviewQueue[
-      reviewIndex
-    ];
-
-
-  const box =
-    document.getElementById(
-      "reviewSentenceOptions"
-    );
-
-
-  box.innerHTML = "";
-
-
-  document
-    .getElementById(
-      "reviewSentenceFeedback"
-    )
-    .textContent = "";
-
-
-  document
-    .getElementById(
-      "reviewSentenceText"
-    )
-    .textContent =
-      SENTENCES[word]
-      ||
-      "Choose the word that correctly completes the sentence.";
-
-
-  const choices =
-    randomChoices(
-      word,
-      4,
-      MODULES[currentModule]
-    );
-
-
-  choices.forEach(
-    choice => {
-
-      const button =
-        document.createElement(
-          "button"
-        );
-
-
-      button.className =
-        "option";
-
-
-      button.textContent =
-        choice.toLowerCase();
-
-
-      button.onclick =
-        () =>
-          answerReviewSentence(
-            choice
-          );
-
-
-      box.appendChild(
-        button
-      );
-
-    }
-  );
-
+const word =
+reviewQueue[
+reviewIndex
+];
+const box =
+document.getElementById(
+"reviewSentenceOptions"
+);
+box.innerHTML = ""
+document
+.getElementById(
+"reviewSentenceFeedback"
+)
+.textContent = ""
+document
+.getElementById(
+"reviewSentenceText"
+)
+.textContent =
+SENTENCES[word]
+||
+"Choose the word that correctly completes the sentence."
+const choices =
+randomChoices(
+word,
+4,
+MODULES[currentModule]
+);
+choices.forEach(
+choice => {
+const button =
+document.createElement(
+"button"
+);
+button.className =
+"option"
+button.textContent =
+choice;
+button.onclick =
+() =>
+answerReviewSentence(
+choice
+);
+box.appendChild(
+button
+);
 }
-
-
+);
+}
 function answerReviewSentence(
-  answer
+answer
 ) {
-
-  document
-    .querySelectorAll(
-      "#reviewSentenceOptions button"
-    )
-    .forEach(
-      button =>
-        button.disabled = true
-    );
-
-
-  const word =
-    reviewQueue[
-      reviewIndex
-    ];
-
-
-  const correct =
-    answer.toLowerCase()
-    === word.toLowerCase();
-
-
-  const moduleWordIndex =
-    MODULES[currentModule]
-      .findIndex(
-        w =>
-          w.toLowerCase()
-          === word.toLowerCase()
-      );
-
-
-  if (correct) {
-
-    currentProgress[
-      moduleWordIndex
-    ].sentence = 20;
-
-  }
-
-
-  document
-    .getElementById(
-      "reviewSentenceFeedback"
-    )
-    .innerHTML =
-      correct
-
-        ? '<span class="correct">✓ Correct!</span>'
-
-        : '<span class="incorrect">✗ Incorrect</span>';
-
-
-  setTimeout(
-    () => {
-
-      startHangman(
-        true
-      );
-
-      showStage(
-        "reviewHangman"
-      );
-
-    },
-    700
-  );
-
+document
+.querySelectorAll(
+"#reviewSentenceOptions button"
+)
+.forEach(
+button =>
+button.disabled = true
+);
+const word =
+reviewQueue[
+reviewIndex
+];
+if (continueAction) return;
+const correct =
+answer.toLowerCase()
+=== word.toLowerCase();
+const moduleWordIndex =
+MODULES[currentModule]
+.findIndex(
+w =>
+w.toLowerCase()
+=== word.toLowerCase()
+);
+reviewResults[word].sentence = correct;
+document
+.getElementById(
+"reviewSentenceFeedback"
+)
+.innerHTML =
+correct
+? '<span class="correct">✓ Correct!</span>'
+: `<span class="incorrect">✗ Correct answer: ${word}</span>`;
+offerContinue(() => {
+startHangman(
+true
+);
+showStage(
+"reviewHangman"
+);
+});
 }
-
-
 /* =========================================================
-   REVIEW HANGMAN COMPLETE
+REVIEW HANGMAN COMPLETE
 ========================================================= */
-
 function finishReviewHangman(
-  success,
-  score
+success,
+score
 ) {
-
-  const word =
-    reviewQueue[
-      reviewIndex
-    ];
-
-
-  const moduleWordIndex =
-    MODULES[currentModule]
-      .findIndex(
-        w =>
-          w.toLowerCase()
-          === word.toLowerCase()
-      );
-
-
-  if (success) {
-
-    currentProgress[
-      moduleWordIndex
-    ].hangman =
-      Math.max(
-        currentProgress[
-          moduleWordIndex
-        ].hangman,
-        score
-      );
-
-  }
-
-
-  document
-    .getElementById(
-      "reviewHangmanFeedback"
-    )
-    .innerHTML =
-      success
-
-        ? '<span class="correct">✓ Review complete!</span>'
-
-        : '<span class="incorrect">✗ Keep practicing this word.</span>';
-
-
-  setTimeout(
-    () => {
-
-      reviewIndex++;
-
-
-      if (
-        reviewIndex <
-        reviewQueue.length
-      ) {
-
-        document
-          .getElementById(
-            "reviewWord"
-          )
-          .textContent =
-            reviewQueue[
-              reviewIndex
-            ].toLowerCase();
-
-
-        showStage(
-          "reviewIntro"
-        );
-
-      } else {
-
-        finishModule();
-
-      }
-
-    },
-    800
-  );
-
+const word =
+reviewQueue[
+reviewIndex
+];
+const moduleWordIndex =
+MODULES[currentModule]
+.findIndex(
+w =>
+w.toLowerCase()
+=== word.toLowerCase()
+);
+reviewResults[word].hangman = score;
+document
+.getElementById(
+"reviewHangmanFeedback"
+)
+.innerHTML =
+success
+? '<span class="correct">✓ Review complete!</span>'
+: '<span class="incorrect">✗ Keep practicing this word.</span>';
+offerContinue(() => {
+reviewIndex++;
+if (
+reviewIndex <
+reviewQueue.length
+) {
+document
+.getElementById(
+"reviewWord"
+)
+.textContent =
+reviewQueue[
+reviewIndex
+].toLowerCase();
+showStage(
+"reviewIntro"
+);
+} else {
+finishModule();
 }
-
-
+});
+}
 /* =========================================================
-   FINISH MODULE
+FINISH MODULE
 ========================================================= */
-
 function finishModule() {
-
-  const wordScores =
-    currentProgress.map(
-      (_,index) =>
-        getWordScore(
-          index
-        )
-    );
-
-
-  const total =
-    wordScores.reduce(
-      (a,b) =>
-        a + b,
-      0
-    );
-
-
-  const max =
-    currentProgress.length *
-    100;
-
-
-  const moduleScore =
-    Math.round(
-      total /
-      max *
-      100
-    );
-
-
-  const records =
-    loadRecords(
-      currentModule
-    );
-
-
-  const previousBest =
-    records.length
-      ? Math.max(
-          ...records.map(
-            r => r.score
-          )
-        )
-      : 0;
-
-
-  const isNewRecord =
-    moduleScore >
-    previousBest;
-
-
-  const record = {
-
-    attempt:
-      attempt,
-
-    name:
-      playerName,
-
-    score:
-      moduleScore,
-
-    date:
-      new Date()
-        .toLocaleDateString()
-
-  };
-
-
-  records.push(
-    record
-  );
-
-
-  saveRecords(
-    currentModule,
-    records
-  );
-
-
-  document
-    .getElementById(
-      "resultScore"
-    )
-    .textContent =
-      moduleScore + "%";
-
-
-  document
-    .getElementById(
-      "resultAttempt"
-    )
-    .textContent =
-      attempt;
-
-
-  document
-    .getElementById(
-      "resultPlayer"
-    )
-    .textContent =
-      playerName;
-
-
-  const newBest =
-    Math.max(
-      ...records.map(
-        r => r.score
-      )
-    );
-
-
-  document
-    .getElementById(
-      "resultBest"
-    )
-    .textContent =
-      newBest + "%";
-
-
-  let badge;
-
-
-  if (
-    moduleScore >= 95
-  ) {
-
-    badge =
-      "🏆 Master";
-
-  } else if (
-    moduleScore >= 90
-  ) {
-
-    badge =
-      "🌟 Excellent";
-
-  } else if (
-    moduleScore >= 80
-  ) {
-
-    badge =
-      "👍 Great Job";
-
-  } else if (
-    moduleScore >= 70
-  ) {
-
-    badge =
-      "💪 Keep Practicing";
-
-  } else {
-
-    badge =
-      "📚 Needs Review";
-
-  }
-
-
-  document
-    .getElementById(
-      "resultBadge"
-    )
-    .textContent =
-      badge;
-
-
-  document
-    .getElementById(
-      "resultTitle"
-    )
-    .textContent =
-      isNewRecord
-        ? "🎉 NEW RECORD!"
-        : "🎉 Module Complete!";
-
-
-  renderResultTopScores();
-
-
-  showStage(
-    "result"
-  );
-
+const wordScores =
+currentProgress.map(
+(_,index) =>
+getWordScore(
+index
+)
+);
+const total =
+wordScores.reduce(
+(a,b) =>
+a + b,
+0
+);
+const max =
+currentProgress.length *
+100;
+const moduleScore =
+Math.min(total === max ? 100 : 99, Math.round(
+total /
+max *
+100
+));
+const records =
+loadRecords(
+currentModule
+);
+const previousBest =
+records.length
+? Math.max(
+...records.map(
+r => r.score
+)
+)
+: 0;
+const isNewRecord =
+moduleScore >
+previousBest;
+const record = {
+attempt:
+attempt,
+name:
+playerName,
+score:
+moduleScore,
+perfect: total === max,
+wordScores,
+review: JSON.parse(JSON.stringify(reviewResults)),
+date:
+new Date()
+.toLocaleDateString()
+};
+records.push(
+record
+);
+saveRecords(
+currentModule,
+records
+);
+document
+.getElementById(
+"resultScore"
+)
+.textContent =
+moduleScore + "%"
+document
+.getElementById(
+"resultAttempt"
+)
+.textContent =
+attempt;
+const newBest =
+Math.max(
+...records.map(
+r => r.score
+)
+);
+document
+.getElementById(
+"resultBest"
+)
+.textContent =
+newBest + "%"
+let badge;
+if (
+total === max
+) {
+badge =
+"🏆 Perfect — no mistakes"
+} else if (
+moduleScore >= 90
+) {
+badge =
+"🌟 Excellent"
+} else if (
+moduleScore >= 80
+) {
+badge =
+"👍 Great Job"
+} else if (
+moduleScore >= 70
+) {
+badge =
+"💪 Keep Practicing"
+} else {
+badge =
+"📚 Needs Review"
 }
-
-
-/* =========================================================
-   RESULT TOP SCORES
-========================================================= */
-
-function renderResultTopScores() {
-
-  const records =
-    loadRecords(
-      currentModule
-    )
-    .sort(
-      (a,b) =>
-        b.score - a.score
-    )
-    .slice(
-      0,
-      5
-    );
-
-
-  const medals =
-    [
-      "🥇",
-      "🥈",
-      "🥉",
-      "4️⃣",
-      "5️⃣"
-    ];
-
-
-  let html =
-    "<h3>🏆 Top Scores</h3>";
-
-
-  records.forEach(
-    (record,index) => {
-
-      html += `
-
-        <div class="top-score-row">
-
-          ${medals[index]}
-          Attempt ${record.attempt}
-          —
-          ${record.name}
-          —
-          <strong>
-            ${record.score}%
-          </strong>
-
-        </div>
-
-      `;
-
-    }
-  );
-
-
-  document
-    .getElementById(
-      "resultTopScores"
-    )
-    .innerHTML =
-      html;
-
+document
+.getElementById(
+"resultBadge"
+)
+.textContent =
+badge;
+document
+.getElementById(
+"resultTitle"
+)
+.textContent =
+isNewRecord
+? "🎉 NEW RECORD!"
+: "🎉 Module Complete!"
+document.getElementById("scoreExplanation").textContent = "Score: first-pass listen, meaning, spelling, sentence, and hangman (20% each). Learning and review do not add points. Hangman loses 4 points per wrong letter. Review: " + Object.values(reviewResults).filter(r => r.spelling && r.sentence && r.hangman === 20).length + " / " + reviewQueue.length + " words completed without review errors.";
+const needsReview=MODULES[currentModule].filter((_,i)=>getWordScore(i)<100);
+document.getElementById('scoreExplanation').textContent += needsReview.length ? ' Words to practice: '+needsReview.join(', ')+'.' : ' All words were correct without errors.';
+renderResultTopScores();
+showStage(
+"result"
+);
 }
-
-
 /* =========================================================
-   RESTART
+RESULT TOP SCORES
 ========================================================= */
-
+function escapeHtml(value) { return String(value).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch])); }
+function renderResultTopScores() {document.getElementById('resultTopScores').innerHTML='';}
 function restartModule() {
-
-  const confirmRestart =
-    confirm(
-
-      "Restart this module?\n\n" +
-
-      "Your current attempt will be abandoned. " +
-
-      "A new Attempt number will be used, " +
-
-      "while previous records stay saved."
-
-    );
-
-
-  if (
-    !confirmRestart
-  ) {
-
-    return;
-
-  }
-
-
-  startModule(
-    currentModule
-  );
-
+const confirmRestart =
+confirm(
+"Restart this module?\n\n" +
+"Your current attempt will be abandoned. " +
+"The score starts fresh; completed attempts stay saved. " +
+"while previous records stay saved."
+);
+if (
+!confirmRestart
+) {
+return;
 }
-
-
+startModule(
+currentModule
+);
+}
 /* =========================================================
-   HOME
+HOME
 ========================================================= */
-
 function goHome() {
-
-  const gameVisible =
-    !document
-      .getElementById(
-        "game"
-      )
-      .classList.contains(
-        "hidden"
-      );
-
-
-  if (
-    gameVisible &&
-    currentStage !== "result"
-  ) {
-
-    const leave =
-      confirm(
-
-        "Return to Home?\n\n" +
-
-        "Your current attempt will be abandoned. " +
-
-        "Previous records will stay saved."
-
-      );
-
-
-    if (!leave) {
-
-      return;
-
-    }
-
-  }
-
-
-  renderHome();
-
+const gameVisible =
+!document
+.getElementById(
+"game"
+)
+.classList.contains(
+"hidden"
+);
+if (
+gameVisible &&
+currentStage !== "result"
+) {
+const leave =
+confirm(
+"Return to Home?\n\n" +
+"Your current attempt will be abandoned. " +
+"Previous records will stay saved."
+);
+if (!leave) {
+return;
 }
-
-
+}
+renderHome();
+}
 /* =========================================================
-   SHUFFLE
+SHUFFLE
 ========================================================= */
-
 function shuffle(array) {
+for (
+let i =
+array.length - 1;
+i > 0;
+i--
+) {
+const j =
+Math.floor(
+Math.random() *
+(i + 1)
+);
+[
+array[i],
+array[j]
+] =
+[
+array[j],
+array[i]
+];
+}
+return array;
+}
+/* =========================================================
+START
+========================================================= */
 
-  for (
-    let i =
-      array.length - 1;
-
-    i > 0;
-
-    i--
-  ) {
-
-    const j =
-      Math.floor(
-        Math.random() *
-        (i + 1)
-      );
-
-
-    [
-      array[i],
-      array[j]
-    ] =
-    [
-      array[j],
-      array[i]
-    ];
-
+// Each stage traverses the entire module in a fresh shuffled order.
+function offerContinue(action) {
+ continueAction = action;
+ schedule(() => {const next=continueAction;continueAction=null;if(next)next();},1600);
+}
+function continueAfterAnswer() {
+ const action = continueAction;
+ if (!action) return;
+ continueAction = null;
+ document.getElementById('answerContinue').classList.add('hidden');
+ clearPending();
+ action();
+}
+function setupWord() {
+ currentIndex = stageOrder[stageCursor];
+ mode = 'main';
+ document.getElementById('headerProgress').textContent = `Module ${currentModule+1} • Stage ${stageNumber} of 6 • Word ${stageCursor+1} of ${stageOrder.length}`;
+ if(stageNumber===1) {
+  document.getElementById('learnWord').textContent = getCurrentWord();
+  document.getElementById('learnDefinition').textContent=DEFINITIONS[getCurrentWord()];
+  document.getElementById('learnTranslation').textContent=TRANSLATIONS[getCurrentWord()];
+  showStage('stage1'); schedule(speakCurrent, 200);
+ } else if(stageNumber===2) {buildStage2();showStage('stage2');}
+ else if(stageNumber===3) {buildMatching();showStage('meaningStage');}
+ else if(stageNumber===4) {buildStage3();showStage('stage3');}
+ else if(stageNumber===5) {buildStage4();showStage('stage4');schedule(speakSentence,200);}
+ else {startHangman(false);showStage('stage5');schedule(speakCurrent,200);}
+}
+function finishLearn() { advanceStageWord(); }
+function advanceStageWord() {
+ clearPending();
+ stageCursor++;
+ if(stageCursor < stageOrder.length) {setupWord();return;}
+ stageNumber++;
+ if(stageNumber <=6) {
+  stageOrder=shuffle(MODULES[currentModule].map((_,i)=>i));stageCursor=0;setupWord();return;
+ }
+ beginTargetedReview();
+}
+let sentenceToneContext=null;
+function prepareSentenceTone(){
+ const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+ if(!AudioContextClass)return;
+ try{sentenceToneContext ||= new AudioContextClass();if(sentenceToneContext.state==='suspended')sentenceToneContext.resume().catch(()=>{});}catch{}
+}
+document.addEventListener('pointerdown',prepareSentenceTone);
+document.addEventListener('keydown',prepareSentenceTone);
+function gentleBlankTone(){
+ prepareSentenceTone();const ctx=sentenceToneContext;
+ if(!ctx||ctx.state!=='running')return;
+ const oscillator=ctx.createOscillator(),gain=ctx.createGain(),now=ctx.currentTime;
+ oscillator.type='sine';oscillator.frequency.value=520;
+ gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(0.045,now+0.025);
+ gain.gain.linearRampToValueAtTime(0,now+0.15);
+ oscillator.connect(gain);gain.connect(ctx.destination);
+ oscillator.onended=()=>{oscillator.disconnect();gain.disconnect();};oscillator.start(now);oscillator.stop(now+0.16);
+}
+function speakSentence() {
+ if(!('speechSynthesis' in window))return;
+ const token=++speechGeneration;speechSynthesis.cancel();prepareSentenceTone();
+ const [beforeRaw,afterRaw]=SENTENCES[getCurrentWord()].split('_____');
+ const before=beforeRaw.trimEnd(),after=afterRaw.trimStart();
+ // Keep one speech stream: separate utterances add an engine-dependent end delay.
+ const text=before+(before&&after?' , ': '')+after;
+ const utterance=new SpeechSynthesisUtterance(text);utterance.lang='en-US';utterance.rate=0.5;
+ let sounded=false;
+ const tone=()=>{if(token===speechGeneration&&!sounded){sounded=true;gentleBlankTone();}};
+ const lastWordStart=before.search(/\S+$/);
+ utterance.onstart=()=>{if(!before)tone();};
+ utterance.onboundary=event=>{
+  if(token!==speechGeneration||sounded)return;
+  if(event.charIndex>=before.length){tone();return;}
+  if(event.name==='word'&&event.charIndex===lastWordStart){
+   const letters=before.slice(lastWordStart).replace(/[^a-z]/gi,'').length;
+   schedule(tone,Math.max(180,Math.min(400,letters*55))+100);
   }
+ };
+ // A sentence ending at the blank has no following word boundary.
+ utterance.onend=()=>{if(!after)tone();};
+ speechSynthesis.speak(utterance);
+}
+const originalBuildReviewSentence = buildReviewSentence;
+buildReviewSentence = function() {originalBuildReviewSentence();schedule(speakSentence,200);};
+const WORD_TYPES = {};
+const TYPE_GROUPS = {
+ adjective:'adequate affectionate ambient archaic arrogant auspicious bashful belated beloved benevolent bilingual bizarre boisterous brilliant callous candid carnivorous celestial clandestine cohesive colloquial compulsory courageous customary dangerous debatable effective eligible',
+ verb:'baffle banish breathe characterize culminate',
+ plural:'advancements credentials',
+ adverb:'abroad', conjunction:'because'
+};
+Object.entries(TYPE_GROUPS).forEach(([type,list])=>list.split(' ').forEach(w=>WORD_TYPES[w]=type));
+const originalRandomChoices = randomChoices;
+randomChoices = function(correct,count,source) {
+ return originalRandomChoices(correct,count,MODULES.find(module=>module.includes(correct)));
+};
+document.addEventListener('keydown', event=>{
+ if(event.ctrlKey||event.metaKey||event.altKey || !['stage5','reviewHangman'].includes(currentStage) || hangmanFinished || !/^[a-z]$/i.test(event.key))return;
+ const prefix=mode==='review'?'review':'main';
+ const button=document.querySelector(`[id^="${prefix}Row"] [data-letter="${event.key.toLowerCase()}"]`);
+ if(button){event.preventDefault();guessLetter(event.key.toLowerCase(),button);}
+});
 
+let reviewTasks = [];
+function beginTargetedReview() {
+ reviewTasks=[];reviewResults={};
+ MODULES[currentModule].forEach((word,index)=>{
+  ['listen','meaning','spelling','sentence','hangman'].forEach(part=>{
+   if(currentProgress[index][part]<20)reviewTasks.push({word,part});
+  });
+ });
+ reviewQueue=reviewTasks.map(task=>task.word);
+ reviewIndex=0;mode='review';
+ runReviewTask();
+}
+function runReviewTask() {
+ clearPending();
+ if(reviewIndex>=reviewTasks.length){finishModule();return;}
+ mode='review';
+ const {word,part}=reviewTasks[reviewIndex];
+ reviewResults[word] ||= {};
+ document.getElementById('headerProgress').textContent=`Review • ${reviewIndex+1} of ${reviewTasks.length} • ${part}`;
+ if(part==='meaning'){buildMatching();showStage('meaningStage');}
+ else if(part==='typing'){buildTyping();showStage('typingStage');schedule(speakCurrent,200);}
+ else if(part==='spelling'){buildReviewSpelling();showStage('reviewSpelling');}
+ else if(part==='sentence'){buildReviewSentence();showStage('reviewSentence');}
+ else if(part==='hangman'){startHangman(true);showStage('reviewHangman');schedule(speakCurrent,200);}
+ else {
+  const box=document.getElementById('stage2Options');box.innerHTML='';
+  document.getElementById('feedback2').textContent='';
+  originalRandomChoices(word,4,MODULES.find(module=>module.includes(word))).forEach(choice=>{
+   const button=document.createElement('button');button.className='option';button.textContent=choice;
+   button.onclick=()=>answerTargetedReview(choice,'listen','stage2Options','feedback2');box.appendChild(button);
+  });
+  showStage('stage2');schedule(speakCurrent,200);
+ }
+}
+function answerTargetedReview(answer,part,box,feedback) {
+ if(continueAction)return;
+ const word=getCurrentWord(),correct=answer.toLowerCase()===word.toLowerCase();
+ document.querySelectorAll('#'+box+' button').forEach(button=>{
+  button.disabled=true;
+  if(button.textContent.toLowerCase()===word.toLowerCase())button.classList.add('answer-highlight');
+ });
+ reviewResults[word][part]=correct;
+ const message=document.getElementById(feedback);
+ message.textContent=correct?'✓ Correct!':'✗ Incorrect. Correct answer: '+word;
+ message.className='feedback '+(correct?'correct':'incorrect');
+ offerContinue(()=>{reviewIndex++;runReviewTask();});
+}
+answerReviewSpell=function(answer){answerTargetedReview(answer,'spelling','reviewSpellOptions','reviewSpellFeedback');};
+answerReviewSentence=function(answer){answerTargetedReview(answer,'sentence','reviewSentenceOptions','reviewSentenceFeedback');};
+finishReviewHangman=function(success,score){
+ lockHangman();const word=getCurrentWord();reviewResults[word].hangman=score;
+ const feedback=document.getElementById('reviewHangmanFeedback');
+ feedback.textContent=success?'✓ Word complete!':'✗ The word was '+word+'.';
+ feedback.className='feedback '+(success?'correct':'incorrect');
+ offerContinue(()=>{reviewIndex++;runReviewTask();});
+};
+const finishModuleWithScores=finishModule;
+finishModule=function(){
+ finishModuleWithScores();
+ const completed=reviewTasks.filter(({word,part})=>part==='hangman'?reviewResults[word]?.hangman===20:reviewResults[word]?.[part]===true).length;
+ const words=MODULES[currentModule].filter((_,i)=>getWordScore(i)<100);
+ document.getElementById('scoreExplanation').textContent='First-pass score stays fixed. Review: '+completed+' / '+reviewTasks.length+' activities correct without errors.'+(words.length?' Words to practice: '+words.join(', ')+'.':' All words were correct without errors.');
+};
+const startModuleWithStages=startModule;
+startModule=function(index){reviewTasks=[];startModuleWithStages(index);};
 
-  return array;
+let spacedSession = false;
+function buildTyping(){
+ const input=document.getElementById('typingInput');input.value='';input.disabled=false;
+ document.getElementById('typingSubmit').disabled=false;document.getElementById('typingFeedback').textContent='';input.focus();
+}
+function answerTyping(){
+ if(continueAction)return;
+ const word=getCurrentWord(),correct=document.getElementById('typingInput').value.trim().toLowerCase()===word.toLowerCase();
+ reviewResults[word] ||= {};reviewResults[word].typing=correct;
+ document.getElementById('typingInput').disabled=true;document.getElementById('typingSubmit').disabled=true;
+ document.getElementById('typingFeedback').textContent=correct?'✓ Correct!':'✗ Incorrect. Correct answer: '+word;
+ offerContinue(()=>{reviewIndex++;runReviewTask();});
+}
+function reviewPlanKey(){return 'spellingMaster_reviewPlan_'+encodeURIComponent(playerName);}
+function loadReviewPlan(){try{return JSON.parse(localStorage.getItem(reviewPlanKey())||'[]');}catch{return [];}}
+function saveReviewPlan(plan){localStorage.setItem(reviewPlanKey(),JSON.stringify(plan));}
+function planFutureReviews(){
+ const plan=loadReviewPlan();
+ [1,3,7].forEach(days=>{
+  if(!plan.some(item=>item.module===currentModule&&item.days===days&&!item.done))plan.push({module:currentModule,days,due:Date.now()+days*86400000,done:false});
+ });saveReviewPlan(plan);
+}
+function renderReviewPlan(){
+ const box=document.getElementById('spacedReviewBox');box.innerHTML='';
 
+ const plan=loadReviewPlan().filter(item=>!item.done).sort((a,b)=>a.due-b.due);
+ box.classList.toggle('hidden',!plan.length);
+ if(!plan.length)return;
+ const heading=document.createElement('h3');heading.textContent='Review';box.appendChild(heading);
+ plan.slice(0,9).forEach(item=>{
+  const row=document.createElement('p');row.textContent='Module '+(item.module+1)+' • '+new Date(item.due).toLocaleDateString()+' ';
+  const button=document.createElement('button');button.className='secondary';button.textContent=item.due<=Date.now()?'Review now':'Practice early';button.onclick=()=>startSpacedReview(item.module,item.days);row.appendChild(button);box.appendChild(row);
+ });
+}
+let activeReviewPlan = null;
+function startSpacedReview(moduleIndex,days){
+ clearPending();currentModule=moduleIndex;spacedSession=true;activeReviewPlan={module:moduleIndex,days};
+ const plan=loadReviewPlan();const moduleWords=MODULES[moduleIndex];
+ const priorModules=[...new Set(plan.filter(item=>item.module!==moduleIndex).map(item=>item.module))];
+ let pool=[...shuffle([...moduleWords]).slice(0,5)];
+ if(days>=3 && priorModules.length)pool.push(...shuffle(priorModules.flatMap(i=>MODULES[i])).slice(0,3));
+ else pool=[...shuffle([...moduleWords]).slice(0,8)];
+ reviewTasks=pool.map((word,i)=>({word,part:days===7?'typing':i%2===0?'meaning':'sentence'}));
+ reviewQueue=reviewTasks.map(t=>t.word);reviewIndex=0;reviewResults={};mode='review';
+ document.getElementById('home').classList.add('hidden');document.getElementById('game').classList.remove('hidden');runReviewTask();
+}
+const runReviewTaskBase=runReviewTask;
+runReviewTask=function(){
+ if(spacedSession&&reviewIndex>=reviewTasks.length){finishSpacedReview();return;}runReviewTaskBase();
+};
+function finishSpacedReview(){
+ clearPending();
+ const good=reviewTasks.filter(({word,part})=>reviewResults[word]?.[part]===true).length;
+ const plan=loadReviewPlan();const item=plan.find(p=>p.module===activeReviewPlan.module&&p.days===activeReviewPlan.days&&!p.done);if(item){item.done=true;item.correct=good;item.total=reviewTasks.length;saveReviewPlan(plan);}
+ const failed=reviewTasks.filter(({word,part})=>reviewResults[word]?.[part]!==true).map(t=>t.word);
+ spacedSession=false;showStage('result');
+ document.getElementById('resultTitle').textContent='Memory review complete';document.getElementById('resultScore').textContent=good+' / '+reviewTasks.length;
+ document.getElementById('resultBadge').textContent='Short practice, separate from your module score';
+ document.getElementById('resultAttempt').textContent='Memory review';document.getElementById('resultBest').textContent='—';document.getElementById('resultTopScores').innerHTML='';
+ document.getElementById('scoreExplanation').textContent=failed.length?'Practice again: '+failed.join(', ')+'.':'You remembered all the words in this review!';
+}
+const renderHomeBase=renderHome;
+renderHome=function(){spacedSession=false;renderHomeBase();renderReviewPlan();};
+const startModuleBase=startModule;
+startModule=function(index){spacedSession=false;startModuleBase(index);};
+const finishModuleBase=finishModule;
+finishModule=function(){finishModuleBase();planFutureReviews();};
+
+let matchWords=[],matchDone=new Set(),matchFailed=new Set(),selectedSpanish=null,matchTransition=false;
+function buildMatching(){
+ matchDone=new Set();matchFailed=new Set(mode==='main'?matchErrorWords:[]);selectedSpanish=null;matchTransition=false;
+ const isReview=mode==='review';
+ const pageSize=MODULES[currentModule].length===8?4:5;
+ matchWords=isReview?[getCurrentWord()]:stageOrder.slice(stageCursor,stageCursor+pageSize).filter(i=>!stageDone[3].has(i)).map(i=>MODULES[currentModule][i]);
+ document.getElementById('matchPageLabel').textContent=isReview?'Match the word to its translation.':'Page '+(Math.floor(stageCursor/pageSize)+1)+' of 2 • '+matchWords.length+' pairs';
+ if(!isReview)document.getElementById('headerProgress').textContent='Module '+(currentModule+1)+' • Stage 3 of 6 • Match page '+(Math.floor(stageCursor/pageSize)+1)+' of 2';
+ document.getElementById('meaningFeedback').textContent='';
+ const english=document.getElementById('matchEnglish'),spanish=document.getElementById('matchSpanish');english.innerHTML='';spanish.innerHTML='';
+ // A one-word review keeps translations from its module as distractors.
+ const spanishPool=isReview?originalRandomChoices(getCurrentWord(),Math.min(5,MODULES[currentModule].length),MODULES.find(m=>m.includes(getCurrentWord()))):shuffle([...matchWords]);
+ matchWords.forEach(word=>{
+  const b=document.createElement('button');b.className='match-card';b.textContent=word;b.dataset.word=word;b.setAttribute('aria-label','English: '+word);
+  b.onclick=()=>{if(selectedSpanish)attemptMatch(selectedSpanish,word);else document.getElementById('meaningFeedback').textContent='Choose a Spanish translation first.';};
+  b.draggable=true;
+  b.ondragstart=event=>{event.dataTransfer.setData('text/plain',JSON.stringify({language:'english',word}));event.dataTransfer.effectAllowed='move';};
+  b.ondragover=event=>{event.preventDefault();if(!b.disabled)b.classList.add('dragover');};
+  b.ondragleave=()=>b.classList.remove('dragover');
+  b.ondrop=event=>{event.preventDefault();b.classList.remove('dragover');const item=readMatchDrag(event.dataTransfer.getData('text/plain'));if(item.language==='spanish')attemptMatch(item.word,word);};english.appendChild(b);
+ });
+ spanishPool.forEach(word=>{
+  const b=document.createElement('button');b.className='match-card';b.textContent=TRANSLATIONS[word];b.dataset.word=word;b.draggable=true;b.setAttribute('aria-pressed','false');
+  b.onclick=()=>selectSpanish(word);
+  b.ondragstart=event=>{selectSpanish(word);event.dataTransfer.setData('text/plain',JSON.stringify({language:'spanish',word}));event.dataTransfer.effectAllowed='move';};
+  b.ondragover=event=>{event.preventDefault();if(!b.disabled)b.classList.add('dragover');};
+  b.ondragleave=()=>b.classList.remove('dragover');
+  b.ondrop=event=>{event.preventDefault();b.classList.remove('dragover');const item=readMatchDrag(event.dataTransfer.getData('text/plain'));if(item.language==='english')attemptMatch(word,item.word);};spanish.appendChild(b);
+ });
+}
+function readMatchDrag(value){try{return JSON.parse(value);}catch{return {language:'spanish',word:value};}}
+function selectSpanish(word){
+ if(matchTransition||matchDone.has(word))return;selectedSpanish=word;
+ document.querySelectorAll('#matchSpanish button').forEach(b=>{b.classList.toggle('selected',b.dataset.word===word);b.setAttribute('aria-pressed',String(b.dataset.word===word));});
+}
+function attemptMatch(spanishWord,englishWord){
+ if(matchTransition||!spanishWord||!matchWords.includes(englishWord)||matchDone.has(englishWord)||matchDone.has(spanishWord))return;
+ const correct=spanishWord===englishWord;
+ const message=document.getElementById('meaningFeedback');message.className='feedback '+(correct?'correct':'incorrect');
+ if(!correct){
+  matchFailed.add(englishWord);if(mode==='main')matchErrorWords.add(englishWord);
+  if(mode==='main'){const index=MODULES[currentModule].indexOf(englishWord);currentProgress[index].meaning=0;}
+  message.textContent='✗ Not a match. Try another translation.';selectedSpanish=null;
+  document.querySelectorAll('#matchSpanish button').forEach(b=>{b.classList.remove('selected');b.setAttribute('aria-pressed','false');});return;
+ }
+ matchDone.add(englishWord);
+ if(mode==='main'){stageDone[3].add(MODULES[currentModule].indexOf(englishWord));updateModuleProgress();}
+ const clean=!matchFailed.has(englishWord);
+ if(mode==='main'){const index=MODULES[currentModule].indexOf(englishWord);currentProgress[index].meaning=clean?20:0;}
+ else {reviewResults[englishWord] ||= {};reviewResults[englishWord].meaning=clean;}
+ message.textContent='✓ '+englishWord+' = '+TRANSLATIONS[englishWord];
+ document.querySelectorAll('#matchEnglish button, #matchSpanish button').forEach(b=>{
+  if(b.dataset.word===englishWord){b.disabled=true;b.draggable=false;b.classList.add('matched');b.classList.remove('selected');b.setAttribute('aria-pressed','false');}
+ });selectedSpanish=null;
+ if(matchDone.size===matchWords.length){
+  matchTransition=true;
+  offerContinue(()=>{
+   if(mode==='review'){reviewIndex++;runReviewTask();return;}
+   stageCursor+=MODULES[currentModule].length===8?4:5;
+   if(stageCursor<stageOrder.length){setupWord();return;}
+   finishCurrentStage();
+  });
+ }
 }
 
-
-/* =========================================================
-   START
-========================================================= */
+const STAGE_NAMES=['Learn','Listen','Match','Spelling','Sentence','Hangman'];
+let stageDone={},stageOrders={},matchErrorWords=new Set();
+function resetStageTracking(){
+ stageDone={};stageOrders={};matchErrorWords=new Set();
+ for(let stage=1;stage<=6;stage++){stageDone[stage]=new Set();stageOrders[stage]=shuffle(MODULES[currentModule].map((_,i)=>i));}
+}
+function updateModuleProgress(){
+ const box=document.getElementById('moduleNavigation');
+ box.classList.toggle('hidden',spacedSession);
+ if(spacedSession || !stageDone[1])return;
+ const n=MODULES[currentModule].length;
+ const done=Object.values(stageDone).reduce((sum,set)=>sum+set.size,0),total=n*6;
+ const percentage=Math.round(done/total*100);
+ const stages=Object.values(stageDone).filter(set=>set.size===n).length;
+ document.getElementById('moduleProgressText').textContent='Module '+(currentModule+1)+' • '+percentage+'% complete • '+stages+' / 6 stages finished';
+ document.getElementById('moduleProgressFill').style.width=percentage+'%';
+ document.getElementById('moduleProgressBar').setAttribute('aria-valuenow',String(percentage));
+ const nav=document.getElementById('stageNavigation');nav.innerHTML='';
+ STAGE_NAMES.forEach((name,index)=>{
+  const stage=index+1,complete=stageDone[stage].size===n;
+  const button=document.createElement('button');button.className=stage===stageNumber&&mode==='main'?'primary':'secondary';
+  button.textContent=complete?'✓':String(stage);
+  button.classList.add('stage-circle');
+  button.title=name+(complete?' — completed':'');
+  button.setAttribute('aria-label','Stage '+stage+': '+name+(complete?', completed':''));
+  button.setAttribute('aria-current',stage===stageNumber&&mode==='main'?'step':'false');
+  button.disabled=complete || mode==='review' || currentStage==='result';
+  button.onclick=()=>chooseStage(stage);nav.appendChild(button);
+ });
+}
+function chooseStage(stage){
+ if(mode!=='main'||!stageDone[stage]||stageDone[stage].size===MODULES[currentModule].length)return;
+ clearPending();stageNumber=stage;stageOrder=stageOrders[stage];
+ stageCursor=stageOrder.findIndex(i=>!stageDone[stage].has(i));
+ if(stage===3){const size=MODULES[currentModule].length===8?4:5;stageCursor=Math.floor(stageCursor/size)*size;}
+ setupWord();
+}
+function finishCurrentStage(){
+ const n=MODULES[currentModule].length;
+ // Continue in normal order, then return to any stages skipped earlier.
+ let next=0;
+ for(let offset=1;offset<=6;offset++){const candidate=(stageNumber-1+offset)%6+1;if(stageDone[candidate].size<n){next=candidate;break;}}
+ if(!next){beginTargetedReview();updateModuleProgress();return;}
+ stageNumber=next;stageOrder=stageOrders[next];stageCursor=stageOrder.findIndex(i=>!stageDone[next].has(i));
+ if(next===3){const size=n===8?4:5;stageCursor=Math.floor(stageCursor/size)*size;}
+ setupWord();
+}
+const setupWordBeforeTracking=setupWord;
+setupWord=function(){setupWordBeforeTracking();updateModuleProgress();};
+advanceStageWord=function(){
+ clearPending();
+ if(stageNumber===1)stageDone[1].add(currentIndex);
+ stageCursor++;
+ while(stageCursor<stageOrder.length&&stageDone[stageNumber].has(stageOrder[stageCursor]))stageCursor++;
+ if(stageCursor<stageOrder.length){setupWord();return;}
+ finishCurrentStage();
+};
+const startModuleBeforeTracking=startModule;
+startModule=function(index){
+ currentModule=index;resetStageTracking();startModuleBeforeTracking(index);clearPending();
+ stageOrder=stageOrders[1];stageCursor=0;setupWord();
+};
+function trackAnswer(handler,stage){return function(...args){
+ if(mode==='main'&&(continueAction||stageDone[stage].has(currentIndex)))return;
+ handler(...args);
+ if(mode==='main'){stageDone[stage].add(currentIndex);updateModuleProgress();}
+};}
+answerStage2=trackAnswer(answerStage2,2);
+answerStage3=trackAnswer(answerStage3,4);
+answerStage4=trackAnswer(answerStage4,5);
+finishMainHangman=trackAnswer(finishMainHangman,6);
+const finishModuleBeforeTracking=finishModule;
+finishModule=function(){
+ if(!stageDone[1]||Object.values(stageDone).some(set=>set.size!==MODULES[currentModule].length)){finishCurrentStage();return;}
+ finishModuleBeforeTracking();updateModuleProgress();
+};
+const beginReviewBeforeTracking=beginTargetedReview;
+beginTargetedReview=function(){beginReviewBeforeTracking();updateModuleProgress();};
+const startSpacedBeforeTracking=startSpacedReview;
+startSpacedReview=function(...args){startSpacedBeforeTracking(...args);updateModuleProgress();};
 
 renderHome();
-
 </script>
-
 </body>
 </html>
