@@ -1,493 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#3157d5">
-<title>Spelling Master</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#2857c5">
+<title>Vocabulario · Aprende y practica</title>
 <style>
-:root{--blue:#3157d5;--bg:#f3f6fc;--ink:#172033;--muted:#68738a;--green:#17834b;--red:#c33b45;--line:#e4e9f4}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
-header{background:linear-gradient(135deg,#3157d5,#6a52d8);color:white;padding:17px 14px;text-align:center}
-header h1{font-size:clamp(23px,5vw,30px);margin:0}
-header p{margin:6px 0 0;font-size:14px}
-.container{width:min(900px,100%);margin:auto;padding:15px}
-.card{background:#fff;border-radius:18px;padding:20px;box-shadow:0 5px 20px #1720330d;margin-bottom:14px}
-.hidden{display:none!important}
-.muted{color:var(--muted)}
-.center{text-align:center}
-.title{font-size:clamp(22px,5vw,28px);margin:5px 0 8px}
-.btnrow{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:15px}
-button{border:0;border-radius:12px;padding:12px 16px;font-size:15px;font-weight:700;cursor:pointer;touch-action:manipulation}
-button:disabled{opacity:.4;cursor:not-allowed}
-.primary{background:var(--blue);color:#fff}
-.secondary{background:#e8edfa;color:#26345f}
-.modulegrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.module{border:2px solid var(--line);border-radius:15px;padding:16px;text-align:left;background:#fff;color:var(--ink);width:100%}
-.module strong{display:block;font-size:17px;margin-bottom:5px}
-.module span{color:var(--muted);font-size:13px;font-weight:400}
-.steps{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:12px 0 18px}
-.step{border-radius:30px;background:#e8ecf5;color:#68738a;padding:8px 11px;font-size:12px;font-weight:700}
-.step.active{background:var(--blue);color:#fff}
-.progress{height:9px;background:#e8edf6;border-radius:20px;overflow:hidden;margin:12px 0}
-.progress div{height:100%;background:linear-gradient(90deg,#3157d5,#8a5de8);width:0;transition:width .2s}
-.word{font-size:clamp(30px,8vw,43px);font-weight:800;letter-spacing:1px;overflow-wrap:anywhere;margin:17px 0}
-.translation{font-size:22px;font-weight:700;color:#3157d5}
-.definition{background:#f4f6fc;border-radius:13px;padding:13px;margin:12px 0;line-height:1.45}
-.sentence{line-height:1.55;font-size:17px;background:#f8f9fd;padding:12px;border-radius:12px}
-.feedback{min-height:25px;text-align:center;font-weight:700;margin:12px 0}
-.good{color:var(--green)}.bad{color:var(--red)}
-input[type=text]{width:100%;padding:14px;border:2px solid #d9e0ef;border-radius:12px;font-size:20px;text-align:center;outline:none}
-input:focus{border-color:var(--blue)}
-.keyboard{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin:16px auto;max-width:520px}
-.key{padding:11px 0;min-width:0;background:#e9edf7;color:#1e2c51}
-.key.used{opacity:.35}
-.hangword{font-size:28px;letter-spacing:5px;font-weight:800;margin:20px 0;overflow-wrap:anywhere}
-.attempts{font-weight:700}
-.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.stat{background:#f1f4fc;padding:12px;border-radius:12px;text-align:center}
-.stat b{display:block;font-size:23px;color:var(--blue)}
-.small{font-size:13px}
-.footer{font-size:12px;color:var(--muted);text-align:center;padding:8px}
-.notice{background:#fff5d9;border-radius:12px;padding:12px;line-height:1.45}
-@media(max-width:480px){
-.container{padding:10px}.card{padding:16px}.modulegrid{gap:8px}
-.module{padding:12px}.keyboard{gap:4px}.key{padding:10px 0;font-size:13px}
-.btnrow button{flex:1}.word{margin:12px 0}
-}
+:root{--blue:#2857c5;--blue2:#704be0;--ink:#17223b;--muted:#65718a;--bg:#f3f6fc;--line:#e1e7f2;--green:#13834c;--red:#bb3545;--amber:#fff4d6;--white:#fff}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}body{min-height:100dvh}button,input{font:inherit}button{border:0;border-radius:13px;padding:12px 16px;font-weight:700;cursor:pointer;touch-action:manipulation}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--blue);color:white}.secondary{background:#e8edfa;color:#25345c}.danger{background:#fff0f1;color:#a92332}.hidden{display:none!important}.muted{color:var(--muted)}.small{font-size:12px}.center{text-align:center}
+header{height:66px;background:linear-gradient(120deg,var(--blue),var(--blue2));color:white;display:flex;align-items:center;justify-content:center;padding:8px 14px;text-align:center}header h1{font-size:clamp(19px,5vw,25px);margin:0}main{width:min(900px,100%);margin:auto;padding:12px}.panel{background:white;border:1px solid #edf0f6;border-radius:20px;padding:clamp(14px,3vw,22px);box-shadow:0 8px 24px #17223b0a}.home-title{margin:0 0 7px;font-size:clamp(22px,5vw,29px)}.summary{display:flex;gap:8px;justify-content:center;margin:13px 0}.pill{background:#f0f3fb;border-radius:999px;padding:8px 12px;font-size:13px;font-weight:700}.modulegrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.module{background:white;border:2px solid var(--line);border-radius:17px;padding:16px;text-align:left;min-height:126px;color:var(--ink)}.module strong{display:block;font-size:17px;margin-bottom:7px}.module .status{display:block;color:var(--muted);font-size:12px;line-height:1.5}.module .score{display:inline-block;margin-top:10px;color:var(--blue);font-weight:800}.home-actions{display:flex;justify-content:center;margin-top:14px}
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px;min-height:42px}.iconbtn{width:42px;height:42px;padding:0;border-radius:13px;background:#e8edfa;color:#25345c;font-size:21px;display:grid;place-items:center}.modulelabel{font-size:14px;font-weight:800;text-align:center}.scoreline{text-align:center;margin:0 0 5px}.scorebox{font-weight:800;color:var(--blue);white-space:nowrap}.module-label{text-align:center;font-size:13px;color:var(--muted);margin:5px 0}.steps{display:flex;align-items:center;gap:8px;justify-content:center;margin:6px 0;min-height:27px}.step{width:23px;height:23px;min-width:23px;flex:0 0 23px;aspect-ratio:1;padding:0;border-radius:50%;background:#edf0f6;color:#62708a;font-size:11px;font-weight:800;display:grid;place-items:center}.step.active{background:#2857c5;color:white;box-shadow:0 0 0 3px #dce6ff}.step.done{background:#e4f5eb;color:#117342}.stage-name{font-size:12px;font-weight:800;color:#354466;margin-left:4px;padding-left:10px;border-left:1px solid #d7deec;min-width:62px}.progress{height:7px;background:#e9edf5;border-radius:99px;overflow:hidden;margin:9px 0 13px}.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--blue2));transition:width .2s}.wordcount{font-size:12px;color:var(--muted);margin:0}.word{font-size:clamp(30px,9vw,48px);font-weight:850;letter-spacing:.3px;margin:7px 0 8px;overflow-wrap:anywhere;line-height:1.06}.translation{font-size:clamp(19px,5vw,23px);font-weight:800;color:var(--blue);margin:5px 0 9px}.definition,.sentence{background:#f5f7fc;border-radius:13px;padding:10px 12px;text-align:left;line-height:1.4;margin:8px 0;font-size:14px}.definition b,.sentence b{color:#354466}.synonym{margin:8px 0;color:#323e5a;font-size:14px}.trace-label{font-size:12px;font-weight:800;color:#495674;margin:10px 0 4px}.tracebox{position:relative;width:100%;max-width:620px;height:86px;margin:0 auto;border:2px dashed #c8d2e5;border-radius:14px;background:#f9faff;overflow:hidden;touch-action:none;user-select:none}.traceguide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(30px,9vw,48px);font-weight:850;letter-spacing:.4px;color:#d2d8e5;white-space:nowrap;padding:4px;pointer-events:none}.traceletter{display:inline-block;padding:0 1px;border-radius:5px;color:transparent;-webkit-text-stroke:1.8px #a7b1c2;text-stroke:1.8px #a7b1c2}.tracespace{display:inline-block;width:.32em}.tracebox canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none}.tracestatus{font-size:12px;font-weight:800;color:#495674;margin:5px 0}.traceactions{display:flex;justify-content:flex-end;margin:5px auto 0;max-width:620px}.traceactions button{padding:7px 11px;font-size:12px}.btnrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}.btnrow button{min-width:120px}.feedback{min-height:23px;margin:8px 0;text-align:center;font-weight:700;font-size:14px}.good{color:var(--green)}.bad{color:var(--red)}.hangword{font-size:clamp(24px,7vw,34px);font-weight:850;letter-spacing:4px;margin:14px 0 9px;overflow-wrap:anywhere}.keyboard{display:flex;flex-direction:column;gap:5px;max-width:520px;margin:12px auto 5px}.keyboardrow{display:flex;justify-content:center;gap:5px}.key{flex:1;max-width:48px;padding:10px 0;min-width:0;background:#e9edf7;color:#1d2d52;border-radius:10px;font-size:clamp(13px,3.5vw,17px)}.key.used{opacity:.35}.attempts{font-weight:800;margin:6px 0}.hang-stage{display:block;width:120px;height:120px;margin:4px auto}.hang-stage line,.hang-stage circle{stroke:#293858;stroke-width:4;stroke-linecap:round;fill:none}.hang-stage .hang-part{visibility:hidden}.hang-stage .hang-part.show{visibility:visible}.writeinput{width:100%;max-width:520px;border:2px solid #d7deec;border-radius:13px;padding:13px;font-size:20px;text-align:center;outline:none}.writeinput:focus{border-color:var(--blue)}.notice{background:var(--amber);border-radius:12px;padding:10px;text-align:left;line-height:1.4;margin:9px 0;font-size:13px}.donebox{padding:18px 4px}.donebox h2{margin:4px 0 8px}.footer{font-size:11px;color:var(--muted);text-align:center;padding:10px 4px}
+@media(max-width:480px){main{padding:9px}.module{padding:12px;min-height:117px}.modulegrid{gap:8px}.panel{border-radius:17px}.keyboard{gap:4px}.key{padding:10px 0;border-radius:9px}.definition,.sentence{font-size:13px;padding:9px 10px}.tracebox{height:78px}.btnrow button{flex:1}.steps{gap:6px}.step{font-size:10px;padding:0}}
+
+.hangman-screen .wordcount{margin:0;font-size:11px}.hangman-screen .translation{font-size:17px;line-height:1.1;margin:2px 0 3px}.hangman-screen .definition{padding:5px 8px;margin:4px 0;font-size:12px;line-height:1.2}.hangman-screen .synonym{margin:3px 0;font-size:12px}.hangman-screen .btnrow{margin-top:3px}.hangman-screen .btnrow button{padding:7px 12px;min-height:34px}.hangman-screen .hangword{font-size:clamp(20px,6vw,30px);letter-spacing:3px;line-height:1.05;margin:4px 0}.hangman-screen .hang-stage{width:92px;height:82px;margin:0 auto}.hangman-screen .feedback{min-height:0;margin:2px 0;font-size:12px;line-height:1.1}.hangman-screen .keyboard{gap:3px;margin:5px auto 0}.hangman-screen .keyboardrow{gap:3px}.hangman-screen .key{min-height:38px;padding:6px 0;font-size:clamp(14px,4vw,17px);border-radius:7px}
+@media(max-width:480px) and (max-height:760px){header{height:48px}main{padding:5px}.panel{padding:10px}#game .toprow{min-height:28px}.iconbtn{width:30px;height:30px;font-size:16px;border-radius:8px}.steps{margin:2px 0;gap:4px;flex-wrap:nowrap}.step{width:20px;height:20px;min-width:20px;flex-basis:20px;font-size:9px;padding:0}.stage-name{font-size:10px;min-width:55px}.progress{height:4px;margin:4px 0 6px}#game .modulelabel{font-size:11px}#game .scoreline{font-size:11px;margin:0}.hangman-screen .wordcount{font-size:10px;line-height:1}.hangman-screen .hang-stage{width:78px;height:68px}.hangman-screen .key{min-height:36px;padding:5px 0}.footer{padding:4px}}
 </style>
 </head>
 <body>
-<header>
-  <h1>📚 Spelling Master</h1>
-  <p>Aprende, practica y domina tus palabras</p>
-</header>
-<main class="container">
-  <section id="home" class="card">
-    <h2 class="title center">¡Vamos a aprender!</h2>
-    <p class="muted center">Escoge un módulo de 22 palabras. Cada módulo tiene tres sesiones.</p>
-    <div class="statgrid">
-      <div class="stat"><b>88</b><span class="small">palabras</span></div>
-      <div class="stat"><b>4</b><span class="small">módulos</span></div>
-      <div class="stat"><b>3</b><span class="small">sesiones</span></div>
-    </div>
-    <div id="modules" class="modulegrid" style="margin-top:16px"></div>
-    <div class="btnrow"><button class="secondary" onclick="resetProgress()">Reiniciar progreso</button></div>
-  </section>
-
-  <section id="game" class="card hidden">
-    <div class="btnrow" style="margin-top:0;justify-content:space-between">
-      <button class="secondary" onclick="goHome()">← Módulos</button>
-      <span id="moduleLabel" class="muted"></span>
-    </div>
-    <div class="steps">
-      <span id="stepLearn" class="step">1 · Aprender</span>
-      <span id="stepHang" class="step">2 · Hangman</span>
-      <span id="stepWrite" class="step">3 · Escribir</span>
-    </div>
-    <div class="progress"><div id="bar"></div></div>
-    <div id="gameContent"></div>
-  </section>
-  <div class="footer">El progreso se guarda en este dispositivo.</div>
+<header><h1>📚 Vocabulario · Aprende y practica</h1></header>
+<main>
+<section id="home" class="panel">
+  <h2 class="home-title center">¡Vamos a aprender!</h2>
+  <p class="center muted" style="margin:0">Elige un módulo para comenzar.</p>
+  
+  <div id="modules" class="modulegrid"></div>
+  <div class="home-actions"><button class="secondary" onclick="resetAll()">Reiniciar todo</button></div>
+</section>
+<section id="game" class="panel hidden">
+  <div class="toprow"><button class="iconbtn" aria-label="Inicio" title="Inicio" onclick="goHome()">🏠</button><span id="moduleLabel" class="modulelabel"></span><button class="iconbtn" aria-label="Reiniciar módulo" title="Reiniciar módulo" onclick="restartModule()">🔄</button></div><div class="scoreline"><span id="scoreBox" class="scorebox">100%</span></div>
+  <div class="steps"><button id="stepLearn" class="step" aria-label="Learn" title="Learn" onclick="chooseStage('learn')">1</button><button id="stepHang" class="step" aria-label="Hangman" title="Hangman" onclick="chooseStage('hangman')">2</button><button id="stepWrite" class="step" aria-label="Escribir" title="Escribir" onclick="chooseStage('write')">3</button><span id="stageName" class="stage-name">Learn</span></div>
+  <div class="progress"><div id="bar"></div></div>
+  <div id="gameContent"></div>
+</section>
+<div class="footer">El progreso y la puntuación se guardan en este dispositivo.</div>
 </main>
 <script>
-const VOCAB = 
-{"abbreviation":{"translation":"Abreviatura","definition":"A short form of a word or phrase.","meaning":"Forma corta de una palabra o frase","sentence":"“Dr.” is an _____ for “Doctor.”"},"abroad":{"translation":"En el extranjero","definition":"In another country.","meaning":"En otro país","sentence":"She went _____ to visit another country."},"access":{"translation":"Acceso","definition":"The ability or permission to enter or use something.","meaning":"Permiso o posibilidad de entrar o usar algo","sentence":"The key gives us _____ to the room."},"accord":{"translation":"Acuerdo","definition":"An agreement between people or groups.","meaning":"Acuerdo entre dos partes","sentence":"They signed an _____ to work together."},"adequate":{"translation":"Suficiente","definition":"Enough for what is needed.","meaning":"Suficiente para lo que se necesita","sentence":"The food is _____; there is enough."},"advancements":{"translation":"Avances","definition":"New improvements or progress.","meaning":"Avances o mejoras","sentence":"New _____ make our phones work better."},"aeronautics":{"translation":"Aeronáutica","definition":"The study of aircraft and flying.","meaning":"Estudio de cómo vuelan los aviones","sentence":"He studies _____ to learn how planes fly."},"affectionate":{"translation":"Cariñoso","definition":"Showing love and care.","meaning":"Que muestra cariño","sentence":"The _____ dog loves hugs."},"affliction":{"translation":"Aflicción","definition":"An illness or problem that causes suffering.","meaning":"Enfermedad o problema que causa sufrimiento","sentence":"Her illness is an _____ that causes pain."},"aggregate":{"translation":"Total combinado","definition":"The total formed by adding parts together.","meaning":"Total al sumar varias cantidades","sentence":"The _____ score adds all the game scores."},"agony":{"translation":"Agonía","definition":"Very strong pain.","meaning":"Dolor muy fuerte","sentence":"His broken leg caused _____, or great pain."},"aide":{"translation":"Ayudante","definition":"A person who helps someone with work.","meaning":"Persona que ayuda a otra en su trabajo","sentence":"The teacher’s _____ helps in class."},"aisle":{"translation":"Pasillo","definition":"A passage between rows of seats or shelves.","meaning":"Pasillo entre filas de asientos","sentence":"Walk down the _____ between the seats."},"alibi":{"translation":"Coartada","definition":"Proof that someone was elsewhere when a crime happened.","meaning":"Prueba de que alguien estaba en otro lugar","sentence":"His _____ showed he was home, not at the crime."},"allegiance":{"translation":"Lealtad","definition":"Loyalty to a country or group.","meaning":"Lealtad a un país o grupo","sentence":"They promised _____, or loyalty, to their country."},"ambient":{"translation":"Ambiental","definition":"Coming from the surrounding area.","meaning":"Del ambiente que nos rodea","sentence":"The _____ light comes from the room around us."},"amnesty":{"translation":"Amnistía","definition":"An official pardon for a group of people.","meaning":"Perdón oficial para un grupo por sus delitos","sentence":"The group received _____, an official pardon for their crimes."},"anatomy":{"translation":"Anatomía","definition":"The study of body parts.","meaning":"Estudio de las partes del cuerpo","sentence":"We study _____ to learn about body parts."},"animosity":{"translation":"Enemistad","definition":"Strong dislike or anger toward someone.","meaning":"Enojo o rechazo fuerte hacia alguien","sentence":"Their _____ showed in their angry looks."},"apathy":{"translation":"Apatía","definition":"A lack of interest or care.","meaning":"Falta de interés","sentence":"His _____ showed that he did not care."},"approach":{"translation":"Manera de abordar algo","definition":"A way of doing or solving something.","meaning":"Manera de hacer algo","sentence":"Try a new _____, or way to solve it."},"archaic":{"translation":"Anticuado","definition":"Very old and no longer commonly used.","meaning":"Muy antiguo y ya poco usado","sentence":"This word is _____; no one uses it now."},"arrogant":{"translation":"Arrogante","definition":"Acting as if you are better than others.","meaning":"Que se cree mejor que los demás","sentence":"The _____ boy thinks he is better than us."},"assignment":{"translation":"Tarea","definition":"A task someone asks you to do.","meaning":"Tarea que alguien te pide hacer","sentence":"Our _____ is to read two pages."},"audacity":{"translation":"Atrevimiento","definition":"Bold behavior that may be rude.","meaning":"Atrevimiento que puede mostrar falta de respeto","sentence":"He had the _____ to take my lunch without asking!"},"auspicious":{"translation":"Prometedor","definition":"Showing signs that something will go well.","meaning":"Que indica que algo puede salir bien","sentence":"Good weather is an _____ sign for our picnic."},"baffle":{"translation":"Confundir","definition":"To confuse someone.","meaning":"Confundir a alguien","sentence":"This hard puzzle may _____ me."},"banish":{"translation":"Desterrar","definition":"To force someone to leave a place.","meaning":"Expulsar a alguien de un lugar","sentence":"The king will _____ him and make him leave."},"banquet":{"translation":"Banquete","definition":"A large, special meal for many people.","meaning":"Comida especial para muchas personas","sentence":"We had a _____, a big special dinner."},"barricade":{"translation":"Barricada","definition":"A barrier that blocks the way.","meaning":"Barrera que impide el paso","sentence":"A _____ blocks the road."},"bashful":{"translation":"Tímido","definition":"Shy and easily embarrassed.","meaning":"Tímido o vergonzoso","sentence":"The _____ child is too shy to speak."},"battalion":{"translation":"Batallón","definition":"A large group of soldiers.","meaning":"Grupo grande de soldados","sentence":"A _____ is a large group of soldiers."},"because":{"translation":"Porque","definition":"For the reason that.","meaning":"Porque","sentence":"I stayed home _____ I was sick."},"belated":{"translation":"Tardío","definition":"Arriving or happening late.","meaning":"Que llega tarde","sentence":"The card was _____; it arrived late."},"beloved":{"translation":"Querido","definition":"Loved very much.","meaning":"Muy querido","sentence":"Our _____ dog is loved by everyone."},"benevolent":{"translation":"Bondadoso","definition":"Kind and willing to help.","meaning":"Amable y dispuesto a ayudar","sentence":"The _____ woman kindly helps others."},"bibliography":{"translation":"Bibliografía","definition":"A list of books or sources used in a project.","meaning":"Lista de libros usados para un trabajo","sentence":"The _____ lists the books I used."},"bilingual":{"translation":"Bilingüe","definition":"Able to speak two languages.","meaning":"Que habla dos idiomas","sentence":"She is _____; she speaks two languages."},"bizarre":{"translation":"Extraño","definition":"Very strange or unusual.","meaning":"Muy extraño","sentence":"A purple cow is a _____ sight."},"blockade":{"translation":"Bloqueo","definition":"An action that stops people or goods from entering or leaving.","meaning":"Acción de impedir la entrada o salida de un lugar","sentence":"The ships formed a _____ to stop other ships."},"boarder":{"translation":"Huésped con alojamiento y comida","definition":"A person who pays for a room and meals in a home.","meaning":"Persona que paga por vivir y comer en una casa ajena","sentence":"The _____ pays to live and eat in our home."},"boisterous":{"translation":"Bullicioso","definition":"Noisy and full of energy.","meaning":"Muy ruidoso y lleno de energía","sentence":"The _____ children laugh and shout loudly."},"border":{"translation":"Frontera","definition":"The line that separates two places or countries.","meaning":"Límite entre dos países o lugares","sentence":"The _____ separates the two countries."},"bracelet":{"translation":"Pulsera","definition":"Jewelry worn around the wrist.","meaning":"Joya que se usa en la muñeca","sentence":"She wears a _____ on her wrist."},"breathe":{"translation":"Respirar","definition":"To take air into and out of your lungs.","meaning":"Respirar","sentence":"We _____ air in and out."},"bridge":{"translation":"Puente","definition":"A structure that lets you cross a river or road.","meaning":"Estructura para cruzar un río o camino","sentence":"The _____ lets us cross the river."},"brilliant":{"translation":"Brillante","definition":"Very smart or excellent.","meaning":"Muy inteligente o excelente","sentence":"Her _____ idea solved the problem."},"bruise":{"translation":"Moretón","definition":"A mark on the skin caused by a bump or hit.","meaning":"Marca en la piel causada por un golpe","sentence":"The bump left a purple _____ on my arm."},"bulletin":{"translation":"Boletín","definition":"A short notice with news or information.","meaning":"Aviso con noticias o información","sentence":"The _____ has our school news."},"bungalow":{"translation":"Casa de una planta","definition":"A small house with one floor.","meaning":"Casa pequeña de una sola planta","sentence":"They live in a _____ with one floor."},"calligraphy":{"translation":"Caligrafía","definition":"The art of making beautiful letters by hand.","meaning":"Arte de escribir letras bonitas","sentence":"She uses _____ to make fancy letters."},"callous":{"translation":"Insensible","definition":"Not caring about another person's pain.","meaning":"Que no se preocupa por el dolor de otros","sentence":"His _____ words showed he did not care about her pain."},"camouflage":{"translation":"Camuflaje","definition":"Colors or patterns that help something blend in and hide.","meaning":"Colores o formas que ayudan a esconderse en el entorno","sentence":"The green _____ helps him hide in the trees."},"candid":{"translation":"Sincero","definition":"Honest and direct.","meaning":"Honesto y directo","sentence":"Her _____ answer was honest and direct."},"carnivorous":{"translation":"Carnívoro","definition":"Eating meat.","meaning":"Que come carne","sentence":"A lion is _____; it eats meat."},"casserole":{"translation":"Guiso al horno","definition":"A meal baked in a deep dish.","meaning":"Comida que se hornea en un recipiente hondo","sentence":"Mom baked a chicken _____ in a deep dish."},"catastrophe":{"translation":"Catástrofe","definition":"A very serious disaster.","meaning":"Desastre muy grave","sentence":"The flood was a _____; it ruined many homes."},"cauldron":{"translation":"Caldero","definition":"A large metal pot.","meaning":"Olla grande de metal","sentence":"The witch stirred a large iron _____."},"celestial":{"translation":"Celestial","definition":"Related to the sky or outer space.","meaning":"Relacionado con el cielo o el espacio","sentence":"Stars are _____ objects in the sky."},"characterize":{"translation":"Caracterizar","definition":"To describe the qualities that make someone or something distinct.","meaning":"Describir los rasgos que distinguen a alguien","sentence":"Kindness and honesty _____ her personality."},"chimpanzee":{"translation":"Chimpancé","definition":"An intelligent ape that can use tools.","meaning":"Tipo de simio inteligente","sentence":"The _____ is an ape that uses tools."},"choreography":{"translation":"Coreografía","definition":"The planned steps in a dance.","meaning":"Pasos planeados para un baile","sentence":"The _____ tells dancers which steps to do."},"circumstance":{"translation":"Circunstancia","definition":"A fact or condition that affects a situation.","meaning":"Hecho o condición que afecta una situación","sentence":"A flat tire was the _____ that made us late."},"clandestine":{"translation":"Clandestino","definition":"Done in secret.","meaning":"Secreto u oculto","sentence":"They held a _____ meeting in secret."},"clemency":{"translation":"Clemencia","definition":"Mercy shown by reducing a punishment.","meaning":"Misericordia al reducir un castigo","sentence":"The judge showed _____ by reducing the punishment."},"clientele":{"translation":"Clientela","definition":"The regular customers of a business.","meaning":"Clientes habituales de un negocio","sentence":"The shop’s _____ are its regular customers."},"cohesive":{"translation":"Unido","definition":"United and working well together.","meaning":"Unido y que trabaja bien como grupo","sentence":"Our _____ team works well together."},"coincidence":{"translation":"Coincidencia","definition":"Things happening together by chance.","meaning":"Algo que ocurre por casualidad","sentence":"Having the same birthday was a _____."},"colleague":{"translation":"Compañero de trabajo","definition":"A person you work with.","meaning":"Persona que trabaja contigo","sentence":"My _____ works with me."},"colloquial":{"translation":"Coloquial","definition":"Used in casual, everyday conversation.","meaning":"Usado en una conversación informal","sentence":"“Wanna” is _____; we use it in casual talk."},"compensation":{"translation":"Compensación","definition":"Payment for work or a loss.","meaning":"Pago por un trabajo","sentence":"She got _____, or payment, for her work."},"compulsory":{"translation":"Obligatorio","definition":"Required; something you must do.","meaning":"Obligatorio","sentence":"School is _____; children must attend."},"condolence":{"translation":"Condolencia","definition":"An expression of sympathy after someone dies.","meaning":"Expresión de apoyo cuando alguien muere","sentence":"I sent a message of _____ after his mother died."},"configuration":{"translation":"Configuración","definition":"The way parts are arranged.","meaning":"Forma de organizar las partes de algo","sentence":"The desk _____ has all desks in a circle."},"constellation":{"translation":"Constelación","definition":"A group of stars that forms a pattern.","meaning":"Grupo de estrellas que forma una figura","sentence":"A _____ is a group of stars in a pattern."},"courageous":{"translation":"Valiente","definition":"Brave, even when afraid.","meaning":"Valiente","sentence":"The _____ child was brave."},"creation":{"translation":"Creación","definition":"Something that someone has made.","meaning":"Algo que alguien ha hecho o creado","sentence":"This painting is my _____; I made it."},"credentials":{"translation":"Credenciales","definition":"Documents that show a person's skills or qualifications.","meaning":"Documentos que muestran preparación o capacidad","sentence":"Her _____ show that she can teach."},"criticism":{"translation":"Crítica","definition":"Comments about what is good or what needs improvement.","meaning":"Comentario sobre lo que está bien o se puede mejorar","sentence":"Helpful _____ tells me how to improve."},"cuisine":{"translation":"Cocina de un lugar","definition":"The style of food from a place.","meaning":"Comida típica de un lugar","sentence":"Italian _____ includes pasta and pizza."},"culminate":{"translation":"Culminar","definition":"To end with an important event.","meaning":"Terminar con un evento importante","sentence":"The show will _____ with the final song."},"customary":{"translation":"Habitual","definition":"Usual or done as a tradition.","meaning":"Habitual o según la costumbre","sentence":"It is _____ for us to sing on birthdays."},"dandelion":{"translation":"Diente de león","definition":"A plant with yellow flowers and seeds that blow away.","meaning":"Planta de flor amarilla y semillas que vuelan","sentence":"The _____ is a yellow flower with seeds that blow away."},"dangerous":{"translation":"Peligroso","definition":"Able to cause harm.","meaning":"Que puede causar daño","sentence":"Fire is _____; it can hurt you."},"debatable":{"translation":"Discutible","definition":"Open to different opinions.","meaning":"Sobre lo que hay distintas opiniones","sentence":"The best game is _____; we do not all agree."},"December":{"translation":"Diciembre","definition":"The last month of the year.","meaning":"Diciembre","sentence":"_____ is the last month of the year."},"effective":{"translation":"Eficaz","definition":"Working well and giving the wanted result.","meaning":"Que funciona y da el resultado esperado","sentence":"The _____ medicine stopped my cough."},"eligible":{"translation":"Elegible","definition":"Meeting the requirements to take part.","meaning":"Que cumple los requisitos para participar","sentence":"You are _____ to play if you meet the age rule."}};
-const WORDS = Object.keys(VOCAB);
-const MODULES = Array.from({length:4}, (_,i) => WORDS.slice(i*22,(i+1)*22));
-const STORE = 'spellingMasterProgress_v3';
+'use strict';
+const VOCAB = {"abbreviation":{"translation":"Abreviatura","definition":"A short form of a word or phrase.","meaning":"Forma corta de una palabra o frase","sentence":"“Dr.” is an _____ for “Doctor.”","synonym":"short form"},"abroad":{"translation":"En el extranjero","definition":"In another country.","meaning":"En otro país","sentence":"She went _____ to visit another country.","synonym":"overseas"},"access":{"translation":"Acceso","definition":"The ability or permission to enter or use something.","meaning":"Permiso o posibilidad de entrar o usar algo","sentence":"The key gives us _____ to the room.","synonym":"entry"},"accord":{"translation":"Acuerdo","definition":"An agreement between people or groups.","meaning":"Acuerdo entre dos partes","sentence":"They signed an _____ to work together.","synonym":"agreement"},"adequate":{"translation":"Suficiente","definition":"Enough for what is needed.","meaning":"Suficiente para lo que se necesita","sentence":"The food is _____; there is enough.","synonym":"sufficient"},"advancements":{"translation":"Avances","definition":"New improvements or progress.","meaning":"Avances o mejoras","sentence":"New _____ make our phones work better.","synonym":"progress"},"aeronautics":{"translation":"Aeronáutica","definition":"The study of aircraft and flying.","meaning":"Estudio de cómo vuelan los aviones","sentence":"He studies _____ to learn how planes fly.","synonym":"aviation"},"affectionate":{"translation":"Cariñoso","definition":"Showing love and care.","meaning":"Que muestra cariño","sentence":"The _____ dog loves hugs.","synonym":"loving"},"affliction":{"translation":"Aflicción","definition":"An illness or problem that causes suffering.","meaning":"Enfermedad o problema que causa sufrimiento","sentence":"Her illness is an _____ that causes pain.","synonym":"illness"},"aggregate":{"translation":"Total combinado","definition":"The total formed by adding parts together.","meaning":"Total al sumar varias cantidades","sentence":"The _____ score adds all the game scores.","synonym":"total"},"agony":{"translation":"Agonía","definition":"Very strong pain.","meaning":"Dolor muy fuerte","sentence":"His broken leg caused _____, or great pain.","synonym":"pain"},"aide":{"translation":"Ayudante","definition":"A person who helps someone with work.","meaning":"Persona que ayuda a otra en su trabajo","sentence":"The teacher’s _____ helps in class.","synonym":"assistant"},"aisle":{"translation":"Pasillo","definition":"A passage between rows of seats or shelves.","meaning":"Pasillo entre filas de asientos","sentence":"Walk down the _____ between the seats.","synonym":"passage"},"alibi":{"translation":"Coartada","definition":"Proof that someone was elsewhere when a crime happened.","meaning":"Prueba de que alguien estaba en otro lugar","sentence":"His _____ showed he was home, not at the crime.","synonym":"excuse"},"allegiance":{"translation":"Lealtad","definition":"Loyalty to a country or group.","meaning":"Lealtad a un país o grupo","sentence":"They promised _____, or loyalty, to their country.","synonym":"loyalty"},"ambient":{"translation":"Ambiental","definition":"Coming from the surrounding area.","meaning":"Del ambiente que nos rodea","sentence":"The _____ light comes from the room around us.","synonym":"surrounding"},"amnesty":{"translation":"Amnistía","definition":"An official pardon for a group of people.","meaning":"Perdón oficial para un grupo por sus delitos","sentence":"The group received _____, an official pardon for their crimes.","synonym":"pardon"},"anatomy":{"translation":"Anatomía","definition":"The study of body parts.","meaning":"Estudio de las partes del cuerpo","sentence":"We study _____ to learn about body parts.","synonym":"body structure"},"animosity":{"translation":"Enemistad","definition":"Strong dislike or anger toward someone.","meaning":"Enojo o rechazo fuerte hacia alguien","sentence":"Their _____ showed in their angry looks.","synonym":"hostility"},"apathy":{"translation":"Apatía","definition":"A lack of interest or care.","meaning":"Falta de interés","sentence":"His _____ showed that he did not care.","synonym":"indifference"},"approach":{"translation":"Manera de abordar algo","definition":"A way of doing or solving something.","meaning":"Manera de hacer algo","sentence":"Try a new _____, or way to solve it.","synonym":"method"},"archaic":{"translation":"Anticuado","definition":"Very old and no longer commonly used.","meaning":"Muy antiguo y ya poco usado","sentence":"This word is _____; no one uses it now.","synonym":"old-fashioned"},"arrogant":{"translation":"Arrogante","definition":"Acting as if you are better than others.","meaning":"Que se cree mejor que los demás","sentence":"The _____ boy thinks he is better than us.","synonym":"conceited"},"assignment":{"translation":"Tarea","definition":"A task someone asks you to do.","meaning":"Tarea que alguien te pide hacer","sentence":"Our _____ is to read two pages.","synonym":"task"},"audacity":{"translation":"Atrevimiento","definition":"Bold behavior that may be rude.","meaning":"Atrevimiento que puede mostrar falta de respeto","sentence":"He had the _____ to take my lunch without asking!","synonym":"boldness"},"auspicious":{"translation":"Prometedor","definition":"Showing signs that something will go well.","meaning":"Que indica que algo puede salir bien","sentence":"Good weather is an _____ sign for our picnic.","synonym":"favorable"},"baffle":{"translation":"Confundir","definition":"To confuse someone.","meaning":"Confundir a alguien","sentence":"This hard puzzle may _____ me.","synonym":"confuse"},"banish":{"translation":"Desterrar","definition":"To force someone to leave a place.","meaning":"Expulsar a alguien de un lugar","sentence":"The king will _____ him and make him leave.","synonym":"expel"},"banquet":{"translation":"Banquete","definition":"A large, special meal for many people.","meaning":"Comida especial para muchas personas","sentence":"We had a _____, a big special dinner.","synonym":"feast"},"barricade":{"translation":"Barricada","definition":"A barrier that blocks the way.","meaning":"Barrera que impide el paso","sentence":"A _____ blocks the road.","synonym":"barrier"},"bashful":{"translation":"Tímido","definition":"Shy and easily embarrassed.","meaning":"Tímido o vergonzoso","sentence":"The _____ child is too shy to speak.","synonym":"shy"},"battalion":{"translation":"Batallón","definition":"A large group of soldiers.","meaning":"Grupo grande de soldados","sentence":"A _____ is a large group of soldiers.","synonym":"unit"},"because":{"translation":"Porque","definition":"For the reason that.","meaning":"Porque","sentence":"I stayed home _____ I was sick.","synonym":"since"},"belated":{"translation":"Tardío","definition":"Arriving or happening late.","meaning":"Que llega tarde","sentence":"The card was _____; it arrived late.","synonym":"late"},"beloved":{"translation":"Querido","definition":"Loved very much.","meaning":"Muy querido","sentence":"Our _____ dog is loved by everyone.","synonym":"dear"},"benevolent":{"translation":"Bondadoso","definition":"Kind and willing to help.","meaning":"Amable y dispuesto a ayudar","sentence":"The _____ woman kindly helps others.","synonym":"kind"},"bibliography":{"translation":"Bibliografía","definition":"A list of books or sources used in a project.","meaning":"Lista de libros usados para un trabajo","sentence":"The _____ lists the books I used.","synonym":"source list"},"bilingual":{"translation":"Bilingüe","definition":"Able to speak two languages.","meaning":"Que habla dos idiomas","sentence":"She is _____; she speaks two languages.","synonym":"speaking two languages"},"bizarre":{"translation":"Extraño","definition":"Very strange or unusual.","meaning":"Muy extraño","sentence":"A purple cow is a _____ sight.","synonym":"strange"},"blockade":{"translation":"Bloqueo","definition":"An action that stops people or goods from entering or leaving.","meaning":"Acción de impedir la entrada o salida de un lugar","sentence":"The ships formed a _____ to stop other ships.","synonym":"barrier"},"boarder":{"translation":"Huésped con alojamiento y comida","definition":"A person who pays for a room and meals in a home.","meaning":"Persona que paga por vivir y comer en una casa ajena","sentence":"The _____ pays to live and eat in our home.","synonym":"lodger"},"boisterous":{"translation":"Bullicioso","definition":"Noisy and full of energy.","meaning":"Muy ruidoso y lleno de energía","sentence":"The _____ children laugh and shout loudly.","synonym":"rowdy"},"border":{"translation":"Frontera","definition":"The line that separates two places or countries.","meaning":"Límite entre dos países o lugares","sentence":"The _____ separates the two countries.","synonym":"boundary"},"bracelet":{"translation":"Pulsera","definition":"Jewelry worn around the wrist.","meaning":"Joya que se usa en la muñeca","sentence":"She wears a _____ on her wrist.","synonym":"bangle"},"breathe":{"translation":"Respirar","definition":"To take air into and out of your lungs.","meaning":"Respirar","sentence":"We _____ air in and out.","synonym":"respire"},"bridge":{"translation":"Puente","definition":"A structure that lets you cross a river or road.","meaning":"Estructura para cruzar un río o camino","sentence":"The _____ lets us cross the river.","synonym":"span"},"brilliant":{"translation":"Brillante","definition":"Very smart or excellent.","meaning":"Muy inteligente o excelente","sentence":"Her _____ idea solved the problem.","synonym":"excellent"},"bruise":{"translation":"Moretón","definition":"A mark on the skin caused by a bump or hit.","meaning":"Marca en la piel causada por un golpe","sentence":"The bump left a purple _____ on my arm.","synonym":"contusion"},"bulletin":{"translation":"Boletín","definition":"A short notice with news or information.","meaning":"Aviso con noticias o información","sentence":"The _____ has our school news.","synonym":"notice"},"bungalow":{"translation":"Casa de una planta","definition":"A small house with one floor.","meaning":"Casa pequeña de una sola planta","sentence":"They live in a _____ with one floor.","synonym":"one-story house"},"calligraphy":{"translation":"Caligrafía","definition":"The art of making beautiful letters by hand.","meaning":"Arte de escribir letras bonitas","sentence":"She uses _____ to make fancy letters.","synonym":"handwriting art"},"callous":{"translation":"Insensible","definition":"Not caring about another person's pain.","meaning":"Que no se preocupa por el dolor de otros","sentence":"His _____ words showed he did not care about her pain.","synonym":"uncaring"},"camouflage":{"translation":"Camuflaje","definition":"Colors or patterns that help something blend in and hide.","meaning":"Colores o formas que ayudan a esconderse en el entorno","sentence":"The green _____ helps him hide in the trees.","synonym":"disguise"},"candid":{"translation":"Sincero","definition":"Honest and direct.","meaning":"Honesto y directo","sentence":"Her _____ answer was honest and direct.","synonym":"frank"},"carnivorous":{"translation":"Carnívoro","definition":"Eating meat.","meaning":"Que come carne","sentence":"A lion is _____; it eats meat.","synonym":"meat-eating"},"casserole":{"translation":"Guiso al horno","definition":"A meal baked in a deep dish.","meaning":"Comida que se hornea en un recipiente hondo","sentence":"Mom baked a chicken _____ in a deep dish.","synonym":"baked dish"},"catastrophe":{"translation":"Catástrofe","definition":"A very serious disaster.","meaning":"Desastre muy grave","sentence":"The flood was a _____; it ruined many homes.","synonym":"disaster"},"cauldron":{"translation":"Caldero","definition":"A large metal pot.","meaning":"Olla grande de metal","sentence":"The witch stirred a large iron _____.","synonym":"large pot"},"celestial":{"translation":"Celestial","definition":"Related to the sky or outer space.","meaning":"Relacionado con el cielo o el espacio","sentence":"Stars are _____ objects in the sky.","synonym":"heavenly"},"characterize":{"translation":"Caracterizar","definition":"To describe the qualities that make someone or something distinct.","meaning":"Describir los rasgos que distinguen a alguien","sentence":"Kindness and honesty _____ her personality.","synonym":"describe"},"chimpanzee":{"translation":"Chimpancé","definition":"An intelligent ape that can use tools.","meaning":"Tipo de simio inteligente","sentence":"The _____ is an ape that uses tools.","synonym":"ape"},"choreography":{"translation":"Coreografía","definition":"The planned steps in a dance.","meaning":"Pasos planeados para un baile","sentence":"The _____ tells dancers which steps to do.","synonym":"dance steps"},"circumstance":{"translation":"Circunstancia","definition":"A fact or condition that affects a situation.","meaning":"Hecho o condición que afecta una situación","sentence":"A flat tire was the _____ that made us late.","synonym":"situation"},"clandestine":{"translation":"Clandestino","definition":"Done in secret.","meaning":"Secreto u oculto","sentence":"They held a _____ meeting in secret.","synonym":"secret"},"clemency":{"translation":"Clemencia","definition":"Mercy shown by reducing a punishment.","meaning":"Misericordia al reducir un castigo","sentence":"The judge showed _____ by reducing the punishment.","synonym":"mercy"},"clientele":{"translation":"Clientela","definition":"The regular customers of a business.","meaning":"Clientes habituales de un negocio","sentence":"The shop’s _____ are its regular customers.","synonym":"customers"},"cohesive":{"translation":"Unido","definition":"United and working well together.","meaning":"Unido y que trabaja bien como grupo","sentence":"Our _____ team works well together.","synonym":"united"},"coincidence":{"translation":"Coincidencia","definition":"Things happening together by chance.","meaning":"Algo que ocurre por casualidad","sentence":"Having the same birthday was a _____.","synonym":"chance event"},"colleague":{"translation":"Compañero de trabajo","definition":"A person you work with.","meaning":"Persona que trabaja contigo","sentence":"My _____ works with me.","synonym":"coworker"},"colloquial":{"translation":"Coloquial","definition":"Used in casual, everyday conversation.","meaning":"Usado en una conversación informal","sentence":"“Wanna” is _____; we use it in casual talk.","synonym":"informal"},"compensation":{"translation":"Compensación","definition":"Payment for work or a loss.","meaning":"Pago por un trabajo","sentence":"She got _____, or payment, for her work.","synonym":"payment"},"compulsory":{"translation":"Obligatorio","definition":"Required; something you must do.","meaning":"Obligatorio","sentence":"School is _____; children must attend.","synonym":"required"},"condolence":{"translation":"Condolencia","definition":"An expression of sympathy after someone dies.","meaning":"Expresión de apoyo cuando alguien muere","sentence":"I sent a message of _____ after his mother died.","synonym":"sympathy"},"configuration":{"translation":"Configuración","definition":"The way parts are arranged.","meaning":"Forma de organizar las partes de algo","sentence":"The desk _____ has all desks in a circle.","synonym":"arrangement"},"constellation":{"translation":"Constelación","definition":"A group of stars that forms a pattern.","meaning":"Grupo de estrellas que forma una figura","sentence":"A _____ is a group of stars in a pattern.","synonym":"star group"},"courageous":{"translation":"Valiente","definition":"Brave, even when afraid.","meaning":"Valiente","sentence":"The _____ child was brave.","synonym":"brave"},"creation":{"translation":"Creación","definition":"Something that someone has made.","meaning":"Algo que alguien ha hecho o creado","sentence":"This painting is my _____; I made it.","synonym":"something made"},"credentials":{"translation":"Credenciales","definition":"Documents that show a person's skills or qualifications.","meaning":"Documentos que muestran preparación o capacidad","sentence":"Her _____ show that she can teach.","synonym":"qualifications"},"criticism":{"translation":"Crítica","definition":"Comments about what is good or what needs improvement.","meaning":"Comentario sobre lo que está bien o se puede mejorar","sentence":"Helpful _____ tells me how to improve.","synonym":"evaluation"},"cuisine":{"translation":"Cocina de un lugar","definition":"The style of food from a place.","meaning":"Comida típica de un lugar","sentence":"Italian _____ includes pasta and pizza.","synonym":"food style"},"culminate":{"translation":"Culminar","definition":"To end with an important event.","meaning":"Terminar con un evento importante","sentence":"The show will _____ with the final song.","synonym":"end"},"customary":{"translation":"Habitual","definition":"Usual or done as a tradition.","meaning":"Habitual o según la costumbre","sentence":"It is _____ for us to sing on birthdays.","synonym":"usual"},"dandelion":{"translation":"Diente de león","definition":"A plant with yellow flowers and seeds that blow away.","meaning":"Planta de flor amarilla y semillas que vuelan","sentence":"The _____ is a yellow flower with seeds that blow away.","synonym":"blowball"},"dangerous":{"translation":"Peligroso","definition":"Able to cause harm.","meaning":"Que puede causar daño","sentence":"Fire is _____; it can hurt you.","synonym":"risky"},"debatable":{"translation":"Discutible","definition":"Open to different opinions.","meaning":"Sobre lo que hay distintas opiniones","sentence":"The best game is _____; we do not all agree.","synonym":"arguable"},"December":{"translation":"Diciembre","definition":"The last month of the year.","meaning":"Diciembre","sentence":"_____ is the last month of the year.","synonym":"year’s final month"},"effective":{"translation":"Eficaz","definition":"Working well and giving the wanted result.","meaning":"Que funciona y da el resultado esperado","sentence":"The _____ medicine stopped my cough.","synonym":"successful"},"eligible":{"translation":"Elegible","definition":"Meeting the requirements to take part.","meaning":"Que cumple los requisitos para participar","sentence":"You are _____ to play if you meet the age rule.","synonym":"qualified"}};
+const WORDS=Object.keys(VOCAB);
+const MODULES=Array.from({length:4},(_,i)=>WORDS.slice(i*22,(i+1)*22));
+const STORE='vocabulario4x22_v1';
+let saved=loadSaved(),moduleIndex=0,mode='learn',list=[],index=0,currentWord='',wrongLetters=new Set(),usedLetters=new Set(),hangErrors=0,writeAttempts=0,answered=false,traceLength=0,traceMinX=Infinity,traceMaxX=-Infinity,traceVisited=new Set(),traceReady=false,traceState=null,traceStrokeCount=0,remedialQueue=[],remedialWord='',remedialPhase='',remedialReturn='free',autoNextTimer=null;
+function fresh(){return {modules:{}}}
+function loadSaved(){try{const x=JSON.parse(localStorage.getItem(STORE));return x&&x.modules?x:fresh()}catch{return fresh()}}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(saved))}catch{}}
+function moduleState(i){if(!saved.modules[i])saved.modules[i]={stage:0,stageIndex:0,score:100,hangWrongTotal:0,writeWrongTotal:0,untracedWords:[],completed:false,repeatWords:[],firstPassErrors:0,remedialQueue:[],remedialWord:'',remedialPhase:'',remedialReturn:'free'};const s=saved.modules[i];if(!Array.isArray(s.untracedWords))s.untracedWords=[];if(!Array.isArray(s.stageIndices)){s.stageIndices=[0,0,0];s.stageIndices[Math.min(s.stage||0,2)]=s.stageIndex||0}if(!Array.isArray(s.stageDone)){s.stageDone=[[],[],[]];for(let n=0;n<Math.min(3,s.stage||0);n++)s.stageDone[n]=Array(22).fill(true);if(s.stage<3&&s.stageIndex>0)s.stageDone[s.stage]=Array.from({length:22},(_,n)=>n<s.stageIndex)}while(s.stageIndices.length<3)s.stageIndices.push(0);while(s.stageDone.length<3)s.stageDone.push([]);s.stageDone=s.stageDone.map(a=>Array.from({length:22},(_,n)=>!!(a||[])[n]));if(!Array.isArray(s.repeatWords))s.repeatWords=[];return s}
+function stageNumber(m=mode){return ({learn:0,hangman:1,write:2})[m]??0}
+function doneCount(s,i){return (s.stageDone[i]||[]).filter(Boolean).length}
+function allStagesDone(s){return [0,1,2].every(i=>doneCount(s,i)===22)}
+function isModuleComplete(s){return !!s.completed&&allStagesDone(s)&&!(s.repeatWords||[]).length&&!s.remedialPhase&&!(s.remedialQueue||[]).length}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function scoreFor(st){return Math.max(0,Math.min(100,100-Math.floor((st.hangWrongTotal||0)/2)-(st.writeWrongTotal||0)))}
+function renderHome(){document.getElementById('home').classList.remove('hidden');document.getElementById('game').classList.add('hidden');let h='';MODULES.forEach((arr,i)=>{const s=moduleState(i),labels=['Learn','Hangman','Escribir'];h+=`<button class="module" onclick="openModule(${i})"><strong>📘 Módulo ${i+1}</strong><span class="status">${isModuleComplete(s)?'✅ Completado':`${labels[s.stage]||'Learn'} · ${doneCount(s,s.stage||0)}/22`}</span><span class="score">Puntuación: ${scoreFor(s)}%</span></button>`});document.getElementById('modules').innerHTML=h;persist()}
+function goHome(){if(autoNextTimer){clearTimeout(autoNextTimer);autoNextTimer=null}saveRemedial();renderHome()}
+function saveRemedial(){const s=moduleState(moduleIndex);s.remedialQueue=[...remedialQueue];s.remedialWord=remedialWord;s.remedialPhase=remedialPhase;s.remedialReturn=remedialReturn;persist()}
+function resetAll(){if(confirm('¿Borrar el progreso y las puntuaciones de los cuatro módulos?')){saved=fresh();persist();renderHome()}}
+function openModule(i){moduleIndex=i;const s=moduleState(i);document.getElementById('home').classList.add('hidden');document.getElementById('game').classList.remove('hidden');document.getElementById('moduleLabel').textContent='Módulo '+(i+1);list=MODULES[i];if(s.remedialPhase){remedialQueue=[...(s.remedialQueue||[])];remedialWord=s.remedialWord||'';remedialPhase=s.remedialPhase;remedialReturn='free';mode=remedialPhase}else{remedialQueue=[];remedialWord='';remedialPhase='';remedialReturn='free';mode=['learn','hangman','write'][s.stage]||'learn'}index=s.stageIndices[stageNumber(mode)]||0;renderCurrent()}
+function setScore(){const s=moduleState(moduleIndex);s.score=scoreFor(s);document.getElementById('scoreBox').textContent=s.score+'%';persist()}
+function setSteps(){const s=moduleState(moduleIndex);const ids=['stepLearn','stepHang','stepWrite'],names=['Learn','Hangman','Escribir'];['learn','hangman','write'].forEach((m,i)=>{let el=document.getElementById(ids[i]);el.classList.toggle('active',mode===m);el.classList.toggle('done',doneCount(s,i)===22);el.textContent=doneCount(s,i)===22?'✓':String(i+1);el.disabled=!!remedialPhase});document.getElementById('stageName').textContent=names[stageNumber()];const i=stageNumber(),pos=doneCount(s,i);document.getElementById('bar').style.width=(remedialPhase?10:(pos/22*100))+'%';setScore()}
+function current(){return remedialPhase?remedialWord:list[index]}
+function chooseStage(m){if(remedialPhase)return;if(autoNextTimer){clearTimeout(autoNextTimer);autoNextTimer=null}mode=m;const s=moduleState(moduleIndex);s.stage=stageNumber(m);index=s.stageIndices[s.stage]||0;persist();renderCurrent()}
+function renderCurrent(){const s=moduleState(moduleIndex);if(!remedialPhase){s.stage=stageNumber(mode);index=s.stageIndices[s.stage]||0;if(doneCount(s,s.stage)===22){setSteps();document.getElementById('gameContent').innerHTML=`<div class="center donebox"><h2>✅ Parte completada</h2><p>Terminaste las 22 palabras de esta parte.</p><p>Elige otra etapa para continuar.</p></div>`;if(allStagesDone(s)&&!(s.repeatWords||[]).length){completeModule();return}return}}currentWord=current();answered=false;wrongLetters=new Set();usedLetters=new Set();hangErrors=0;writeAttempts=0;setSteps();if(mode==='learn')renderLearn();else if(mode==='hangman')renderHangman();else renderWrite()}
+function cardInfo(w){const d=VOCAB[w];return `<div class="translation">${esc(d.translation)}</div><div class="definition"><b>🇺🇸</b> ${esc(d.definition)}</div><div class="synonym"><b>Synonym 🇺🇸:</b> ${esc(d.synonym)}</div>`}
+function restartModule(){if(!confirm('¿Comenzar de nuevo este módulo? Se borrarán su progreso y puntuación.'))return;saved.modules[moduleIndex]={stage:0,stageIndex:0,stageIndices:[0,0,0],stageDone:[Array(22).fill(false),Array(22).fill(false),Array(22).fill(false)],score:100,hangWrongTotal:0,writeWrongTotal:0,untracedWords:[],completed:false,repeatWords:[],firstPassErrors:0,remedialQueue:[],remedialWord:'',remedialPhase:'',remedialReturn:'free'};remedialQueue=[];remedialWord='';remedialPhase='';remedialReturn='free';mode='learn';index=0;list=MODULES[moduleIndex];persist();renderCurrent()}
+function updateTraceProgress(){const status=document.getElementById('traceStatus'),btn=document.getElementById('learnNext');if(status)status.textContent=`Trazos individuales: ${Math.min(traceStrokeCount,5)}/5`;if(btn)btn.disabled=traceStrokeCount<5}
+function clearTrace(){if(traceState)traceState.reset();document.querySelectorAll('#traceGuide .traceletter').forEach(el=>el.classList.remove('traced'));traceLength=0;traceMinX=Infinity;traceMaxX=-Infinity;traceVisited=new Set();traceReady=false;traceStrokeCount=0;updateTraceProgress();}
+function speak(w=current()){if(!('speechSynthesis'in window)){alert('Este navegador no tiene audio disponible.');return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang='en-US';u.rate=.75;speechSynthesis.speak(u)}
+function renderLearn(){const w=currentWord,d=VOCAB[w];document.getElementById('gameContent').innerHTML=`<div class="center"><p class="wordcount">${remedialPhase?'REPASO · ':''}LEARN</p><div class="word">${esc(w)}</div>${cardInfo(w)}<div class="tracebox" id="traceBox"><div class="traceguide" id="traceGuide">${[...w].map((ch,i)=>ch===' '?'<span class="tracespace">&nbsp;</span>':`<span class="traceletter" data-letter="${i}">${esc(ch)}</span>`).join('')}</div><canvas id="traceCanvas" aria-label="Área para trazar la palabra"></canvas></div><p id="traceStatus" class="tracestatus" aria-live="polite">Trazos individuales: 0/5</p><div class="traceactions"><button class="secondary" onclick="clearTrace()">Borrar trazo</button></div><div class="btnrow"><button class="secondary" onclick="speak()">🔊 Escuchar otra vez</button><button class="primary" id="learnNext" onclick="nextLearn()" disabled>Siguiente →</button></div></div>`;startTrace();setTimeout(()=>speak(w),180)}
+function startTrace(){const canvas=document.getElementById('traceCanvas');if(!canvas)return;traceStrokeCount=0;updateTraceProgress();const dpr=Math.max(1,window.devicePixelRatio||1),rect=canvas.getBoundingClientRect();canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.height*dpr);const ctx=canvas.getContext('2d'),trail=document.createElement('canvas');trail.width=canvas.width;trail.height=canvas.height;const trailCtx=trail.getContext('2d');trailCtx.setTransform(dpr,0,0,dpr,0,0);trailCtx.lineWidth=4;trailCtx.lineCap='round';trailCtx.lineJoin='round';trailCtx.strokeStyle='#5479d7';const letters=[...document.querySelectorAll('#traceGuide .traceletter')].map(el=>{const r=el.getBoundingClientRect(),w=r.width,h=r.height,mw=Math.max(1,Math.ceil(w*dpr)),mh=Math.max(1,Math.ceil(h*dpr)),glyph=document.createElement('canvas');glyph.width=mw;glyph.height=mh;const gctx=glyph.getContext('2d'),style=getComputedStyle(el);gctx.setTransform(dpr,0,0,dpr,0,0);gctx.fillStyle='#fff';gctx.font=`${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;gctx.textAlign='center';gctx.textBaseline='middle';gctx.fillText(el.textContent,mw/(2*dpr),mh/(2*dpr));const pixels=gctx.getImageData(0,0,mw,mh).data,outline=[];for(let py=1;py<mh-1;py++)for(let px=1;px<mw-1;px++){const at=(py*mw+px)*4;if(pixels[at+3]<40)continue;if(pixels[at-1]<24||pixels[at+7]<24||pixels[at-mw*4+3]<24||pixels[at+mw*4+3]<24)outline.push({x:px,y:py})}return{el,x:r.left-rect.left,y:r.top-rect.top,w,h,outline,visited:false}});const contourMask=document.createElement('canvas');contourMask.width=canvas.width;contourMask.height=canvas.height;const maskCtx=contourMask.getContext('2d'),maskData=maskCtx.createImageData(canvas.width,canvas.height),radius=7*dpr;for(const q of letters)for(const o of q.outline){const cx=Math.round(q.x*dpr)+o.x,cy=Math.round(q.y*dpr)+o.y,reach=Math.ceil(radius);for(let yy=-reach;yy<=reach;yy++)for(let xx=-reach;xx<=reach;xx++){if(xx*xx+yy*yy>radius*radius)continue;const gx=cx+xx,gy=cy+yy;if(gx<0||gy<0||gx>=canvas.width||gy>=canvas.height)continue;maskData.data[(gy*canvas.width+gx)*4+3]=255}}maskCtx.putImageData(maskData,0,0);let drawing=false,active=null;function point(e){const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}function findLetter(p){return letters.findIndex(q=>p.x>=q.x&&p.x<=q.x+q.w&&p.y>=q.y&&p.y<=q.y+q.h)}function showTrace(){ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(trail,0,0);ctx.globalCompositeOperation='destination-in';ctx.drawImage(contourMask,0,0);ctx.globalCompositeOperation='source-over'}function drawSegment(a,b){trailCtx.beginPath();trailCtx.moveTo(a.x,a.y);trailCtx.lineTo(b.x,b.y);trailCtx.stroke();showTrace()}function finishGesture(end){if(!active)return;const q=letters[active.index],sameLetter=findLetter(end)===active.index,minDistance=Math.max(16,Math.min(q.w,q.h)*.7);if(sameLetter&&active.travel>=minDistance){traceStrokeCount++;q.visited=true;q.el.classList.add('traced');traceVisited.add(active.index);updateTraceProgress()}active=null;drawing=false;if(letters.length&&letters.every(x=>x.visited))traceReady=true}traceState={reset(){letters.forEach(q=>{q.visited=false;q.el.classList.remove('traced')});trailCtx.clearRect(0,0,canvas.width/dpr,canvas.height/dpr);ctx.clearRect(0,0,canvas.width,canvas.height);traceVisited=new Set();traceReady=false;traceStrokeCount=0;updateTraceProgress();active=null;drawing=false}};canvas.onpointerdown=e=>{e.preventDefault();const p=point(e),idx=findLetter(p);if(idx<0)return;drawing=true;active={index:idx,last:p,travel:0};drawSegment(p,{x:p.x+.1,y:p.y+.1});if(canvas.setPointerCapture)canvas.setPointerCapture(e.pointerId)};canvas.onpointermove=e=>{if(!drawing||!active)return;e.preventDefault();const p=point(e),q=letters[active.index],a=active.last,mid={x:(a.x+p.x)/2,y:(a.y+p.y)/2},dist=Math.hypot(p.x-a.x,p.y-a.y);if(mid.x>=q.x&&mid.x<=q.x+q.w&&mid.y>=q.y&&mid.y<=q.y+q.h)active.travel+=dist;drawSegment(a,p);active.last=p};canvas.onpointerup=e=>{if(!drawing)return;e.preventDefault();finishGesture(point(e))};canvas.onpointercancel=()=>{active=null;drawing=false}}
 
-let saved = loadSaved();
-let moduleIndex = 0, mode = 'learn', list = [], index = 0;
-let wrongLetters = new Set(), hangErrors = 0, usedLetters = new Set();
-let answered = false, writeAttempts = 0;
-
-function loadSaved(){
-  try {
-    return JSON.parse(localStorage.getItem(STORE)) || {modules:{},misses:{}};
-  } catch(e) {
-    return {modules:{},misses:{}};
-  }
-}
-function persist(){
-  localStorage.setItem(STORE,JSON.stringify(saved));
-}
-function moduleState(i){
-  return saved.modules[i] || (saved.modules[i]={learned:false,hangman:false,write:false});
-}
-function escapeHtml(s){
-  return String(s ?? '').replace(/[&<>"']/g,c=>({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-  }[c]));
-}
-function renderHome(){
-  document.getElementById('home').classList.remove('hidden');
-  document.getElementById('game').classList.add('hidden');
-  let html='';
-  MODULES.forEach((arr,i)=>{
-    let st=moduleState(i);
-    html+=`<button class="module" onclick="openModule(${i})">
-      <strong>📘 Módulo ${i+1}</strong>
-      <span>Palabras ${i*22+1}–${i*22+22}</span>
-      <div style="margin-top:10px;font-size:12px">
-        ${st.learned?'✅ Aprender':'○ Aprender'} ·
-        ${st.hangman?'✅ Hangman':'○ Hangman'} ·
-        ${st.write?'✅ Escribir':'○ Escribir'}
-      </div>
-    </button>`;
-  });
-  document.getElementById('modules').innerHTML=html;
-}
-function goHome(){
-  renderHome();
-}
-function resetProgress(){
-  if(confirm('¿Seguro que quieres borrar todo el progreso y empezar desde cero?')){
-    saved={modules:{},misses:{}};
-    persist();
-    renderHome();
-  }
-}
-function openModule(i){
-  moduleIndex=i;
-  document.getElementById('home').classList.add('hidden');
-  document.getElementById('game').classList.remove('hidden');
-  document.getElementById('moduleLabel').textContent='Módulo '+(i+1)+' · 22 palabras';
-  let st=moduleState(i);
-  if(!st.learned) startMode('learn');
-  else if(!st.hangman) startMode('hangman');
-  else startMode('write');
-}
-function setSteps(){
-  document.getElementById('stepLearn').classList.toggle('active',mode==='learn');
-  document.getElementById('stepHang').classList.toggle('active',mode==='hangman');
-  document.getElementById('stepWrite').classList.toggle('active',mode==='write');
-  document.getElementById('bar').style.width=
-    ((index+1)/Math.max(1,list.length)*100)+'%';
-}
-function startMode(m){
-  mode=m;
-  index=0;
-  list=mode==='write' ? getReviewWords() : MODULES[moduleIndex].slice();
-
-  if(mode==='write' && !list.length){
-    document.getElementById('gameContent').innerHTML=`
-      <div class="center">
-        <h2>¡Buen trabajo!</h2>
-        <p>No hay palabras pendientes con dos o más letras incorrectas.</p>
-        <p>Puedes volver a jugar Hangman para seguir practicando.</p>
-        <div class="btnrow">
-          <button class="primary" onclick="startMode('hangman')">Jugar Hangman</button>
-          <button class="secondary" onclick="goHome()">Volver a módulos</button>
-        </div>
-      </div>`;
-    setSteps();
-    return;
-  }
-  setSteps();
-  renderCurrent();
-}
-function getReviewWords(){
-  return MODULES[moduleIndex].filter(w=>
-    (saved.misses[w]?.letters?.length || 0)>=2
-  );
-}
-function current(){
-  return list[index];
-}
-function renderCurrent(){
-  if(index>=list.length){
-    finishMode();
-    return;
-  }
-  answered=false;
-  wrongLetters=new Set();
-  hangErrors=0;
-  usedLetters=new Set();
-  writeAttempts=0;
-  setSteps();
-
-  if(mode==='learn') renderLearn();
-  else if(mode==='hangman') renderHangman();
-  else renderWrite();
-}
-
-/* SESIÓN 1: APRENDER */
-function renderLearn(){
-  let w=current(), d=VOCAB[w];
-  document.getElementById('gameContent').innerHTML=`
-    <div class="center">
-      <p class="muted">APRENDE LA PALABRA · ${index+1} DE ${list.length}</p>
-      <div class="word">${escapeHtml(w)}</div>
-      <div class="translation">${escapeHtml(d.translation)}</div>
-      <div class="definition">
-        <b>English definition:</b><br>${escapeHtml(d.definition)}
-        <hr style="border:0;border-top:1px solid #e1e6f0">
-        <b>En español:</b><br>${escapeHtml(d.meaning)}
-      </div>
-      <p class="sentence"><b>Example:</b><br>${escapeHtml(d.sentence)}</p>
-      <div class="btnrow">
-        <button class="secondary" onclick="speakCurrent()">🔊 Escuchar pronunciación</button>
-        <button class="primary" onclick="learnNext()">
-          ${index===list.length-1?'Terminé de aprender':'Ya la aprendí →'}
-        </button>
-      </div>
-      <p class="muted small">
-        Tómate tu tiempo. Mira la palabra, escúchala y léela antes de continuar.
-      </p>
-    </div>`;
-}
-function speakCurrent(){
-  let w=current();
-  if(!w) return;
-  if(!('speechSynthesis' in window)){
-    alert('Este navegador no tiene audio de pronunciación disponible.');
-    return;
-  }
-  speechSynthesis.cancel();
-  let u=new SpeechSynthesisUtterance(w);
-  u.lang='en-US';
-  u.rate=.72;
-  speechSynthesis.speak(u);
-}
-function learnNext(){
-  if(index<list.length-1){
-    index++;
-    renderCurrent();
-  } else {
-    finishMode();
-  }
-}
-
-/* SESIÓN 2: HANGMAN */
-function renderHangman(){
-  let w=current(), d=VOCAB[w];
-  document.getElementById('gameContent').innerHTML=`
-    <div class="center">
-      <p class="muted">HANGMAN · ${index+1} DE ${list.length}</p>
-      <div class="translation">${escapeHtml(d.translation)}</div>
-      <div class="definition">
-        <b>English definition:</b> ${escapeHtml(d.definition)}<br>
-        <b>En español:</b> ${escapeHtml(d.meaning)}
-      </div>
-      <button class="secondary" onclick="speakCurrent()">🔊 Escuchar palabra</button>
-      <div class="hangword" id="hangWord">
-        ${w.split('').map(c=>c===' '?' ':'_').join(' ')}
-      </div>
-      <p class="attempts">Errores: <span id="errCount">0</span> de 6</p>
-      <div id="hangFeedback" class="feedback" aria-live="polite"></div>
-      <div class="keyboard" id="keyboard">
-        ${'abcdefghijklmnopqrstuvwxyz'.split('').map(c=>
-          `<button class="key" id="key-${c}" onclick="guessLetter('${c}')">${c}</button>`
-        ).join('')}
-      </div>
-      <div class="btnrow">
-        <button class="primary hidden" id="hangContinue" onclick="nextWord()">
-          Siguiente palabra →
-        </button>
-      </div>
-    </div>`;
-}
-function guessLetter(c){
-  if(answered || usedLetters.has(c)) return;
-
-  usedLetters.add(c);
-  let key=document.getElementById('key-'+c);
-  if(key) key.classList.add('used');
-
-  let w=current();
-  let feedback=document.getElementById('hangFeedback');
-
-  if(w.toLowerCase().includes(c)){
-    feedback.textContent='¡Bien! Esa letra está en la palabra.';
-    feedback.className='feedback good';
-  } else {
-    wrongLetters.add(c);
-    hangErrors++;
-    document.getElementById('errCount').textContent=hangErrors;
-    feedback.textContent='Esa letra no está. ¡Sigue intentando!';
-    feedback.className='feedback bad';
-  }
-
-  let shown=w.split('').map(ch=>
-    ch===' '?' ':usedLetters.has(ch.toLowerCase())?ch:'_'
-  ).join(' ');
-
-  document.getElementById('hangWord').textContent=shown;
-
-  if(!shown.includes('_')){
-    answered=true;
-    feedback.textContent='¡Correcto! Adivinaste la palabra.';
-    feedback.className='feedback good';
-    saveMisses(w,wrongLetters);
-    document.getElementById('hangContinue').classList.remove('hidden');
-  } else if(hangErrors>=6){
-    answered=true;
-    saveMisses(w,wrongLetters);
-    document.getElementById('hangWord').textContent=w;
-    feedback.textContent='La palabra era “'+w+'”. Practícala en la sesión de escritura.';
-    feedback.className='feedback bad';
-    document.getElementById('hangContinue').classList.remove('hidden');
-  }
-}
-
-/* Guarda las letras diferentes que Ángel falló */
-function saveMisses(w,set){
-  let rec=saved.misses[w] || {letters:[],hangmanMisses:0,writeMisses:0};
-  rec.letters=[...new Set([...(rec.letters||[]),...set])];
-  if(set.size) rec.hangmanMisses=(rec.hangmanMisses||0)+1;
-  saved.misses[w]=rec;
-  persist();
-}
-
-/* SESIÓN 3: ESCRIBIR LA PALABRA COMPLETA */
-function renderWrite(){
-  let w=current(), d=VOCAB[w];
-  document.getElementById('gameContent').innerHTML=`
-    <div class="center">
-      <p class="muted">ESCRIBE LA PALABRA COMPLETA · ${index+1} DE ${list.length}</p>
-      <div class="translation">${escapeHtml(d.translation)}</div>
-      <div class="definition">
-        <b>English definition:</b><br>${escapeHtml(d.definition)}<br>
-        <b>En español:</b><br>${escapeHtml(d.meaning)}
-      </div>
-      <p class="sentence">
-        <b>Completa la palabra que corresponde a esta oración:</b><br>
-        ${escapeHtml(d.sentence)}
-      </p>
-      <button class="secondary" onclick="speakCurrent()">🔊 Escuchar pronunciación</button>
-      <form onsubmit="checkWrite(event)" style="margin-top:15px">
-        <input id="writeAnswer" type="text" autocomplete="off" autocapitalize="none"
-          spellcheck="false" placeholder="Escribe la palabra en inglés"
-          aria-label="Escribe la palabra completa" required>
-        <div class="btnrow">
-          <button class="primary" type="submit">Comprobar</button>
-        </div>
-      </form>
-      <div id="writeFeedback" class="feedback" aria-live="polite"></div>
-      <div id="writeRetry" class="hidden">
-        <p class="notice">
-          Lee la palabra y vuelve a escribirla para practicar.
-          Escucha la pronunciación si lo necesitas.
-        </p>
-        <div class="word">${escapeHtml(w)}</div>
-        <div class="btnrow">
-          <button class="secondary" onclick="speakCurrent()">🔊 Escuchar</button>
-          <button class="primary" onclick="practiceCorrect()">Practicar la palabra</button>
-        </div>
-      </div>
-      <button id="writeContinue" class="primary hidden" onclick="nextWord()">
-        Siguiente palabra →
-      </button>
-    </div>`;
-  document.getElementById('writeAnswer').focus();
-}
-function checkWrite(e){
-  e.preventDefault();
-  if(answered) return;
-
-  let w=current();
-  let v=document.getElementById('writeAnswer').value.trim();
-  let feedback=document.getElementById('writeFeedback');
-
-  if(v.toLowerCase()===w.toLowerCase()){
-    answered=true;
-    feedback.textContent='¡Excelente! Escribiste la palabra correctamente.';
-    feedback.className='feedback good';
-    document.getElementById('writeContinue').classList.remove('hidden');
-    saveMisses(w,wrongLetters);
-  } else {
-    writeAttempts++;
-    let diff=[];
-
-    for(let i=0;i<Math.max(w.length,v.length);i++){
-      let a=(v[i]||'').toLowerCase();
-      let b=(w[i]||'').toLowerCase();
-      if(a!==b && b.match(/[a-z]/) && !diff.includes(b)) diff.push(b);
-    }
-
-    diff.forEach(c=>wrongLetters.add(c));
-    saveMisses(w,wrongLetters);
-
-    feedback.textContent=
-      `No es correcto todavía. Intento ${writeAttempts} de 3. Revisa las letras y vuelve a intentarlo.`;
-    feedback.className='feedback bad';
-
-    if(writeAttempts>=3){
-      document.getElementById('writeRetry').classList.remove('hidden');
-      feedback.textContent=
-        'Has tenido 3 intentos. Mira la palabra, escúchala y practícala antes de continuar.';
-      document.getElementById('writeAnswer').value='';
-      document.getElementById('writeAnswer').focus();
-    }
-  }
-}
-function practiceCorrect(){
-  let input=document.getElementById('writeAnswer');
-  input.value='';
-  input.placeholder='Escribe la palabra que acabas de estudiar';
-  input.focus();
-  document.getElementById('writeFeedback').textContent=
-    'Escríbela completa en el espacio de arriba. No se marcará dominada automáticamente.';
-  document.getElementById('writeFeedback').className='feedback';
-}
-function nextWord(){
-  index++;
-  renderCurrent();
-}
-
-/* FINAL DE CADA SESIÓN */
-function finishMode(){
-  let st=moduleState(moduleIndex);
-
-  if(mode==='learn'){
-    st.learned=true;
-    persist();
-    document.getElementById('gameContent').innerHTML=`
-      <div class="center">
-        <h2>🎉 ¡Terminaste de aprender!</h2>
-        <p>Has estudiado las 22 palabras del módulo ${moduleIndex+1}.</p>
-        <p>Ahora juega Hangman con las mismas palabras.</p>
-        <div class="btnrow">
-          <button class="primary" onclick="startMode('hangman')">Comenzar Hangman →</button>
-          <button class="secondary" onclick="goHome()">Volver a módulos</button>
-        </div>
-      </div>`;
-  } else if(mode==='hangman'){
-    st.hangman=true;
-    persist();
-    document.getElementById('gameContent').innerHTML=`
-      <div class="center">
-        <h2>🎯 ¡Terminaste Hangman!</h2>
-        <p>Completaste las 22 palabras. En la próxima sesión podrás practicar escribiendo las palabras que más se te hicieron difíciles.</p>
-        <div class="btnrow">
-          <button class="primary" onclick="startMode('write')">Sesión de escritura →</button>
-          <button class="secondary" onclick="goHome()">Volver a módulos</button>
-        </div>
-      </div>`;
-  } else {
-    st.write=true;
-    persist();
-    document.getElementById('gameContent').innerHTML=`
-      <div class="center">
-        <h2>⭐ ¡Sesión completada!</h2>
-        <p>Terminaste la práctica de las palabras que necesitaban más repaso.</p>
-        <div class="statgrid">
-          <div class="stat"><b>${list.length}</b><span class="small">palabras repasadas</span></div>
-          <div class="stat"><b>${getReviewWords().length}</b><span class="small">pendientes para repasar</span></div>
-          <div class="stat"><b>22</b><span class="small">palabras en el módulo</span></div>
-        </div>
-        <div class="btnrow">
-          <button class="primary" onclick="startMode('hangman')">Practicar Hangman otra vez</button>
-          <button class="secondary" onclick="goHome()">Volver a módulos</button>
-        </div>
-      </div>`;
-  }
-
-  setSteps();
-  document.getElementById('bar').style.width='100%';
-}
+function nextLearn(){if(traceStrokeCount<5)return;const s=moduleState(moduleIndex);traceReady=false;if(remedialPhase){remedialPhase='hangman';saveRemedial();renderCurrent();return}markStageWord(0)}
+function renderHangman(){const w=currentWord;document.getElementById('gameContent').innerHTML=`<div class="center hangman-screen"><p class="wordcount">${remedialPhase?'REPASO · ':''}HANGMAN</p>${cardInfo(w)}<div class="btnrow"><button class="secondary" onclick="speak()">🔊 Repetir palabra</button></div><p class="hangword" id="hangWord">${w.split('').map(c=>c===' '?' ':'_').join(' ')}</p><svg class="hang-stage" viewBox="0 0 150 140" role="img" aria-label="Muñeco de Hangman"><g><line x1="18" y1="130" x2="112" y2="130"/><line x1="42" y1="130" x2="42" y2="12"/><line x1="42" y1="12" x2="105" y2="12"/><line x1="105" y1="12" x2="105" y2="28"/></g><circle id="hangPart1" class="hang-part" cx="105" cy="42" r="14"/><line id="hangPart2" class="hang-part" x1="105" y1="56" x2="105" y2="91"/><line id="hangPart3" class="hang-part" x1="105" y1="65" x2="84" y2="82"/><line id="hangPart4" class="hang-part" x1="105" y1="65" x2="126" y2="82"/><g id="hangPart5" class="hang-part"><line x1="105" y1="91" x2="87" y2="116"/><line x1="105" y1="91" x2="123" y2="116"/></g></svg><div id="hangFeedback" class="feedback" aria-live="polite"></div><div class="keyboard" id="keyboard">${['qwertyuiop','asdfghjkl','zxcvbnm'].map(row=>`<div class="keyboardrow">${[...row].map(c=>`<button class="key" id="key-${c}" onclick="guess('${c}')">${c}</button>`).join('')}</div>`).join('')}</div><button class="primary hidden" id="hangNext" onclick="nextHang()">Siguiente →</button></div>`;setTimeout(()=>speak(w),180)}
+function guess(c){if(answered||usedLetters.has(c))return;usedLetters.add(c);document.getElementById('key-'+c)?.classList.add('used');const w=currentWord,st=moduleState(moduleIndex),feedback=document.getElementById('hangFeedback');if(w.toLowerCase().includes(c)){feedback.textContent='';feedback.className='feedback good'}else{hangErrors++;st.hangWrongTotal=(st.hangWrongTotal||0)+1;st.firstPassErrors=(st.firstPassErrors||0)+1;feedback.textContent='Esa letra no está. Sigue intentando.';feedback.className='feedback bad';document.getElementById('hangPart'+hangErrors)?.classList.add('show');setScore()}const shown=w.split('').map(ch=>ch===' '?' ':usedLetters.has(ch.toLowerCase())?ch:'_').join(' ');document.getElementById('hangWord').textContent=shown;if(!shown.includes('_')){answered=true;feedback.textContent='';feedback.className='feedback good';autoNextTimer=setTimeout(()=>{autoNextTimer=null;nextHang()},1400)}else if(hangErrors>=5){answered=true;document.getElementById('hangWord').textContent=w;feedback.textContent='No la sabe. La repetirá.';feedback.className='feedback bad';if(!st.repeatWords.includes(w))st.repeatWords.push(w);autoNextTimer=setTimeout(()=>{autoNextTimer=null;nextHang()},1400);persist()}persist()}
+function nextHang(){if(remedialPhase){remedialPhase='write';saveRemedial();renderCurrent();return}markStageWord(1)}
+function renderWrite(){const w=currentWord;document.getElementById('gameContent').innerHTML=`<div class="center"><p class="wordcount">${remedialPhase?'REPASO · ':''}ESCRIBIR</p>${cardInfo(w)}<button class="secondary" onclick="speak()">🔊 Repetir palabra</button><div style="margin-top:12px"><input id="writeAnswer" class="writeinput" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Escribe la palabra en inglés" aria-label="Escribe la palabra en inglés" onkeydown="if(event.key==='Enter'){event.preventDefault();checkWrite()}"><div class="btnrow"><button class="primary" type="button" onclick="checkWrite()">Comprobar</button></div></div><div id="writeFeedback" class="feedback" aria-live="polite"></div><div id="writeHints" class="notice hidden" aria-live="polite"></div><button class="primary hidden" id="writeNext" onclick="nextWrite()">Siguiente →</button></div>`;document.getElementById('writeAnswer').focus({preventScroll:true});setTimeout(()=>speak(w),180)}
+function showWriteNext(){const btn=document.getElementById('writeNext');btn.classList.remove('hidden');document.getElementById('writeAnswer').blur();setTimeout(()=>btn.scrollIntoView({block:'nearest'}),80)}
+function checkWrite(e){if(e&&e.preventDefault)e.preventDefault();if(answered)return;const w=currentWord,v=document.getElementById('writeAnswer').value.trim(),feedback=document.getElementById('writeFeedback'),hintBox=document.getElementById('writeHints'),st=moduleState(moduleIndex);if(!v){feedback.textContent='Escribe la palabra antes de comprobar.';feedback.className='feedback bad';document.getElementById('writeAnswer').focus({preventScroll:true});return}if(v.toLocaleLowerCase()===w.toLocaleLowerCase()){answered=true;feedback.textContent='¡Correcto!';feedback.className='feedback good';hintBox.classList.add('hidden');document.getElementById('writeAnswer').blur();autoNextTimer=setTimeout(()=>{autoNextTimer=null;nextWrite()},800)}else{writeAttempts++;st.writeWrongTotal=(st.writeWrongTotal||0)+1;st.firstPassErrors=(st.firstPassErrors||0)+1;setScore();feedback.textContent=`No es correcto. Intento ${writeAttempts} de 2.`;feedback.className='feedback bad';const target=[...w.toLocaleLowerCase()],typed=[...v.toLocaleLowerCase()],dp=Array.from({length:target.length+1},()=>Array(typed.length+1).fill(0));for(let i=0;i<=target.length;i++)dp[i][0]=i;for(let j=0;j<=typed.length;j++)dp[0][j]=j;for(let i=1;i<=target.length;i++)for(let j=1;j<=typed.length;j++)dp[i][j]=Math.min(dp[i-1][j-1]+(target[i-1]===typed[j-1]?0:1),dp[i-1][j]+1,dp[i][j-1]+1);const edits=[];let i=target.length,j=typed.length;while(i||j){if(i&&j&&target[i-1]===typed[j-1]&&dp[i][j]===dp[i-1][j-1]){i--;j--}else if(i&&j&&dp[i][j]===dp[i-1][j-1]+1){edits.push({type:'replace',wrong:typed[j-1],right:w[i-1]});i--;j--}else if(i&&dp[i][j]===dp[i-1][j]+1){edits.push({type:'missing',right:w[i-1]});i--}else{edits.push({type:'extra',wrong:typed[j-1]});j--}}const hints=[];edits.reverse().forEach(edit=>{const hint=edit.type==='missing'?`Falta la letra “${esc(edit.right)}”.`:edit.type==='extra'?`La letra “${esc(edit.wrong)}” sobra.`:`La letra “${esc(edit.wrong)}” no va; escribe “${esc(edit.right)}”.`;if(!hints.includes(hint))hints.push(hint)});hintBox.innerHTML='<b>Revisa las letras:</b><br>'+hints.join('<br>');hintBox.classList.remove('hidden');if(writeAttempts>=2){answered=true;feedback.textContent=`La palabra era “${w}”. La repetirás en las tres partes.`;if(!st.repeatWords.includes(w))st.repeatWords.push(w);showWriteNext()}else{document.getElementById('writeAnswer').focus({preventScroll:true})}persist()}}
+function nextWrite(){if(remedialPhase){finishRemedial();return}markStageWord(2)}
+function markStageWord(si){const s=moduleState(moduleIndex);s.stageDone[si][index]=true;let next=s.stageDone[si].findIndex(done=>!done);s.stageIndices[si]=next<0?22:next;s.stage=si;index=s.stageIndices[si];persist();if(allStagesDone(s)){if((s.repeatWords||[]).length){beginRemediation();return}completeModule();return}if(s.stageIndices[si]>=22){for(let step=1;step<=3;step++){const candidate=(si+step)%3;if(doneCount(s,candidate)<22){s.stage=candidate;mode=['learn','hangman','write'][candidate];index=s.stageIndices[candidate]||0;persist();break}}}renderCurrent()}
+function advanceStage(){const s=moduleState(moduleIndex);if(s.stage<2){s.stage++;s.stageIndex=0;mode=['learn','hangman','write'][s.stage];index=0;renderCurrent();return}completeModule()}
+function beginRemediation(){const s=moduleState(moduleIndex);remedialQueue=[...new Set(s.repeatWords)];s.repeatWords=[];remedialReturn='free';remedialWord=remedialQueue.shift();if(!remedialWord){if(allStagesDone(s))completeModule();return}remedialPhase='learn';mode='learn';traceReady=false;saveRemedial();renderCurrent()}
+function finishRemedial(){const s=moduleState(moduleIndex);remedialPhase='';remedialWord='';if(s.repeatWords.length){remedialQueue=[...new Set([...remedialQueue,...s.repeatWords])];s.repeatWords=[]}if(remedialQueue.length){remedialWord=remedialQueue.shift();remedialPhase='learn';mode='learn';traceReady=false;saveRemedial();renderCurrent();return}s.remedialQueue=[];s.remedialWord='';s.remedialPhase='';if(remedialReturn==='advance'){if(s.stage<2){s.stage++;s.stageIndex=0;mode=['learn','hangman','write'][s.stage];persist();renderCurrent()}else completeModule()}else if(allStagesDone(s)&&!(s.repeatWords||[]).length)completeModule();else{index=s.stageIndices[stageNumber(mode)]||0;persist();renderCurrent()}persist()}
+function completeModule(){const s=moduleState(moduleIndex);if(!allStagesDone(s)||(s.repeatWords||[]).length||remedialPhase||(remedialQueue||[]).length)return;s.completed=true;s.stage=2;s.stageIndex=22;s.stageIndices=[22,22,22];persist();document.getElementById('gameContent').innerHTML=`<div class="center donebox"><h2>🎉 ¡Módulo completado!</h2><p>Terminaste las 22 palabras en las tres partes.</p><p class="scorebox">Puntuación final: ${scoreFor(s)}%</p><p class="muted small">Los errores se mantuvieron aunque repetiste la práctica.</p><div class="btnrow"><button class="primary" onclick="goHome()">Volver a módulos</button></div></div>`;setScore();document.getElementById('bar').style.width='100%'}
 renderHome();
 </script>
 </body>
